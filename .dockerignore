@@ -1,0 +1,8 @@
+.env
+.env.local
+.env.*.local
+.git
+.vercel
+dist
+node_modules
+tmp

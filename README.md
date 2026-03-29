@@ -79,6 +79,26 @@ node tests/unit/fitness-gemini.test.js
 - `GEMINI_API_KEY`
 - `GEMINI_MODEL`（可选）
 
+## ECS Deploy
+
+这个仓库也已经支持通过 Docker 部署到 ECS。
+
+最小流程：
+
+```bash
+docker build -t personal-web .
+docker run -d --name personal-web --restart unless-stopped -p 80:3000 \
+  -e GEMINI_API_KEY=your-key \
+  -e GEMINI_MODEL=gemini-2.5-flash \
+  personal-web
+```
+
+健康检查：
+
+```bash
+curl http://127.0.0.1/healthz
+```
+
 ## Security Note
 
 你在对话里贴出的旧 `Google AI Studio API key` 已经算暴露了，建议立刻在 Google AI Studio 中废弃并重新生成一把新的 key，再只把新 key 放到 `.env.local` 和部署平台环境变量里。
