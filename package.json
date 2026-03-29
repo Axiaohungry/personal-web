@@ -1,0 +1,21 @@
+{
+  "name": "personal-fitness-workbench",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "node tests/unit/entrypoints.test.js && node tests/unit/content-data.test.js && node tests/unit/navigation.test.js && node tests/unit/tdee.test.js && node tests/unit/macros.test.js && node tests/unit/storage.test.js && node tests/unit/theme.test.js && node tests/unit/module-plans.test.js && node tests/unit/fitness-gemini.test.js"
+  },
+  "dependencies": {
+    "ant-design-vue": "^4.2.6",
+    "vue": "^3.4.38",
+    "vue-router": "^4.4.3"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.1.2",
+    "vite": "^5.4.2"
+  }
+}

@@ -1,0 +1,208 @@
+.fitness-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(18rem, 0.9fr);
+  gap: 1rem 1.4rem;
+  margin-bottom: 1.35rem;
+  padding: clamp(1.3rem, 3.8vw, 2rem);
+}
+
+.fitness-page__body-shell {
+  display: grid;
+  gap: 1.25rem;
+  padding: clamp(1.1rem, 3vw, 1.8rem);
+}
+
+.fitness-hero__title,
+.module-page__title {
+  margin: 0;
+  font-family: var(--font-display);
+  letter-spacing: -0.05em;
+}
+
+.fitness-hero__title {
+  font-size: clamp(2.9rem, 7vw, 5rem);
+  line-height: 0.98;
+}
+
+.fitness-hero__summary,
+.fitness-panel__note,
+.scenario-card__range,
+.history-list__row span {
+  color: var(--muted);
+}
+
+.fitness-hero__summary {
+  max-width: 42rem;
+  margin: 1rem 0 0;
+}
+
+.fitness-hero__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-top: 1.2rem;
+}
+
+.fitness-hero__aside {
+  align-self: end;
+}
+
+.fitness-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+  gap: 1rem;
+  align-items: start;
+}
+
+.fitness-panel .ant-card-body {
+  display: grid;
+  gap: 1rem;
+}
+
+.fitness-panel__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.fitness-panel__title,
+.history-block__title,
+.form-section__title {
+  margin: 0;
+}
+
+.fitness-panel__title {
+  font-size: 1.38rem;
+}
+
+.fitness-panel__record-button.ant-btn {
+  min-width: 8rem;
+}
+
+.tdee-form .ant-form-item {
+  margin-bottom: 0.85rem;
+}
+
+.form-section {
+  padding: 1rem 1.05rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--panel-soft);
+}
+
+.form-section + .form-section {
+  margin-top: 1rem;
+}
+
+.form-section__header {
+  margin-bottom: 0.7rem;
+}
+
+.form-section__title {
+  font-size: 1.05rem;
+}
+
+.fitness-panel__statistic .ant-statistic-content {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  line-height: 1;
+}
+
+.fitness-panel__statistic .ant-statistic-content-value,
+.fitness-panel__statistic .ant-statistic-content-suffix {
+  color: var(--text);
+}
+
+.metric-list {
+  border-top: 1px solid var(--line);
+}
+
+.metric-list__item.ant-list-item,
+.history-list__item.ant-list-item {
+  padding-inline: 0;
+  border-block-end-color: var(--line);
+}
+
+.metric-list__row,
+.history-list__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+}
+
+.fitness-summary {
+  display: grid;
+  gap: 1rem;
+  margin-top: 0;
+}
+
+.fitness-summary__header {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.fitness-summary__note {
+  max-width: 26rem;
+  margin: 0;
+}
+
+.scenario-card__target {
+  margin: 0.6rem 0 0;
+  font-size: 1.36rem;
+}
+
+.scenario-card__range {
+  margin: 0.55rem 0 0;
+}
+
+.history-block {
+  margin-top: 0.2rem;
+}
+
+.history-block__header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.history-list__row strong {
+  font-size: 1rem;
+}
+
+.modules-panel .ant-card-body {
+  gap: 0;
+}
+
+@media (max-width: 1024px) {
+  .fitness-hero,
+  .fitness-grid,
+  .fitness-summary__header {
+    grid-template-columns: 1fr;
+  }
+
+  .fitness-summary__header {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 720px) {
+  .fitness-hero {
+    padding: 1.1rem;
+  }
+
+  .fitness-page__body-shell {
+    padding: 1rem;
+  }
+
+  .metric-list__row,
+  .history-list__row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
