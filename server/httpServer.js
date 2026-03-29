@@ -23,6 +23,10 @@ const CONTENT_TYPES = {
   '.woff2': 'font/woff2',
 }
 
+function normalizeBaseUrl(baseUrl) {
+  return String(baseUrl || '').trim().replace(/\/+$/, '')
+}
+
 function normalizePathname(pathname) {
   try {
     return decodeURIComponent(pathname || '/')
@@ -61,6 +65,28 @@ export function resolveRequestTarget(rawPathname) {
   return { kind: 'spa' }
 }
 
+export function buildUpstreamProxyUrl(baseUrl, requestUrl) {
+  const normalizedBaseUrl = normalizeBaseUrl(baseUrl)
+  if (!normalizedBaseUrl) return ''
+  return `${normalizedBaseUrl}${requestUrl}`
+}
+
+export function resolveApiExecutionMode({ upstreamBaseUrl, apiKind, requestUrl }) {
+  const proxyUrl = buildUpstreamProxyUrl(upstreamBaseUrl, requestUrl)
+
+  if (proxyUrl) {
+    return {
+      mode: 'proxy',
+      url: proxyUrl,
+    }
+  }
+
+  return {
+    mode: 'local',
+    apiKind,
+  }
+}
+
 function getContentType(filePath) {
   return CONTENT_TYPES[path.extname(filePath).toLowerCase()] || 'application/octet-stream'
 }
@@ -85,8 +111,40 @@ async function serveFile(res, filePath, method = 'GET') {
   return createReadStream(filePath).pipe(res)
 }
 
+async function proxyApiRequest(req, res, proxyUrl, fetchImpl = fetch) {
+  try {
+    const upstreamResponse = await fetchImpl(proxyUrl, {
+      method: req.method || 'GET',
+      headers: {
+        Accept: 'application/json',
+      },
+    })
+
+    const contentType = upstreamResponse.headers.get('content-type') || 'application/json; charset=utf-8'
+    res.statusCode = upstreamResponse.status
+    res.setHeader('Content-Type', contentType)
+
+    if ((req.method || 'GET') === 'HEAD') {
+      return res.end()
+    }
+
+    const responseText = await upstreamResponse.text()
+    return res.end(responseText)
+  } catch (error) {
+    return sendJson(res, 502, {
+      error: `Upstream proxy failed: ${error.message}`,
+    })
+  }
+}
+
 export function createHttpHandler(options = {}) {
   const distRoot = options.distRoot || DEFAULT_DIST_ROOT
+  const upstreamBaseUrl =
+    options.upstreamBaseUrl ||
+    process.env.FITNESS_API_UPSTREAM_BASE_URL ||
+    process.env.UPSTREAM_FITNESS_API_BASE_URL ||
+    ''
+  const fetchImpl = options.fetchImpl || fetch
 
   return async function httpHandler(req, res) {
     const method = req.method || 'GET'
@@ -106,6 +164,16 @@ export function createHttpHandler(options = {}) {
     }
 
     if (target.kind === 'api') {
+      const executionMode = resolveApiExecutionMode({
+        upstreamBaseUrl,
+        apiKind: target.apiKind,
+        requestUrl: req.url || '',
+      })
+
+      if (executionMode.mode === 'proxy') {
+        return proxyApiRequest(req, res, executionMode.url, fetchImpl)
+      }
+
       return handleNodeSearchRequest(req, res, target.apiKind, options)
     }
 

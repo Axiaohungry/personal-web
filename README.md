@@ -88,10 +88,17 @@ node tests/unit/fitness-gemini.test.js
 ```bash
 docker build -t personal-web .
 docker run -d --name personal-web --restart unless-stopped -p 80:3000 \
+  -e FITNESS_API_UPSTREAM_BASE_URL=https://personal-web-blue-six.vercel.app \
   -e GEMINI_API_KEY=your-key \
   -e GEMINI_MODEL=gemini-2.5-flash \
   personal-web
 ```
+
+如果你的 ECS 所在地域不能直接调用 Gemini API，可以只把页面部署在 ECS，上游接口继续复用 Vercel：
+
+- `FITNESS_API_UPSTREAM_BASE_URL=https://你的-Vercel-生产域名`
+
+配置后，ECS 上的 `/api/fitness/*` 会自动转发到这个上游地址，不再直接从 ECS 调用 Gemini。
 
 健康检查：
 

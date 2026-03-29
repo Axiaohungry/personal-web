@@ -1,7 +1,11 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 
-import { resolveRequestTarget } from '../../server/httpServer.js'
+import {
+  buildUpstreamProxyUrl,
+  resolveApiExecutionMode,
+  resolveRequestTarget,
+} from '../../server/httpServer.js'
 
 test('resolveRequestTarget routes fitness API endpoints explicitly', () => {
   assert.deepEqual(resolveRequestTarget('/api/fitness/food-search'), {
@@ -40,4 +44,39 @@ test('resolveRequestTarget rejects path traversal attempts', () => {
   assert.deepEqual(resolveRequestTarget('/assets/%2e%2e/%2e%2e/secret.txt'), {
     kind: 'invalid',
   })
+})
+
+test('resolveApiExecutionMode prefers upstream proxy when configured', () => {
+  assert.deepEqual(
+    resolveApiExecutionMode({
+      upstreamBaseUrl: 'https://personal-web-blue-six.vercel.app',
+      apiKind: 'food',
+      requestUrl: '/api/fitness/food-search?q=%E9%A6%99%E8%95%89',
+    }),
+    {
+      mode: 'proxy',
+      url: 'https://personal-web-blue-six.vercel.app/api/fitness/food-search?q=%E9%A6%99%E8%95%89',
+    }
+  )
+})
+
+test('resolveApiExecutionMode falls back to local execution without upstream', () => {
+  assert.deepEqual(
+    resolveApiExecutionMode({
+      upstreamBaseUrl: '',
+      apiKind: 'supplement',
+      requestUrl: '/api/fitness/supplement-search?q=%E8%82%8C%E9%85%B8',
+    }),
+    {
+      mode: 'local',
+      apiKind: 'supplement',
+    }
+  )
+})
+
+test('buildUpstreamProxyUrl preserves query strings and trims trailing slash', () => {
+  assert.equal(
+    buildUpstreamProxyUrl('https://personal-web-blue-six.vercel.app/', '/api/fitness/food-search?q=oats'),
+    'https://personal-web-blue-six.vercel.app/api/fitness/food-search?q=oats'
+  )
 })
