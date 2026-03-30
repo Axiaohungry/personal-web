@@ -29,5 +29,5 @@ docker run -d \
   "${IMAGE_NAME}"
 
 sleep 3
-curl -fsS "http://127.0.0.1:${CONTAINER_PORT}/healthz" >/dev/null
+curl -fsS "http://127.0.0.1:${PORT}/healthz" >/dev/null
 echo "Deploy complete."
