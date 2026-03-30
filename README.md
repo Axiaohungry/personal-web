@@ -106,6 +106,23 @@ docker run -d --name personal-web --restart unless-stopped -p 80:3000 \
 curl http://127.0.0.1/healthz
 ```
 
+## ECS Auto Deploy With GitHub Actions
+
+仓库已经包含 ECS 自动部署工作流：
+
+- `.github/workflows/deploy-ecs.yml`
+- `scripts/ecs/deploy.sh`
+
+推荐做法是给 ECS 安装一个 GitHub Actions self-hosted runner，并打上标签：
+
+- `ecs-personal-web`
+
+这样以后每次 `push origin main`，GitHub Actions 会直接在 ECS 上执行 Docker 重建和重启。
+
+完整步骤见：
+
+- `docs/ecs-github-actions.md`
+
 ## Security Note
 
 你在对话里贴出的旧 `Google AI Studio API key` 已经算暴露了，建议立刻在 Google AI Studio 中废弃并重新生成一把新的 key，再只把新 key 放到 `.env.local` 和部署平台环境变量里。
