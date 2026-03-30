@@ -108,6 +108,7 @@ const rationaleRows = computed(() => [
         :pagination="false"
         row-key="key"
         size="middle"
+        :scroll="{ x: 860 }"
       />
     </a-card>
 
@@ -118,6 +119,7 @@ const rationaleRows = computed(() => [
         :pagination="false"
         row-key="day"
         size="middle"
+        :scroll="{ x: 760 }"
       />
     </a-card>
 

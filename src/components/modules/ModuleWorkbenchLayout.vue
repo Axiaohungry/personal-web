@@ -42,6 +42,7 @@ defineProps({
 .module-page {
   min-height: 100vh;
   padding: 1.5rem;
+  overflow-x: clip;
   background-color: var(--bg);
   background-image: var(--page-background);
   background-repeat: no-repeat;
@@ -92,12 +93,22 @@ defineProps({
 .module-page__content {
   display: grid;
   gap: 1rem;
+  min-width: 0;
 }
 
 :deep(.module-grid) {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
+}
+
+:deep(.ant-row),
+:deep(.ant-col),
+:deep(.ant-card),
+:deep(.ant-card-body),
+:deep(.ant-space),
+:deep(.ant-space-item) {
+  min-width: 0;
 }
 
 :deep(.module-section) {
@@ -172,14 +183,58 @@ defineProps({
   margin: 0.35rem 0 0;
 }
 
+:deep(.source-card a),
+:deep(.source-card p),
+:deep(.ant-alert-message),
+:deep(.ant-alert-description),
+:deep(.ant-collapse-header-text),
+:deep(.ant-card-head-title),
+:deep(.ant-list-item),
+:deep(.ant-typography) {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+:deep(.ant-table-wrapper) {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+:deep(.ant-table-content) {
+  overflow-x: auto;
+}
+
+:deep(.ant-table) {
+  min-width: 40rem;
+}
+
+:deep(.ant-table-cell) {
+  white-space: normal;
+  word-break: break-word;
+}
+
 @media (max-width: 820px) {
   .module-page {
-    padding: 1rem;
+    padding: 0.8rem;
   }
 
   .module-page__hero,
   :deep(.module-grid) {
     grid-template-columns: 1fr;
+  }
+
+  .module-page__note {
+    padding: 0.9rem 1rem;
+  }
+
+  :deep(.ant-card-body) {
+    padding: 0.95rem;
+  }
+
+  :deep(.ant-table) {
+    min-width: 34rem;
   }
 }
 </style>

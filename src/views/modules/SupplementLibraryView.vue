@@ -73,6 +73,7 @@ async function handleSearch() {
             :columns="supplementColumns"
             :data-source="supplementCatalog.map((item) => ({ ...item, key: item.key }))"
             :pagination="false"
+            :scroll="{ x: 860 }"
           />
         </a-card>
       </a-col>
@@ -152,6 +153,7 @@ async function handleSearch() {
               :data-source="remoteRows"
               :pagination="false"
               size="small"
+              :scroll="{ x: 720 }"
             />
           </a-space>
         </a-card>

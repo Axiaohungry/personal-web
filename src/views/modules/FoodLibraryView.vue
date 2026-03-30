@@ -70,6 +70,7 @@ async function handleSearch() {
             :data-source="group.items.map((item) => ({ ...item, key: item.name }))"
             :pagination="false"
             size="small"
+            :scroll="{ x: 900 }"
           />
         </a-card>
       </a-col>
@@ -112,6 +113,7 @@ async function handleSearch() {
               :data-source="remoteRows"
               :pagination="false"
               size="small"
+              :scroll="{ x: 760 }"
             />
           </a-space>
         </a-card>

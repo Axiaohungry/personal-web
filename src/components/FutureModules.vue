@@ -385,17 +385,30 @@ watch(
 }
 
 @media (max-width: 720px) {
+  .modules-toolbar__controls,
+  .modules-toolbar__control,
+  .modules-toolbar__select,
+  .modules-toolbar__number {
+    width: 100%;
+  }
+
   .modules-toolbar__control--wide {
     min-width: 0;
   }
 
   .modules-toolbar__field-row {
     flex-direction: column;
+    align-items: stretch;
     gap: 0.55rem;
   }
 
   .modules-toolbar__hint--inline {
     max-width: none;
+  }
+
+  .modules-frame__header {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .modules-frame__iframe {

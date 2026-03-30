@@ -101,6 +101,7 @@ const rationaleRows = computed(() => [
         :data-source="plan.stages"
         :pagination="false"
         row-key="stage"
+        :scroll="{ x: 920 }"
       />
     </a-card>
 
