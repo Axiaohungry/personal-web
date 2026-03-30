@@ -1,0 +1,67 @@
+{
+  "defaultMode": "thermal",
+  "defaultGroup": "full_zscore",
+  "defaultScope": "roi",
+  "rgbAssets": {
+    "roi": "/3dgs/rgb/roi.spz"
+  },
+  "groups": [
+    {
+      "id": "full_zscore",
+      "label": "最佳模型",
+      "alias": "full_zscore",
+      "description": "全要素输入并进行标准化。",
+      "assets": {
+        "roi": "/3dgs/thermal/full_zscore/roi.spz"
+      }
+    },
+    {
+      "id": "full",
+      "label": "全要素基线",
+      "alias": "full",
+      "description": "全要素输入但不做标准化。",
+      "assets": {
+        "roi": "/3dgs/thermal/full/roi.spz"
+      }
+    },
+    {
+      "id": "sem_only",
+      "label": "仅语义先验",
+      "alias": "sem_only",
+      "description": "仅保留语义材质相关先验。",
+      "assets": {
+        "roi": "/3dgs/thermal/sem_only/roi.spz"
+      }
+    },
+    {
+      "id": "shadow_only",
+      "label": "仅光照先验",
+      "alias": "shadow_only",
+      "description": "仅保留光照与遮挡相关先验。",
+      "assets": {
+        "roi": "/3dgs/thermal/shadow_only/roi.spz"
+      }
+    },
+    {
+      "id": "shuffled",
+      "label": "空间一致性破坏",
+      "alias": "shuffled",
+      "description": "打乱物理先验与空间位置对应关系。",
+      "assets": {
+        "roi": "/3dgs/thermal/shuffled/roi.spz"
+      }
+    }
+  ],
+  "presets": {
+    "oblique": {
+      "position": [1.4, 0.9, 1.2],
+      "target": [0.0, 0.0, 0.0],
+      "up": [0.0, 1.0, 0.0]
+    },
+    "topdown": {
+      "position": [0.0, 2.4, 0.0],
+      "target": [0.0, 0.0, 0.0],
+      "up": [0.0, 0.0, -1.0]
+    }
+  }
+}

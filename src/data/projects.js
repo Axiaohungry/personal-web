@@ -18,7 +18,7 @@ export const projects = [
   {
     name: '3DGS 三维热场重建研究',
     status: '研究项目',
-    href: '#projects',
+    href: '/projects/3dgs',
     summary:
       '基于 3D Gaussian Splatting 搭建 RGB-温度双通道三维热场建模框架，重点在复杂数据建模、可视化表达和结果评估。',
     tags: ['3DGS', '3D Gaussian Splatting', '三维重建', '热场建模'],

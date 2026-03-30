@@ -34,6 +34,12 @@ const router = createRouter({
       name: 'fitness-supplement-library',
       component: () => import('@/views/modules/SupplementLibraryView.vue'),
     },
+    {
+      path: '/projects/3dgs',
+      alias: ['/projects/3dgs/'],
+      name: 'project-3dgs',
+      component: () => import('@/views/projects/Project3dgsView.vue'),
+    },
   ],
 })
 

@@ -39,6 +39,13 @@ pnpm dev
 - `/api/fitness/food-search`
 - `/api/fitness/supplement-search`
 
+## 3DGS Project Page
+
+- 路由：`/projects/3dgs`
+- 页面使用 `public/3dgs/scene-metadata.json` 读取实验组、scope、预设视角和资源路径
+- 浏览器可直接加载的 splat 资源需要放在 `public/3dgs/` 下
+- 如果资源还没准备好，页面会先显示完整壳层和 warning 状态，而不是直接白屏
+
 ## Build
 
 ```bash
