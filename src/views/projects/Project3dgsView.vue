@@ -55,7 +55,7 @@ const defaultManifest = {
   defaultGroup: 'full_zscore',
   defaultScope: 'full_masked',
   rgbAssets: {
-    full_masked: '/3dgs/rgb/full_masked.ply',
+    full_masked: '/3dgs/rgb/full_masked.splat',
   },
   groups: [
     {
@@ -64,7 +64,7 @@ const defaultManifest = {
       alias: 'full_zscore',
       description: '全要素输入并进行标准化。',
       assets: {
-        full_masked: '/3dgs/thermal/full_zscore/full_masked.ply',
+        full_masked: '/3dgs/thermal/full_zscore/full_masked.splat',
       },
     },
     {
@@ -73,7 +73,7 @@ const defaultManifest = {
       alias: 'full',
       description: '全要素输入但不做标准化。',
       assets: {
-        full_masked: '/3dgs/thermal/full/full_masked.ply',
+        full_masked: '/3dgs/thermal/full/full_masked.splat',
       },
     },
     {
@@ -82,7 +82,7 @@ const defaultManifest = {
       alias: 'sem_only',
       description: '仅保留语义材质相关先验。',
       assets: {
-        full_masked: '/3dgs/thermal/sem_only/full_masked.ply',
+        full_masked: '/3dgs/thermal/sem_only/full_masked.splat',
       },
     },
     {
@@ -91,7 +91,7 @@ const defaultManifest = {
       alias: 'shadow_only',
       description: '仅保留光照与遮挡相关先验。',
       assets: {
-        full_masked: '/3dgs/thermal/shadow_only/full_masked.ply',
+        full_masked: '/3dgs/thermal/shadow_only/full_masked.splat',
       },
     },
     {
@@ -100,7 +100,7 @@ const defaultManifest = {
       alias: 'shuffled',
       description: '打乱物理先验与空间位置对应关系。',
       assets: {
-        full_masked: '/3dgs/thermal/shuffled/full_masked.ply',
+        full_masked: '/3dgs/thermal/shuffled/full_masked.splat',
       },
     },
   ],
