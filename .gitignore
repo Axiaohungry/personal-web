@@ -8,3 +8,5 @@ dist/
 tmp/
 assets/
 docs/
+upload/
+public/

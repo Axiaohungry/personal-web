@@ -6,7 +6,7 @@ const props = defineProps({
   },
   title: {
     type: String,
-    default: '',
+    required: true,
   },
   intro: {
     type: String,
@@ -21,7 +21,7 @@ const props = defineProps({
       <p v-if="props.eyebrow" class="eyebrow project-case-section__eyebrow">
         {{ props.eyebrow }}
       </p>
-      <h2 v-if="props.title" class="project-case-section__title">
+      <h2 class="project-case-section__title">
         {{ props.title }}
       </h2>
       <p v-if="props.intro" class="project-case-section__intro">
