@@ -1,0 +1,162 @@
+.project-case-page {
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  padding-bottom: clamp(2rem, 5vw, 4rem);
+  background-image: var(--page-background);
+  background-repeat: no-repeat;
+}
+
+.project-case-page__shell {
+  gap: clamp(1rem, 2.8vw, 1.6rem);
+}
+
+.project-case-hero,
+.project-case-section {
+  padding: clamp(1.1rem, 3vw, 1.6rem);
+}
+
+.project-case-hero {
+  display: grid;
+  gap: 1rem;
+}
+
+.project-case-hero__content {
+  display: grid;
+  gap: 0.9rem;
+  max-width: 52rem;
+}
+
+.project-case-hero__heading {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.project-case-hero__title,
+.project-case-section__title {
+  margin: 0;
+  font-family: var(--font-display);
+  letter-spacing: -0.05em;
+}
+
+.project-case-hero__title {
+  font-size: clamp(2.5rem, 6vw, 4.8rem);
+  line-height: 0.96;
+}
+
+.project-case-hero__subtitle,
+.project-case-hero__summary,
+.project-case-section__intro {
+  margin: 0;
+  color: var(--muted);
+}
+
+.project-case-hero__subtitle {
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  font-weight: 600;
+  color: var(--text);
+}
+
+.project-case-hero__summary {
+  max-width: 46rem;
+  font-size: 1.02rem;
+}
+
+.project-case-hero__chips,
+.project-case-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.project-case-section {
+  display: grid;
+  grid-template-columns: minmax(0, 16rem) minmax(0, 1fr);
+  gap: 1.1rem 1.5rem;
+  border-top: 1px solid var(--line);
+}
+
+.project-case-section__header {
+  display: grid;
+  align-content: start;
+  gap: 0.7rem;
+}
+
+.project-case-section__title {
+  font-size: clamp(1.6rem, 4vw, 2.3rem);
+  line-height: 1.05;
+}
+
+.project-case-section__body {
+  display: grid;
+  gap: 1rem;
+}
+
+.project-case-evidence-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  gap: 0.9rem;
+}
+
+.project-case-evidence-card.ant-card {
+  height: 100%;
+}
+
+.project-case-evidence-card__label {
+  margin: 0 0 0.5rem;
+  color: var(--accent);
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.project-case-evidence-card__title {
+  margin: 0;
+  font-size: 1.08rem;
+}
+
+.project-case-evidence-card__detail,
+.project-case-evidence-card__meta {
+  margin: 0.7rem 0 0;
+  color: var(--muted);
+}
+
+.chip-list,
+.project-case-chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.project-case-page .ant-tag {
+  background: var(--panel-soft);
+  border-color: var(--line);
+  color: var(--text);
+}
+
+.project-case-page .ant-surface-card.ant-card {
+  background:
+    linear-gradient(160deg, rgba(255, 255, 255, 0.06), transparent 45%),
+    var(--panel);
+}
+
+@media (max-width: 1080px) {
+  .project-case-section {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .project-case-page {
+    padding-bottom: 1rem;
+  }
+
+  .project-case-hero,
+  .project-case-section {
+    padding: 1rem;
+  }
+
+  .project-case-hero__title {
+    font-size: clamp(2.2rem, 12vw, 3.8rem);
+  }
+}
