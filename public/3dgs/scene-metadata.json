@@ -1,9 +1,16 @@
 {
   "defaultMode": "thermal",
   "defaultGroup": "full_zscore",
-  "defaultScope": "roi",
+  "defaultScope": "full_masked",
+  "preferredFormat": "splat",
+  "thermalStyle": "jet_baked_approx",
+  "viewerExactReference": "The *-viewer-exact.png previews match view_phase5_roi_splat.py post-colormap behavior.",
   "rgbAssets": {
-    "roi": "/3dgs/rgb/roi.spz"
+    "full_masked": "/3dgs/rgb/full_masked.ply"
+  },
+  "rgbPreviews": {
+    "oblique": "/3dgs/rgb/full_masked-oblique.png",
+    "topdown": "/3dgs/rgb/full_masked-topdown.png"
   },
   "groups": [
     {
@@ -12,7 +19,13 @@
       "alias": "full_zscore",
       "description": "全要素输入并进行标准化。",
       "assets": {
-        "roi": "/3dgs/thermal/full_zscore/roi.spz"
+        "full_masked": "/3dgs/thermal/full_zscore/full_masked.ply"
+      },
+      "previews": {
+        "oblique": "/3dgs/thermal/full_zscore/full_masked-oblique.png",
+        "topdown": "/3dgs/thermal/full_zscore/full_masked-topdown.png",
+        "obliqueViewerExact": "/3dgs/thermal/full_zscore/full_masked-oblique-viewer-exact.png",
+        "topdownViewerExact": "/3dgs/thermal/full_zscore/full_masked-topdown-viewer-exact.png"
       }
     },
     {
@@ -21,7 +34,13 @@
       "alias": "full",
       "description": "全要素输入但不做标准化。",
       "assets": {
-        "roi": "/3dgs/thermal/full/roi.spz"
+        "full_masked": "/3dgs/thermal/full/full_masked.ply"
+      },
+      "previews": {
+        "oblique": "/3dgs/thermal/full/full_masked-oblique.png",
+        "topdown": "/3dgs/thermal/full/full_masked-topdown.png",
+        "obliqueViewerExact": "/3dgs/thermal/full/full_masked-oblique-viewer-exact.png",
+        "topdownViewerExact": "/3dgs/thermal/full/full_masked-topdown-viewer-exact.png"
       }
     },
     {
@@ -30,7 +49,13 @@
       "alias": "sem_only",
       "description": "仅保留语义材质相关先验。",
       "assets": {
-        "roi": "/3dgs/thermal/sem_only/roi.spz"
+        "full_masked": "/3dgs/thermal/sem_only/full_masked.ply"
+      },
+      "previews": {
+        "oblique": "/3dgs/thermal/sem_only/full_masked-oblique.png",
+        "topdown": "/3dgs/thermal/sem_only/full_masked-topdown.png",
+        "obliqueViewerExact": "/3dgs/thermal/sem_only/full_masked-oblique-viewer-exact.png",
+        "topdownViewerExact": "/3dgs/thermal/sem_only/full_masked-topdown-viewer-exact.png"
       }
     },
     {
@@ -39,7 +64,13 @@
       "alias": "shadow_only",
       "description": "仅保留光照与遮挡相关先验。",
       "assets": {
-        "roi": "/3dgs/thermal/shadow_only/roi.spz"
+        "full_masked": "/3dgs/thermal/shadow_only/full_masked.ply"
+      },
+      "previews": {
+        "oblique": "/3dgs/thermal/shadow_only/full_masked-oblique.png",
+        "topdown": "/3dgs/thermal/shadow_only/full_masked-topdown.png",
+        "obliqueViewerExact": "/3dgs/thermal/shadow_only/full_masked-oblique-viewer-exact.png",
+        "topdownViewerExact": "/3dgs/thermal/shadow_only/full_masked-topdown-viewer-exact.png"
       }
     },
     {
@@ -48,20 +79,50 @@
       "alias": "shuffled",
       "description": "打乱物理先验与空间位置对应关系。",
       "assets": {
-        "roi": "/3dgs/thermal/shuffled/roi.spz"
+        "full_masked": "/3dgs/thermal/shuffled/full_masked.ply"
+      },
+      "previews": {
+        "oblique": "/3dgs/thermal/shuffled/full_masked-oblique.png",
+        "topdown": "/3dgs/thermal/shuffled/full_masked-topdown.png",
+        "obliqueViewerExact": "/3dgs/thermal/shuffled/full_masked-oblique-viewer-exact.png",
+        "topdownViewerExact": "/3dgs/thermal/shuffled/full_masked-topdown-viewer-exact.png"
       }
     }
   ],
   "presets": {
     "oblique": {
-      "position": [1.4, 0.9, 1.2],
-      "target": [0.0, 0.0, 0.0],
-      "up": [0.0, 1.0, 0.0]
+      "position": [
+        -2.4072303771972656,
+        1.0765020847320557,
+        0.3236919641494751
+      ],
+      "target": [
+        -0.05218890309333801,
+        3.5864930152893066,
+        0.10674095153808594
+      ],
+      "up": [
+        0.0,
+        1.0,
+        0.0
+      ]
     },
     "topdown": {
-      "position": [0.0, 2.4, 0.0],
-      "target": [0.0, 0.0, 0.0],
-      "up": [0.0, 0.0, -1.0]
+      "position": [
+        0.8368116617202759,
+        -1.7652935981750488,
+        2.806446075439453
+      ],
+      "target": [
+        1.0783778429031372,
+        1.9066476821899414,
+        -0.49563688039779663
+      ],
+      "up": [
+        0.0,
+        0.0,
+        -1.0
+      ]
     }
   }
 }

@@ -24,6 +24,16 @@ test('resolveRequestTarget serves static assets by relative dist path', () => {
     kind: 'asset',
     relativePath: 'assets/index.js',
   })
+
+  assert.deepEqual(resolveRequestTarget('/3dgs/scene-metadata.json'), {
+    kind: 'asset',
+    relativePath: '3dgs/scene-metadata.json',
+  })
+
+  assert.deepEqual(resolveRequestTarget('/3dgs/thermal/full_zscore/full_masked.ply'), {
+    kind: 'asset',
+    relativePath: '3dgs/thermal/full_zscore/full_masked.ply',
+  })
 })
 
 test('resolveRequestTarget falls back SPA routes to index.html', () => {

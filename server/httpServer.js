@@ -23,6 +23,8 @@ const CONTENT_TYPES = {
   '.woff2': 'font/woff2',
 }
 
+const STATIC_ASSET_PREFIXES = ['/assets/', '/3dgs/']
+
 function normalizeBaseUrl(baseUrl) {
   return String(baseUrl || '').trim().replace(/\/+$/, '')
 }
@@ -54,7 +56,7 @@ export function resolveRequestTarget(rawPathname) {
     return { kind: 'invalid' }
   }
 
-  if (pathname.startsWith('/assets/')) {
+  if (STATIC_ASSET_PREFIXES.some((prefix) => pathname.startsWith(prefix))) {
     return { kind: 'asset', relativePath: pathname.slice(1) }
   }
 

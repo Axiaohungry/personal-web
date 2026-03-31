@@ -6,6 +6,16 @@ import Project3dgsViewer from '@/components/projects/Project3dgsViewer.vue'
 import { navigationItems } from '@/data/navigation.js'
 import { profile } from '@/data/profile.js'
 
+const PRESET_LABEL_MAP = {
+  oblique: '斜视',
+  topdown: '顶视',
+}
+
+const PRESET_NOTE_MAP = {
+  oblique: '用于从倾斜观察角度对比不同实验组的整体热场结构。',
+  topdown: '用于从顶视角度对齐论文核心对比视角。',
+}
+
 const headlineMetrics = [
   { label: 'RMSE', value: '-8.41%' },
   { label: 'PSNR', value: '+0.763 dB' },
@@ -43,9 +53,9 @@ const limitations = [
 const defaultManifest = {
   defaultMode: 'thermal',
   defaultGroup: 'full_zscore',
-  defaultScope: 'roi',
+  defaultScope: 'full_masked',
   rgbAssets: {
-    roi: '/3dgs/rgb/roi.spz',
+    full_masked: '/3dgs/rgb/full_masked.ply',
   },
   groups: [
     {
@@ -54,7 +64,7 @@ const defaultManifest = {
       alias: 'full_zscore',
       description: '全要素输入并进行标准化。',
       assets: {
-        roi: '/3dgs/thermal/full_zscore/roi.spz',
+        full_masked: '/3dgs/thermal/full_zscore/full_masked.ply',
       },
     },
     {
@@ -63,7 +73,7 @@ const defaultManifest = {
       alias: 'full',
       description: '全要素输入但不做标准化。',
       assets: {
-        roi: '/3dgs/thermal/full/roi.spz',
+        full_masked: '/3dgs/thermal/full/full_masked.ply',
       },
     },
     {
@@ -72,7 +82,7 @@ const defaultManifest = {
       alias: 'sem_only',
       description: '仅保留语义材质相关先验。',
       assets: {
-        roi: '/3dgs/thermal/sem_only/roi.spz',
+        full_masked: '/3dgs/thermal/sem_only/full_masked.ply',
       },
     },
     {
@@ -81,7 +91,7 @@ const defaultManifest = {
       alias: 'shadow_only',
       description: '仅保留光照与遮挡相关先验。',
       assets: {
-        roi: '/3dgs/thermal/shadow_only/roi.spz',
+        full_masked: '/3dgs/thermal/shadow_only/full_masked.ply',
       },
     },
     {
@@ -90,7 +100,7 @@ const defaultManifest = {
       alias: 'shuffled',
       description: '打乱物理先验与空间位置对应关系。',
       assets: {
-        roi: '/3dgs/thermal/shuffled/roi.spz',
+        full_masked: '/3dgs/thermal/shuffled/full_masked.ply',
       },
     },
   ],
@@ -119,6 +129,7 @@ const selectedMode = ref(defaultManifest.defaultMode)
 const selectedGroupId = ref(defaultManifest.defaultGroup)
 const selectedScopeId = ref(defaultManifest.defaultScope)
 const selectedPresetId = ref('oblique')
+const selectedThermalDisplayMode = ref('postprocess')
 const viewerMessage = ref('')
 const viewerLoading = ref(false)
 const cameraState = ref(null)
@@ -126,6 +137,11 @@ const cameraState = ref(null)
 const modeOptions = [
   { label: '热场', value: 'thermal' },
   { label: 'RGB', value: 'rgb' },
+]
+
+const thermalDisplayModeOptions = [
+  { label: '对齐版', value: 'postprocess' },
+  { label: '原始版', value: 'baked' },
 ]
 
 const scopeOptions = computed(() => {
@@ -139,12 +155,14 @@ const scopeOptions = computed(() => {
 
 const presetOptions = computed(() =>
   Object.entries(manifest.value.presets).map(([value, preset]) => ({
-    label: preset.label,
+    label: preset.label || PRESET_LABEL_MAP[value] || value,
     value,
   }))
 )
 
 const scopeVisible = computed(() => scopeOptions.value.length > 1)
+const thermalDisplayModeVisible = computed(() => selectedMode.value === 'thermal')
+const ablationVisible = computed(() => selectedMode.value === 'thermal')
 const activeGroup = computed(
   () => manifest.value.groups.find((group) => group.id === selectedGroupId.value) ?? manifest.value.groups[0]
 )
@@ -166,6 +184,26 @@ function normalizeManifest(raw) {
       : defaultManifest.presets
   const rgbAssets = raw?.rgbAssets && typeof raw.rgbAssets === 'object' ? raw.rgbAssets : defaultManifest.rgbAssets
 
+  const normalizedPresets = Object.fromEntries(
+    Object.entries(presets).map(([presetId, presetValue]) => {
+      const fallbackPreset = defaultManifest.presets[presetId] || {}
+      const normalizedPreset = {
+        ...fallbackPreset,
+        ...(presetValue || {}),
+      }
+
+      if (!normalizedPreset.label) {
+        normalizedPreset.label = PRESET_LABEL_MAP[presetId] || presetId
+      }
+
+      if (!normalizedPreset.note) {
+        normalizedPreset.note = PRESET_NOTE_MAP[presetId] || ''
+      }
+
+      return [presetId, normalizedPreset]
+    })
+  )
+
   const availableScopes = Array.from(
     new Set([
       ...Object.keys(rgbAssets),
@@ -183,7 +221,7 @@ function normalizeManifest(raw) {
       : availableScopes[0] ?? defaultManifest.defaultScope,
     rgbAssets,
     groups,
-    presets,
+    presets: normalizedPresets,
   }
 }
 
@@ -192,6 +230,7 @@ function resetSelections() {
   selectedGroupId.value = manifest.value.defaultGroup
   selectedScopeId.value = manifest.value.defaultScope
   selectedPresetId.value = 'oblique'
+  selectedThermalDisplayMode.value = 'postprocess'
 }
 
 function ensureSelectionsValid() {
@@ -291,6 +330,8 @@ onMounted(loadManifest)
           <div class="project-3dgs-viewer-frame">
             <Project3dgsViewer
               :asset-url="assetUrl"
+              :mode="selectedMode"
+              :thermal-display-mode="selectedThermalDisplayMode"
               :preset="activePreset"
               @camera-change="handleCameraChange"
               @error="handleViewerError"
@@ -321,7 +362,7 @@ onMounted(loadManifest)
               </div>
             </template>
 
-            <div class="project-3dgs-panel__group">
+            <div  class="project-3dgs-panel__group">
               <p class="eyebrow">显示模式</p>
               <a-segmented
                 class="project-3dgs-segmented"
@@ -331,7 +372,24 @@ onMounted(loadManifest)
               />
             </div>
 
-            <div class="project-3dgs-panel__group">
+            <div v-if="thermalDisplayModeVisible" class="project-3dgs-panel__group">
+              <p class="eyebrow">热场显示</p>
+              <a-segmented
+                class="project-3dgs-segmented"
+                :value="selectedThermalDisplayMode"
+                :options="thermalDisplayModeOptions"
+                @change="selectedThermalDisplayMode = $event"
+              />
+              <p class="project-3dgs-panel__note">
+                {{
+                  selectedThermalDisplayMode === 'postprocess'
+                    ? '对齐版会先完成灰度热场混合，再对最终图像执行 JET 后处理。'
+                    : '原始版直接显示资源里烘焙过的伪彩高斯颜色，便于和旧效果对比。'
+                }}
+              </p>
+            </div>
+
+            <div v-if="ablationVisible" class="project-3dgs-panel__group">
               <p class="eyebrow">消融实验</p>
               <div class="project-3dgs-group-list">
                 <button
@@ -374,7 +432,11 @@ onMounted(loadManifest)
               <p class="eyebrow">当前选择</p>
               <p class="project-3dgs-panel__summary-line">
                 <strong>{{ selectedMode }}</strong>
-                <span> / {{ activeGroup?.label }}</span>
+                <span v-if="ablationVisible"> / {{ activeGroup?.label }}</span>
+              </p>
+              <p v-if="thermalDisplayModeVisible" class="project-3dgs-panel__summary-line">
+                <strong>{{ selectedThermalDisplayMode === 'postprocess' ? '对齐版' : '原始版' }}</strong>
+                <span> / 热场视觉链路</span>
               </p>
               <p class="project-3dgs-panel__summary-line">
                 <strong>{{ activePreset?.label }}</strong>
@@ -406,7 +468,7 @@ onMounted(loadManifest)
       </section>
 
       <section class="project-3dgs-bottom motion-rise motion-rise--3">
-        <a-card class="ant-surface-card project-3dgs-result-card" :bordered="false">
+        <a-card v-if="ablationVisible" class="ant-surface-card project-3dgs-result-card" :bordered="false">
           <template #title>
             <div class="project-3dgs-section-title">
               <span>消融实验结果</span>

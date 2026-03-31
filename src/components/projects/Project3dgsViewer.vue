@@ -2,11 +2,27 @@
 import { nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import { FullScreenQuad } from 'three/examples/jsm/postprocessing/Pass.js'
+import { SparkRenderer, SplatMesh } from '@sparkjsdev/spark'
+
+import {
+  JET_COLORMAP_RGBA_BYTES,
+  prepareThermalPackedColors,
+} from './project3dgsThermalColormap.js'
+import { resolveSparkAssetFileType } from './project3dgsSparkAsset.js'
 
 const props = defineProps({
   assetUrl: {
     type: String,
     default: '',
+  },
+  mode: {
+    type: String,
+    default: 'rgb',
+  },
+  thermalDisplayMode: {
+    type: String,
+    default: 'postprocess',
   },
   preset: {
     type: Object,
@@ -22,13 +38,19 @@ const error = ref('')
 const hasAttemptedLoad = ref(false)
 
 let renderer = null
+let sparkRenderer = null
 let scene = null
 let camera = null
 let controls = null
+let thermalRenderTarget = null
+let thermalPostMaterial = null
+let thermalPostQuad = null
+let thermalJetTexture = null
 let resizeObserver = null
 let rafId = 0
 let activeAssetHandle = null
 let loadVersion = 0
+const PRESET_DISTANCE_SCALE = 3
 
 function setLoading(nextValue) {
   loading.value = nextValue
@@ -69,11 +91,12 @@ function restoreCameraSnapshot(snapshot) {
 
   camera.position.fromArray(snapshot.position)
   controls.target.fromArray(snapshot.target)
+  camera.lookAt(controls.target)
   controls.update()
   emitCameraSnapshot()
 }
 
-function applyPreset(preset) {
+function applyPreset(preset, { distanceScale = PRESET_DISTANCE_SCALE } = {}) {
   if (!preset || !camera || !controls) return
 
   if (Array.isArray(preset.position) && preset.position.length === 3) {
@@ -89,6 +112,14 @@ function applyPreset(preset) {
     controls.target.fromArray(preset.target)
   }
 
+  if (distanceScale > 0 && distanceScale !== 1) {
+    const offset = camera.position.clone().sub(controls.target)
+    if (offset.lengthSq() > 1e-8) {
+      camera.position.copy(controls.target).add(offset.multiplyScalar(distanceScale))
+    }
+  }
+
+  camera.lookAt(controls.target)
   controls.update()
   emitCameraSnapshot()
 }
@@ -128,63 +159,152 @@ function disposeAssetHandle(handle) {
   }
 }
 
-async function resolveSparkAssetHandle(url) {
-  const sparkModule = await import('@sparkjsdev/spark')
+function usesThermalPostprocess(url) {
+  return (
+    props.mode === 'thermal' &&
+    props.thermalDisplayMode === 'postprocess' &&
+    typeof url === 'string' &&
+    url.includes('/thermal/')
+  )
+}
 
-  // Spark's public API may vary by release. Keep the uncertainty isolated here.
-  const candidate =
-    sparkModule.SplatMesh ||
-    sparkModule.default?.SplatMesh ||
-    sparkModule.default ||
-    null
-
-  if (!candidate) {
-    throw new Error(
-      'Spark loader entrypoint was not found. Update the adapter in Project3dgsViewer.vue to match the installed package API.'
-    )
+function ensureThermalJetTexture() {
+  if (thermalJetTexture) {
+    return thermalJetTexture
   }
 
-  let instance = null
+  thermalJetTexture = new THREE.DataTexture(
+    JET_COLORMAP_RGBA_BYTES,
+    JET_COLORMAP_RGBA_BYTES.length / 4,
+    1,
+    THREE.RGBAFormat,
+    THREE.UnsignedByteType
+  )
+  thermalJetTexture.colorSpace = THREE.NoColorSpace
+  thermalJetTexture.minFilter = THREE.NearestFilter
+  thermalJetTexture.magFilter = THREE.NearestFilter
+  thermalJetTexture.wrapS = THREE.ClampToEdgeWrapping
+  thermalJetTexture.wrapT = THREE.ClampToEdgeWrapping
+  thermalJetTexture.generateMipmaps = false
+  thermalJetTexture.needsUpdate = true
 
-  if (typeof candidate.fromURL === 'function') {
-    instance = await candidate.fromURL(url)
-  } else if (typeof candidate.load === 'function') {
-    instance = await candidate.load(url)
-  } else {
-    instance = new candidate({ url })
+  return thermalJetTexture
+}
+
+function ensureThermalPostprocessResources() {
+  if (!renderer) return
+
+  if (!thermalRenderTarget) {
+    thermalRenderTarget = new THREE.WebGLRenderTarget(1, 1, {
+      depthBuffer: false,
+      stencilBuffer: false,
+      generateMipmaps: false,
+    })
+    thermalRenderTarget.texture.minFilter = THREE.LinearFilter
+    thermalRenderTarget.texture.magFilter = THREE.LinearFilter
   }
 
-  if (typeof instance?.ready === 'function') {
-    await instance.ready()
-  } else if (instance?.readyPromise && typeof instance.readyPromise.then === 'function') {
-    await instance.readyPromise
+  if (!thermalPostMaterial) {
+    thermalPostMaterial = new THREE.ShaderMaterial({
+      uniforms: {
+        tDiffuse: { value: null },
+        tJet: { value: ensureThermalJetTexture() },
+      },
+      vertexShader: `
+        varying vec2 vUv;
+
+        void main() {
+          vUv = uv;
+          gl_Position = vec4(position.xy, 0.0, 1.0);
+        }
+      `,
+      fragmentShader: `
+        uniform sampler2D tDiffuse;
+        uniform sampler2D tJet;
+
+        varying vec2 vUv;
+
+        void main() {
+          vec4 source = texture2D(tDiffuse, vUv);
+          float gray01 = clamp(source.r, 0.0, 1.0);
+          float jetIndex = floor(gray01 * 255.0 + 0.5);
+          vec2 jetUv = vec2((jetIndex + 0.5) / 256.0, 0.5);
+          vec3 jetRgb = texture2D(tJet, jetUv).rgb;
+
+          gl_FragColor = vec4(jetRgb, 1.0);
+        }
+      `,
+      depthTest: false,
+      depthWrite: false,
+    })
   }
 
-  const object3D =
-    instance?.object3D ||
-    instance?.mesh ||
-    instance?.group ||
-    (instance?.isObject3D ? instance : null)
+  if (!thermalPostQuad) {
+    thermalPostQuad = new FullScreenQuad(thermalPostMaterial)
+  }
+}
 
-  if (!object3D) {
-    throw new Error(
-      'Spark asset loaded, but no renderable Three.js object was exposed. Update the adapter boundary in Project3dgsViewer.vue.'
-    )
+function resizeThermalPostprocess() {
+  if (!thermalRenderTarget || !canvasHost.value) return
+
+  const { clientWidth, clientHeight } = canvasHost.value
+  thermalRenderTarget.setSize(Math.max(clientWidth, 1), Math.max(clientHeight, 1))
+}
+
+function disposeThermalPostprocess() {
+  thermalPostQuad?.dispose?.()
+  thermalPostQuad = null
+
+  thermalPostMaterial?.dispose()
+  thermalPostMaterial = null
+
+  thermalRenderTarget?.dispose()
+  thermalRenderTarget = null
+
+  thermalJetTexture?.dispose()
+  thermalJetTexture = null
+}
+
+async function resolveSparkAssetHandle(url, { thermalPostprocess = false, shouldAbort = null } = {}) {
+  const response = await fetch(url, { cache: 'no-store' })
+  if (!response.ok) {
+    throw new Error(`${response.status} ${response.statusText} fetching URL: ${url}`)
+  }
+
+  const fileBytes = new Uint8Array(await response.arrayBuffer())
+  if (shouldAbort?.()) {
+    return null
+  }
+
+  const fileType = resolveSparkAssetFileType(url)
+  const mesh = new SplatMesh({
+    fileBytes,
+    fileType: fileType ?? undefined,
+    fileName: url,
+  })
+  await mesh.initialized
+
+  if (thermalPostprocess) {
+    const prepared = await prepareThermalPackedColors(mesh.packedSplats, { shouldAbort })
+
+    if (!prepared) {
+      mesh.dispose()
+      return null
+    }
   }
 
   return {
-    instance,
-    object3D,
+    object3D: mesh,
+    thermalPostprocess,
     dispose() {
-      instance?.dispose?.()
-      instance?.destroy?.()
+      mesh.dispose()
     },
   }
 }
 
 async function loadAsset(url, { restoreView = true } = {}) {
   const version = ++loadVersion
-  const snapshot = restoreView ? captureCameraSnapshot() : null
+  const snapshot = restoreView && activeAssetHandle ? captureCameraSnapshot() : null
   hasAttemptedLoad.value = true
 
   disposeAssetHandle(activeAssetHandle)
@@ -200,7 +320,14 @@ async function loadAsset(url, { restoreView = true } = {}) {
   setLoading(true)
 
   try {
-    const nextHandle = await resolveSparkAssetHandle(url)
+    const nextHandle = await resolveSparkAssetHandle(url, {
+      thermalPostprocess: usesThermalPostprocess(url),
+      shouldAbort: () => version !== loadVersion,
+    })
+
+    if (!nextHandle) {
+      return
+    }
 
     if (version !== loadVersion) {
       disposeAssetHandle(nextHandle)
@@ -229,10 +356,34 @@ async function loadAsset(url, { restoreView = true } = {}) {
   }
 }
 
+function renderThermalPostprocess() {
+  ensureThermalPostprocessResources()
+
+  if (!renderer || !scene || !camera || !thermalRenderTarget || !thermalPostMaterial || !thermalPostQuad) {
+    renderer?.render(scene, camera)
+    return
+  }
+
+  thermalPostMaterial.uniforms.tDiffuse.value = thermalRenderTarget.texture
+
+  renderer.setRenderTarget(thermalRenderTarget)
+  renderer.clear()
+  renderer.render(scene, camera)
+
+  renderer.setRenderTarget(null)
+  renderer.clear()
+  thermalPostQuad.render(renderer)
+}
+
 function renderLoop() {
   if (renderer && scene && camera) {
     controls?.update()
-    renderer.render(scene, camera)
+
+    if (props.mode === 'thermal' && activeAssetHandle?.thermalPostprocess) {
+      renderThermalPostprocess()
+    } else {
+      renderer.render(scene, camera)
+    }
   }
 
   rafId = window.requestAnimationFrame(renderLoop)
@@ -249,6 +400,7 @@ function resizeRenderer() {
   renderer.setSize(safeWidth, safeHeight, false)
   camera.aspect = safeWidth / safeHeight
   camera.updateProjectionMatrix()
+  resizeThermalPostprocess()
 }
 
 function destroyRenderer() {
@@ -266,6 +418,12 @@ function destroyRenderer() {
   disposeAssetHandle(activeAssetHandle)
   activeAssetHandle = null
 
+  if (sparkRenderer && scene) {
+    scene.remove(sparkRenderer)
+  }
+  sparkRenderer = null
+
+  disposeThermalPostprocess()
   renderer?.dispose()
 
   if (renderer?.domElement && renderer.domElement.parentNode) {
@@ -282,7 +440,7 @@ async function initRenderer() {
 
   try {
     renderer = new THREE.WebGLRenderer({
-      antialias: true,
+      antialias: false,
       alpha: true,
       powerPreference: 'high-performance',
     })
@@ -298,6 +456,10 @@ async function initRenderer() {
   scene = new THREE.Scene()
   camera = new THREE.PerspectiveCamera(42, 1, 0.01, 500)
   camera.position.set(2.2, 1.2, 2.2)
+  sparkRenderer = new SparkRenderer({ renderer })
+  sparkRenderer.frustumCulled = false
+  scene.add(sparkRenderer)
+  ensureThermalPostprocessResources()
 
   const ambientLight = new THREE.HemisphereLight(0xf8efe1, 0x5c4b40, 1.15)
   scene.add(ambientLight)
@@ -338,13 +500,20 @@ onMounted(async () => {
   }
 })
 
-watch(
-  () => props.assetUrl,
-  async (nextAssetUrl, previousAssetUrl) => {
-    if (!renderer || nextAssetUrl === previousAssetUrl) return
-    await loadAsset(nextAssetUrl, { restoreView: true })
-  }
-)
+watch(() => [props.assetUrl, props.mode, props.thermalDisplayMode], async (
+  [nextAssetUrl, nextMode, nextThermalDisplayMode],
+  [previousAssetUrl, previousMode, previousThermalDisplayMode]
+) => {
+  if (!renderer) return
+
+  const viewerInputsChanged =
+    nextAssetUrl !== previousAssetUrl ||
+    nextMode !== previousMode ||
+    nextThermalDisplayMode !== previousThermalDisplayMode
+
+  if (!viewerInputsChanged) return
+  await loadAsset(nextAssetUrl, { restoreView: true })
+})
 
 watch(
   () => props.preset,
