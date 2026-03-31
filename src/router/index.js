@@ -35,6 +35,24 @@ const router = createRouter({
       component: () => import('@/views/modules/SupplementLibraryView.vue'),
     },
     {
+      path: '/projects/approval-map-workflow',
+      alias: ['/projects/approval-map-workflow/'],
+      name: 'project-approval-map-workflow',
+      component: () => import('@/views/projects/ProjectApprovalMapWorkflowView.vue'),
+    },
+    {
+      path: '/projects/campus-collaboration',
+      alias: ['/projects/campus-collaboration/'],
+      name: 'project-campus-collaboration',
+      component: () => import('@/views/projects/ProjectCampusCollaborationView.vue'),
+    },
+    {
+      path: '/projects/fitness-coaching',
+      alias: ['/projects/fitness-coaching/'],
+      name: 'project-fitness-coaching',
+      component: () => import('@/views/projects/ProjectFitnessCoachingView.vue'),
+    },
+    {
       path: '/projects/3dgs',
       alias: ['/projects/3dgs/'],
       name: 'project-3dgs',
