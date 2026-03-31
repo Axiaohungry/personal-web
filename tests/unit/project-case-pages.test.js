@@ -9,21 +9,36 @@ import { fitnessCoachingCase } from '../../src/data/projectCases/fitnessCoaching
 
 test('project case routes and homepage cards stay aligned', async () => {
   const routerFile = await readFile(new URL('../../src/router/index.js', import.meta.url), 'utf8')
+  const routeBindings = [
+    {
+      route: approvalMapWorkflowCase.route,
+      viewFile: 'ProjectApprovalMapWorkflowView.vue',
+    },
+    {
+      route: campusCollaborationCase.route,
+      viewFile: 'ProjectCampusCollaborationView.vue',
+    },
+    {
+      route: fitnessCoachingCase.route,
+      viewFile: 'ProjectFitnessCoachingView.vue',
+    },
+  ]
 
-  assert.ok(routerFile.includes("path: '/projects/approval-map-workflow'"))
-  assert.ok(routerFile.includes("path: '/projects/campus-collaboration'"))
-  assert.ok(routerFile.includes("path: '/projects/fitness-coaching'"))
+  for (const binding of routeBindings) {
+    assert.ok(routerFile.includes(binding.route))
+    assert.ok(routerFile.includes(binding.viewFile))
+  }
 
   assert.equal(
-    projects.find((project) => project.name === '政务审批地图工作流')?.href,
-    approvalMapWorkflowCase.route
+    projects.filter((project) => project.href === approvalMapWorkflowCase.route).length,
+    1
   )
   assert.equal(
-    projects.find((project) => project.name === '校园产品化协作项目集')?.href,
-    campusCollaborationCase.route
+    projects.filter((project) => project.href === campusCollaborationCase.route).length,
+    1
   )
   assert.equal(
-    projects.find((project) => project.name === '健身私教顾问方案')?.href,
-    fitnessCoachingCase.route
+    projects.filter((project) => project.href === fitnessCoachingCase.route).length,
+    1
   )
 })

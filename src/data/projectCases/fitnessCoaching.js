@@ -42,10 +42,6 @@ export const fitnessCoachingCase = {
       '支持长期跟进和复购关系',
       '让建议更容易被执行和复盘',
     ],
-    bridgeCta: {
-      label: '进入健身工具',
-      href: '/fitness/',
-    },
   },
   evidence: [
     {
@@ -57,4 +53,8 @@ export const fitnessCoachingCase = {
       detail: '续费率保持在 80% 左右，说明服务节奏和结果反馈有持续价值。',
     },
   ],
+  bridgeCta: {
+    label: '进入健身工具',
+    href: '/fitness/',
+  },
 }

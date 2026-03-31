@@ -47,16 +47,6 @@ export const campusCollaborationCase = {
       '跨部门协作节点的清晰拆分',
       '活动执行后的复盘与复用路径',
     ],
-    supportingCases: [
-      {
-        title: '迎新周协作面板',
-        detail: '把多部门排期和任务流放进同一张协作面板。',
-      },
-      {
-        title: '社团活动复盘包',
-        detail: '把执行结果、问题和改进项整理成可复用模板。',
-      },
-    ],
   },
   evidence: [
     {
@@ -70,6 +60,16 @@ export const campusCollaborationCase = {
     {
       title: '团队协同密度',
       detail: '核心团队保持在 16 人左右，兼顾分工清晰和沟通效率。',
+    },
+  ],
+  supportingCases: [
+    {
+      title: '迎新周协作面板',
+      detail: '把多部门排期和任务流放进同一张协作面板。',
+    },
+    {
+      title: '社团活动复盘包',
+      detail: '把执行结果、问题和改进项整理成可复用模板。',
     },
   ],
 }
