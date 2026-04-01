@@ -9,4 +9,16 @@ test('ecs deploy script health check uses the published host port', async () => 
     script,
     /curl -fsS "http:\/\/127\.0\.0\.1:\$\{PORT\}\/healthz"/
   )
+  assert.match(
+    script,
+    /ASSET_3DGS_DIR="\$\{ASSET_3DGS_DIR:-\/home\/ecs-assist-user\/personal-web\/public\/3dgs\}"/
+  )
+  assert.match(
+    script,
+    /Missing 3DGS asset manifest at \$\{ASSET_3DGS_DIR\}\/scene-metadata\.json/
+  )
+  assert.match(
+    script,
+    /cp -a "\$\{ASSET_3DGS_DIR\}" "\$\{BUILD_3DGS_DIR\}"/
+  )
 })
