@@ -8,235 +8,396 @@ const page = approvalMapWorkflowCase
 </script>
 
 <template>
-  <ProjectCaseShell :hero="page.hero" variant="approval-map">
-    <template #hero="{ hero }">
-      <div class="project-case-hero__content project-case-approval__hero">
-        <p class="eyebrow project-case-hero__eyebrow">{{ hero.eyebrow }}</p>
-
-        <div class="project-case-hero__heading">
-          <h1 class="project-case-hero__title">
-            {{ hero.title }}
-          </h1>
-          <p v-if="hero.subtitle" class="project-case-hero__subtitle">
-            {{ hero.subtitle }}
-          </p>
-        </div>
-
-        <p class="project-case-hero__summary">
-          {{ hero.summary }}
+  <ProjectCaseShell
+    class="project-case-approval-map-view"
+    :hero="page.hero"
+    variant="approval-map"
+  >
+    <ProjectCaseSection
+      class="project-case-approval__stage project-case-approval__stage--bare"
+      variant="bare"
+      :eyebrow="page.difficultySection.eyebrow"
+      :title="page.difficultySection.title"
+      :intro="page.difficultySection.intro"
+    >
+      <div class="project-case-approval__complexity">
+        <p class="project-case-approval__complexity-lead">
+          这页不是在做信息堆叠，而是在把审批这件事的真实复杂度拆开，让业务、实施和普通用户都能顺着同一条线读下去。
         </p>
 
-        <div class="chip-list project-case-approval__tags">
-          <a-tag v-for="tag in hero.tags" :key="tag">
-            {{ tag }}
-          </a-tag>
-        </div>
-
-        <div class="project-case-approval__signals">
-          <article v-for="signal in hero.signals" :key="signal.label" class="project-case-approval__signal">
-            <p class="project-case-approval__signal-label">{{ signal.label }}</p>
-            <p class="project-case-approval__signal-value">{{ signal.value }}</p>
-          </article>
-        </div>
+        <ul class="project-case-approval__complexity-list">
+          <li
+            v-for="item in page.complexity"
+            :key="item"
+            class="project-case-approval__complexity-item"
+          >
+            {{ item }}
+          </li>
+        </ul>
       </div>
-    </template>
-
-    <ProjectCaseSection
-      eyebrow="复杂度"
-      title="为什么这个页面需要被认真拆开"
-      intro="审批地图类页面的难点，不在于图层本身，而在于把对象、表单和状态变成统一叙事。"
-    >
-      <ul class="project-case-approval__list project-case-approval__list--stack">
-        <li v-for="item in page.complexity" :key="item" class="project-case-approval__list-item">
-          {{ item }}
-        </li>
-      </ul>
     </ProjectCaseSection>
 
     <ProjectCaseSection
-      eyebrow="职责"
-      title="我在这个案例里负责什么"
-      intro="职责不是堆功能点，而是把跨角色的理解收束成一套能交付的页面结构。"
+      class="project-case-approval__stage project-case-approval__stage--panel"
+      variant="panel"
+      :eyebrow="page.responsibilitySection.eyebrow"
+      :title="page.responsibilitySection.title"
+      :intro="page.responsibilitySection.intro"
     >
-      <div class="project-case-approval__grid">
-        <article v-for="item in page.responsibilities" :key="item" class="project-case-approval__panel">
-          {{ item }}
+      <div class="project-case-approval__responsibility-grid">
+        <article
+          v-for="(item, index) in page.responsibilities"
+          :key="item"
+          class="project-case-approval__responsibility-item"
+        >
+          <p class="project-case-approval__item-kicker">
+            职责 {{ index + 1 }}
+          </p>
+          <p class="project-case-approval__responsibility-copy">
+            {{ item }}
+          </p>
         </article>
       </div>
     </ProjectCaseSection>
 
     <ProjectCaseSection
-      eyebrow="流程"
-      title="四步工作法"
-      intro="从发现问题到交付结果，页面结构沿着同一条阅读路径展开。"
+      class="project-case-approval__stage project-case-approval__stage--panel project-case-approval__stage--process"
+      variant="panel"
+      :eyebrow="page.processSection.eyebrow"
+      :title="page.processSection.title"
+      :intro="page.processSection.intro"
     >
-      <ol class="project-case-approval__steps">
-        <li v-for="(step, index) in page.process" :key="step.key" class="project-case-approval__step">
-          <span class="project-case-approval__step-key">步骤 {{ index + 1 }}</span>
-          <strong class="project-case-approval__step-title">{{ step.title }}</strong>
-          <p class="project-case-approval__step-detail">{{ step.description }}</p>
-        </li>
-      </ol>
+      <div class="project-case-approval__process-band">
+        <div class="project-case-approval__process-band-lead">
+          <p class="project-case-approval__process-band-kicker">
+            连续流程带
+          </p>
+          <p class="project-case-approval__process-band-copy">
+            不是把流程拆成四个互不相干的框，而是让判定、结构、协作和交付沿着同一条阅读轨迹往前推进。
+          </p>
+        </div>
+
+        <ol class="project-case-approval__process-list">
+          <li
+            v-for="(step, index) in page.process"
+            :key="step.key"
+            class="project-case-approval__process-step"
+          >
+            <span class="project-case-approval__process-step-key">
+              {{ page.processSection.stepLabelPrefix }} {{ index + 1 }}{{ page.processSection.stepLabelSuffix }}
+            </span>
+            <strong class="project-case-approval__process-step-title">
+              {{ step.title }}
+            </strong>
+            <p class="project-case-approval__process-step-detail">
+              {{ step.description }}
+            </p>
+          </li>
+        </ol>
+      </div>
     </ProjectCaseSection>
 
     <ProjectCaseSection
-      eyebrow="证据"
-      title="可替换的公开证据"
-      intro="三张静态图先把叙事位立住，后续可以平滑替换成真实裁切图。"
+      class="project-case-approval__stage project-case-approval__stage--proof"
+      variant="proof"
+      :eyebrow="page.evidenceSection.eyebrow"
+      :title="page.evidenceSection.title"
+      :intro="page.evidenceSection.intro"
     >
-      <ProjectEvidenceGrid :items="page.evidence" />
+      <div class="project-case-approval__proof">
+        <p class="project-case-approval__proof-note">
+          这些图不是装饰性的展示物，而是可替换的证据位。后续只需要把临时占位图换成真实截图，叙事结构就能原样保留。
+        </p>
+
+        <ProjectEvidenceGrid :items="page.evidence" />
+      </div>
     </ProjectCaseSection>
 
     <ProjectCaseSection
-      eyebrow="结果与反思"
-      title="我希望招聘方读到什么"
-      intro="这是一个强调交付边界的案例，不是单纯展示功能堆叠的页面。"
+      class="project-case-approval__stage project-case-approval__stage--bare project-case-approval__stage--outcomes"
+      variant="bare"
+      :eyebrow="page.outcomesSection.eyebrow"
+      :title="page.outcomesSection.title"
+      :intro="page.outcomesSection.intro"
     >
       <div class="project-case-approval__outcomes">
         <p class="project-case-approval__outcome-summary">
           {{ page.outcomes.summary }}
         </p>
 
-        <p class="project-case-approval__disclaimer">
-          {{ page.outcomes.disclaimer }}
-        </p>
-
         <div class="chip-list project-case-approval__capabilities">
-          <a-tag v-for="capability in page.outcomes.capabilities" :key="capability">
+          <a-tag
+            v-for="capability in page.outcomes.capabilities"
+            :key="capability"
+          >
             {{ capability }}
           </a-tag>
         </div>
 
         <ul class="project-case-approval__reflections">
-          <li v-for="reflection in page.outcomes.reflections" :key="reflection">
+          <li
+            v-for="reflection in page.outcomes.reflections"
+            :key="reflection"
+          >
             {{ reflection }}
           </li>
         </ul>
+
+        <p class="project-case-approval__disclaimer">
+          {{ page.outcomes.disclaimer }}
+        </p>
       </div>
     </ProjectCaseSection>
   </ProjectCaseShell>
 </template>
 
 <style scoped>
-.project-case-approval__hero {
-  max-width: 52rem;
+.project-case-approval-map-view {
+  position: relative;
+  isolation: isolate;
+  overflow-x: clip;
 }
 
-.project-case-approval__tags,
-.project-case-approval__signals,
-.project-case-approval__grid,
-.project-case-approval__steps,
-.project-case-approval__reflections {
-  display: grid;
-  gap: 0.75rem;
+.project-case-approval-map-view::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(circle at 12% 8%, rgba(180, 85, 45, 0.11), transparent 18%),
+    radial-gradient(circle at 86% 14%, rgba(31, 123, 104, 0.11), transparent 20%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 42%);
+  pointer-events: none;
 }
 
-.project-case-approval__signals {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+.project-case-approval-map-view :deep(.project-case-page__shell) {
+  gap: 0.95rem;
 }
 
-.project-case-approval__signal,
-.project-case-approval__panel,
-.project-case-approval__step {
-  padding: 0.95rem 1rem;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-md);
-  background: var(--panel-soft);
+.project-case-approval-map-view :deep(.project-case-hero) {
+  padding: clamp(1.2rem, 3vw, 2rem);
 }
 
-.project-case-approval__signal {
-  display: grid;
-  gap: 0.35rem;
+.project-case-approval-map-view :deep(.project-case-hero__layout) {
+  grid-template-columns: minmax(0, 1.55fr) minmax(18rem, 0.95fr);
+  gap: clamp(1rem, 2vw, 1.75rem);
 }
 
-.project-case-approval__signal-label,
-.project-case-approval__step-key {
-  margin: 0;
-  color: var(--accent);
-  font-size: 0.78rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+.project-case-approval-map-view :deep(.project-case-hero__content) {
+  max-width: 48rem;
 }
 
-.project-case-approval__signal-value,
-.project-case-approval__step-detail,
-.project-case-approval__outcome-summary,
-.project-case-approval__disclaimer {
-  margin: 0;
-  color: var(--muted);
-  line-height: 1.7;
+.project-case-approval-map-view :deep(.project-case-hero__title) {
+  font-size: clamp(2.7rem, 6vw, 5.4rem);
+  line-height: 0.94;
+  letter-spacing: -0.06em;
 }
 
-.project-case-approval__list,
-.project-case-approval__reflections {
-  margin: 0;
-  padding: 0;
-  list-style: none;
+.project-case-approval__stage {
+  margin-top: clamp(0.9rem, 2vw, 1.2rem);
 }
 
-.project-case-approval__list--stack {
-  display: grid;
-  gap: 0.75rem;
+.project-case-approval__stage--bare {
+  max-width: 58rem;
 }
 
-.project-case-approval__list-item {
-  padding: 0.9rem 1rem;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-md);
-  background: var(--panel-soft);
-  line-height: 1.7;
-}
-
-.project-case-approval__grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.project-case-approval__panel {
-  line-height: 1.7;
-}
-
-.project-case-approval__steps {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.project-case-approval__step {
-  display: grid;
-  gap: 0.45rem;
-}
-
-.project-case-approval__step-title {
-  margin: 0;
-  font-size: 1.04rem;
-}
-
-.project-case-approval__outcomes {
+.project-case-approval__complexity,
+.project-case-approval__outcomes,
+.project-case-approval__proof {
   display: grid;
   gap: 0.95rem;
 }
 
+.project-case-approval__complexity-lead,
+.project-case-approval__outcome-summary,
+.project-case-approval__proof-note {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.78;
+}
+
+.project-case-approval__complexity-lead {
+  max-width: 40rem;
+}
+
+.project-case-approval__complexity-list {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.project-case-approval__complexity-item {
+  padding: 0.95rem 1rem;
+  border: 1px solid var(--line);
+  border-inline-start: 3px solid color-mix(in srgb, var(--accent) 60%, var(--line));
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--accent-soft) 20%, transparent), transparent 44%),
+    var(--panel-soft);
+  line-height: 1.78;
+}
+
+.project-case-approval__responsibility-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.project-case-approval__responsibility-item {
+  display: grid;
+  gap: 0.38rem;
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--panel-soft);
+}
+
+.project-case-approval__item-kicker,
+.project-case-approval__process-band-kicker {
+  margin: 0;
+  color: var(--accent);
+  font-size: 0.76rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.project-case-approval__responsibility-copy,
+.project-case-approval__process-band-copy,
+.project-case-approval__process-step-detail,
+.project-case-approval__disclaimer,
+.project-case-approval__proof-note {
+  line-height: 1.75;
+}
+
+.project-case-approval__responsibility-copy,
+.project-case-approval__process-band-copy,
+.project-case-approval__process-step-detail,
+.project-case-approval__disclaimer {
+  margin: 0;
+  color: var(--muted);
+}
+
+.project-case-approval__process-band {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius-lg) + 2px);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--panel) 88%, white 12%), var(--panel-soft));
+}
+
+.project-case-approval__process-band-lead {
+  display: grid;
+  gap: 0.35rem;
+  max-width: 40rem;
+}
+
+.project-case-approval__process-band-copy {
+  max-width: 38rem;
+}
+
+.project-case-approval__process-list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+
+.project-case-approval__process-step {
+  display: grid;
+  align-content: start;
+  gap: 0.45rem;
+  padding: 1rem 0.9rem 0;
+}
+
+.project-case-approval__process-step + .project-case-approval__process-step {
+  border-inline-start: 1px solid color-mix(in srgb, var(--line) 80%, transparent);
+}
+
+.project-case-approval__process-step-title {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.project-case-approval__process-step-key {
+  position: relative;
+  margin: 0;
+  color: var(--accent-strong);
+  font-size: 0.86rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.project-case-approval__proof-note {
+  max-width: 42rem;
+}
+
 .project-case-approval__capabilities {
-  margin-top: 0.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
 }
 
 .project-case-approval__reflections {
+  display: grid;
   gap: 0.6rem;
+  margin: 0;
   padding-left: 1.1rem;
   list-style: disc;
 }
 
 .project-case-approval__reflections li {
-  line-height: 1.7;
   color: var(--muted);
+  line-height: 1.75;
+}
+
+.project-case-approval__disclaimer {
+  padding: 0.92rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--panel-soft);
 }
 
 @media (max-width: 1080px) {
-  .project-case-approval__signals,
-  .project-case-approval__grid,
-  .project-case-approval__steps {
+  .project-case-approval-map-view :deep(.project-case-hero__layout) {
     grid-template-columns: 1fr;
+  }
+
+  .project-case-approval__responsibility-grid,
+  .project-case-approval__process-list {
+    grid-template-columns: 1fr;
+  }
+
+  .project-case-approval__process-step + .project-case-approval__process-step {
+    border-inline-start: 0;
+    border-top: 1px solid color-mix(in srgb, var(--line) 80%, transparent);
+  }
+}
+
+@media (max-width: 720px) {
+  .project-case-approval-map-view :deep(.project-case-hero),
+  .project-case-approval__stage {
+    padding-inline: 1rem;
+  }
+
+  .project-case-approval-map-view :deep(.project-case-hero__title) {
+    font-size: clamp(2.3rem, 11vw, 3.6rem);
+  }
+
+  .project-case-approval__process-band {
+    padding: 0.9rem;
+  }
+
+  .project-case-approval__complexity-item,
+  .project-case-approval__responsibility-item,
+  .project-case-approval__disclaimer {
+    padding-inline: 0.92rem;
   }
 }
 </style>

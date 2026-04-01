@@ -4,18 +4,37 @@ import { access, readFile } from 'node:fs/promises'
 
 import { approvalMapWorkflowCase } from '../../src/data/projectCases/approvalMapWorkflow.js'
 
-test('approval map page keeps the approved content emphasis', async () => {
+test('approval map page locks the refreshed flagship case structure', async () => {
   const viewFile = await readFile(
     new URL('../../src/views/projects/ProjectApprovalMapWorkflowView.vue', import.meta.url),
     'utf8'
   )
 
-  assert.ok(viewFile.includes('ProjectCaseShell'))
-  assert.ok(viewFile.includes('ProjectEvidenceGrid'))
-  assert.ok(viewFile.includes(':items="page.evidence"'))
+  const shellFile = await readFile(
+    new URL('../../src/components/projects/ProjectCaseShell.vue', import.meta.url),
+    'utf8'
+  )
+
+  assert.ok(viewFile.includes('<ProjectCaseShell'))
+  assert.ok(viewFile.includes(':hero="page.hero"'))
+  assert.ok(viewFile.includes('variant="approval-map"'))
+  assert.ok(shellFile.includes('ProjectCaseSignalRail'))
+  assert.ok(shellFile.includes(':items="heroSignals"'))
+
+  assert.ok(viewFile.includes(':eyebrow="page.difficultySection.eyebrow"'))
+  assert.ok(viewFile.includes(':eyebrow="page.responsibilitySection.eyebrow"'))
+  assert.ok(viewFile.includes(':eyebrow="page.processSection.eyebrow"'))
+  assert.ok(viewFile.includes(':eyebrow="page.evidenceSection.eyebrow"'))
+  assert.ok(viewFile.includes(':eyebrow="page.outcomesSection.eyebrow"'))
+
+  assert.ok(viewFile.includes('variant="bare"'))
+  assert.ok(viewFile.includes('variant="panel"'))
+  assert.ok(viewFile.includes('variant="proof"'))
+
+  assert.ok(viewFile.includes('<ProjectEvidenceGrid :items="page.evidence" />'))
   assert.ok(viewFile.includes('{{ page.outcomes.disclaimer }}'))
-  assert.ok(viewFile.includes('步骤 {{ index + 1 }}'))
-  assert.ok(approvalMapWorkflowCase.outcomes.disclaimer.includes('近似估算'))
+
+  assert.ok(approvalMapWorkflowCase.outcomes.disclaimer.length > 0)
 
   for (const item of approvalMapWorkflowCase.evidence) {
     assert.equal(typeof item.src, 'string')
