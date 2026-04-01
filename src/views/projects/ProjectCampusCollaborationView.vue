@@ -5,6 +5,9 @@ import ProjectEvidenceGrid from '@/components/projects/ProjectEvidenceGrid.vue'
 import { campusCollaborationCase } from '@/data/projectCases/campusCollaboration.js'
 
 const page = campusCollaborationCase
+
+const positioningKicker = '为什么这不是办活动'
+const outcomesCapabilitiesKicker = '可复用能力'
 </script>
 
 <template>
@@ -17,9 +20,10 @@ const page = campusCollaborationCase
     >
       <div class="project-case-campus__positioning">
         <div class="project-case-campus__positioning-copy">
-          <p class="project-case-campus__section-kicker">为什么这不是办活动</p>
+          <p class="project-case-campus__section-kicker">{{ positioningKicker }}</p>
           <p class="project-case-campus__positioning-lede">
-            这页先把问题框住，再谈交付。不是为了热闹，而是为了把协作边界、角色分工和执行约束讲清楚。
+            先把问题框清楚，再谈协作、动作和结果。校园合作不是单次活动，而是一套
+            需要被拆解、对齐和复用的执行机制。
           </p>
         </div>
 
@@ -40,6 +44,7 @@ const page = campusCollaborationCase
       <article class="project-case-campus__lead-stage">
         <div class="project-case-campus__lead-head">
           <p class="project-case-campus__lead-role">{{ page.leadCase.role }}</p>
+          <h3 class="project-case-campus__lead-title">{{ page.leadCase.title }}</h3>
           <p class="project-case-campus__lead-summary">
             {{ page.leadCase.summary }}
           </p>
@@ -89,7 +94,11 @@ const page = campusCollaborationCase
       variant="proof"
     >
       <div class="project-case-campus__proof-columns">
-        <article v-for="(item, index) in page.supportingCases" :key="item.title" class="project-case-campus__proof-column">
+        <article
+          v-for="(item, index) in page.supportingCases"
+          :key="item.title"
+          class="project-case-campus__proof-column"
+        >
           <p class="project-case-campus__proof-index">证明 {{ index + 1 }}</p>
           <p class="project-case-campus__proof-title">{{ item.title }}</p>
           <p class="project-case-campus__proof-summary">{{ item.summary }}</p>
@@ -122,7 +131,7 @@ const page = campusCollaborationCase
 
         <div class="project-case-campus__outcome-grid">
           <div class="project-case-campus__outcome-capabilities">
-            <p class="project-case-campus__section-kicker">可复用能力</p>
+            <p class="project-case-campus__section-kicker">{{ outcomesCapabilitiesKicker }}</p>
             <div class="chip-list project-case-campus__capabilities">
               <a-tag v-for="capability in page.outcomes.capabilities" :key="capability">
                 {{ capability }}
@@ -207,7 +216,7 @@ const page = campusCollaborationCase
 
 .project-case-campus__lead-head {
   display: grid;
-  gap: 0.55rem;
+  gap: 0.5rem;
   max-width: 52rem;
 }
 
@@ -216,6 +225,14 @@ const page = campusCollaborationCase
   color: var(--text);
   font-weight: 600;
   font-size: 1.02rem;
+}
+
+.project-case-campus__lead-title {
+  margin: 0;
+  color: var(--text);
+  font-size: clamp(1.55rem, 3vw, 2.2rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
 }
 
 .project-case-campus__lead-grid {
