@@ -8,7 +8,7 @@ export const fitnessCoachingCase = {
     title: '把健身教练服务做成可持续交付的工作台。',
     subtitle: '围绕咨询、计划、执行、复盘，整理出一条更清楚的服务路径。',
     summary:
-      '这个案例强调的不是训练花样，而是服务方法。页面围绕 5 位付费客户的持续服务展开，把计划更新、跟踪反馈和续费判断放到同一条阅读路径里，让普通用户知道下一步怎么做，也让合作方看见服务如何稳定续上。',
+      '这个案例不想强调训练花样，而是把 5 位付费客户的持续服务收成一条更安静的路径。咨询、计划、跟踪和复盘都放在同一页里，用户知道下一步怎么做，教练也能稳定推进。',
     tags: ['私教服务产品化', '持续跟进', '复盘迭代', '双端可用'],
     signals: [
       { label: '付费客户', value: '5 位' },
@@ -18,11 +18,11 @@ export const fitnessCoachingCase = {
   },
   problemSection: {
     eyebrow: '问题',
-    title: '为什么这页要更像服务台，而不是课程海报',
-    intro: '健身服务最容易散掉的地方，不在动作本身，而在版本、提醒和复盘没有被整理成同一条路径。',
+    title: '为什么这页要像服务台，而不是课程海报',
+    intro: '健身服务最容易散掉的，不是动作本身，而是版本、提醒和复盘没有被放在同一条路上。',
   },
   userProblems: [
-    '训练计划经常散落在聊天记录里，用户很难判断自己现在执行的是哪一版。',
+    '训练计划经常散在聊天记录里，用户很难判断自己执行的是哪一版。',
     '交付节奏依赖临时沟通，计划更新、提醒和回收信息容易丢上下文。',
     '复盘材料和执行记录分开，续费判断只能靠印象，缺少稳定依据。',
     '电脑和手机都要能看，表单输入、结果查看和后续提醒都不能太费力。',
@@ -30,7 +30,7 @@ export const fitnessCoachingCase = {
   processSection: {
     eyebrow: '流程',
     title: '四步服务循环',
-    intro: '我把这页组织成一条固定回路：先建档，再拆计划，随后跟踪执行，最后把复盘写回服务本身。',
+    intro: '我把这页整理成一条固定回路：先建档，再拆计划，随后跟踪执行，最后把复盘写回服务本身。',
     stepLabelPrefix: '第',
     stepLabelSuffix: '步',
   },
@@ -38,7 +38,7 @@ export const fitnessCoachingCase = {
     {
       key: 'discover',
       title: '初访建档',
-      description: '先明确目标、限制条件和可投入时间，再把客户情况整理成能被持续使用的基础档案。',
+      description: '先明确目标、限制条件和可投入时间，再把客户情况整理成能持续使用的基础档案。',
     },
     {
       key: 'structure',
@@ -48,7 +48,7 @@ export const fitnessCoachingCase = {
     {
       key: 'collaboration',
       title: '跟踪执行',
-      description: '持续收集完成情况、体感和反馈，让教练能够在同一套记录里判断偏差，而不是靠零散消息补课。',
+      description: '持续收集完成情况、体感和反馈，让教练能在同一套记录里判断偏差，而不是靠零散消息补课。',
     },
     {
       key: 'execution',
@@ -59,7 +59,7 @@ export const fitnessCoachingCase = {
   evidenceSection: {
     eyebrow: '证据',
     title: '公开可替换的服务材料',
-    intro: '这三张图是匿名安全占位，先把流程、计划和跟踪的叙事位置固定下来，后续可以平滑替换成真实素材。',
+    intro: '先把流程、计划和跟踪的叙事位置固定下来，后续可以平滑替换成真实素材。',
   },
   evidence: [
     {
@@ -83,8 +83,8 @@ export const fitnessCoachingCase = {
   ],
   outcomesSection: {
     eyebrow: '结果',
-    title: '我希望招聘方和普通用户分别读到什么',
-    intro: '这不是一次性内容展示，而是一个能持续服务、持续跟进、持续迭代的工作方法。',
+    title: '这页最后想留下什么',
+    intro: '这不是一次性展示，而是一个能持续服务、持续跟进、持续迭代的工作方法。',
   },
   outcomes: {
     summary:
@@ -99,7 +99,7 @@ export const fitnessCoachingCase = {
   bridgeSection: {
     eyebrow: '桥接',
     title: '从案例页回到健身工作台',
-    intro: '如果你想先看实际工具，可以直接进入健身工作台。',
+    intro: '如果你想先看实际工具，可以直接去健身工作台。',
     copy:
       '这页讲的是方法，健身工作台讲的是落地体验。两者保持同一套气质，但一个负责说明思路，一个负责真正使用。',
   },
