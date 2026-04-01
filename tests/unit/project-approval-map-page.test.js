@@ -12,6 +12,7 @@ test('approval map page keeps the approved content emphasis', async () => {
 
   assert.ok(viewFile.includes('ProjectCaseShell'))
   assert.ok(viewFile.includes('approvalMapWorkflowCase'))
+  assert.ok(viewFile.includes('page.outcomes.disclaimer'))
   assert.ok(approvalMapWorkflowCase.outcomes.disclaimer.includes('近似估算'))
 
   for (const item of approvalMapWorkflowCase.evidence) {
