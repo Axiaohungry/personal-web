@@ -98,8 +98,8 @@ const page = campusCollaborationCase
       intro="从发现边界到沉淀复用，四步把一个校园项目从现场型工作变成可交付机制。"
     >
       <ol class="project-case-campus__steps">
-        <li v-for="step in page.process" :key="step.key" class="project-case-campus__step">
-          <span class="project-case-campus__step-key">{{ step.key }}</span>
+        <li v-for="(step, index) in page.process" :key="step.key" class="project-case-campus__step">
+          <span class="project-case-campus__step-key">第 {{ index + 1 }} 步</span>
           <strong class="project-case-campus__step-title">{{ step.title }}</strong>
           <p class="project-case-campus__step-detail">{{ step.description }}</p>
         </li>
