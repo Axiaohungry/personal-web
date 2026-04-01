@@ -42,9 +42,9 @@ const page = fitnessCoachingCase
     </template>
 
     <ProjectCaseSection
-      eyebrow="问题"
-      title="为什么这页要更像服务台，而不是课程海报"
-      intro="健身服务最容易散掉的地方，不在动作本身，而在版本、提醒和复盘没有被整理成同一条路径。"
+      :eyebrow="page.problemSection.eyebrow"
+      :title="page.problemSection.title"
+      :intro="page.problemSection.intro"
     >
       <ul class="project-case-fitness__problem-list">
         <li v-for="problem in page.userProblems" :key="problem" class="project-case-fitness__problem-item">
@@ -54,13 +54,15 @@ const page = fitnessCoachingCase
     </ProjectCaseSection>
 
     <ProjectCaseSection
-      eyebrow="流程"
-      title="四步服务循环"
-      intro="我把这页组织成一条固定回路：先建档，再拆计划，随后跟踪执行，最后把复盘写回服务本身。"
+      :eyebrow="page.processSection.eyebrow"
+      :title="page.processSection.title"
+      :intro="page.processSection.intro"
     >
       <ol class="project-case-fitness__steps">
         <li v-for="(step, index) in page.process" :key="step.key" class="project-case-fitness__step">
-          <span class="project-case-fitness__step-key">第 {{ index + 1 }} 步</span>
+          <span class="project-case-fitness__step-key">
+            {{ page.processSection.stepLabelPrefix }} {{ index + 1 }} {{ page.processSection.stepLabelSuffix }}
+          </span>
           <strong class="project-case-fitness__step-title">{{ step.title }}</strong>
           <p class="project-case-fitness__step-detail">{{ step.description }}</p>
         </li>
@@ -68,17 +70,17 @@ const page = fitnessCoachingCase
     </ProjectCaseSection>
 
     <ProjectCaseSection
-      eyebrow="证据"
-      title="公开可替换的服务材料"
-      intro="这三张图是匿名安全占位，先把流程、计划和跟踪的叙事位置固定下来，后续可以平滑替换成真实素材。"
+      :eyebrow="page.evidenceSection.eyebrow"
+      :title="page.evidenceSection.title"
+      :intro="page.evidenceSection.intro"
     >
       <ProjectEvidenceGrid :items="page.evidence" />
     </ProjectCaseSection>
 
     <ProjectCaseSection
-      eyebrow="结果"
-      title="我希望招聘方和普通用户分别读到什么"
-      intro="这不是一次性内容展示，而是一个能持续服务、持续跟进、持续迭代的工作方法。"
+      :eyebrow="page.outcomesSection.eyebrow"
+      :title="page.outcomesSection.title"
+      :intro="page.outcomesSection.intro"
     >
       <div class="project-case-fitness__outcomes">
         <p class="project-case-fitness__outcome-summary">
@@ -100,13 +102,13 @@ const page = fitnessCoachingCase
     </ProjectCaseSection>
 
     <ProjectCaseSection
-      eyebrow="桥接"
-      title="从案例页回到健身工作台"
-      intro="如果你想先看实际工具而不是案例说明，可以直接进入健身工作台。"
+      :eyebrow="page.bridgeSection.eyebrow"
+      :title="page.bridgeSection.title"
+      :intro="page.bridgeSection.intro"
     >
       <div class="project-case-fitness__bridge">
         <p class="project-case-fitness__bridge-copy">
-          这页讲的是方法，`/fitness/` 讲的是落地体验。两者保持同一套气质，但一个负责说明思路，一个负责真正使用。
+          {{ page.bridgeSection.copy }}
         </p>
         <a class="project-case-fitness__cta" :href="page.bridgeCta.href">
           {{ page.bridgeCta.label }}
