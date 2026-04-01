@@ -9,39 +9,64 @@ test('project case foundation locks the shared refresh surface contract', async 
   const evidenceFile = await readFile(new URL('../../src/components/projects/ProjectEvidenceGrid.vue', import.meta.url), 'utf8')
   const projectCasesCss = await readFile(new URL('../../src/styles/project-cases.css', import.meta.url), 'utf8')
 
+  assert.ok(shellFile.includes('import ProjectCaseSignalRail from'), 'ProjectCaseShell.vue should import ProjectCaseSignalRail')
   assert.match(
     shellFile,
-    /(import\s+ProjectCaseSignalRail|<ProjectCaseSignalRail\b)/,
-    'ProjectCaseShell.vue should reference ProjectCaseSignalRail'
+    /v-if="heroSignals\.length"[\s\S]*:items="heroSignals"/,
+    'ProjectCaseShell.vue should pass heroSignals into the rail behind a length guard'
+  )
+
+  assert.match(
+    sectionFile,
+    /variant:\s*\{[\s\S]*default:\s*['"]panel['"][\s\S]*\}/,
+    'ProjectCaseSection.vue should expose a panel default variant'
   )
   assert.match(
     sectionFile,
-    /variant\s*:\s*\{[\s\S]*?default\s*:\s*['"]panel['"]/,
-    'ProjectCaseSection.vue should expose a variant prop with a panel default'
+    /class="project-case-section project-case-stage content-section"[\s\S]*:class="`project-case-stage--\$\{props\.variant\}`"/,
+    'ProjectCaseSection.vue should map the variant prop onto the stage modifier class'
+  )
+
+  assert.match(
+    signalRailFile,
+    /getSignalValue\(item\)\s*\{\s*return item\?\.value\s*\?\?\s*item\?\.metric\s*\?\?\s*item\?\.stat\s*\?\?\s*''\s*\}/s,
+    'ProjectCaseSignalRail.vue should preserve numeric zero through nullish extraction'
   )
   assert.match(
     signalRailFile,
-    /\bitems\b[\s\S]*\bnote\b[\s\S]*\bsubtext\b/,
-    'ProjectCaseSignalRail.vue should accept items with note and subtext support'
+    /function hasSignalValue\(item\)[\s\S]*value !== undefined && value !== null && value !== ''/,
+    'ProjectCaseSignalRail.vue should keep zero-valued signals visible'
   )
   assert.match(
-    evidenceFile,
-    /\bevidence-media\b/,
-    'ProjectEvidenceGrid.vue should include evidence-media handling'
+    signalRailFile,
+    /:class="\{ 'project-case-signal-rail__item--featured': item\?\.featured \}"/,
+    'ProjectCaseSignalRail.vue should keep the featured modifier hook'
   )
+
   assert.match(
     evidenceFile,
-    /\bproject-case-evidence-card--featured\b/,
+    /class="\{ 'project-case-evidence-card--featured': item\.featured \}"/,
     'ProjectEvidenceGrid.vue should support featured proof blocks'
   )
   assert.match(
     evidenceFile,
-    /\bitem\.note\b/,
+    /v-if="getEvidenceDetail\(item\)"/,
+    'ProjectEvidenceGrid.vue should keep the detail-only path'
+  )
+  assert.match(
+    evidenceFile,
+    /v-if="item\.note"/,
     'ProjectEvidenceGrid.vue should keep the note text path'
+  )
+
+  assert.match(
+    projectCasesCss,
+    /\.project-case-signal-rail__item--featured[\s\S]*background:\s*color-mix\(in srgb, var\(--accent\) 6%, transparent\)/,
+    'project-cases.css should style featured signal rail items lightly'
   )
   assert.match(
     projectCasesCss,
-    /@media\s*\(prefers-reduced-motion:\s*reduce\)[\s\S]*?\.project-case-hero[\s\S]*?\.project-case-stage[\s\S]*?\.project-case-signal-rail/s,
-    'project-cases.css should include reduced-motion handling plus hero, stage, and signal rail classes'
+    /@media\s*\(prefers-reduced-motion:\s*reduce\)[\s\S]*?\.project-case-page :where\(a:hover, button:hover, \[role='button'\]:hover\)[\s\S]*?transform:\s*none !important;/s,
+    'project-cases.css should neutralize hover transforms in reduced-motion mode'
   )
 })
