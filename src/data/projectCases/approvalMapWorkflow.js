@@ -12,16 +12,16 @@ export const approvalMapWorkflowCase = {
     tags: ['MapGIS WebClient', 'GeoJSON', '审批流程', '空间业务'],
     signals: [
       {
-        label: '核心模块',
-        value: '地图对象、表单字段和审批状态同源联动',
+        label: '流程收敛',
+        value: '审批步骤 -30%（近似）',
       },
       {
-        label: '结构优化',
-        value: '把分散的查看、填写、确认步骤收束到一页',
+        label: '切换减负',
+        value: '来回切换 -40%（近似）',
       },
       {
-        label: '交付重点',
-        value: '步骤收敛、回写可追踪、边界说明清楚',
+        label: '回写聚合',
+        value: '状态回写收束为 1 个工作区（近似）',
       },
     ],
   },
@@ -86,7 +86,7 @@ export const approvalMapWorkflowCase = {
     reflections: [
       '最关键的不是视觉元素本身，而是让审批对象、表单和结果有同一套语义。',
       '结果类数字保留近似估算的表达，避免把案例页写成仪表盘。',
-      '把证据资产单独拆出来后，后续替换真实截屏的成本会很低。',
+      '把证据资产单独拆出来后，后续替换真实截图的成本会很低。',
     ],
     capabilities: [
       '审批节点与地图对象的联动展示',

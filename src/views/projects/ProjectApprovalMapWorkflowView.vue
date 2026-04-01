@@ -71,8 +71,8 @@ const page = approvalMapWorkflowCase
       intro="从发现问题到交付结果，页面结构沿着同一条阅读路径展开。"
     >
       <ol class="project-case-approval__steps">
-        <li v-for="step in page.process" :key="step.key" class="project-case-approval__step">
-          <span class="project-case-approval__step-key">{{ step.key }}</span>
+        <li v-for="(step, index) in page.process" :key="step.key" class="project-case-approval__step">
+          <span class="project-case-approval__step-key">步骤 {{ index + 1 }}</span>
           <strong class="project-case-approval__step-title">{{ step.title }}</strong>
           <p class="project-case-approval__step-detail">{{ step.description }}</p>
         </li>
