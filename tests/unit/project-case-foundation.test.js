@@ -5,6 +5,7 @@ import { readFile } from 'node:fs/promises'
 test('project case foundation locks the shared refresh surface contract', async () => {
   const shellFile = await readFile(new URL('../../src/components/projects/ProjectCaseShell.vue', import.meta.url), 'utf8')
   const sectionFile = await readFile(new URL('../../src/components/projects/ProjectCaseSection.vue', import.meta.url), 'utf8')
+  const signalRailFile = await readFile(new URL('../../src/components/projects/ProjectCaseSignalRail.vue', import.meta.url), 'utf8')
   const evidenceFile = await readFile(new URL('../../src/components/projects/ProjectEvidenceGrid.vue', import.meta.url), 'utf8')
   const projectCasesCss = await readFile(new URL('../../src/styles/project-cases.css', import.meta.url), 'utf8')
 
@@ -15,13 +16,23 @@ test('project case foundation locks the shared refresh surface contract', async 
   )
   assert.match(
     sectionFile,
-    /props\s*:\s*\{[\s\S]*?variant\s*:\s*\{[\s\S]*?default\s*:\s*['"]panel['"]/,
+    /variant\s*:\s*\{[\s\S]*?default\s*:\s*['"]panel['"]/,
     'ProjectCaseSection.vue should expose a variant prop with a panel default'
+  )
+  assert.match(
+    signalRailFile,
+    /\bitems\b[\s\S]*\bnote\b[\s\S]*\bsubtext\b/,
+    'ProjectCaseSignalRail.vue should accept items with note and subtext support'
   )
   assert.match(
     evidenceFile,
     /\bevidence-media\b/,
     'ProjectEvidenceGrid.vue should include evidence-media handling'
+  )
+  assert.match(
+    evidenceFile,
+    /\bproject-case-evidence-card--featured\b/,
+    'ProjectEvidenceGrid.vue should support featured proof blocks'
   )
   assert.match(
     evidenceFile,
