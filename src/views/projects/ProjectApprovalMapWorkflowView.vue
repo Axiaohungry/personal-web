@@ -8,81 +8,73 @@ const page = approvalMapWorkflowCase
 </script>
 
 <template>
-  <ProjectCaseShell
-    class="project-case-approval-map-view"
-    :hero="page.hero"
-    variant="approval-map"
-  >
+  <ProjectCaseShell class="project-case-approval-map-view" :hero="page.hero" variant="approval-map">
     <ProjectCaseSection
       class="project-case-approval__stage project-case-approval__stage--bare"
       variant="bare"
       :eyebrow="page.difficultySection.eyebrow"
-      :title="page.difficultySection.title"
+      title="真正的难点"
       :intro="page.difficultySection.intro"
     >
-      <div class="project-case-approval__complexity">
-        <p class="project-case-approval__complexity-lead">
-          这页不是在做信息堆叠，而是在把审批这件事的真实复杂度拆开，让业务、实施和普通用户都能顺着同一条线读下去。
-        </p>
+      <div class="project-case-approval__two-up">
+        <article class="project-case-approval__substage">
+          <p class="project-case-approval__substage-kicker">
+            {{ page.difficultySection.title }}
+          </p>
+          <p class="project-case-approval__substage-copy">
+            这页不是把审批对象重新画一遍，而是把对象、表单、状态和权限的关系先讲清楚，再让界面长出来。
+          </p>
 
-        <ul class="project-case-approval__complexity-list">
-          <li
-            v-for="item in page.complexity"
-            :key="item"
-            class="project-case-approval__complexity-item"
-          >
-            {{ item }}
-          </li>
-        </ul>
+          <ul class="project-case-approval__complexity-list">
+            <li v-for="item in page.complexity" :key="item" class="project-case-approval__complexity-item">
+              {{ item }}
+            </li>
+          </ul>
+        </article>
+
+        <article class="project-case-approval__substage">
+          <p class="project-case-approval__substage-kicker">
+            {{ page.responsibilitySection.title }}
+          </p>
+          <p class="project-case-approval__substage-copy">
+            {{ page.responsibilitySection.intro }}
+          </p>
+
+          <div class="project-case-approval__responsibility-grid">
+            <article
+              v-for="(item, index) in page.responsibilities"
+              :key="item"
+              class="project-case-approval__responsibility-item"
+            >
+              <p class="project-case-approval__item-kicker">职责 {{ index + 1 }}</p>
+              <p class="project-case-approval__responsibility-copy">
+                {{ item }}
+              </p>
+            </article>
+          </div>
+        </article>
       </div>
     </ProjectCaseSection>
 
     <ProjectCaseSection
       class="project-case-approval__stage project-case-approval__stage--panel"
       variant="panel"
-      :eyebrow="page.responsibilitySection.eyebrow"
-      :title="page.responsibilitySection.title"
-      :intro="page.responsibilitySection.intro"
-    >
-      <div class="project-case-approval__responsibility-grid">
-        <article
-          v-for="(item, index) in page.responsibilities"
-          :key="item"
-          class="project-case-approval__responsibility-item"
-        >
-          <p class="project-case-approval__item-kicker">
-            职责 {{ index + 1 }}
-          </p>
-          <p class="project-case-approval__responsibility-copy">
-            {{ item }}
-          </p>
-        </article>
-      </div>
-    </ProjectCaseSection>
-
-    <ProjectCaseSection
-      class="project-case-approval__stage project-case-approval__stage--panel project-case-approval__stage--process"
-      variant="panel"
       :eyebrow="page.processSection.eyebrow"
-      :title="page.processSection.title"
+      title="我怎么把它收束成工作流"
       :intro="page.processSection.intro"
     >
-      <div class="project-case-approval__process-band">
-        <div class="project-case-approval__process-band-lead">
-          <p class="project-case-approval__process-band-kicker">
-            连续流程带
+      <div class="project-case-approval__workflow">
+        <div class="project-case-approval__workflow-lead">
+          <p class="project-case-approval__substage-kicker">
+            {{ page.processSection.title }}
           </p>
-          <p class="project-case-approval__process-band-copy">
-            不是把流程拆成四个互不相干的框，而是让判定、结构、协作和交付沿着同一条阅读轨迹往前推进。
+          <p class="project-case-approval__workflow-copy">
+            我把整个页面收束成一条连续流程带，让判断、结构、协作和交付沿着同一条阅读路径往前走，而不是变成四个孤立模块。
           </p>
         </div>
 
         <ol class="project-case-approval__process-list">
-          <li
-            v-for="(step, index) in page.process"
-            :key="step.key"
-            class="project-case-approval__process-step"
-          >
+          <li v-for="(step, index) in page.process" :key="step.key" class="project-case-approval__process-step">
             <span class="project-case-approval__process-step-key">
               {{ page.processSection.stepLabelPrefix }} {{ index + 1 }}{{ page.processSection.stepLabelSuffix }}
             </span>
@@ -101,51 +93,40 @@ const page = approvalMapWorkflowCase
       class="project-case-approval__stage project-case-approval__stage--proof"
       variant="proof"
       :eyebrow="page.evidenceSection.eyebrow"
-      :title="page.evidenceSection.title"
+      title="证据与结果"
       :intro="page.evidenceSection.intro"
     >
       <div class="project-case-approval__proof">
         <p class="project-case-approval__proof-note">
-          这些图不是装饰性的展示物，而是可替换的证据位。后续只需要把临时占位图换成真实截图，叙事结构就能原样保留。
+          这些图不是装饰，而是证据位。后续只要把临时占位图替换成真实截图，这套叙事仍然成立。
         </p>
 
         <ProjectEvidenceGrid :items="page.evidence" />
-      </div>
-    </ProjectCaseSection>
 
-    <ProjectCaseSection
-      class="project-case-approval__stage project-case-approval__stage--bare project-case-approval__stage--outcomes"
-      variant="bare"
-      :eyebrow="page.outcomesSection.eyebrow"
-      :title="page.outcomesSection.title"
-      :intro="page.outcomesSection.intro"
-    >
-      <div class="project-case-approval__outcomes">
-        <p class="project-case-approval__outcome-summary">
-          {{ page.outcomes.summary }}
-        </p>
+        <article class="project-case-approval__outcomes">
+          <p class="project-case-approval__substage-kicker">
+            {{ page.outcomesSection.title }}
+          </p>
+          <p class="project-case-approval__outcome-summary">
+            {{ page.outcomes.summary }}
+          </p>
 
-        <div class="chip-list project-case-approval__capabilities">
-          <a-tag
-            v-for="capability in page.outcomes.capabilities"
-            :key="capability"
-          >
-            {{ capability }}
-          </a-tag>
-        </div>
+          <div class="chip-list project-case-approval__capabilities">
+            <a-tag v-for="capability in page.outcomes.capabilities" :key="capability">
+              {{ capability }}
+            </a-tag>
+          </div>
 
-        <ul class="project-case-approval__reflections">
-          <li
-            v-for="reflection in page.outcomes.reflections"
-            :key="reflection"
-          >
-            {{ reflection }}
-          </li>
-        </ul>
+          <ul class="project-case-approval__reflections">
+            <li v-for="reflection in page.outcomes.reflections" :key="reflection">
+              {{ reflection }}
+            </li>
+          </ul>
 
-        <p class="project-case-approval__disclaimer">
-          {{ page.outcomes.disclaimer }}
-        </p>
+          <p class="project-case-approval__disclaimer">
+            {{ page.outcomes.disclaimer }}
+          </p>
+        </article>
       </div>
     </ProjectCaseSection>
   </ProjectCaseShell>
@@ -201,23 +182,47 @@ const page = approvalMapWorkflowCase
   max-width: 58rem;
 }
 
-.project-case-approval__complexity,
-.project-case-approval__outcomes,
+.project-case-approval__two-up,
+.project-case-approval__workflow,
 .project-case-approval__proof {
   display: grid;
-  gap: 0.95rem;
+  gap: 1rem;
 }
 
-.project-case-approval__complexity-lead,
+.project-case-approval__two-up {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.project-case-approval__substage,
+.project-case-approval__outcomes {
+  display: grid;
+  gap: 0.75rem;
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--panel-soft);
+}
+
+.project-case-approval__substage-kicker,
+.project-case-approval__item-kicker,
+.project-case-approval__process-step-key {
+  margin: 0;
+  color: var(--accent);
+  font-size: 0.76rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.project-case-approval__substage-copy,
+.project-case-approval__workflow-copy,
+.project-case-approval__process-step-detail,
+.project-case-approval__proof-note,
 .project-case-approval__outcome-summary,
-.project-case-approval__proof-note {
+.project-case-approval__disclaimer,
+.project-case-approval__responsibility-copy {
   margin: 0;
   color: var(--muted);
-  line-height: 1.78;
-}
-
-.project-case-approval__complexity-lead {
-  max-width: 40rem;
+  line-height: 1.75;
 }
 
 .project-case-approval__complexity-list {
@@ -235,7 +240,7 @@ const page = approvalMapWorkflowCase
   border-radius: 0 var(--radius-md) var(--radius-md) 0;
   background:
     linear-gradient(135deg, color-mix(in srgb, var(--accent-soft) 20%, transparent), transparent 44%),
-    var(--panel-soft);
+    var(--panel);
   line-height: 1.78;
 }
 
@@ -248,40 +253,13 @@ const page = approvalMapWorkflowCase
 .project-case-approval__responsibility-item {
   display: grid;
   gap: 0.38rem;
-  padding: 1rem;
+  padding: 0.95rem 1rem;
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
-  background: var(--panel-soft);
+  background: color-mix(in srgb, var(--panel-soft) 86%, white 14%);
 }
 
-.project-case-approval__item-kicker,
-.project-case-approval__process-band-kicker {
-  margin: 0;
-  color: var(--accent);
-  font-size: 0.76rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-
-.project-case-approval__responsibility-copy,
-.project-case-approval__process-band-copy,
-.project-case-approval__process-step-detail,
-.project-case-approval__disclaimer,
-.project-case-approval__proof-note {
-  line-height: 1.75;
-}
-
-.project-case-approval__responsibility-copy,
-.project-case-approval__process-band-copy,
-.project-case-approval__process-step-detail,
-.project-case-approval__disclaimer {
-  margin: 0;
-  color: var(--muted);
-}
-
-.project-case-approval__process-band {
-  display: grid;
-  gap: 1rem;
+.project-case-approval__workflow {
   padding: 1rem;
   border: 1px solid var(--line);
   border-radius: calc(var(--radius-lg) + 2px);
@@ -289,14 +267,10 @@ const page = approvalMapWorkflowCase
     linear-gradient(180deg, color-mix(in srgb, var(--panel) 88%, white 12%), var(--panel-soft));
 }
 
-.project-case-approval__process-band-lead {
+.project-case-approval__workflow-lead {
   display: grid;
   gap: 0.35rem;
-  max-width: 40rem;
-}
-
-.project-case-approval__process-band-copy {
-  max-width: 38rem;
+  max-width: 42rem;
 }
 
 .project-case-approval__process-list {
@@ -323,15 +297,6 @@ const page = approvalMapWorkflowCase
 .project-case-approval__process-step-title {
   margin: 0;
   font-size: 1.05rem;
-}
-
-.project-case-approval__process-step-key {
-  position: relative;
-  margin: 0;
-  color: var(--accent-strong);
-  font-size: 0.86rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
 }
 
 .project-case-approval__proof-note {
@@ -365,10 +330,8 @@ const page = approvalMapWorkflowCase
 }
 
 @media (max-width: 1080px) {
-  .project-case-approval-map-view :deep(.project-case-hero__layout) {
-    grid-template-columns: 1fr;
-  }
-
+  .project-case-approval-map-view :deep(.project-case-hero__layout),
+  .project-case-approval__two-up,
   .project-case-approval__responsibility-grid,
   .project-case-approval__process-list {
     grid-template-columns: 1fr;
@@ -390,14 +353,10 @@ const page = approvalMapWorkflowCase
     font-size: clamp(2.3rem, 11vw, 3.6rem);
   }
 
-  .project-case-approval__process-band {
+  .project-case-approval__workflow,
+  .project-case-approval__substage,
+  .project-case-approval__outcomes {
     padding: 0.9rem;
-  }
-
-  .project-case-approval__complexity-item,
-  .project-case-approval__responsibility-item,
-  .project-case-approval__disclaimer {
-    padding-inline: 0.92rem;
   }
 }
 </style>

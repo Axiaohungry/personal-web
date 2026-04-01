@@ -21,15 +21,20 @@ test('approval map page locks the refreshed flagship case structure', async () =
   assert.ok(shellFile.includes('ProjectCaseSignalRail'))
   assert.ok(shellFile.includes(':items="heroSignals"'))
 
+  assert.equal((viewFile.match(/<ProjectCaseSection\b/g) || []).length, 3)
+  assert.equal((viewFile.match(/variant="bare"/g) || []).length, 1)
+  assert.equal((viewFile.match(/variant="panel"/g) || []).length, 1)
+  assert.equal((viewFile.match(/variant="proof"/g) || []).length, 1)
+
+  assert.ok(viewFile.includes('真正的难点'))
+  assert.ok(viewFile.includes('我怎么把它收束成工作流'))
+  assert.ok(viewFile.includes('证据与结果'))
   assert.ok(viewFile.includes(':eyebrow="page.difficultySection.eyebrow"'))
-  assert.ok(viewFile.includes(':eyebrow="page.responsibilitySection.eyebrow"'))
+  assert.ok(viewFile.includes('page.responsibilitySection.title'))
+  assert.ok(viewFile.includes('page.responsibilitySection.intro'))
   assert.ok(viewFile.includes(':eyebrow="page.processSection.eyebrow"'))
   assert.ok(viewFile.includes(':eyebrow="page.evidenceSection.eyebrow"'))
-  assert.ok(viewFile.includes(':eyebrow="page.outcomesSection.eyebrow"'))
-
-  assert.ok(viewFile.includes('variant="bare"'))
-  assert.ok(viewFile.includes('variant="panel"'))
-  assert.ok(viewFile.includes('variant="proof"'))
+  assert.ok(viewFile.includes('page.outcomesSection.title'))
 
   assert.ok(viewFile.includes('<ProjectEvidenceGrid :items="page.evidence" />'))
   assert.ok(viewFile.includes('{{ page.outcomes.disclaimer }}'))
