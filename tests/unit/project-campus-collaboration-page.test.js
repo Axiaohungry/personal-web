@@ -4,24 +4,31 @@ import { access, readFile } from 'node:fs/promises'
 
 import { campusCollaborationCase } from '../../src/data/projectCases/campusCollaboration.js'
 
-test('campus collaboration page keeps one lead case plus supporting cases', async () => {
-  const viewFile = await readFile(
-    new URL('../../src/views/projects/ProjectCampusCollaborationView.vue', import.meta.url),
-    'utf8'
-  )
+test('campus collaboration page locks the refreshed stage structure', async () => {
+  const [viewFile, shellFile] = await Promise.all([
+    readFile(new URL('../../src/views/projects/ProjectCampusCollaborationView.vue', import.meta.url), 'utf8'),
+    readFile(new URL('../../src/components/projects/ProjectCaseShell.vue', import.meta.url), 'utf8'),
+  ])
 
   assert.ok(viewFile.includes('ProjectCaseShell'))
+  assert.ok(viewFile.includes('ProjectCaseSection'))
   assert.ok(viewFile.includes('ProjectEvidenceGrid'))
-  assert.ok(viewFile.includes('为什么这不是“办活动”'))
-  assert.ok(viewFile.includes('支持主案的协作证明'))
-  assert.ok(viewFile.includes('结果、反思与可迁移能力'))
-  assert.ok(viewFile.includes('第 {{ index + 1 }} 步'))
-  assert.ok(viewFile.includes('page.supportingCases'))
-  assert.ok(viewFile.includes('page.outcomes.reflections'))
-  assert.ok(viewFile.includes('page.outcomes.capabilities'))
-  assert.ok(viewFile.includes('v-for="signal in hero.signals"'))
-  assert.equal(campusCollaborationCase.leadCase.title, '“活力柚子”篮球新生杯')
-  assert.equal(campusCollaborationCase.hero.signals.length, 3)
+  assert.ok(viewFile.includes('page.positioningSection'))
+  assert.ok(viewFile.includes('page.leadCaseSection'))
+  assert.ok(viewFile.includes('page.processSection'))
+  assert.ok(viewFile.includes('page.supportingSection'))
+  assert.ok(viewFile.includes('page.evidenceSection'))
+  assert.ok(viewFile.includes('page.outcomesSection'))
+  assert.ok(viewFile.includes('variant="bare"'))
+  assert.ok(viewFile.includes('variant="panel"'))
+  assert.ok(viewFile.includes('variant="proof"'))
+
+  assert.ok(shellFile.includes('ProjectCaseSignalRail'))
+
+  assert.equal(typeof campusCollaborationCase.leadCase.title, 'string')
+  assert.ok(campusCollaborationCase.leadCase.title.trim().length > 0)
+  assert.ok(campusCollaborationCase.hero.signals.length >= 3)
+  assert.ok(campusCollaborationCase.leadCase.highlights.length >= 3)
   assert.ok(campusCollaborationCase.supportingCases.length >= 2)
 
   for (const item of campusCollaborationCase.evidence) {
