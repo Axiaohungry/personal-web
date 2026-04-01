@@ -23,7 +23,12 @@ test('project case foundation locks the shared refresh surface contract', async 
   )
   assert.match(
     sectionFile,
-    /class="project-case-section project-case-stage content-section"[\s\S]*:class="`project-case-stage--\$\{props\.variant\}`"/,
+    /class="project-case-section project-case-stage content-section motion-rise"/,
+    'ProjectCaseSection.vue should opt shared case stages into the shared motion system'
+  )
+  assert.match(
+    sectionFile,
+    /:class="`project-case-stage--\$\{props\.variant\}`"/,
     'ProjectCaseSection.vue should map the variant prop onto the stage modifier class'
   )
 
@@ -63,6 +68,11 @@ test('project case foundation locks the shared refresh surface contract', async 
     projectCasesCss,
     /\.project-case-signal-rail__item--featured[\s\S]*background:\s*color-mix\(in srgb, var\(--accent\) 6%, transparent\)/,
     'project-cases.css should style featured signal rail items lightly'
+  )
+  assert.match(
+    projectCasesCss,
+    /\.project-case-page__shell > \.project-case-stage\.motion-rise:nth-of-type\(2\)[\s\S]*animation-delay:\s*90ms[\s\S]*nth-of-type\(3\)[\s\S]*180ms[\s\S]*nth-of-type\(n \+ 4\)[\s\S]*270ms/s,
+    'project-cases.css should stagger shared case stages lightly after the hero'
   )
   assert.match(
     projectCasesCss,

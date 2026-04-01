@@ -20,7 +20,10 @@ const props = defineProps({
 </script>
 
 <template>
-  <section class="project-case-section project-case-stage content-section" :class="`project-case-stage--${props.variant}`">
+  <section
+    class="project-case-section project-case-stage content-section motion-rise"
+    :class="`project-case-stage--${props.variant}`"
+  >
     <header class="project-case-stage__header project-case-section__header">
       <p v-if="props.eyebrow" class="eyebrow project-case-section__eyebrow">
         {{ props.eyebrow }}

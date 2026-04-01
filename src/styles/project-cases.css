@@ -13,11 +13,11 @@
 
 .project-case-page :where(a, button, [role='button'], input, select, textarea, .ant-tag) {
   transition:
-    border-color 180ms ease,
-    background-color 180ms ease,
-    color 180ms ease,
-    box-shadow 180ms ease,
-    transform 180ms ease;
+    border-color var(--duration-fast) var(--ease-out-quart),
+    background-color var(--duration-base) var(--ease-out-quart),
+    color var(--duration-base) var(--ease-out-quart),
+    box-shadow var(--duration-fast) var(--ease-out-quart),
+    transform var(--duration-fast) var(--ease-out-quint);
 }
 
 .project-case-page :where(a, button, [role='button'], input, select, textarea):focus-visible {
@@ -105,6 +105,18 @@
 
 .project-case-hero__rail {
   align-self: stretch;
+}
+
+.project-case-page__shell > .project-case-stage.motion-rise:nth-of-type(2) {
+  animation-delay: 90ms;
+}
+
+.project-case-page__shell > .project-case-stage.motion-rise:nth-of-type(3) {
+  animation-delay: 180ms;
+}
+
+.project-case-page__shell > .project-case-stage.motion-rise:nth-of-type(n + 4) {
+  animation-delay: 270ms;
 }
 
 .project-case-stage {
