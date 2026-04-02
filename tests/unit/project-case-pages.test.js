@@ -29,7 +29,7 @@ test('project case routes and homepage cards stay aligned', async () => {
   assertRouteBlock(routerFile, fitnessCoachingCase.route, 'FitnessCoachingView.vue')
 
   assert.equal(
-    projects.find((project) => project.name === '政务审批地图工作流')?.href,
+    projects.find((project) => project.name === '政务审批地图项目（实习期参与）')?.href,
     approvalMapWorkflowCase.route
   )
   assert.equal(

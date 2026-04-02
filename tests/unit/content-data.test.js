@@ -12,9 +12,9 @@ test('profile exports a Chinese-first public homepage position', () => {
   assert.equal(typeof profile.tagline, 'string')
   assert.ok(profile.tagline.includes('产品'))
   assert.ok(profile.tagline.includes('前端') || profile.tagline.includes('做出来'))
-  assert.equal(profile.ctaPrimary.href, '/fitness/')
-  assert.equal(profile.ctaPrimary.label, '进入健身工作台')
-  assert.equal(profile.ctaSecondary.href, '#projects')
+  assert.equal(profile.ctaPrimary.href, '#projects')
+  assert.equal(profile.ctaPrimary.label, '看我在做的事')
+  assert.equal(profile.ctaSecondary.href, '/fitness/')
 })
 
 test('content collections stay concise and curated', () => {
