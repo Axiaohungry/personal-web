@@ -108,6 +108,89 @@ function yieldToMainThread() {
   return new Promise((resolve) => setTimeout(resolve, 0))
 }
 
+export function remapPackedThermalArray(packedArray, numSplats) {
+  if (!packedArray || !numSplats) {
+    return false
+  }
+
+  for (let index = 0; index < numSplats; index += 1) {
+    const wordIndex = index * 4
+    packedArray[wordIndex] = remapPackedThermalWordToGrayscale(packedArray[wordIndex])
+  }
+
+  return true
+}
+
+async function tryPrepareThermalPackedColorsInWorker(packedArray, numSplats, { shouldAbort = null } = {}) {
+  if (typeof Worker !== 'function') {
+    return null
+  }
+
+  const sourceBuffer = packedArray.buffer
+  if (!(sourceBuffer instanceof ArrayBuffer) || sourceBuffer.byteLength === 0) {
+    return null
+  }
+
+  const workerBuffer = sourceBuffer.slice(0)
+
+  return new Promise((resolve) => {
+    const worker = new Worker(new URL('./project3dgsThermalColormap.worker.js', import.meta.url), {
+      type: 'module',
+    })
+
+    let settled = false
+    let abortTimer = null
+
+    function cleanup() {
+      if (abortTimer) {
+        clearInterval(abortTimer)
+        abortTimer = null
+      }
+
+      worker.onmessage = null
+      worker.onerror = null
+      worker.terminate()
+    }
+
+    function finish(nextValue) {
+      if (settled) return
+      settled = true
+      cleanup()
+      resolve(nextValue)
+    }
+
+    worker.onmessage = (event) => {
+      const nextBuffer = event?.data?.buffer
+      if (!(nextBuffer instanceof ArrayBuffer)) {
+        finish(null)
+        return
+      }
+
+      finish(new Uint32Array(nextBuffer))
+    }
+
+    worker.onerror = () => {
+      finish(null)
+    }
+
+    if (shouldAbort) {
+      abortTimer = setInterval(() => {
+        if (shouldAbort()) {
+          finish(null)
+        }
+      }, 50)
+    }
+
+    worker.postMessage(
+      {
+        buffer: workerBuffer,
+        numSplats,
+      },
+      [workerBuffer]
+    )
+  })
+}
+
 export async function prepareThermalPackedColors(
   packedSplats,
   { chunkSize = 250000, shouldAbort = null } = {}
@@ -117,6 +200,13 @@ export async function prepareThermalPackedColors(
 
   if (!packedArray || !numSplats) {
     return false
+  }
+
+  const workerResult = await tryPrepareThermalPackedColorsInWorker(packedArray, numSplats, { shouldAbort })
+  if (workerResult) {
+    packedSplats.packedArray = workerResult
+    packedSplats.needsUpdate = true
+    return true
   }
 
   for (let index = 0; index < numSplats; index += 1) {

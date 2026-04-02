@@ -6,6 +6,7 @@ import {
   decodeBakedJetKeyToGrayByte,
   encodeGrayByteToJetKey,
   getJetRgbAtByte,
+  remapPackedThermalArray,
   remapPackedThermalWordToGrayscale,
 } from '../../src/components/projects/project3dgsThermalColormap.js'
 
@@ -36,6 +37,28 @@ test('thermal packed splat remap preserves alpha while collapsing baked JET into
   assert.equal(grayR, grayByte)
   assert.equal(grayG, grayByte)
   assert.equal(grayB, grayByte)
+})
+
+test('thermal packed splat array remap updates every splat word in place', () => {
+  const packedArray = new Uint32Array([
+    (0xaa << 24) | encodeGrayByteToJetKey(32),
+    1,
+    2,
+    3,
+    (0xbb << 24) | encodeGrayByteToJetKey(192),
+    4,
+    5,
+    6,
+  ])
+
+  assert.equal(remapPackedThermalArray(packedArray, 2), true)
+
+  assert.equal((packedArray[0] >>> 24) & 0xff, 0xaa)
+  assert.equal(packedArray[0] & 0xff, 32)
+  assert.equal((packedArray[4] >>> 24) & 0xff, 0xbb)
+  assert.equal(packedArray[4] & 0xff, 192)
+  assert.equal(packedArray[1], 1)
+  assert.equal(packedArray[5], 4)
 })
 
 test('3dgs page passes the selected render mode into the viewer thermal pipeline', async () => {

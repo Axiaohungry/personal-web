@@ -312,7 +312,7 @@ async function loadAsset(url, { restoreView = true } = {}) {
 
   if (!url) {
     setLoading(false)
-    setError('3DGS 资源路径尚未配置。')
+    setError('对应的 3DGS 文件还没有放进来。')
     return
   }
 
@@ -348,7 +348,7 @@ async function loadAsset(url, { restoreView = true } = {}) {
     emit('ready', { assetUrl: url })
   } catch (loadError) {
     console.error('[Project3dgsViewer] Failed to load asset.', loadError)
-    setError(loadError instanceof Error ? loadError.message : '3DGS 资源加载失败。')
+    setError(loadError instanceof Error ? loadError.message : '这一版模型暂时没有加载出来。')
   } finally {
     if (version === loadVersion) {
       setLoading(false)
@@ -445,7 +445,7 @@ async function initRenderer() {
       powerPreference: 'high-performance',
     })
   } catch (rendererError) {
-    setError('当前浏览器环境无法初始化 WebGL 渲染器。')
+    setError('这个浏览器暂时没法打开 3D 预览。')
     console.error('[Project3dgsViewer] WebGL initialization failed.', rendererError)
     return
   }
@@ -541,7 +541,7 @@ onBeforeUnmount(() => {
         class="project-3dgs-viewer__overlay"
       >
         <strong>正在加载模型</strong>
-        <span>切换实验组时会尽量保持当前视角。</span>
+        <span>会尽量把镜头留在刚才的位置，方便连续对照。</span>
       </div>
 
       <div
@@ -549,7 +549,7 @@ onBeforeUnmount(() => {
         class="project-3dgs-viewer__overlay project-3dgs-viewer__overlay--placeholder"
       >
         <strong>等待资源</strong>
-        <span>当前还没有可加载的 3DGS 资源路径。</span>
+        <span>对应的 3DGS 文件还没有放进来。</span>
       </div>
     </div>
 
@@ -561,8 +561,8 @@ onBeforeUnmount(() => {
       :message="error"
       :description="
         hasAttemptedLoad
-          ? '如果资源文件还未放入 public/3dgs，先保留当前页面骨架即可。'
-          : '请检查传入的资源路径和 Spark 适配层是否匹配当前安装版本。'
+          ? '如果文件还在整理中，先保留这个展示框就可以。'
+          : '可以先检查文件地址，或确认当前加载方式和资源格式一致。'
       "
     />
   </section>
@@ -579,6 +579,7 @@ onBeforeUnmount(() => {
   position: relative;
   min-height: clamp(23rem, 58vh, 40rem);
   overflow: hidden;
+  overscroll-behavior: contain;
   border: 1px solid var(--line);
   border-radius: calc(var(--radius-lg) - 2px);
   background:
@@ -592,6 +593,9 @@ onBeforeUnmount(() => {
   display: block;
   width: 100%;
   height: 100%;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .project-3dgs-viewer__canvas--empty {
@@ -643,6 +647,21 @@ onBeforeUnmount(() => {
   .project-3dgs-viewer__overlay {
     inset: auto 0.8rem 0.8rem 0.8rem;
     padding: 0.8rem 0.9rem;
+  }
+}
+
+@media (max-width: 720px) {
+  .project-3dgs-viewer__canvas {
+    min-height: clamp(16.5rem, 42vh, 22rem);
+  }
+
+  .project-3dgs-viewer__overlay {
+    inset: auto 0.65rem 0.65rem 0.65rem;
+    padding: 0.72rem 0.82rem;
+  }
+
+  .project-3dgs-viewer__overlay--placeholder {
+    inset: 0.65rem;
   }
 }
 </style>
