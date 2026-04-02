@@ -21,7 +21,7 @@ const props = defineProps({
 
 <template>
   <section
-    class="project-case-section project-case-stage content-section motion-rise"
+    class="project-case-section project-case-stage motion-rise"
     :class="`project-case-stage--${props.variant}`"
   >
     <header class="project-case-stage__header project-case-section__header">

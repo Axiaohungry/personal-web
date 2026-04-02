@@ -268,19 +268,16 @@ const page = fitnessCoachingCase
 .project-case-fitness__problem-list {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0;
-  border-top: 1px solid var(--line);
+  gap: 1rem;
 }
 
 .project-case-fitness__problem-item {
   display: grid;
   gap: 0.4rem;
-  padding: 1rem 0.25rem 1rem 0;
-  border-bottom: 1px solid var(--line);
-}
-
-.project-case-fitness__problem-item:nth-child(odd) {
-  padding-right: 1.25rem;
+  padding: 1rem 1rem 1.05rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--panel-soft) 88%, transparent);
 }
 
 .project-case-fitness__problem-index,
@@ -352,17 +349,22 @@ const page = fitnessCoachingCase
 
 .project-case-fitness__bridge {
   display: grid;
-  gap: 0.85rem;
-  max-width: 58rem;
-  padding-top: 0.25rem;
-  border-top: 1px solid var(--line);
+  grid-template-columns: minmax(0, 1.1fr) minmax(18rem, 0.85fr);
+  gap: 1rem 1.2rem;
+  align-items: end;
+  width: 100%;
+  padding: 1rem 1.05rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background:
+    linear-gradient(180deg, rgba(57, 81, 60, 0.04), rgba(174, 119, 72, 0.04)),
+    color-mix(in srgb, var(--panel-soft) 90%, transparent);
 }
 
 .project-case-fitness__bridge-action {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 0.8rem 1rem;
+  display: grid;
+  gap: 0.65rem;
+  justify-items: start;
 }
 
 .project-case-fitness__bridge-link {
@@ -383,17 +385,14 @@ const page = fitnessCoachingCase
   .project-case-fitness__hero,
   .project-case-fitness__problem-list,
   .project-case-fitness__steps,
-  .project-case-fitness__outcome-grid {
+  .project-case-fitness__outcome-grid,
+  .project-case-fitness__bridge {
     grid-template-columns: 1fr;
   }
 
   .project-case-fitness__step + .project-case-fitness__step {
     border-inline-start: 0;
     border-top: 1px solid color-mix(in srgb, var(--line) 82%, transparent);
-  }
-
-  .project-case-fitness__problem-item:nth-child(odd) {
-    padding-right: 0.25rem;
   }
 }
 
@@ -408,7 +407,7 @@ const page = fitnessCoachingCase
   }
 
   .project-case-fitness__problem-list {
-    gap: 0;
+    gap: 0.9rem;
   }
 }
 </style>

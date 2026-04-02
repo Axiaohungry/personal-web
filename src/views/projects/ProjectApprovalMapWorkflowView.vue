@@ -178,26 +178,22 @@ const page = approvalMapWorkflowCase
   margin-top: clamp(0.9rem, 2vw, 1.2rem);
 }
 
-.project-case-approval__stage--bare {
-  max-width: 58rem;
-}
-
 .project-case-approval__two-up,
 .project-case-approval__workflow,
 .project-case-approval__proof {
   display: grid;
-  gap: 1rem;
+  gap: 1.15rem;
 }
 
 .project-case-approval__two-up {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
 }
 
 .project-case-approval__substage,
 .project-case-approval__outcomes {
   display: grid;
-  gap: 0.75rem;
-  padding: 1rem;
+  gap: 0.8rem;
+  padding: 1.05rem;
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
   background: var(--panel-soft);

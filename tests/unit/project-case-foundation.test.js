@@ -23,8 +23,13 @@ test('project case foundation locks the shared refresh surface contract', async 
   )
   assert.match(
     sectionFile,
-    /class="project-case-section project-case-stage content-section motion-rise"/,
-    'ProjectCaseSection.vue should opt shared case stages into the shared motion system'
+    /class="project-case-section project-case-stage motion-rise"/,
+    'ProjectCaseSection.vue should render as a standalone stage container'
+  )
+  assert.doesNotMatch(
+    sectionFile,
+    /content-section/,
+    'ProjectCaseSection.vue should not inherit the home section split layout'
   )
   assert.match(
     sectionFile,
@@ -66,8 +71,23 @@ test('project case foundation locks the shared refresh surface contract', async 
 
   assert.match(
     projectCasesCss,
+    /\.project-case-section\s*\{[\s\S]*grid-template-columns:\s*minmax\(0,\s*1fr\)/,
+    'project-cases.css should keep project case sections on a single runway column'
+  )
+  assert.doesNotMatch(
+    projectCasesCss,
+    /grid-template-columns:\s*minmax\(0,\s*17rem\)\s+minmax\(0,\s*1fr\)/,
+    'project-cases.css should no longer force a fixed sidebar/body split'
+  )
+  assert.match(
+    projectCasesCss,
     /\.project-case-signal-rail__item--featured[\s\S]*background:\s*color-mix\(in srgb, var\(--accent\) 6%, transparent\)/,
     'project-cases.css should style featured signal rail items lightly'
+  )
+  assert.match(
+    projectCasesCss,
+    /\.project-case-stage--bare[\s\S]*background:[\s\S]*linear-gradient/,
+    'project-cases.css should keep bare stages intentionally surfaced'
   )
   assert.match(
     projectCasesCss,
