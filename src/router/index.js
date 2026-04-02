@@ -25,6 +25,16 @@ const router = createRouter({
       component: () => import('@/views/modules/CarbTaperView.vue'),
     },
     {
+      path: '/fitness/modules/five-two-fasting',
+      name: 'fitness-five-two-fasting',
+      component: () => import('@/views/modules/FiveTwoFastingView.vue'),
+    },
+    {
+      path: '/fitness/modules/sixteen-eight-fasting',
+      name: 'fitness-sixteen-eight-fasting',
+      component: () => import('@/views/modules/SixteenEightFastingView.vue'),
+    },
+    {
       path: '/fitness/modules/food-library',
       name: 'fitness-food-library',
       component: () => import('@/views/modules/FoodLibraryView.vue'),

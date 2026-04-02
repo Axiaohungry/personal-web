@@ -60,26 +60,26 @@ for (const page of [approvalMapWorkflowCase, campusCollaborationCase, fitnessCoa
 
 test('approval case exposes explicit section metadata', () => {
   assert.deepEqual(approvalMapWorkflowCase.complexity, [
-    '审批对象、空间要素和表单字段必须对得上，不然页面再完整也只是表面整齐。',
-    '地图交互、状态流转和权限控制彼此牵连，不能用一排按钮硬拆。',
-    '结果类数据只能按近似口径表达，边界要先说清楚，免得页面看起来像仪表盘。',
-    '这个页面既要帮人理解业务，也要方便实施交付，叙事不能只偏一边。',
+    '审批对象、空间信息和表单内容必须一一对应，不然页面再完整，用户也会越看越乱。',
+    '地图交互、流程进度和权限判断彼此牵动，不能靠堆按钮硬拼。',
+    '结果类数字只能做谨慎估算，表达必须克制，避免把案例页写成“看起来很热闹”的仪表盘。',
+    '这页既要帮助业务沟通，也要支撑实施落地，叙事和结构都得兼顾。',
   ])
   assert.deepEqual(approvalMapWorkflowCase.responsibilities, [
-    '先把审批节点、表单字段和地图要素的对应关系理顺。',
-    '把地图、表单、流程和结果拆成能单独阅读的区块。',
-    '统一产品、实施和业务的审批口径，避免页面说的是一套，落地又是另一套。',
-    '补上状态回写、空态提示和后续扩展预留。',
+    '梳理审批节点、表单内容和地图对象之间的对应关系。',
+    '把地图、表单、流程和结果拆成清楚的阅读层次。',
+    '统一业务理解、产品表达和实施方案，减少“页面说一套，交付做一套”。',
+    '补齐结果反馈、空状态提示和后续扩展位置。',
   ])
   assertSection(approvalMapWorkflowCase.difficultySection, {
     eyebrow: '复杂度',
     title: '这个页面为什么不能一口气讲完',
-    intro: '审批地图最难的不是把图画出来，而是把对象、表单和状态放进同一条可交付的逻辑里。',
+    intro: '审批地图最难的不是把图画出来，而是把对象、表单和结果反馈放进同一条能交付的体验里。',
   })
   assertSection(approvalMapWorkflowCase.responsibilitySection, {
     eyebrow: '职责',
     title: '我在这个案例里负责什么',
-    intro: '我负责的不是把功能堆满，而是把跨角色的理解收成一套能落地的页面结构。',
+    intro: '我负责的不是把功能塞满，而是把多方认知整理成一套能上线、能交付、也能继续扩展的页面结构。',
   })
   assertSection(approvalMapWorkflowCase.processSection, {
     eyebrow: '流程',
@@ -92,21 +92,21 @@ test('approval case exposes explicit section metadata', () => {
   })
   assertSection(approvalMapWorkflowCase.evidenceSection, {
     eyebrow: '证据',
-    title: '可替换的公开证据',
-    intro: '先把叙事位立住，后续再平滑替换成真实裁切图。',
+    title: '公开证据位',
+    intro: '先把关键信息位定下来，后续可以平滑替换成真实素材。',
   })
   assertSection(approvalMapWorkflowCase.outcomesSection, {
     eyebrow: '结果',
-    title: '我希望招聘方读到什么',
-    intro: '这不是功能堆叠，而是交付边界、语义统一和扩展空间是否站得住。',
+    title: '我希望招聘方看到什么',
+    intro: '我想让人看到的，不是页面堆了多少信息，而是我能不能把复杂流程整理成可交付、可接手、可扩展的产品。',
   })
   assert.equal(
     approvalMapWorkflowCase.outcomes.summary,
-    '这条工作流的价值不在于把页面做满，而在于让审批映射、状态回写和结果说明真的能被接手。',
+    '这个案例真正的价值，不是页面做得多满，而是把审批理解、结果反馈和交付方式整理成一套接得住的产品方案。',
   )
   assert.equal(
     approvalMapWorkflowCase.outcomes.reflections[0],
-    '最关键的不是视觉元素本身，而是让审批对象、表单和结果有同一套语义。',
+    '最关键的不是多做几个模块，而是让审批对象、表单信息和结果反馈说同一种语言。',
   )
 })
 
@@ -120,12 +120,12 @@ test('campus case exposes organizer-oriented section metadata', () => {
   assertSection(campusCollaborationCase.complexitySection, {
     eyebrow: '复杂度',
     title: '为什么这场校园活动不能只按一次活动来理解',
-    intro: '表面上是一场活动，实际牵涉报名、筛选、物料、场地、传播和复盘六条并行链路。',
+    intro: '表面上是一场活动，真正推进时却要同时照顾报名、筛选、物料、场地、传播和复盘六件事。',
   })
   assertSection(campusCollaborationCase.leadCaseSection, {
     eyebrow: '主案',
     title: '主案例怎么把机制跑起来',
-    intro: '主案不是单独的一场活动，而是把协作节奏跑顺的那条线。',
+    intro: '主案不是“最热闹的一场”，而是最能说明这套协作方法如何跑起来的一条主线。',
     extra: {
       methodLabel: '主线方法',
       perspectiveLabel: '页面视角',
@@ -133,24 +133,24 @@ test('campus case exposes organizer-oriented section metadata', () => {
   })
   assert.equal(
     campusCollaborationCase.leadCaseSection.perspectiveCopy,
-    '我希望招聘方看到的不是“做过一场比赛”，而是我能把多人协作拆成清楚的步骤、角色和产物，并在结束后继续把经验变成可复用的资产。',
+    '我希望招聘方看到的，不只是“组织过一场比赛”，而是我能把目标、角色、节奏和产出讲清楚，并把经验继续沉淀成下一次可复用的方法。',
   )
   assert.equal(
     campusCollaborationCase.leadCase.summary,
-    '以篮球新生杯为主线，我把报名收口、角色分工、赛程同步、现场执行和赛后复盘放进同一套节奏里，尽量让这场校园活动像一个项目，而不是一串临时动作。',
+    '以篮球新生杯为主线，我把报名管理、角色分工、赛程同步、现场执行和赛后复盘放进同一套推进节奏里，尽量让这场校园活动像一个项目，而不是一串临时动作。',
   )
   assert.deepEqual(
     campusCollaborationCase.supportingCases.map((item) => item.summary),
     [
-      '把报名信息、分组规则和通知时间统一管理，减少重复追问和漏发。',
-      '把赛程、签到、物料和场地安排对齐到同一个执行视图里。',
-      '把执行问题、观察结论和下一轮优化点整理成可复用清单。',
+      '把报名信息、分组规则和通知节奏统一管理，让信息传达更准，执行压力更小。',
+      '把赛程、签到、物料和场地安排放进同一个执行视图里，让现场协作更顺。',
+      '把执行问题、观察结论和下一轮优化点整理成一份下次还能继续用的清单。',
     ],
   )
   assertSection(campusCollaborationCase.processSection, {
     eyebrow: '机制',
     title: '协作机制怎么跑起来',
-    intro: '从发现边界到沉淀复用，四步把一个校园项目从现场型工作变成可交付机制。',
+    intro: '从看清边界到沉淀方法，四步把一次校园活动做成下次还能直接接上的项目机制。',
     extra: {
       stepLabelPrefix: '第',
       stepLabelSuffix: '步',
@@ -173,7 +173,7 @@ test('campus case exposes organizer-oriented section metadata', () => {
   })
   assert.equal(
     campusCollaborationCase.outcomes.summary,
-    '这个案例的价值在于把一次校园活动变成了可描述、可接手、可复用的协作机制。它让主案有了明确主线，也让支持性工作不再散落在聊天记录里。',
+    '这个案例的价值，不是证明活动办成了，而是说明我能把一次多人协作沉淀成可描述、可交接、可复用的方法。它让主案有了清楚主线，也让支持性工作不再散落在聊天记录里。',
   )
   assert.equal(
     campusCollaborationCase.outcomes.reflections[0],

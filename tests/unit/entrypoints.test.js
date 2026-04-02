@@ -11,4 +11,6 @@ test('router defines both home and fitness views', async () => {
   const routerFile = await readFile(new URL('../../src/router/index.js', import.meta.url), 'utf8')
   assert.ok(routerFile.includes("path: '/'"))
   assert.ok(routerFile.includes("path: '/fitness'"))
+  assert.ok(routerFile.includes("path: '/fitness/modules/five-two-fasting'"))
+  assert.ok(routerFile.includes("path: '/fitness/modules/sixteen-eight-fasting'"))
 })

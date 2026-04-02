@@ -23,12 +23,12 @@ defineProps({
   <section class="fitness-summary motion-rise motion-rise--2">
     <div class="fitness-summary__header">
       <div>
-        <p class="fitness-panel__eyebrow">Decision</p>
-        <h2 class="fitness-panel__title">直接建议</h2>
+        <p class="fitness-panel__eyebrow">Plan</p>
+        <h2 class="fitness-panel__title">起步建议</h2>
       </div>
       <p class="fitness-panel__note fitness-summary__note">
-        当前细化口径按 {{ planning.goal === 'cut' ? '减脂' : '增肌' }} {{ planning.targetKg }} kg / {{ planning.weeks }} 周计算，
-        先用下面 3 个热量方案做起点，再根据体重趋势和训练表现微调。
+        当前先按 {{ planning.goal === 'cut' ? '减脂' : '增肌' }} {{ planning.targetKg }} kg / {{ planning.weeks }} 周来推演。
+        先从下面 3 套热量方案里选一个更像你的起点，再根据体重变化和训练状态慢慢微调。
       </p>
     </div>
 

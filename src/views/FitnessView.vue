@@ -86,6 +86,16 @@ const modules = [
     routePath: '/fitness/modules/carb-taper',
   },
   {
+    title: '5+2 轻断食',
+    summary: '如果你不想天天算得很紧，5 天正常吃、2 天轻一点，往往更容易坚持。',
+    routePath: '/fitness/modules/five-two-fasting',
+  },
+  {
+    title: '16+8 轻断食',
+    summary: '把吃饭时间收得整齐一点，有时候比一味靠意志力更省心。',
+    routePath: '/fitness/modules/sixteen-eight-fasting',
+  },
+  {
     title: '食物库',
     summary: '用更直观的方式看常见食物和外部食品数据。',
     routePath: '/fitness/modules/food-library',

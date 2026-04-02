@@ -55,10 +55,10 @@ const targetKgHint = computed(() => {
   })
 
   if (!guidance) {
-    return '目标变化会按当前 TDEE、周期和性别换算；当直接建议碰到安全热量边界后，热量建议会趋于不再变化。'
+    return '目标会结合当前 TDEE、周期和性别一起推算；一旦接近更稳妥的热量边界，建议就会慢慢放缓。'
   }
 
-  return `按当前设置估算，目标变化超过 ${guidance.clampKg} kg 后，直接建议会先触到${guidance.guardrailLabel} ${guidance.clampCalories} kcal，热量建议可能不再${guidance.trendLabel}。`
+  return `按你现在的设置，目标变化超过 ${guidance.clampKg} kg 后，建议会先守住${guidance.guardrailLabel} ${guidance.clampCalories} kcal，这时候热量通常不会再明显${guidance.trendLabel}。`
 })
 
 const iframeSrc = computed(() => {
@@ -133,7 +133,7 @@ watch(
         <h2 class="fitness-panel__title">功能模块</h2>
       </div>
       <p class="fitness-panel__note modules-panel__note">
-        上面先把热量和三大营养素的起点算出来，下面那几块模块再把策略、食物和补剂拆得更细一点。
+        上面先帮你找到一个更靠谱的起点，下面这些模块再把饮食策略、食物选择和补剂判断讲得更清楚。
       </p>
     </div>
 
@@ -181,7 +181,7 @@ watch(
         class="modules-toolbar__alert"
         type="info"
         show-icon
-        :message="`现在按 ${props.goal === 'cut' ? '减脂' : '增肌'} ${props.targetKg} kg、${props.weeks} 周来给你下面几块内容。`"
+        :message="`现在先按 ${props.goal === 'cut' ? '减脂' : '增肌'} ${props.targetKg} kg、${props.weeks} 周来推演，下面几块内容都会围绕同一个目标展开。`"
       />
     </div>
 
@@ -297,7 +297,7 @@ watch(
 
 .modules-tabs {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
   gap: 0.9rem;
 }
 
