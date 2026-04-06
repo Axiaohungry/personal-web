@@ -31,7 +31,7 @@ const page = fitnessCoachingCase
           </p>
 
           <p class="project-case-fitness__hero-note">
-            我把咨询、计划、跟进和复盘收进同一条服务线里，页面只负责把这条线说清楚。
+            我把目标定义、数据追踪、变量控制和复盘放进同一条交付链里，页面负责把这条链讲清楚。
           </p>
         </div>
 
@@ -86,10 +86,6 @@ const page = fitnessCoachingCase
       :intro="page.evidenceSection.intro"
     >
       <div class="project-case-fitness__proof">
-        <p class="project-case-fitness__proof-copy">
-          这些图不是装饰，而是为了把方法、节奏和交付位置钉住。
-        </p>
-
         <ProjectEvidenceGrid :items="page.evidence" />
       </div>
     </ProjectCaseSection>
@@ -108,7 +104,7 @@ const page = fitnessCoachingCase
 
         <div class="project-case-fitness__outcome-grid">
           <div class="project-case-fitness__capability-block">
-            <p class="project-case-fitness__section-label">沉淀能力</p>
+            <p class="project-case-fitness__section-label">能力标签</p>
 
             <div class="chip-list project-case-fitness__capabilities">
               <a-tag v-for="capability in page.outcomes.capabilities" :key="capability">
@@ -139,7 +135,7 @@ const page = fitnessCoachingCase
         </p>
         <div class="project-case-fitness__bridge-action">
           <p class="project-case-fitness__bridge-note">
-            方法在这里收束，工具页继续承接输入、建议和复盘。
+            方法论在这里闭环，工具页继续承接输入、建议与复盘。
           </p>
           <a class="project-case-fitness__bridge-link" :href="page.bridgeCta.href">
             {{ page.bridgeCta.label }}
