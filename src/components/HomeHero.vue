@@ -23,7 +23,7 @@ defineProps({
   <section class="home-hero">
     <div class="home-hero__copy motion-rise motion-rise--2">
       <p class="home-hero__eyebrow">Profile</p>
-      <h1 class="home-hero__title">我喜欢把复杂的问题，整理成能被人真正使用的东西。</h1>
+      <h1 class="home-hero__title">我喜欢把复杂的问题，一步步拆解成更简单的部分。</h1>
       <p class="home-hero__tagline">{{ profile.tagline }}</p>
       <p class="home-hero__summary">{{ profile.summary }}</p>
 
@@ -58,7 +58,7 @@ defineProps({
 
     <aside class="home-hero__aside motion-rise motion-rise--3" aria-label="Introduction highlight">
       <a-card class="home-hero__aside-card ant-surface-card" :bordered="false">
-        <p class="home-hero__accent-label">一句判断</p>
+        <p class="home-hero__accent-label">核心定位</p>
         <p class="home-hero__accent-line">{{ profile.accentLine }}</p>
       </a-card>
 

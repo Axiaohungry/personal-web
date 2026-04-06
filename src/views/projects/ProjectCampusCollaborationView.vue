@@ -6,8 +6,8 @@ import { campusCollaborationCase } from '@/data/projectCases/campusCollaboration
 
 const page = campusCollaborationCase
 
-const positioningKicker = '为什么这不是办活动'
-const outcomesCapabilitiesKicker = '可复用能力'
+const positioningKicker = '项目视角'
+const outcomesCapabilitiesKicker = '能力标签'
 </script>
 
 <template>
@@ -22,8 +22,8 @@ const outcomesCapabilitiesKicker = '可复用能力'
         <div class="project-case-campus__positioning-copy">
           <p class="project-case-campus__section-kicker">{{ positioningKicker }}</p>
           <p class="project-case-campus__positioning-lede">
-            先把问题框清楚，再谈协作、动作和结果。校园合作不是单次活动，而是一套
-            需要被拆解、对齐和复用的执行机制。
+            这段经历的关键不是“组织过比赛”，而是把一个预算不足、存在叫停风险的事项，
+            拆成可论证、可协调、可落地的项目推进路径。
           </p>
         </div>
 
@@ -99,7 +99,7 @@ const outcomesCapabilitiesKicker = '可复用能力'
           :key="item.title"
           class="project-case-campus__proof-column"
         >
-          <p class="project-case-campus__proof-index">证明 {{ index + 1 }}</p>
+          <p class="project-case-campus__proof-index"> {{ index + 1 }}</p>
           <p class="project-case-campus__proof-title">{{ item.title }}</p>
           <p class="project-case-campus__proof-summary">{{ item.summary }}</p>
           <p class="project-case-campus__proof-detail">{{ item.detail }}</p>

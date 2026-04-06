@@ -13,7 +13,7 @@ const page = approvalMapWorkflowCase
       class="project-case-approval__stage project-case-approval__stage--bare"
       variant="bare"
       :eyebrow="page.difficultySection.eyebrow"
-      title="真正的难点"
+      title="痛点解构"
       :intro="page.difficultySection.intro"
     >
       <div class="project-case-approval__two-up">
@@ -22,7 +22,7 @@ const page = approvalMapWorkflowCase
             {{ page.difficultySection.title }}
           </p>
           <p class="project-case-approval__substage-copy">
-            这页不是把审批对象重新画一遍，而是把对象、表单、状态和权限的关系先讲清楚，再让界面长出来。
+            这不是把审批对象重新画一遍，而是先把“审批人员效率”定义为终点，再决定交互怎么收束、接口怎么聚合、自动化该做到哪里。
           </p>
 
           <ul class="project-case-approval__complexity-list">
@@ -60,7 +60,7 @@ const page = approvalMapWorkflowCase
       class="project-case-approval__stage project-case-approval__stage--panel"
       variant="panel"
       :eyebrow="page.processSection.eyebrow"
-      title="我怎么把它收束成工作流"
+      title="我怎么把它收束成价值闭环"
       :intro="page.processSection.intro"
     >
       <div class="project-case-approval__workflow">
@@ -69,7 +69,7 @@ const page = approvalMapWorkflowCase
             {{ page.processSection.title }}
           </p>
           <p class="project-case-approval__workflow-copy">
-            我把整个页面收束成一条连续流程带，让判断、结构、协作和交付沿着同一条阅读路径往前走，而不是变成四个孤立模块。
+            我没有把它理解成一次前端改版，而是把视图聚合、接口聚合和数据预填收束成同一条交付链路，让每个技术决策都直接服务审批效率。
           </p>
         </div>
 
@@ -93,12 +93,12 @@ const page = approvalMapWorkflowCase
       class="project-case-approval__stage project-case-approval__stage--proof"
       variant="proof"
       :eyebrow="page.evidenceSection.eyebrow"
-      title="证据与结果"
+      title="证据与价值交付"
       :intro="page.evidenceSection.intro"
     >
       <div class="project-case-approval__proof">
         <p class="project-case-approval__proof-note">
-          这些图不是装饰，而是证据位。后续只要把临时占位图替换成真实截图，这套叙事仍然成立。
+          这些图不是装饰，而是验证痛点、方案和结果的证据位。后续替换为真实截图后，仍然能完整证明 4 合 1 视图、4 接口 -> 1 聚合接口与效率收益。
         </p>
 
         <ProjectEvidenceGrid :items="page.evidence" />
