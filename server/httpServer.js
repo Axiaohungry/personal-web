@@ -23,7 +23,7 @@ const CONTENT_TYPES = {
   '.woff2': 'font/woff2',
 }
 
-const STATIC_ASSET_PREFIXES = ['/assets/', '/3dgs/', '/projects/']
+const STATIC_ASSET_PREFIXES = ['/assets/', '/3dgs/']
 
 function normalizeBaseUrl(baseUrl) {
   return String(baseUrl || '').trim().replace(/\/+$/, '')
@@ -57,6 +57,12 @@ export function resolveRequestTarget(rawPathname) {
   }
 
   if (STATIC_ASSET_PREFIXES.some((prefix) => pathname.startsWith(prefix))) {
+    return { kind: 'asset', relativePath: pathname.slice(1) }
+  }
+
+  // Project pages and project images share the /projects/ prefix.
+  // Only treat /projects/* as a static asset when the request clearly targets a file.
+  if (pathname.startsWith('/projects/') && path.extname(pathname)) {
     return { kind: 'asset', relativePath: pathname.slice(1) }
   }
 

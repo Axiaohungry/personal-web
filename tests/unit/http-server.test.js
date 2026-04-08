@@ -46,6 +46,14 @@ test('resolveRequestTarget falls back SPA routes to index.html', () => {
     kind: 'spa',
   })
 
+  assert.deepEqual(resolveRequestTarget('/projects/fitness-coaching'), {
+    kind: 'spa',
+  })
+
+  assert.deepEqual(resolveRequestTarget('/projects/approval-map-workflow'), {
+    kind: 'spa',
+  })
+
   assert.deepEqual(resolveRequestTarget('/fitness/modules/food-library'), {
     kind: 'spa',
   })
