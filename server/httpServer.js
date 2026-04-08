@@ -23,7 +23,7 @@ const CONTENT_TYPES = {
   '.woff2': 'font/woff2',
 }
 
-const STATIC_ASSET_PREFIXES = ['/assets/', '/3dgs/']
+const STATIC_ASSET_PREFIXES = ['/assets/', '/3dgs/', '/projects/']
 
 function normalizeBaseUrl(baseUrl) {
   return String(baseUrl || '').trim().replace(/\/+$/, '')
