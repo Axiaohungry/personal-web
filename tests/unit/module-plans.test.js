@@ -401,8 +401,14 @@ test('buildLeanGainCalorieLogicPlan keeps phase 3 carb penalties off at or below
 
   assert.equal(noviceBoundary.carbAdjustmentPct, 0)
   assert.equal(novicePenalty.carbAdjustmentPct, -10)
-  assert.equal(getLeanGainMacro(noviceBoundaryStage).protein, getLeanGainMacro(novicePenaltyStage).protein)
-  assert.equal(getLeanGainMacro(noviceBoundaryStage).fat, getLeanGainMacro(novicePenaltyStage).fat)
+  assert.equal(
+    getMacroValue(getLeanGainMacro(noviceBoundaryStage), 'protein'),
+    getMacroValue(getLeanGainMacro(novicePenaltyStage), 'protein')
+  )
+  assert.equal(
+    getMacroValue(getLeanGainMacro(noviceBoundaryStage), 'fat'),
+    getMacroValue(getLeanGainMacro(novicePenaltyStage), 'fat')
+  )
   assert.ok(
     getMacroValue(getLeanGainMacro(novicePenaltyStage), 'carb') <
       getMacroValue(getLeanGainMacro(noviceBoundaryStage), 'carb')
@@ -433,8 +439,14 @@ test('buildLeanGainCalorieLogicPlan keeps phase 4 carb penalties off at or below
 
   assert.equal(advancedBoundary.carbAdjustmentPct, 0)
   assert.equal(advancedPenalty.carbAdjustmentPct, -10)
-  assert.equal(getLeanGainMacro(advancedBoundaryStage).protein, getLeanGainMacro(advancedPenaltyStage).protein)
-  assert.equal(getLeanGainMacro(advancedBoundaryStage).fat, getLeanGainMacro(advancedPenaltyStage).fat)
+  assert.equal(
+    getMacroValue(getLeanGainMacro(advancedBoundaryStage), 'protein'),
+    getMacroValue(getLeanGainMacro(advancedPenaltyStage), 'protein')
+  )
+  assert.equal(
+    getMacroValue(getLeanGainMacro(advancedBoundaryStage), 'fat'),
+    getMacroValue(getLeanGainMacro(advancedPenaltyStage), 'fat')
+  )
   assert.ok(
     getMacroValue(getLeanGainMacro(advancedPenaltyStage), 'carb') <
       getMacroValue(getLeanGainMacro(advancedBoundaryStage), 'carb')

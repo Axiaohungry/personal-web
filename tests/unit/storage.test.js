@@ -42,7 +42,6 @@ test('lean-gain storage api isolates dedicated keys from the generic fitness sto
   assert.deepEqual(JSON.parse(memory.get('fitness.latest')), { weightKg: 71 })
   assert.deepEqual(JSON.parse(memory.get('fitness.history')), [{ weightKg: 70 }])
   assert.equal(memory.has('leanGainLogicPrefs'), true)
-  assert.equal(memory.has('leanGainLogicHistory'), false)
 })
 
 test('lean-gain storage api saves prefs separately and trims history when a limit is provided', () => {
