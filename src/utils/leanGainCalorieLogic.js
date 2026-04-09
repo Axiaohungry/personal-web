@@ -176,11 +176,11 @@ function getAdjustmentDecision({ phase, weeklyAverageWeights, expLevel }) {
   return getPhaseThreeFourDecision({ weeklyAverageWeights, expLevel })
 }
 
-function applyCarbAdjustment(macroPlan, carbAdjustmentPct, calorieFloor) {
+function applyCarbAdjustment(macroPlan, carbAdjustmentPct, calorieFloor, baseTargetCalories) {
   if (!carbAdjustmentPct) {
     return {
       macroPlan,
-      targetCalories: getMacroCalories(macroPlan),
+      targetCalories: Math.max(baseTargetCalories, getMacroCalories(macroPlan)),
       carbAdjustmentPct: 0,
     }
   }
@@ -290,7 +290,7 @@ export function buildLeanGainCalorieLogicPlan({
       fatFactor: fatFactors[index],
     })
     const currentStageAdjustment = stageNumber === phase
-      ? applyCarbAdjustment(baseMacroPlan, adjustment.carbAdjustmentPct, calorieFloor)
+      ? applyCarbAdjustment(baseMacroPlan, adjustment.carbAdjustmentPct, calorieFloor, baseTargetCalories)
       : {
           macroPlan: baseMacroPlan,
           targetCalories: baseTargetCalories,

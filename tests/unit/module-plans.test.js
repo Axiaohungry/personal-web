@@ -574,3 +574,21 @@ test('buildLeanGainCalorieLogicPlan derives final target calories from final int
   assert.equal(directPenaltyPlan.targetCalories, getMacroCalories(directPenaltyPlan.macroPlan))
   assert.equal(floorProtectedPlan.targetCalories, getMacroCalories(floorProtectedPlan.macroPlan))
 })
+
+test('buildLeanGainCalorieLogicPlan keeps the no-penalty current-stage target at the floored stage target', () => {
+  const plan = modulePlans.buildLeanGainCalorieLogicPlan({
+    sex: 'male',
+    bodyFatPct: 18,
+    tdee: 1500,
+    weightKg: 80,
+    expLevel: 'Novice',
+    weeklyAverageWeights: [79.8, 79.7],
+  })
+
+  const activeStage = getLeanGainStages(plan)[plan.phase - 1]
+
+  assert.equal(plan.carbAdjustmentPct, 0)
+  assert.equal(activeStage.baseTargetCalories, 1500)
+  assert.equal(activeStage.targetCalories, 1500)
+  assert.equal(plan.targetCalories, 1500)
+})
