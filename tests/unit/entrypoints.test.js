@@ -13,4 +13,5 @@ test('router defines both home and fitness views', async () => {
   assert.ok(routerFile.includes("path: '/fitness'"))
   assert.ok(routerFile.includes("path: '/fitness/modules/five-two-fasting'"))
   assert.ok(routerFile.includes("path: '/fitness/modules/sixteen-eight-fasting'"))
+  assert.ok(routerFile.includes("path: '/fitness/modules/lean-gain-calorie-logic'"))
 })
