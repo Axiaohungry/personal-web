@@ -76,16 +76,22 @@ function buildMacroPlan({ weightKg, targetCalories, fatFactor }) {
   const protein = round(weightKg * 1.6)
   const fatFloor = weightKg * 0.5
   const fat = Math.max(round(weightKg * fatFactor), round(fatFloor))
-  const carb = Math.max(0, round((targetCalories - protein * 4 - fat * 9) / 4))
+  const carbs = Math.max(0, round((targetCalories - protein * 4 - fat * 9) / 4))
 
   return {
     protein,
     fat,
-    carb,
+    carbs,
+    carb: carbs,
     proteinGrams: protein,
     fatGrams: fat,
-    carbGrams: carb,
+    carbGrams: carbs,
   }
+}
+
+function getMacroCalories(macroPlan) {
+  const carbs = macroPlan?.carbs ?? macroPlan?.carb ?? 0
+  return macroPlan.protein * 4 + macroPlan.fat * 9 + carbs * 4
 }
 
 function toWeeklyAverages(history) {
@@ -171,12 +177,13 @@ function applyCarbAdjustment(macroPlan, carbAdjustmentPct) {
     return macroPlan
   }
 
-  const adjustedCarb = Math.max(0, round(macroPlan.carb * (1 + carbAdjustmentPct / 100)))
+  const adjustedCarbs = Math.max(0, round(macroPlan.carbs * (1 + carbAdjustmentPct / 100)))
 
   return {
     ...macroPlan,
-    carb: adjustedCarb,
-    carbGrams: adjustedCarb,
+    carbs: adjustedCarbs,
+    carb: adjustedCarbs,
+    carbGrams: adjustedCarbs,
   }
 }
 
@@ -208,6 +215,22 @@ export function buildLeanGainCalorieLogicPlan({
 
   const safeTdee = toPositiveNumber(tdee)
   const safeWeightKg = toPositiveNumber(weightKg)
+
+  if (!safeTdee || !safeWeightKg) {
+    return {
+      gateState: 'incomplete',
+      title: 'Complete the core inputs first',
+      description: 'This logic needs both TDEE and body weight before it can build a calorie and macro plan.',
+      phase: null,
+      phaseLabel: null,
+      phaseStrategy: null,
+      stages: [],
+      carbAdjustmentPct: 0,
+      adjustmentDecision: 'observe-only',
+      adjustmentReason: 'Valid TDEE and body weight are required before the module can calculate a plan.',
+    }
+  }
+
   const normalizedExpLevel = normalizeExpLevel(expLevel)
   const normalizedWeeklyAverageWeights = toWeeklyAverages(weeklyAverageWeights)
   const phase = getPhase(normalizedBodyFatPct, normalizedSex)
@@ -235,10 +258,11 @@ export function buildLeanGainCalorieLogicPlan({
       stage: stageNumber,
       label: `Phase ${stageNumber}`,
       targetCalories,
+      adjustedTargetCalories: getMacroCalories(macroPlan),
       macroPlan,
       proteinGrams: macroPlan.protein,
       fatGrams: macroPlan.fat,
-      carbGrams: macroPlan.carb,
+      carbGrams: macroPlan.carbs,
       isCurrent: stageNumber === phase,
     }
   })
@@ -256,11 +280,11 @@ export function buildLeanGainCalorieLogicPlan({
     adjustmentReason: adjustment.adjustmentReason,
     weeklyGainPct: adjustment.weeklyGainPct ?? null,
     weeklyGainThresholdPct: adjustment.weeklyGainThresholdPct ?? null,
-    targetCalories: activeStage.targetCalories,
+    targetCalories: activeStage.adjustedTargetCalories,
     macroPlan: activeStage.macroPlan,
     proteinGrams: activeStage.macroPlan.protein,
     fatGrams: activeStage.macroPlan.fat,
-    carbGrams: activeStage.macroPlan.carb,
+    carbGrams: activeStage.macroPlan.carbs,
     stages,
   }
 }
