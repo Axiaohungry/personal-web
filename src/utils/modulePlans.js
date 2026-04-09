@@ -6,6 +6,7 @@ import {
   normalizeWeeks,
 } from './caloriePlanning.js'
 import { buildMacroPlan } from './macros.js'
+export { buildLeanGainCalorieLogicPlan } from './leanGainCalorieLogic.js'
 
 function round(value) {
   return Math.round(value)
