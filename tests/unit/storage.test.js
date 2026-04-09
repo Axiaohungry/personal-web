@@ -2,6 +2,7 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 
 import { createStorageApi } from '../../src/utils/storage.js'
+import { createLeanGainLogicStorageApi } from '../../src/utils/leanGainLogicStorage.js'
 import * as storage from '../../src/utils/storage.js'
 
 test('storage api saves latest form data and keeps only recent history', () => {
@@ -28,7 +29,7 @@ test('lean-gain storage api isolates dedicated keys from the generic fitness sto
     setItem: (key, value) => memory.set(key, value),
   }
 
-  const api = storage.createLeanGainLogicStorageApi(fakeStorage)
+  const api = createLeanGainLogicStorageApi(fakeStorage)
 
   api.savePrefs({ expLevel: 'Novice', lastWeeklyAverageWeight: 71.2 })
   memory.set('fitness.latest', JSON.stringify({ weightKg: 71 }))
@@ -51,7 +52,7 @@ test('lean-gain storage api saves prefs separately and trims history when a limi
     setItem: (key, value) => memory.set(key, value),
   }
 
-  const api = storage.createLeanGainLogicStorageApi(fakeStorage)
+  const api = createLeanGainLogicStorageApi(fakeStorage)
 
   api.savePrefs({ expLevel: 'Novice', lastWeeklyAverageWeight: 71.2 })
   api.pushHistory({ savedAt: '1', weeklyAverageWeight: 70.1, phase: 2 }, 3)

@@ -3,8 +3,6 @@ const HISTORY_KEY = 'fitness.history'
 export const THEME_KEY = 'site.theme'
 const THEME_MODES = new Set(['light', 'dark', 'system'])
 
-export { createLeanGainLogicStorageApi } from './leanGainLogicStorage.js'
-
 function parseJson(value, fallback) {
   if (!value) return fallback
   try {
