@@ -314,10 +314,14 @@ test('buildLeanGainCalorieLogicPlan locks the four stage calorie formulas from T
   const stages = getLeanGainStages(plan)
 
   assert.equal(stages.length, 4)
-  assert.equal(stages[0].targetCalories, tdee - 300)
-  assert.equal(stages[1].targetCalories, tdee)
-  assert.equal(stages[2].targetCalories, Math.round(tdee * 1.065))
-  assert.equal(stages[3].targetCalories, Math.round(tdee * 1.10))
+  assert.equal(stages[0].baseTargetCalories, tdee - 300)
+  assert.equal(stages[1].baseTargetCalories, tdee)
+  assert.equal(stages[2].baseTargetCalories, Math.round(tdee * 1.065))
+  assert.equal(stages[3].baseTargetCalories, Math.round(tdee * 1.10))
+  assert.equal(stages[0].targetCalories, stages[0].baseTargetCalories)
+  assert.equal(stages[1].targetCalories, stages[1].baseTargetCalories)
+  assert.equal(stages[2].targetCalories, stages[2].baseTargetCalories)
+  assert.equal(stages[3].targetCalories, stages[3].baseTargetCalories)
 })
 
 test('buildLeanGainCalorieLogicPlan keeps female normal fat factors unless the low-body-fat special case applies', () => {
@@ -477,4 +481,38 @@ test('buildLeanGainCalorieLogicPlan enforces the calorie floor for both sexes', 
 
   assert.ok(maleStages.every((stage) => stage.targetCalories >= 1500))
   assert.ok(femaleStages.every((stage) => stage.targetCalories >= 1200))
+  assert.ok(maleStages.every((stage) => stage.baseTargetCalories >= 1500))
+  assert.ok(femaleStages.every((stage) => stage.baseTargetCalories >= 1200))
+})
+
+test('buildLeanGainCalorieLogicPlan keeps the final active target above the calorie floor after carb penalties', () => {
+  const malePlan = modulePlans.buildLeanGainCalorieLogicPlan({
+    sex: 'male',
+    bodyFatPct: 18,
+    tdee: 1500,
+    weightKg: 80,
+    expLevel: 'Novice',
+    weeklyAverageWeights: [79.0, 79.6, 80.2],
+  })
+
+  const femalePlan = modulePlans.buildLeanGainCalorieLogicPlan({
+    sex: 'female',
+    bodyFatPct: 31,
+    tdee: 1200,
+    weightKg: 60,
+    expLevel: 'Novice',
+    weeklyAverageWeights: [59.0, 59.3, 59.6],
+  })
+
+  const maleActiveStage = getLeanGainStages(malePlan)[malePlan.phase - 1]
+  const femaleActiveStage = getLeanGainStages(femalePlan)[femalePlan.phase - 1]
+
+  assert.equal(malePlan.carbAdjustmentPct, -10)
+  assert.equal(femalePlan.carbAdjustmentPct, -10)
+  assert.equal(maleActiveStage.baseTargetCalories, 1500)
+  assert.equal(femaleActiveStage.baseTargetCalories, 1200)
+  assert.ok(maleActiveStage.targetCalories >= 1500)
+  assert.ok(femaleActiveStage.targetCalories >= 1200)
+  assert.equal(malePlan.targetCalories, maleActiveStage.targetCalories)
+  assert.equal(femalePlan.targetCalories, femaleActiveStage.targetCalories)
 })

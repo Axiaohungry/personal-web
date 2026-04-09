@@ -61,7 +61,7 @@ function getStageFatFactors(sex, bodyFatPct) {
 }
 
 function getStageCalories(tdee, sex) {
-  const floor = sex === 'female' ? 1200 : 1500
+  const floor = getCalorieFloor(sex)
   const formulas = [
     tdee - 300,
     tdee,
@@ -92,6 +92,10 @@ function buildMacroPlan({ weightKg, targetCalories, fatFactor }) {
 function getMacroCalories(macroPlan) {
   const carbs = macroPlan?.carbs ?? macroPlan?.carb ?? 0
   return macroPlan.protein * 4 + macroPlan.fat * 9 + carbs * 4
+}
+
+function getCalorieFloor(sex) {
+  return sex === 'female' ? 1200 : 1500
 }
 
 function toWeeklyAverages(history) {
@@ -172,18 +176,43 @@ function getAdjustmentDecision({ phase, weeklyAverageWeights, expLevel }) {
   return getPhaseThreeFourDecision({ weeklyAverageWeights, expLevel })
 }
 
-function applyCarbAdjustment(macroPlan, carbAdjustmentPct) {
+function applyCarbAdjustment(macroPlan, carbAdjustmentPct, calorieFloor) {
   if (!carbAdjustmentPct) {
-    return macroPlan
+    return {
+      macroPlan,
+      targetCalories: getMacroCalories(macroPlan),
+    }
   }
 
   const adjustedCarbs = Math.max(0, round(macroPlan.carbs * (1 + carbAdjustmentPct / 100)))
-
-  return {
+  const adjustedMacroPlan = {
     ...macroPlan,
     carbs: adjustedCarbs,
     carb: adjustedCarbs,
     carbGrams: adjustedCarbs,
+  }
+  const adjustedCalories = getMacroCalories(adjustedMacroPlan)
+
+  if (adjustedCalories >= calorieFloor) {
+    return {
+      macroPlan: adjustedMacroPlan,
+      targetCalories: adjustedCalories,
+    }
+  }
+
+  const protectedCarbs = Math.max(
+    0,
+    round((calorieFloor - macroPlan.protein * 4 - macroPlan.fat * 9) / 4)
+  )
+
+  return {
+    macroPlan: {
+      ...macroPlan,
+      carbs: protectedCarbs,
+      carb: protectedCarbs,
+      carbGrams: protectedCarbs,
+    },
+    targetCalories: calorieFloor,
   }
 }
 
@@ -236,6 +265,7 @@ export function buildLeanGainCalorieLogicPlan({
   const phase = getPhase(normalizedBodyFatPct, normalizedSex)
   const { phaseLabel, phaseStrategy } = getPhaseMeta(phase)
   const fatFactors = getStageFatFactors(normalizedSex, normalizedBodyFatPct)
+  const calorieFloor = getCalorieFloor(normalizedSex)
   const stageCalories = getStageCalories(safeTdee, normalizedSex)
   const adjustment = getAdjustmentDecision({
     phase,
@@ -243,22 +273,26 @@ export function buildLeanGainCalorieLogicPlan({
     expLevel: normalizedExpLevel,
   })
 
-  const stages = stageCalories.map((targetCalories, index) => {
+  const stages = stageCalories.map((baseTargetCalories, index) => {
     const stageNumber = index + 1
     const baseMacroPlan = buildMacroPlan({
       weightKg: safeWeightKg,
-      targetCalories,
+      targetCalories: baseTargetCalories,
       fatFactor: fatFactors[index],
     })
-    const macroPlan = stageNumber === phase
-      ? applyCarbAdjustment(baseMacroPlan, adjustment.carbAdjustmentPct)
-      : baseMacroPlan
+    const currentStageAdjustment = stageNumber === phase
+      ? applyCarbAdjustment(baseMacroPlan, adjustment.carbAdjustmentPct, calorieFloor)
+      : {
+          macroPlan: baseMacroPlan,
+          targetCalories: baseTargetCalories,
+        }
+    const macroPlan = currentStageAdjustment.macroPlan
 
     return {
       stage: stageNumber,
       label: `Phase ${stageNumber}`,
-      targetCalories,
-      adjustedTargetCalories: getMacroCalories(macroPlan),
+      baseTargetCalories,
+      targetCalories: currentStageAdjustment.targetCalories,
       macroPlan,
       proteinGrams: macroPlan.protein,
       fatGrams: macroPlan.fat,
@@ -280,7 +314,7 @@ export function buildLeanGainCalorieLogicPlan({
     adjustmentReason: adjustment.adjustmentReason,
     weeklyGainPct: adjustment.weeklyGainPct ?? null,
     weeklyGainThresholdPct: adjustment.weeklyGainThresholdPct ?? null,
-    targetCalories: activeStage.adjustedTargetCalories,
+    targetCalories: activeStage.targetCalories,
     macroPlan: activeStage.macroPlan,
     proteinGrams: activeStage.macroPlan.protein,
     fatGrams: activeStage.macroPlan.fat,
