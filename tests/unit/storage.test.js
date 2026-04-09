@@ -3,7 +3,6 @@ import assert from 'node:assert/strict'
 
 import { createStorageApi } from '../../src/utils/storage.js'
 import { createLeanGainLogicStorageApi } from '../../src/utils/leanGainLogicStorage.js'
-import * as storage from '../../src/utils/storage.js'
 
 test('storage api saves latest form data and keeps only recent history', () => {
   const memory = new Map()
