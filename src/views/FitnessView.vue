@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import { computed, reactive, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 
@@ -32,6 +32,7 @@ const router = useRouter()
 const moduleGoal = ref('cut')
 const moduleWeeks = ref(8)
 const moduleTargetKg = ref(3)
+
 const planningContext = computed(() => ({
   goal: moduleGoal.value,
   weeks: moduleWeeks.value,
@@ -45,6 +46,7 @@ function coerceNumber(value, fallback) {
 
 function normalizeLatest(latest) {
   const safeLatest = latest && typeof latest === 'object' ? latest : {}
+
   return {
     sex: safeLatest.sex || defaultForm.sex,
     age: coerceNumber(safeLatest.age, defaultForm.age),
@@ -101,6 +103,11 @@ const modules = [
     routePath: '/fitness/modules/food-library',
   },
   {
+    title: '增肌底层热量逻辑',
+    summary: '从 BMR、TDEE、体脂和增肌目标出发，拆出可重载的热量决策入口。',
+    routePath: '/fitness/modules/lean-gain-calorie-logic',
+  },
+  {
     title: '补剂库',
     summary: '把补剂、优先级、剂量和证据放到一页里看清楚。',
     routePath: '/fitness/modules/supplement-library',
@@ -115,11 +122,11 @@ const currentScenarioKey = computed(() => (planningContext.value.goal === 'gain'
 
 function describeScenarioPace(key, scenarioPlan) {
   if (key === 'maintain') {
-    return '这里给的是维持热量，更适合作为观察体重和训练表现的起点。'
+    return '先稳住当前体重，把波动压在最小范围里。'
   }
 
-  const actionLabel = key === 'cut' ? '平均每天需要留出的缺口' : '平均每天需要补进去的盈余'
-  return `按 ${planningContext.value.weeks} 周变化 ${planningContext.value.targetKg} kg 来估算，${actionLabel}大约是 ${scenarioPlan.dailyAdjustment} kcal。`
+  const actionLabel = key === 'cut' ? '减脂' : '增肌'
+  return `按 ${planningContext.value.weeks} 周、${planningContext.value.targetKg} kg 的目标，给出 ${actionLabel}节奏：${scenarioPlan.dailyAdjustment} kcal/天`
 }
 
 const scenarios = computed(() => {
@@ -157,7 +164,7 @@ const scenarios = computed(() => {
     },
     {
       key: 'lean-gain',
-      label: '精益增肌',
+      label: '增肌',
       target: scenarioPlans['lean-gain'].target,
       range: `${scenarioPlans['lean-gain'].min} - ${scenarioPlans['lean-gain'].max} kcal`,
       pace: describeScenarioPace('lean-gain', scenarioPlans['lean-gain']),
@@ -186,6 +193,10 @@ function handleSelectModule(path) {
 const moduleContext = computed(() => ({
   goal: planningContext.value.goal,
   sex: form.sex,
+  age: form.age,
+  heightCm: form.heightCm,
+  bodyFatPct: form.bodyFatPct,
+  bmr: calculation.value.bmr,
   weeks: planningContext.value.weeks,
   targetKg: planningContext.value.targetKg,
   tdee: calculation.value.tdee,

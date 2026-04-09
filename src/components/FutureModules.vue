@@ -67,6 +67,10 @@ const iframeSrc = computed(() => {
   const search = new URLSearchParams({
     goal: props.goal,
     sex: String(props.context.sex ?? 'male'),
+    age: String(props.context.age ?? 24),
+    heightCm: String(props.context.heightCm ?? 175),
+    bodyFatPct: String(props.context.bodyFatPct ?? 15),
+    bmr: String(props.context.bmr ?? 1700),
     weeks: String(props.weeks),
     targetKg: String(props.targetKg),
     tdee: String(props.context.tdee ?? 0),
