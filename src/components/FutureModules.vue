@@ -46,6 +46,13 @@ const activeModule = computed(() => (
   props.modules.find((module) => module.routePath === props.activePath) || props.modules[0] || null
 ))
 
+const sharedModuleContext = computed(() => ({
+  ...props.context,
+  goal: props.goal,
+  weeks: props.weeks,
+  targetKg: props.targetKg,
+}))
+
 const targetKgHint = computed(() => {
   const guidance = getGoalClampGuidance({
     goal: props.goal,
@@ -66,15 +73,16 @@ const iframeSrc = computed(() => {
 
   const search = new URLSearchParams({
     goal: props.goal,
-    sex: String(props.context.sex ?? 'male'),
-    age: String(props.context.age ?? 24),
-    heightCm: String(props.context.heightCm ?? 175),
-    bodyFatPct: String(props.context.bodyFatPct ?? 15),
-    bmr: String(props.context.bmr ?? 1700),
+    sex: String(sharedModuleContext.value.sex ?? 'male'),
+    age: String(sharedModuleContext.value.age ?? 24),
+    heightCm: String(sharedModuleContext.value.heightCm ?? 175),
+    bodyFatPct: String(sharedModuleContext.value.bodyFatPct ?? 15),
+    bmr: String(sharedModuleContext.value.bmr ?? 1700),
     weeks: String(props.weeks),
     targetKg: String(props.targetKg),
-    tdee: String(props.context.tdee ?? 0),
-    weightKg: String(props.context.weightKg ?? 0),
+    tdee: String(sharedModuleContext.value.tdee ?? 0),
+    weightKg: String(sharedModuleContext.value.weightKg ?? 0),
+    currentCalories: String(sharedModuleContext.value.currentCalories ?? sharedModuleContext.value.tdee ?? 0),
     embed: '1',
   })
 
@@ -93,7 +101,7 @@ async function postContext() {
   frame.contentWindow.postMessage(
     {
       type: 'fitness-module-context',
-      payload: props.context,
+      payload: sharedModuleContext.value,
     },
     window.location.origin
   )
@@ -113,7 +121,7 @@ async function postContext() {
 }
 
 watch(
-  () => props.context,
+  () => sharedModuleContext.value,
   () => postContext(),
   { deep: true }
 )

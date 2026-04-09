@@ -1,45 +1,4 @@
-import { defineComponent, h } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
-
-import { useEmbeddedModuleState } from '@/hooks/useEmbeddedModuleState.js'
-
-const LeanGainCalorieLogicView = defineComponent({
-  name: 'LeanGainCalorieLogicView',
-  setup() {
-    const { state } = useEmbeddedModuleState()
-
-    return () =>
-      h('main', { class: 'lean-gain-module' }, [
-        h('section', { class: 'lean-gain-module__shell' }, [
-          h('p', { class: 'lean-gain-module__eyebrow' }, 'Fitness Module'),
-          h('h1', { class: 'lean-gain-module__title' }, '增肌底层热量逻辑'),
-          h(
-            'p',
-            { class: 'lean-gain-module__lede' },
-            '围绕 BMR、TDEE、体脂与增肌目标建立一层可复用的热量判断入口。'
-          ),
-          h('dl', { class: 'lean-gain-module__grid' }, [
-            h('div', [
-              h('dt', 'Age'),
-              h('dd', String(state.age)),
-            ]),
-            h('div', [
-              h('dt', 'Height'),
-              h('dd', `${state.heightCm} cm`),
-            ]),
-            h('div', [
-              h('dt', 'Body Fat'),
-              h('dd', `${state.bodyFatPct}%`),
-            ]),
-            h('div', [
-              h('dt', 'BMR'),
-              h('dd', `${state.bmr} kcal`),
-            ]),
-          ]),
-        ]),
-      ])
-  },
-})
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -88,7 +47,7 @@ const router = createRouter({
     {
       path: '/fitness/modules/lean-gain-calorie-logic',
       name: 'fitness-lean-gain-calorie-logic',
-      component: LeanGainCalorieLogicView,
+      component: () => import('@/views/modules/LeanGainCalorieLogicView.vue'),
     },
     {
       path: '/projects/approval-map-workflow',

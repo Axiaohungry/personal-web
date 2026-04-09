@@ -1,4 +1,4 @@
-import { onBeforeUnmount, onMounted, reactive, computed } from 'vue'
+import { computed, onBeforeUnmount, onMounted, reactive, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
 function normalizeGoal(value) {
@@ -22,6 +22,7 @@ export function useEmbeddedModuleState() {
     heightCm: 175,
     bodyFatPct: 15,
     bmr: 1700,
+    currentCalories: 2200,
     sex: 'male',
     goal: 'cut',
     weeks: 8,
@@ -41,6 +42,7 @@ export function useEmbeddedModuleState() {
     state.bmr = normalizeNumber(payload.bmr, state.bmr)
     state.tdee = normalizeNumber(payload.tdee, state.tdee)
     state.weightKg = normalizeNumber(payload.weightKg, state.weightKg)
+    state.currentCalories = normalizeNumber(payload.currentCalories, state.currentCalories)
   }
 
   function syncFromRoute() {
@@ -55,6 +57,7 @@ export function useEmbeddedModuleState() {
       bmr: route.query.bmr,
       tdee: route.query.tdee,
       weightKg: route.query.weightKg,
+      currentCalories: route.query.currentCalories,
     })
   }
 
@@ -63,8 +66,15 @@ export function useEmbeddedModuleState() {
     applyPayload(event.data.payload)
   }
 
+  syncFromRoute()
+
+  watch(
+    () => route.query,
+    () => syncFromRoute(),
+    { deep: true }
+  )
+
   onMounted(() => {
-    syncFromRoute()
     window.addEventListener('message', handleMessage)
   })
 
@@ -72,7 +82,7 @@ export function useEmbeddedModuleState() {
     window.removeEventListener('message', handleMessage)
   })
 
-  const titleSuffix = computed(() => (state.goal === 'cut' ? '减脂' : '增肌'))
+  const titleSuffix = computed(() => (state.goal === 'cut' ? 'cutting' : 'lean gain'))
 
   return {
     state,
