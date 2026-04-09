@@ -22,3 +22,9 @@ test('ecs deploy script health check uses the published host port', async () => 
     /cp -a "\$\{ASSET_3DGS_DIR\}" "\$\{BUILD_3DGS_DIR\}"/
   )
 })
+
+test('ecs workflow uses clean checkout on self-hosted runner', async () => {
+  const workflow = await readFile(new URL('../../.github/workflows/deploy-ecs.yml', import.meta.url), 'utf8')
+
+  assert.doesNotMatch(workflow, /clean:\s*false/)
+})

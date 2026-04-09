@@ -34,11 +34,6 @@ test('resolveRequestTarget serves static assets by relative dist path', () => {
     kind: 'asset',
     relativePath: '3dgs/thermal/full_zscore/full_masked.ply',
   })
-
-  assert.deepEqual(resolveRequestTarget('/projects/fitness-coaching/目标拆解流程图.png'), {
-    kind: 'asset',
-    relativePath: 'projects/fitness-coaching/目标拆解流程图.png',
-  })
 })
 
 test('resolveRequestTarget falls back SPA routes to index.html', () => {

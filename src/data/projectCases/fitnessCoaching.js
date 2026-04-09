@@ -1,3 +1,5 @@
+import { fitnessCoachingAssets } from '../projectCaseAssets.js'
+
 export const fitnessCoachingCase = {
   slug: 'fitness-coaching',
   route: '/projects/fitness-coaching',
@@ -64,19 +66,19 @@ export const fitnessCoachingCase = {
   evidence: [
     {
       title: '目标拆解流程图',
-      src: '/projects/fitness-coaching/目标拆解流程图.png',
+      src: fitnessCoachingAssets.goalBreakdownFlow,
       detail: '展示如何从最终目标逆向拆到阶段里程碑，让服务逻辑先围绕结果而不是动作展开。',
       note: '真实服务记录，已做隐私处理。',
     },
     {
       title: '训练容量计划片段',
-      src: '/projects/fitness-coaching/训练容量计划片段.png',
+      src: fitnessCoachingAssets.trainingVolumePlan,
       detail: '用计划片段说明训练容量、关键变量和周目标如何被记录，让方案具备连续迭代的依据。',
       note: '真实计划截图片段，已做隐私处理。',
     },
     {
       title: '周度复盘跟踪片段',
-      src: '/projects/fitness-coaching/周度复盘跟踪片段.png',
+      src: fitnessCoachingAssets.weeklyReviewTracking,
       detail: '把执行结果、变量调整和下一步建议写在同一页里，帮助判断阶段成果与续约价值。',
       note: '真实复盘记录片段，已做隐私处理。',
     },

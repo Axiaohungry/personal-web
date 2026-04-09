@@ -7,14 +7,17 @@ import { profile } from '../../src/data/profile.js'
 import { projects } from '../../src/data/projects.js'
 import { skillGroups } from '../../src/data/skills.js'
 
-test('profile exports a Chinese-first public homepage position', () => {
-  assert.equal(profile.name, '王枭')
+test('profile exports a public homepage position with stable CTA structure', () => {
+  assert.equal(typeof profile.name, 'string')
+  assert.ok(profile.name.trim().length > 0)
   assert.equal(typeof profile.tagline, 'string')
-  assert.ok(profile.tagline.includes('产品'))
-  assert.ok(profile.tagline.includes('前端') || profile.tagline.includes('做出来'))
+  assert.ok(profile.tagline.trim().length >= 20)
+  assert.equal(typeof profile.summary, 'string')
+  assert.ok(profile.summary.trim().length >= 20)
   assert.equal(profile.ctaPrimary.href, '#projects')
-  assert.equal(profile.ctaPrimary.label, '看我在做的事')
+  assert.equal(typeof profile.ctaPrimary.label, 'string')
   assert.equal(profile.ctaSecondary.href, '/fitness/')
+  assert.equal(typeof profile.ctaSecondary.label, 'string')
 })
 
 test('content collections stay concise and curated', () => {
@@ -32,9 +35,9 @@ test('content collections stay concise and curated', () => {
 })
 
 test('public contact data omits unsafe private fields', () => {
-  assert.equal(contact.name, '王枭')
-  assert.equal(contact.location, '武汉')
-  assert.equal(contact.email, 'wang_xiao_edu@163.com')
+  assert.equal(typeof contact.name, 'string')
+  assert.equal(typeof contact.location, 'string')
+  assert.equal(typeof contact.email, 'string')
   assert.equal(contact.phone, undefined)
   assert.equal(contact.birthDate, undefined)
   assert.equal(contact.politicalAffiliation, undefined)

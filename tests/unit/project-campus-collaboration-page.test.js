@@ -76,6 +76,6 @@ test('campus collaboration page locks the refreshed stage structure', async () =
   for (const item of campusCollaborationCase.evidence) {
     assert.equal(typeof item.src, 'string')
     assert.ok(item.src.trim().length > 0)
-    await access(new URL(`../../public${item.src}`, import.meta.url))
+    await access(new URL(item.src))
   }
 })

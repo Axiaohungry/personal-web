@@ -1,3 +1,5 @@
+import { campusCollaborationAssets } from '../projectCaseAssets.js'
+
 export const campusCollaborationCase = {
   slug: 'campus-collaboration',
   route: '/projects/campus-collaboration',
@@ -111,25 +113,25 @@ export const campusCollaborationCase = {
   evidence: [
     {
       title: '全景统筹与风险矩阵',
-      src: '/projects/campus-collaboration/全景统筹与风险矩阵.png',
+      src: campusCollaborationAssets.panoramicRiskMatrix,
       detail: '全局视野：映射时间轴、关键依赖项与红蓝线预警，确保各链路负责人在同一语境下同频共振。',
       note: '',
     },
     {
       title: '网格化编队与双轨协同',
-      src: '/projects/campus-collaboration/网格化编队与双轨协同.png',
+      src: campusCollaborationAssets.gridCoordination,
       detail: '人力调度：清晰界定双校区 16 人阵型的职责边界与 Backup 机制，杜绝“三不管”地带。',
       note: '',
     },
     {
       title: 'SOP 落地与现场核验',
-      src: '/projects/campus-collaboration/SOP落地与现场核验.png',
+      src: campusCollaborationAssets.sopLanding,
       detail: '执行还原：不仅验证了赛事的顺利推进，更印证了前期制定的标准化流程在复杂现场的有效性。',
       note: '',
     },
     {
       title: '复盘封装与知识库沉淀',
-      src: '/projects/campus-collaboration/复盘封装与知识库沉淀.png',
+      src: campusCollaborationAssets.retrospectivePackaging,
       detail: '长效价值：剔除无效经验，提纯标准范式与避坑指南，完成从 Data 到 Information 再到 Asset 的转化。',
       note: '',
     },

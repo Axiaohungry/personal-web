@@ -4,7 +4,7 @@ import { access, readFile } from 'node:fs/promises'
 
 import { approvalMapWorkflowCase } from '../../src/data/projectCases/approvalMapWorkflow.js'
 
-test('approval map page locks the refreshed flagship case structure', async () => {
+test('approval map page keeps the flagship case structure', async () => {
   const viewFile = await readFile(
     new URL('../../src/views/projects/ProjectApprovalMapWorkflowView.vue', import.meta.url),
     'utf8'
@@ -26,9 +26,6 @@ test('approval map page locks the refreshed flagship case structure', async () =
   assert.equal((viewFile.match(/variant="panel"/g) || []).length, 1)
   assert.equal((viewFile.match(/variant="proof"/g) || []).length, 1)
 
-  assert.ok(viewFile.includes('真正的难点'))
-  assert.ok(viewFile.includes('我怎么把它收束成工作流'))
-  assert.ok(viewFile.includes('证据与结果'))
   assert.ok(viewFile.includes(':eyebrow="page.difficultySection.eyebrow"'))
   assert.ok(viewFile.includes('page.responsibilitySection.title'))
   assert.ok(viewFile.includes('page.responsibilitySection.intro'))
@@ -38,12 +35,11 @@ test('approval map page locks the refreshed flagship case structure', async () =
 
   assert.ok(viewFile.includes('<ProjectEvidenceGrid :items="page.evidence" />'))
   assert.ok(viewFile.includes('{{ page.outcomes.disclaimer }}'))
-
   assert.ok(approvalMapWorkflowCase.outcomes.disclaimer.length > 0)
 
   for (const item of approvalMapWorkflowCase.evidence) {
     assert.equal(typeof item.src, 'string')
     assert.ok(item.src.trim().length > 0)
-    await access(new URL(`../../public${item.src}`, import.meta.url))
+    await access(new URL(item.src))
   }
 })

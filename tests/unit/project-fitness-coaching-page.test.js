@@ -37,7 +37,7 @@ test('fitness coaching page keeps the service loop and workbench bridge', async 
   for (const item of fitnessCoachingCase.evidence) {
     assert.equal(typeof item.src, 'string')
     assert.ok(item.src.trim().length > 0)
-    assert.ok(item.src.startsWith('/projects/fitness-coaching/'))
-    await access(new URL(`../../public${item.src}`, import.meta.url))
+    assert.ok(item.src.startsWith('file:'))
+    await access(new URL(item.src))
   }
 })
