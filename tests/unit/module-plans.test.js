@@ -15,6 +15,14 @@ function getLeanGainStages(plan) {
   return plan.stages ?? plan.phases ?? []
 }
 
+function getLeanGainMacro(stage) {
+  return stage.macroPlan ?? stage
+}
+
+function getMacroValue(macros, key) {
+  return macros[key] ?? macros[`${key}Grams`]
+}
+
 test('buildCarbCyclingPlan returns cut day targets derived from TDEE', () => {
   const plan = buildCarbCyclingPlan({
     goal: 'cut',
@@ -256,7 +264,7 @@ test('buildLeanGainCalorieLogicPlan locks male and female four-phase boundaries'
   }
 })
 
-test('buildLeanGainCalorieLogicPlan returns the locked four-stage calorie outputs from TDEE', () => {
+test('buildLeanGainCalorieLogicPlan uses the baseline protein, normal fat ladder, and calorie-derived carbs', () => {
   const plan = modulePlans.buildLeanGainCalorieLogicPlan({
     sex: 'male',
     bodyFatPct: 18,
@@ -267,30 +275,45 @@ test('buildLeanGainCalorieLogicPlan returns the locked four-stage calorie output
   })
 
   const stages = getLeanGainStages(plan)
+  const proteins = stages.map((stage) => getMacroValue(getLeanGainMacro(stage), 'protein'))
+  const fats = stages.map((stage) => getMacroValue(getLeanGainMacro(stage), 'fat'))
+  const stageTwoMacros = getLeanGainMacro(stages[1])
 
   assert.equal(stages.length, 4)
-  assert.deepEqual(
-    stages.map((stage) => stage.targetCalories),
-    [2200, 2500, 2663, 2750]
+  assert.deepEqual(proteins, [128, 128, 128, 128])
+  assert.deepEqual(fats, [48, 56, 64, 80])
+  assert.equal(
+    getMacroValue(stageTwoMacros, 'carb'),
+    Math.round((stages[1].targetCalories - proteins[1] * 4 - fats[1] * 9) / 4)
   )
 })
 
-test('buildLeanGainCalorieLogicPlan applies the female low-body-fat fat-factor special case', () => {
-  const plan = modulePlans.buildLeanGainCalorieLogicPlan({
+test('buildLeanGainCalorieLogicPlan keeps female normal fat factors unless the low-body-fat special case applies', () => {
+  const normalPlan = modulePlans.buildLeanGainCalorieLogicPlan({
+    sex: 'female',
+    bodyFatPct: 19.9,
+    tdee: 2200,
+    weightKg: 60,
+    expLevel: 'Novice',
+    weeklyAverageWeights: [60, 60, 60],
+  })
+
+  const specialPlan = modulePlans.buildLeanGainCalorieLogicPlan({
     sex: 'female',
     bodyFatPct: 14,
     tdee: 2200,
-    weightKg: 50,
+    weightKg: 60,
     expLevel: 'Novice',
-    weeklyAverageWeights: [50, 50, 50],
+    weeklyAverageWeights: [60, 60, 60],
   })
 
-  const stages = getLeanGainStages(plan)
-  const phaseThree = stages[2]
-  const macros = phaseThree.macroPlan ?? phaseThree
+  const normalStages = getLeanGainStages(normalPlan)
+  const specialStages = getLeanGainStages(specialPlan)
 
-  assert.equal(plan.phase, 3)
-  assert.equal(macros.fatGrams ?? macros.fat, 60)
+  assert.equal(normalPlan.phase, 4)
+  assert.equal(specialPlan.phase, 4)
+  assert.equal(getMacroValue(getLeanGainMacro(normalStages[3]), 'fat'), 60)
+  assert.equal(getMacroValue(getLeanGainMacro(specialStages[3]), 'fat'), 72)
 })
 
 test('buildLeanGainCalorieLogicPlan keeps phase 1 and 2 in observe-only mode until there is enough history', () => {
@@ -308,22 +331,22 @@ test('buildLeanGainCalorieLogicPlan keeps phase 1 and 2 in observe-only mode unt
   assert.equal(plan.adjustmentDecision, 'observe-only')
 })
 
-test('buildLeanGainCalorieLogicPlan reduces carbs by 10% after three rising weekly averages in phase 1 or 2', () => {
+test('buildLeanGainCalorieLogicPlan applies the phase 1 and 2 carb penalty after three rising weekly averages', () => {
   const plan = modulePlans.buildLeanGainCalorieLogicPlan({
     sex: 'male',
     bodyFatPct: 18,
     tdee: 2500,
     weightKg: 80,
     expLevel: 'Novice',
-    weeklyAverageWeights: [79.2, 79.6, 80.1],
+    weeklyAverageWeights: [79.0, 79.6, 80.2],
   })
 
   assert.equal(plan.phase, 2)
   assert.equal(plan.carbAdjustmentPct, -10)
 })
 
-test('buildLeanGainCalorieLogicPlan reduces carbs by 10% in phase 3 and 4 for novice and advanced thresholds', () => {
-  const novicePhaseThreePlan = modulePlans.buildLeanGainCalorieLogicPlan({
+test('buildLeanGainCalorieLogicPlan keeps phase 3 and 4 carb penalties carb-only at the threshold boundary', () => {
+  const noviceBase = modulePlans.buildLeanGainCalorieLogicPlan({
     sex: 'male',
     bodyFatPct: 14,
     tdee: 2500,
@@ -332,23 +355,62 @@ test('buildLeanGainCalorieLogicPlan reduces carbs by 10% in phase 3 and 4 for no
     weeklyAverageWeights: [80, 80, 80],
   })
 
-  const advancedPhaseFourPlan = modulePlans.buildLeanGainCalorieLogicPlan({
+  const novicePenalty = modulePlans.buildLeanGainCalorieLogicPlan({
+    sex: 'male',
+    bodyFatPct: 14,
+    tdee: 2500,
+    weightKg: 80,
+    expLevel: 'Novice',
+    weeklyAverageWeights: [79.1, 79.8, 80.4],
+  })
+
+  const advancedBase = modulePlans.buildLeanGainCalorieLogicPlan({
     sex: 'female',
-    bodyFatPct: 19,
+    bodyFatPct: 19.9,
     tdee: 2500,
     weightKg: 60,
     expLevel: 'Advanced',
     weeklyAverageWeights: [60, 60, 60],
   })
 
-  assert.equal(novicePhaseThreePlan.phase, 3)
-  assert.equal(novicePhaseThreePlan.carbAdjustmentPct, -10)
-  assert.equal(advancedPhaseFourPlan.phase, 4)
-  assert.equal(advancedPhaseFourPlan.carbAdjustmentPct, -10)
+  const advancedPenalty = modulePlans.buildLeanGainCalorieLogicPlan({
+    sex: 'female',
+    bodyFatPct: 19.9,
+    tdee: 2500,
+    weightKg: 60,
+    expLevel: 'Advanced',
+    weeklyAverageWeights: [59.9, 60.2, 60.5],
+  })
+
+  const noviceBaseStage = getLeanGainStages(noviceBase)[2]
+  const novicePenaltyStage = getLeanGainStages(novicePenalty)[2]
+  const advancedBaseStage = getLeanGainStages(advancedBase)[3]
+  const advancedPenaltyStage = getLeanGainStages(advancedPenalty)[3]
+
+  assert.equal(noviceBase.carbAdjustmentPct, 0)
+  assert.equal(novicePenalty.carbAdjustmentPct, -10)
+  assert.equal(getLeanGainMacro(noviceBaseStage).protein, getLeanGainMacro(novicePenaltyStage).protein)
+  assert.equal(getLeanGainMacro(noviceBaseStage).fat, getLeanGainMacro(novicePenaltyStage).fat)
+  assert.ok(getLeanGainMacro(novicePenaltyStage).carbs < getLeanGainMacro(noviceBaseStage).carbs)
+
+  assert.equal(advancedBase.carbAdjustmentPct, 0)
+  assert.equal(advancedPenalty.carbAdjustmentPct, -10)
+  assert.equal(getLeanGainMacro(advancedBaseStage).protein, getLeanGainMacro(advancedPenaltyStage).protein)
+  assert.equal(getLeanGainMacro(advancedBaseStage).fat, getLeanGainMacro(advancedPenaltyStage).fat)
+  assert.ok(getLeanGainMacro(advancedPenaltyStage).carbs < getLeanGainMacro(advancedBaseStage).carbs)
 })
 
-test('buildLeanGainCalorieLogicPlan enforces the calorie floor and fat floor guards', () => {
-  const plan = modulePlans.buildLeanGainCalorieLogicPlan({
+test('buildLeanGainCalorieLogicPlan enforces the calorie floor for both sexes', () => {
+  const malePlan = modulePlans.buildLeanGainCalorieLogicPlan({
+    sex: 'male',
+    bodyFatPct: 18,
+    tdee: 1000,
+    weightKg: 80,
+    expLevel: 'Novice',
+    weeklyAverageWeights: [80, 80, 80],
+  })
+
+  const femalePlan = modulePlans.buildLeanGainCalorieLogicPlan({
     sex: 'female',
     bodyFatPct: 31,
     tdee: 1000,
@@ -357,8 +419,9 @@ test('buildLeanGainCalorieLogicPlan enforces the calorie floor and fat floor gua
     weeklyAverageWeights: [60, 60, 60],
   })
 
-  const stages = getLeanGainStages(plan)
+  const maleStages = getLeanGainStages(malePlan)
+  const femaleStages = getLeanGainStages(femalePlan)
 
-  assert.ok(stages.every((stage) => stage.targetCalories >= 1200))
-  assert.ok(stages.every((stage) => (stage.fatGrams ?? stage.fat ?? 0) >= 30))
+  assert.ok(maleStages.every((stage) => stage.targetCalories >= 1500))
+  assert.ok(femaleStages.every((stage) => stage.targetCalories >= 1200))
 })

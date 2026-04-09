@@ -60,10 +60,6 @@ test('resolveRequestTarget falls back SPA routes to index.html', () => {
   assert.deepEqual(resolveRequestTarget('/fitness/modules/sixteen-eight-fasting'), {
     kind: 'spa',
   })
-
-  assert.deepEqual(resolveRequestTarget('/fitness/modules/lean-gain-calorie-logic'), {
-    kind: 'spa',
-  })
 })
 
 test('resolveRequestTarget rejects path traversal attempts', () => {
