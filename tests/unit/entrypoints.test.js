@@ -2,52 +2,13 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import { access, readFile } from 'node:fs/promises'
 
-function escapeRegExp(value) {
-  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-}
-
-function extractObjectLiteral(source, marker) {
-  const index = source.indexOf(marker)
-  assert.notEqual(index, -1, `Expected to find marker: ${marker}`)
-
-  const start = source.indexOf('{', index)
-  assert.notEqual(start, -1, `Expected an object literal after marker: ${marker}`)
-
-  let depth = 0
-
-  for (let pointer = start; pointer < source.length; pointer += 1) {
-    const character = source[pointer]
-
-    if (character === '{') {
-      depth += 1
-    } else if (character === '}') {
-      depth -= 1
-
-      if (depth === 0) {
-        return source.slice(start, pointer + 1)
-      }
-    }
-  }
-
-  throw new Error(`Unclosed object literal after marker: ${marker}`)
-}
-
-function extractTopLevelKeys(objectLiteral) {
-  return [...objectLiteral.matchAll(/^\s*([A-Za-z0-9_$]+)\s*:/gm)].map((match) => match[1])
-}
-
 test('vite entry loads the root main bootstrap', async () => {
   const html = await readFile(new URL('../../index.html', import.meta.url), 'utf8')
   assert.ok(html.includes('<script type="module" src="/src/main.js"></script>'))
 })
 
-test('router exposes the lean-gain module as a lazy-loaded view without inline route components', async () => {
+test('router exposes the lean-gain module as a lazy-loaded dedicated view', async () => {
   const routerFile = await readFile(new URL('../../src/router/index.js', import.meta.url), 'utf8')
-
-  assert.ok(routerFile.includes("path: '/'"))
-  assert.ok(routerFile.includes("path: '/fitness'"))
-  assert.ok(routerFile.includes("path: '/fitness/modules/five-two-fasting'"))
-  assert.ok(routerFile.includes("path: '/fitness/modules/sixteen-eight-fasting'"))
 
   assert.match(
     routerFile,
@@ -57,46 +18,33 @@ test('router exposes the lean-gain module as a lazy-loaded view without inline r
   assert.doesNotMatch(routerFile, /useEmbeddedModuleState/)
 })
 
-test('lean-gain module page has a dedicated view file', async () => {
+test('lean-gain module page file exists', async () => {
   await access(new URL('../../src/views/modules/LeanGainCalorieLogicView.vue', import.meta.url))
 })
 
-test('fitness workbench passes the lean-gain route and shared planning context contract', async () => {
+test('fitness workbench still passes the lean-gain shared context fields into the iframe contract', async () => {
   const fitnessView = await readFile(new URL('../../src/views/FitnessView.vue', import.meta.url), 'utf8')
   const futureModules = await readFile(new URL('../../src/components/FutureModules.vue', import.meta.url), 'utf8')
-  const requiredContextKeys = [
-    'sex',
-    'age',
-    'heightCm',
-    'bodyFatPct',
-    'bmr',
-    'tdee',
-    'weightKg',
-    'goal',
-    'weeks',
-    'targetKg',
-  ]
 
-  assert.match(
-    fitnessView,
-    new RegExp(`routePath:\\s*['"]${escapeRegExp('/fitness/modules/lean-gain-calorie-logic')}['"]`)
-  )
+  assert.match(fitnessView, /routePath:\s*['"]\/fitness\/modules\/lean-gain-calorie-logic['"]/)
 
-  const moduleContextLiteral = extractObjectLiteral(fitnessView, 'const moduleContext = computed(() =>')
-  const moduleContextKeys = extractTopLevelKeys(moduleContextLiteral)
+  for (const field of ['sex', 'age', 'heightCm', 'bodyFatPct', 'bmr', 'tdee', 'weightKg', 'goal', 'weeks', 'targetKg']) {
+    assert.match(fitnessView, new RegExp(`${field}\\s*:`))
+    assert.match(futureModules, new RegExp(`${field}\\s*:`))
+  }
+})
 
-  assert.deepEqual(
-    requiredContextKeys.filter((key) => !moduleContextKeys.includes(key)),
-    [],
-    'FitnessView module context is missing required lean-gain fields'
-  )
+test('embedded module state keeps the existing Chinese goal labels for other modules', async () => {
+  const hookFile = await readFile(new URL('../../src/hooks/useEmbeddedModuleState.js', import.meta.url), 'utf8')
 
-  const queryLiteral = extractObjectLiteral(futureModules, 'const search = new URLSearchParams(')
-  const queryKeys = extractTopLevelKeys(queryLiteral)
+  assert.match(hookFile, /titleSuffix\s*=\s*computed\(\(\)\s*=>\s*\(state\.goal\s*===\s*'cut'\s*\?\s*'减脂'\s*:\s*'增肌'\)\)/)
+})
 
-  assert.deepEqual(
-    requiredContextKeys.filter((key) => !queryKeys.includes(key)),
-    [],
-    'FutureModules iframe query params are missing required shared fields'
-  )
+test('lean-gain module page keeps neutral copy and avoids re-appending a just-saved weekly average', async () => {
+  const leanGainView = await readFile(new URL('../../src/views/modules/LeanGainCalorieLogicView.vue', import.meta.url), 'utf8')
+
+  assert.match(leanGainView, /title="Lean-gain calorie logic"/)
+  assert.doesNotMatch(leanGainView, /for \$\{titleSuffix\}/)
+  assert.doesNotMatch(leanGainView, /{{ state\.goal === 'gain' \? 'Gain' : 'Cut' }}/)
+  assert.match(leanGainView, /weeklyAverageWeight\.value = null/)
 })

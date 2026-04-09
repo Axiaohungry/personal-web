@@ -14,7 +14,7 @@ const decisionCopy = {
 
 const storage = createLeanGainLogicStorageApi()
 const savedPrefs = storage.loadPrefs()
-const { state, titleSuffix } = useEmbeddedModuleState()
+const { state } = useEmbeddedModuleState()
 
 const expLevel = ref(savedPrefs.expLevel === 'Advanced' ? 'Advanced' : 'Novice')
 const weeklyAverageWeight = ref(
@@ -148,6 +148,7 @@ function recordWeeklyJudgment() {
     carbGrams: plan.value.carbGrams,
     fatGrams: plan.value.fatGrams,
   })
+  weeklyAverageWeight.value = null
 
   feedback.value = {
     type: 'success',
@@ -159,7 +160,7 @@ function recordWeeklyJudgment() {
 <template>
   <ModuleWorkbenchLayout
     eyebrow="Lean Gain Logic"
-    :title="`Lean-gain calorie logic for ${titleSuffix}`"
+    title="Lean-gain calorie logic"
     intro="Turn baseline intake, body-fat phase, and weekly weight trend into one calm decision flow. This page is meant to feel like the weekly check-in a coach would do before changing calories."
     note="Body-fat percentage decides the phase. Weekly average body weight decides whether the current phase should stay in place or start trimming carbs. Keep the inputs honest and this becomes much more reliable than reacting to daily scale noise."
   >
@@ -167,14 +168,10 @@ function recordWeeklyJudgment() {
       <section class="module-section">
         <h2>Shared context</h2>
         <p class="module-copy">
-          The workbench keeps these inputs in sync so the module starts from the same profile and goal each time.
+          The workbench keeps profile and intake inputs in sync so this module starts from the same body-composition baseline each time.
         </p>
 
         <div class="lean-gain-stats">
-          <div class="lean-gain-stat">
-            <span class="lean-gain-stat__label">Goal</span>
-            <strong>{{ state.goal === 'gain' ? 'Gain' : 'Cut' }}</strong>
-          </div>
           <div class="lean-gain-stat">
             <span class="lean-gain-stat__label">Sex</span>
             <strong>{{ state.sex === 'female' ? 'Female' : 'Male' }}</strong>
@@ -202,10 +199,6 @@ function recordWeeklyJudgment() {
           <div class="lean-gain-stat">
             <span class="lean-gain-stat__label">TDEE</span>
             <strong>{{ state.tdee }} kcal</strong>
-          </div>
-          <div class="lean-gain-stat">
-            <span class="lean-gain-stat__label">Timeline</span>
-            <strong>{{ state.weeks }} weeks / {{ state.targetKg }} kg</strong>
           </div>
         </div>
       </section>

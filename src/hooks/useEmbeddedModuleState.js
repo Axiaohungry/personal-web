@@ -82,7 +82,7 @@ export function useEmbeddedModuleState() {
     window.removeEventListener('message', handleMessage)
   })
 
-  const titleSuffix = computed(() => (state.goal === 'cut' ? 'cutting' : 'lean gain'))
+  const titleSuffix = computed(() => (state.goal === 'cut' ? '减脂' : '增肌'))
 
   return {
     state,
