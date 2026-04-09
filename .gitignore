@@ -6,7 +6,8 @@
 node_modules/
 dist/
 tmp/
-assets/
+/assets/
+.worktrees/
 docs/
 upload/
 public/3dgs/
