@@ -181,6 +181,7 @@ function applyCarbAdjustment(macroPlan, carbAdjustmentPct, calorieFloor) {
     return {
       macroPlan,
       targetCalories: getMacroCalories(macroPlan),
+      carbAdjustmentPct: 0,
     }
   }
 
@@ -197,22 +198,30 @@ function applyCarbAdjustment(macroPlan, carbAdjustmentPct, calorieFloor) {
     return {
       macroPlan: adjustedMacroPlan,
       targetCalories: adjustedCalories,
+      carbAdjustmentPct,
     }
   }
 
   const protectedCarbs = Math.max(
     0,
-    round((calorieFloor - macroPlan.protein * 4 - macroPlan.fat * 9) / 4)
+    Math.ceil((calorieFloor - macroPlan.protein * 4 - macroPlan.fat * 9) / 4)
   )
+  const protectedMacroPlan = {
+    ...macroPlan,
+    carbs: protectedCarbs,
+    carb: protectedCarbs,
+    carbGrams: protectedCarbs,
+  }
+  const actualReductionApplied = protectedCarbs < macroPlan.carbs
 
   return {
-    macroPlan: {
-      ...macroPlan,
-      carbs: protectedCarbs,
-      carb: protectedCarbs,
-      carbGrams: protectedCarbs,
-    },
-    targetCalories: calorieFloor,
+    macroPlan: protectedMacroPlan,
+    targetCalories: getMacroCalories(protectedMacroPlan),
+    carbAdjustmentPct: actualReductionApplied ? carbAdjustmentPct : 0,
+    adjustmentDecision: actualReductionApplied ? 'reduce-carbs' : 'hold',
+    adjustmentReason: actualReductionApplied
+      ? 'Weekly trend still supports a carb reduction, but the calorie floor limits how far it can go.'
+      : 'A carb reduction would push intake below the calorie floor, so the current target stays in place.',
   }
 }
 
@@ -293,6 +302,9 @@ export function buildLeanGainCalorieLogicPlan({
       label: `Phase ${stageNumber}`,
       baseTargetCalories,
       targetCalories: currentStageAdjustment.targetCalories,
+      carbAdjustmentPct: currentStageAdjustment.carbAdjustmentPct,
+      adjustmentDecision: currentStageAdjustment.adjustmentDecision,
+      adjustmentReason: currentStageAdjustment.adjustmentReason,
       macroPlan,
       proteinGrams: macroPlan.protein,
       fatGrams: macroPlan.fat,
@@ -309,9 +321,9 @@ export function buildLeanGainCalorieLogicPlan({
     phaseLabel,
     phaseStrategy,
     expLevel: normalizedExpLevel,
-    carbAdjustmentPct: adjustment.carbAdjustmentPct,
-    adjustmentDecision: adjustment.adjustmentDecision,
-    adjustmentReason: adjustment.adjustmentReason,
+    carbAdjustmentPct: activeStage.carbAdjustmentPct ?? adjustment.carbAdjustmentPct,
+    adjustmentDecision: activeStage.adjustmentDecision ?? adjustment.adjustmentDecision,
+    adjustmentReason: activeStage.adjustmentReason ?? adjustment.adjustmentReason,
     weeklyGainPct: adjustment.weeklyGainPct ?? null,
     weeklyGainThresholdPct: adjustment.weeklyGainThresholdPct ?? null,
     targetCalories: activeStage.targetCalories,
