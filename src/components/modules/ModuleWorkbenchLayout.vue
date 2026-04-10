@@ -54,6 +54,8 @@ defineProps({
   grid-template-columns: minmax(0, 1.4fr) minmax(16rem, 0.8fr);
   gap: 1rem 1.25rem;
   margin-bottom: 1.25rem;
+  width: min(100%, 76rem);
+  margin-inline: auto;
 }
 
 .module-page__eyebrow {
@@ -94,6 +96,8 @@ defineProps({
   display: grid;
   gap: 1rem;
   min-width: 0;
+  width: min(100%, 76rem);
+  margin-inline: auto;
 }
 
 :deep(.module-grid) {

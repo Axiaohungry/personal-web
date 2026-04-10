@@ -96,7 +96,7 @@ test('embedded module state keeps the existing Chinese goal labels for other mod
 test('lean-gain module page keeps neutral copy and avoids re-appending a just-saved weekly average', async () => {
   const leanGainView = await readFile(new URL('../../src/views/modules/LeanGainCalorieLogicView.vue', import.meta.url), 'utf8')
 
-  assert.match(leanGainView, /title="Lean-gain calorie logic"/)
+  assert.match(leanGainView, /title="精益增肌热量决策"/)
   assert.doesNotMatch(leanGainView, /for \$\{titleSuffix\}/)
   assert.doesNotMatch(leanGainView, /{{ state\.goal === 'gain' \? 'Gain' : 'Cut' }}/)
   assert.match(leanGainView, /weeklyAverageWeight\.value = null/)

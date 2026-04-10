@@ -549,7 +549,7 @@ test('buildLeanGainCalorieLogicPlan does not report a carb cut when the calorie 
     getMacroValue(getLeanGainMacro(activeStage), 'carb'),
     getMacroValue(getLeanGainMacro(phaseTwoBaseStage), 'carb')
   )
-  assert.ok(plan.adjustmentReason.toLowerCase().includes('floor'))
+  assert.match(plan.adjustmentReason, /热量下限/)
 })
 
 test('buildLeanGainCalorieLogicPlan derives final target calories from final integer macros in all active branches', () => {

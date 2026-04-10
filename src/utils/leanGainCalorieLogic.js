@@ -32,20 +32,20 @@ function getPhase(bodyFatPct, sex) {
 function getPhaseMeta(phase) {
   const map = {
     1: {
-      phaseLabel: 'Phase 1',
-      phaseStrategy: 'High body-fat recomposition',
+      phaseLabel: '第 1 阶段',
+      phaseStrategy: '高体脂重组',
     },
     2: {
-      phaseLabel: 'Phase 2',
-      phaseStrategy: 'Maintenance recomposition',
+      phaseLabel: '第 2 阶段',
+      phaseStrategy: '维持热量重组',
     },
     3: {
-      phaseLabel: 'Phase 3',
-      phaseStrategy: 'Golden lean-gain',
+      phaseLabel: '第 3 阶段',
+      phaseStrategy: '黄金精益增肌',
     },
     4: {
-      phaseLabel: 'Phase 4',
-      phaseStrategy: 'Active surplus',
+      phaseLabel: '第 4 阶段',
+      phaseStrategy: '主动盈余',
     },
   }
 
@@ -110,7 +110,7 @@ function getPhaseOneTwoDecision(weeklyAverageWeights) {
   if (weeklyAverageWeights.length < 3) {
     return {
       adjustmentDecision: 'observe-only',
-      adjustmentReason: 'Need at least 3 weekly averages before changing carbs.',
+      adjustmentReason: '至少记录 3 周周均体重后，再决定是否下调碳水。',
       carbAdjustmentPct: 0,
     }
   }
@@ -121,14 +121,14 @@ function getPhaseOneTwoDecision(weeklyAverageWeights) {
   if (rising) {
     return {
       adjustmentDecision: 'reduce-carbs',
-      adjustmentReason: 'The last 3 weekly averages kept rising, so next week carbs drop 10%.',
+      adjustmentReason: '最近 3 周的周均体重连续上升，下周建议把碳水下调 10%。',
       carbAdjustmentPct: -10,
     }
   }
 
   return {
     adjustmentDecision: 'hold',
-    adjustmentReason: 'Recent weekly averages are not rising 3 weeks in a row.',
+    adjustmentReason: '最近 3 周的周均体重没有连续上升，当前摄入先保持不变。',
     carbAdjustmentPct: 0,
   }
 }
@@ -137,7 +137,7 @@ function getPhaseThreeFourDecision({ weeklyAverageWeights, expLevel }) {
   if (weeklyAverageWeights.length < 2) {
     return {
       adjustmentDecision: 'observe-only',
-      adjustmentReason: 'Need at least 2 weekly averages before checking rate of gain.',
+      adjustmentReason: '至少记录 2 周周均体重后，才能判断增重速率是否超出阈值。',
       carbAdjustmentPct: 0,
       weeklyGainPct: null,
       weeklyGainThresholdPct: expLevel === 'Advanced' ? 0.25 : 0.5,
@@ -152,7 +152,7 @@ function getPhaseThreeFourDecision({ weeklyAverageWeights, expLevel }) {
   if (weeklyGainPct > weeklyGainThresholdPct) {
     return {
       adjustmentDecision: 'reduce-carbs',
-      adjustmentReason: 'Weekly gain is above the current threshold, so next week carbs drop 10%.',
+      adjustmentReason: '当前周增重速度高于阈值，下周建议把碳水下调 10%。',
       carbAdjustmentPct: -10,
       weeklyGainPct,
       weeklyGainThresholdPct,
@@ -161,7 +161,7 @@ function getPhaseThreeFourDecision({ weeklyAverageWeights, expLevel }) {
 
   return {
     adjustmentDecision: 'hold',
-    adjustmentReason: 'Weekly gain is within the current threshold.',
+    adjustmentReason: '当前周增重速度仍在阈值内，先维持现在的摄入。',
     carbAdjustmentPct: 0,
     weeklyGainPct,
     weeklyGainThresholdPct,
@@ -220,8 +220,8 @@ function applyCarbAdjustment(macroPlan, carbAdjustmentPct, calorieFloor, baseTar
     carbAdjustmentPct: actualReductionApplied ? carbAdjustmentPct : 0,
     adjustmentDecision: actualReductionApplied ? 'reduce-carbs' : 'hold',
     adjustmentReason: actualReductionApplied
-      ? 'Weekly trend still supports a carb reduction, but the calorie floor limits how far it can go.'
-      : 'A carb reduction would push intake below the calorie floor, so the current target stays in place.',
+      ? '周趋势仍支持下调碳水，但热量下限限制了本次可下调的幅度。'
+      : '如果继续下调碳水，摄入会低于热量下限，所以本周目标维持不变。',
   }
 }
 
@@ -239,15 +239,15 @@ export function buildLeanGainCalorieLogicPlan({
   if (!Number.isFinite(normalizedBodyFatPct) || normalizedBodyFatPct <= 0) {
     return {
       gateState: 'reminder',
-      title: 'Add body-fat first',
-      description: 'This logic needs body-fat percentage before it can assign a phase and intake target.',
+      title: '先补充体脂率',
+      description: '只有拿到体脂率，这套逻辑才能判断所处阶段并给出热量目标。',
       phase: null,
       phaseLabel: null,
       phaseStrategy: null,
       stages: [],
       carbAdjustmentPct: 0,
       adjustmentDecision: 'observe-only',
-      adjustmentReason: 'Body-fat percentage is required before the module can calculate a plan.',
+      adjustmentReason: '缺少体脂率时，模块无法计算阶段与计划。',
     }
   }
 
@@ -257,15 +257,15 @@ export function buildLeanGainCalorieLogicPlan({
   if (!safeTdee || !safeWeightKg) {
     return {
       gateState: 'incomplete',
-      title: 'Complete the core inputs first',
-      description: 'This logic needs both TDEE and body weight before it can build a calorie and macro plan.',
+      title: '先补全核心输入',
+      description: '只有同时具备 TDEE 和体重，这套逻辑才能生成热量与宏量营养建议。',
       phase: null,
       phaseLabel: null,
       phaseStrategy: null,
       stages: [],
       carbAdjustmentPct: 0,
       adjustmentDecision: 'observe-only',
-      adjustmentReason: 'Valid TDEE and body weight are required before the module can calculate a plan.',
+      adjustmentReason: '需要有效的 TDEE 和体重后，模块才能计算计划。',
     }
   }
 
@@ -299,7 +299,7 @@ export function buildLeanGainCalorieLogicPlan({
 
     return {
       stage: stageNumber,
-      label: `Phase ${stageNumber}`,
+      label: `第 ${stageNumber} 阶段`,
       baseTargetCalories,
       targetCalories: currentStageAdjustment.targetCalories,
       carbAdjustmentPct: currentStageAdjustment.carbAdjustmentPct,
