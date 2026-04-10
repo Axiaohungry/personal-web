@@ -8,13 +8,14 @@ import { campusCollaborationCase } from '../../src/data/projectCases/campusColla
 import { fitnessCoachingCase } from '../../src/data/projectCases/fitnessCoaching.js'
 
 function assertRouteBlock(routerFile, route, viewFile) {
-  const routeStart = routerFile.indexOf(`path: '${route}'`)
+  const normalizedRouterFile = routerFile.replace(/\r\n/g, '\n')
+  const routeStart = normalizedRouterFile.indexOf(`path: '${route}'`)
   assert.ok(routeStart >= 0, `Expected router to define ${route}`)
 
-  const nextRouteStart = routerFile.indexOf('\n    },\n    {', routeStart)
+  const nextRouteStart = normalizedRouterFile.indexOf('\n    },\n    {', routeStart)
   assert.ok(nextRouteStart > routeStart, `Expected ${route} to be isolated in a route block`)
 
-  const routeBlock = routerFile.slice(routeStart, nextRouteStart)
+  const routeBlock = normalizedRouterFile.slice(routeStart, nextRouteStart)
   assert.ok(
     routeBlock.includes(`Project${viewFile}`),
     `Expected ${route} to bind ${viewFile} within the same route block`
