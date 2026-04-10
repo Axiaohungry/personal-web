@@ -2,6 +2,7 @@
 import { computed, inject, nextTick, ref, watch } from 'vue'
 
 import { getGoalClampGuidance } from '@/utils/caloriePlanning.js'
+import { buildEmbeddedModuleContext, buildEmbeddedModuleQuery } from '@/utils/embeddedModuleContext.js'
 
 const props = defineProps({
   modules: {
@@ -46,8 +47,8 @@ const activeModule = computed(() => (
   props.modules.find((module) => module.routePath === props.activePath) || props.modules[0] || null
 ))
 
-const sharedModuleContext = computed(() => ({
-  ...props.context,
+const sharedModuleContext = computed(() => buildEmbeddedModuleContext({
+  context: props.context,
   goal: props.goal,
   weeks: props.weeks,
   targetKg: props.targetKg,
@@ -71,19 +72,11 @@ const targetKgHint = computed(() => {
 const iframeSrc = computed(() => {
   if (!activeModule.value) return ''
 
-  const search = new URLSearchParams({
+  const search = buildEmbeddedModuleQuery({
+    context: props.context,
     goal: props.goal,
-    sex: String(sharedModuleContext.value.sex ?? 'male'),
-    age: String(sharedModuleContext.value.age ?? 24),
-    heightCm: String(sharedModuleContext.value.heightCm ?? 175),
-    bodyFatPct: String(sharedModuleContext.value.bodyFatPct ?? 15),
-    bmr: String(sharedModuleContext.value.bmr ?? 1700),
-    weeks: String(props.weeks),
-    targetKg: String(props.targetKg),
-    tdee: String(sharedModuleContext.value.tdee ?? 0),
-    weightKg: String(sharedModuleContext.value.weightKg ?? 0),
-    currentCalories: String(sharedModuleContext.value.currentCalories ?? sharedModuleContext.value.tdee ?? 0),
-    embed: '1',
+    weeks: props.weeks,
+    targetKg: props.targetKg,
   })
 
   return `${activeModule.value.href}?${search.toString()}`
