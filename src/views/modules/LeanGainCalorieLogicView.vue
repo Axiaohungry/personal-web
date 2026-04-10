@@ -57,6 +57,10 @@ function formatDecision(value) {
   return decisionCopy[value] ?? decisionCopy['observe-only']
 }
 
+function formatContextMetric(value, suffix = '') {
+  return value === null || value === undefined ? '--' : `${value}${suffix}`
+}
+
 const draftWeight = computed(() => normalizePositiveNumber(weeklyAverageWeight.value))
 
 const recordedWeeklyWeights = computed(() =>
@@ -122,7 +126,7 @@ function recordWeeklyJudgment() {
   if (draftWeight.value === null) {
     feedback.value = {
       type: 'warning',
-      message: 'Enter this week’s average body weight before recording a judgment.',
+      message: "Enter this week's average body weight before recording a judgment.",
     }
     return
   }
@@ -190,11 +194,11 @@ function recordWeeklyJudgment() {
           </div>
           <div class="lean-gain-stat">
             <span class="lean-gain-stat__label">Body fat</span>
-            <strong>{{ state.bodyFatPct }}%</strong>
+            <strong>{{ formatContextMetric(state.bodyFatPct, '%') }}</strong>
           </div>
           <div class="lean-gain-stat">
             <span class="lean-gain-stat__label">BMR</span>
-            <strong>{{ state.bmr }} kcal</strong>
+            <strong>{{ formatContextMetric(state.bmr, ' kcal') }}</strong>
           </div>
           <div class="lean-gain-stat">
             <span class="lean-gain-stat__label">TDEE</span>
@@ -206,7 +210,7 @@ function recordWeeklyJudgment() {
       <section class="module-section">
         <h2>Weekly calibration</h2>
         <p class="module-copy">
-          Pick the training experience that matches the current phase, enter this week’s average body weight, then store the judgment so next week has real context.
+          Pick the training experience that matches the current phase, enter this week's average body weight, then store the judgment so next week has real context.
         </p>
 
         <div class="lean-gain-controls">
@@ -375,8 +379,8 @@ function recordWeeklyJudgment() {
               <a-tag>{{ entry.phaseLabel }}</a-tag>
             </div>
             <p>
-              {{ entry.expLevel }} ·
-              {{ entry.weeklyAverageWeight ?? '--' }} kg ·
+              {{ entry.expLevel }} /
+              {{ entry.weeklyAverageWeight ?? '--' }} kg /
               {{ entry.targetCalories ?? '--' }} kcal
             </p>
             <p>{{ formatDecision(entry.adjustmentDecision) }}</p>

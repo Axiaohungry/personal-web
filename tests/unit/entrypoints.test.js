@@ -2,7 +2,9 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import { access, readFile } from 'node:fs/promises'
 
+import { buildLeanGainCalorieLogicPlan } from '../../src/utils/leanGainCalorieLogic.js'
 import { buildEmbeddedModuleContext, buildEmbeddedModuleQuery } from '../../src/utils/embeddedModuleContext.js'
+import { createEmbeddedModuleInitialState } from '../../src/hooks/useEmbeddedModuleState.js'
 
 test('vite entry loads the root main bootstrap', async () => {
   const html = await readFile(new URL('../../index.html', import.meta.url), 'utf8')
@@ -98,4 +100,16 @@ test('lean-gain module page keeps neutral copy and avoids re-appending a just-sa
   assert.doesNotMatch(leanGainView, /for \$\{titleSuffix\}/)
   assert.doesNotMatch(leanGainView, /{{ state\.goal === 'gain' \? 'Gain' : 'Cut' }}/)
   assert.match(leanGainView, /weeklyAverageWeight\.value = null/)
+})
+
+test('empty embedded context defaults keep lean-gain in reminder state instead of producing actionable guidance', () => {
+  const initialState = createEmbeddedModuleInitialState()
+  const plan = buildLeanGainCalorieLogicPlan(initialState)
+
+  assert.equal(initialState.bodyFatPct, null)
+  assert.equal(initialState.bmr, null)
+  assert.equal(initialState.currentCalories, null)
+  assert.equal(plan.gateState, 'reminder')
+  assert.equal(plan.phase, null)
+  assert.equal(plan.targetCalories, undefined)
 })

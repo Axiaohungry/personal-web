@@ -15,21 +15,25 @@ function normalizeNumber(value, fallback) {
   return Number.isFinite(parsed) ? parsed : fallback
 }
 
-export function useEmbeddedModuleState() {
-  const route = useRoute()
-  const state = reactive({
+export function createEmbeddedModuleInitialState() {
+  return {
     age: 24,
     heightCm: 175,
-    bodyFatPct: 15,
-    bmr: 1700,
-    currentCalories: 2200,
+    bodyFatPct: null,
+    bmr: null,
+    currentCalories: null,
     sex: 'male',
     goal: 'cut',
     weeks: 8,
     targetKg: 3,
     tdee: 2200,
     weightKg: 70,
-  })
+  }
+}
+
+export function useEmbeddedModuleState() {
+  const route = useRoute()
+  const state = reactive(createEmbeddedModuleInitialState())
 
   function applyPayload(payload = {}) {
     state.goal = normalizeGoal(payload.goal ?? state.goal)
@@ -82,7 +86,7 @@ export function useEmbeddedModuleState() {
     window.removeEventListener('message', handleMessage)
   })
 
-  const titleSuffix = computed(() => (state.goal === 'cut' ? '减脂' : '增肌'))
+  const titleSuffix = computed(() => (state.goal === 'cut' ? '\u51cf\u8102' : '\u589e\u808c'))
 
   return {
     state,
