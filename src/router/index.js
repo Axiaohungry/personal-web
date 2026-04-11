@@ -50,6 +50,11 @@ const router = createRouter({
       component: () => import('@/views/modules/LeanGainCalorieLogicView.vue'),
     },
     {
+      path: '/fitness/modules/fenjue-training-system',
+      name: 'fitness-fenjue-training-system',
+      component: () => import('@/views/modules/FenjueTrainingSystemView.vue'),
+    },
+    {
       path: '/projects/approval-map-workflow',
       alias: ['/projects/approval-map-workflow/'],
       name: 'project-approval-map-workflow',

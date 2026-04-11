@@ -108,6 +108,11 @@ const modules = [
     routePath: '/fitness/modules/lean-gain-calorie-logic',
   },
   {
+    title: '谭成义焚诀训练体系',
+    summary: '把原则、热身、分部位训练、风险修正和新手四周计划收成一套更容易进入的训练地图。',
+    routePath: '/fitness/modules/fenjue-training-system',
+  },
+  {
     title: '补剂库',
     summary: '把补剂、优先级、剂量和证据放到一页里看清楚。',
     routePath: '/fitness/modules/supplement-library',

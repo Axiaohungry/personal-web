@@ -373,7 +373,7 @@ watch(
 .modules-frame__iframe {
   display: block;
   width: 100%;
-  min-height: 1120px;
+  height: 1120px;
   border: 0;
   background: transparent;
 }
@@ -417,7 +417,7 @@ watch(
   }
 
   .modules-frame__iframe {
-    min-height: 1320px;
+    height: 1320px;
   }
 }
 </style>

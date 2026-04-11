@@ -26,6 +26,34 @@ test('lean-gain module page file exists', async () => {
   await access(new URL('../../src/views/modules/LeanGainCalorieLogicView.vue', import.meta.url))
 })
 
+test('router exposes the fenjue module as a lazy-loaded dedicated view', async () => {
+  const routerFile = await readFile(new URL('../../src/router/index.js', import.meta.url), 'utf8')
+
+  assert.match(
+    routerFile,
+    /path:\s*'\/fitness\/modules\/fenjue-training-system'[\s\S]*?component:\s*\(\)\s*=>\s*import\(['"]@\/views\/modules\/FenjueTrainingSystemView\.vue['"]\)/
+  )
+})
+
+test('fenjue module page file exists', async () => {
+  await access(new URL('../../src/views/modules/FenjueTrainingSystemView.vue', import.meta.url))
+})
+
+test('fitness workbench exposes the fenjue module entry', async () => {
+  const fitnessView = await readFile(new URL('../../src/views/FitnessView.vue', import.meta.url), 'utf8')
+
+  assert.match(fitnessView, /title:\s*['"]谭成义焚诀训练体系['"]/)
+  assert.match(fitnessView, /routePath:\s*['"]\/fitness\/modules\/fenjue-training-system['"]/)
+})
+
+test('embedded module frame keeps a fixed viewport height instead of growing with content sections', async () => {
+  const modulesView = await readFile(new URL('../../src/components/FutureModules.vue', import.meta.url), 'utf8')
+
+  assert.match(modulesView, /\.modules-frame__iframe\s*\{[\s\S]*height:\s*1120px;/)
+  assert.match(modulesView, /@media\s*\(max-width:\s*720px\)\s*\{[\s\S]*\.modules-frame__iframe\s*\{[\s\S]*height:\s*1320px;/)
+  assert.doesNotMatch(modulesView, /\.modules-frame__iframe\s*\{[\s\S]*min-height:\s*1120px;/)
+})
+
 test('embedded module serialization preserves the shared context contract and missing body-fat state', async () => {
   const fitnessView = await readFile(new URL('../../src/views/FitnessView.vue', import.meta.url), 'utf8')
 
