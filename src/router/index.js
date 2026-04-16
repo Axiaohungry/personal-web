@@ -61,6 +61,12 @@ const router = createRouter({
       component: () => import('@/views/projects/ProjectApprovalMapWorkflowView.vue'),
     },
     {
+      path: '/projects/approval-map-workflow/static-pages',
+      alias: ['/projects/approval-map-workflow/static-pages/'],
+      name: 'project-approval-map-workflow-static-pages',
+      component: () => import('@/views/government-approval/GovernmentApprovalStaticPagesView.vue'),
+    },
+    {
       path: '/projects/campus-collaboration',
       alias: ['/projects/campus-collaboration/'],
       name: 'project-campus-collaboration',

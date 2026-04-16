@@ -88,19 +88,19 @@ export const approvalMapWorkflowCase = {
       title: '原始 4 端流转痛点',
       src: approvalMapWorkflowAssets.painpointFlow,
       detail: '展示办文人员在 4 个业务界面之间来回切换的原始链路，用于说明操作冗余从何而来。',
-      note: '临时安全占位图，后续可替换为真实流程或业务截图。',
+      note: '安全占位图，因涉及到保密数据无法展示。',
     },
     {
       title: '4 合 1 聚合工作视图',
       src: approvalMapWorkflowAssets.formMapUnifiedUi,
       detail: '将审批所需核心信息收束到单页视图中，减少跳转、核对和上下文丢失。',
-      note: '临时安全占位图，后续可替换为真实界面裁切图。',
+      note: '安全占位图，因涉及到保密数据无法展示。',
     },
     {
       title: '接口聚合与验收片段',
       src: approvalMapWorkflowAssets.acceptanceFragment,
       detail: '对应 4 接口 -> 1 聚合接口与表单自动预填后的交付片段，帮助说明技术方案与业务收益如何闭环。',
-      note: '临时安全占位图，后续可替换为真实验收或接口联调材料。',
+      note: '安全占位图，因涉及到保密数据无法展示。',
     },
   ],
   outcomesSection: {

@@ -9,6 +9,20 @@ const page = approvalMapWorkflowCase
 
 <template>
   <ProjectCaseShell class="project-case-approval-map-view" :hero="page.hero" variant="approval-map">
+    <div class="project-case-approval__static-pages-entry">
+      <div class="project-case-approval__static-pages-copy">
+        <RouterLink
+          class="project-case-approval__static-pages-link"
+          to="/projects/approval-map-workflow/static-pages"
+        >
+          查看静态页面解析
+        </RouterLink>
+        <p class="project-case-approval__static-pages-note">
+          因保密原因，只能展示模拟静态前端页面。
+        </p>
+      </div>
+    </div>
+
     <ProjectCaseSection
       class="project-case-approval__stage project-case-approval__stage--bare"
       variant="bare"
@@ -172,6 +186,49 @@ const page = approvalMapWorkflowCase
   font-size: clamp(2.7rem, 6vw, 5.4rem);
   line-height: 0.94;
   letter-spacing: -0.06em;
+}
+
+.project-case-approval__static-pages-entry {
+  display: flex;
+  justify-content: flex-start;
+  padding: 0.15rem 0.25rem 0;
+}
+
+.project-case-approval__static-pages-copy {
+  display: grid;
+  gap: 0.45rem;
+  justify-items: start;
+}
+
+.project-case-approval__static-pages-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.72rem 0.95rem;
+  border: 1px solid color-mix(in srgb, var(--line) 82%, var(--accent) 18%);
+  border-radius: var(--radius-md);
+  color: var(--text);
+  background: color-mix(in srgb, var(--panel-soft) 92%, white 8%);
+  text-decoration: none;
+  line-height: 1;
+  transition:
+    transform var(--duration-fast) var(--ease-out-quint),
+    border-color var(--duration-fast) var(--ease-out-quart),
+    background-color var(--duration-base) var(--ease-out-quart);
+}
+
+.project-case-approval__static-pages-link:hover,
+.project-case-approval__static-pages-link:focus-visible {
+  transform: translateY(-1px);
+  border-color: color-mix(in srgb, var(--accent) 46%, var(--line));
+  background: color-mix(in srgb, var(--panel-soft) 84%, var(--accent-soft) 16%);
+}
+
+.project-case-approval__static-pages-note {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
 }
 
 .project-case-approval__stage {
