@@ -5,6 +5,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 import { handleNodeSearchRequest, sendJson } from './fitnessGemini.js'
+import { handleNodeAiNewsRequest } from './aiNewsGemini.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const DEFAULT_DIST_ROOT = path.resolve(__dirname, '..', 'dist')
@@ -50,6 +51,14 @@ export function resolveRequestTarget(rawPathname) {
 
   if (pathname === '/api/fitness/supplement-search') {
     return { kind: 'api', apiKind: 'supplement' }
+  }
+
+  if (pathname === '/api/fitness/assistant') {
+    return { kind: 'api', apiKind: 'fitness-assistant' }
+  }
+
+  if (pathname === '/api/ai/news-brief') {
+    return { kind: 'api', apiKind: 'ai-news' }
   }
 
   if (pathname.includes('..')) {
@@ -182,7 +191,16 @@ export function createHttpHandler(options = {}) {
         return proxyApiRequest(req, res, executionMode.url, fetchImpl)
       }
 
-      return handleNodeSearchRequest(req, res, target.apiKind, options)
+      if (target.apiKind === 'ai-news') {
+        return handleNodeAiNewsRequest(req, res, options)
+      }
+
+      if (target.apiKind === 'food' || target.apiKind === 'supplement') {
+        return handleNodeSearchRequest(req, res, target.apiKind, options)
+      }
+
+      return sendJson(res, 404, { error: 'Not found.' })
+
     }
 
     if (target.kind === 'asset') {
