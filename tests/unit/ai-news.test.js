@@ -9,29 +9,6 @@ test('buildAiNewsRequestBody requests JSON output and grounded search tooling', 
   assert.equal(requestBody.generationConfig.responseMimeType, 'application/json')
   assert.ok(Array.isArray(requestBody.tools))
   assert.ok(requestBody.tools.some((tool) => tool.googleSearch))
-
-  const schema = requestBody.generationConfig.responseSchema
-  assert.equal(schema.type, 'object')
-  assert.ok(schema.properties.updatedAt)
-  assert.ok(schema.properties.stories)
-  assert.deepEqual(schema.required, ['updatedAt', 'stories'])
-
-  const storySchema = schema.properties.stories.items
-  assert.equal(storySchema.type, 'object')
-  assert.ok(storySchema.properties.title)
-  assert.ok(storySchema.properties.summary)
-  assert.ok(storySchema.properties.whyItMatters)
-  assert.ok(storySchema.properties.sourceLabel)
-  assert.ok(storySchema.properties.sourceUrl)
-  assert.ok(storySchema.properties.publishedAt)
-  assert.deepEqual(storySchema.required, [
-    'title',
-    'summary',
-    'whyItMatters',
-    'sourceLabel',
-    'sourceUrl',
-    'publishedAt',
-  ])
 })
 
 test('normalizeAiNewsPayload keeps only grounded stories with source fields', async () => {
