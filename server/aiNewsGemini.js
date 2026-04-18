@@ -67,6 +67,44 @@ function isValidStory(story) {
   )
 }
 
+function buildAiNewsResponseSchema() {
+  return {
+    type: 'object',
+    additionalProperties: false,
+    properties: {
+      updatedAt: {
+        type: 'string',
+        format: 'date-time',
+      },
+      stories: {
+        type: 'array',
+        maxItems: 3,
+        items: {
+          type: 'object',
+          additionalProperties: false,
+          properties: {
+            title: { type: 'string' },
+            summary: { type: 'string' },
+            whyItMatters: { type: 'string' },
+            sourceLabel: { type: 'string' },
+            sourceUrl: { type: 'string' },
+            publishedAt: { type: 'string', format: 'date-time' },
+          },
+          required: [
+            'title',
+            'summary',
+            'whyItMatters',
+            'sourceLabel',
+            'sourceUrl',
+            'publishedAt',
+          ],
+        },
+      },
+    },
+    required: ['updatedAt', 'stories'],
+  }
+}
+
 function normalizeStory(story) {
   if (!isValidStory(story)) {
     return null
@@ -131,6 +169,7 @@ function extractJsonPayload(text) {
 
 export function buildAiNewsRequestBody(nowIso) {
   const currentIso = isValidIsoDate(nowIso) ? cleanText(nowIso) : new Date().toISOString()
+  const responseJsonSchema = buildAiNewsResponseSchema()
 
   return {
     systemInstruction: {
@@ -165,6 +204,7 @@ export function buildAiNewsRequestBody(nowIso) {
     generationConfig: {
       temperature: 0.2,
       responseMimeType: 'application/json',
+      responseJsonSchema,
     },
   }
 }
@@ -174,6 +214,7 @@ export function normalizeAiNewsPayload(payload) {
   const stories = toStories(payload)
     .map(normalizeStory)
     .filter(Boolean)
+    .slice(0, 3)
 
   const normalized = {
     stories,
@@ -252,6 +293,10 @@ async function fetchGeminiJson(requestBody, options = {}) {
   return extractJsonPayload(extractCandidateText(payload))
 }
 
+function createStableAiNewsError() {
+  return createHttpError(502, 'Unable to refresh AI news right now.')
+}
+
 export async function fetchAiNewsBrief(options = {}) {
   const cache = options.cache || null
   const now = options.now || (() => Date.now())
@@ -280,7 +325,9 @@ export async function fetchAiNewsBrief(options = {}) {
       return staleValue
     }
 
-    throw error
+    const stableError = createStableAiNewsError()
+    stableError.cause = error
+    throw stableError
   }
 }
 
