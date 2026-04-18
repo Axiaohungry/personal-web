@@ -1,15 +1,41 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 
-test('buildAiNewsRequestBody uses nowIso and normalizeAiNewsPayload keeps stories centered', async () => {
-  const { buildAiNewsRequestBody, normalizeAiNewsPayload } = await import('../../server/aiNewsGemini.js')
+test('buildAiNewsRequestBody requests JSON output and grounded search tooling', async () => {
+  const { buildAiNewsRequestBody } = await import('../../server/aiNewsGemini.js')
 
-  const nowIso = '2026-04-18T08:00:00.000Z'
-  const requestBody = buildAiNewsRequestBody(nowIso)
+  const requestBody = buildAiNewsRequestBody('2026-04-18T08:00:00.000Z')
 
   assert.equal(requestBody.generationConfig.responseMimeType, 'application/json')
-  assert.match(requestBody.systemInstruction.parts[0].text, /updatedAt/i)
-  assert.match(requestBody.contents[0].parts[0].text, /2026-04-18T08:00:00\.000Z/)
+  assert.ok(Array.isArray(requestBody.tools))
+  assert.ok(requestBody.tools.some((tool) => tool.googleSearch))
+
+  const schema = requestBody.generationConfig.responseSchema
+  assert.equal(schema.type, 'object')
+  assert.ok(schema.properties.updatedAt)
+  assert.ok(schema.properties.stories)
+  assert.deepEqual(schema.required, ['updatedAt', 'stories'])
+
+  const storySchema = schema.properties.stories.items
+  assert.equal(storySchema.type, 'object')
+  assert.ok(storySchema.properties.title)
+  assert.ok(storySchema.properties.summary)
+  assert.ok(storySchema.properties.whyItMatters)
+  assert.ok(storySchema.properties.sourceLabel)
+  assert.ok(storySchema.properties.sourceUrl)
+  assert.ok(storySchema.properties.publishedAt)
+  assert.deepEqual(storySchema.required, [
+    'title',
+    'summary',
+    'whyItMatters',
+    'sourceLabel',
+    'sourceUrl',
+    'publishedAt',
+  ])
+})
+
+test('normalizeAiNewsPayload keeps only grounded stories with source fields', async () => {
+  const { normalizeAiNewsPayload } = await import('../../server/aiNewsGemini.js')
 
   const normalized = normalizeAiNewsPayload({
     updatedAt: '2026-04-18T08:00:00.000Z',

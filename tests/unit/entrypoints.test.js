@@ -14,13 +14,13 @@ test('vite entry loads the root main bootstrap', async () => {
 test('home view imports or renders the AI news brief', async () => {
   const homeView = await readFile(new URL('../../src/views/HomeView.vue', import.meta.url), 'utf8')
 
-  assert.match(homeView, /AiNewsBrief/)
+  assert.match(homeView, /<AiNewsBrief\b/)
 })
 
 test('fitness view imports or renders the fitness assistant panel', async () => {
   const fitnessView = await readFile(new URL('../../src/views/FitnessView.vue', import.meta.url), 'utf8')
 
-  assert.match(fitnessView, /FitnessAssistantPanel/)
+  assert.match(fitnessView, /<FitnessAssistantPanel\b/)
 })
 
 test('router exposes the lean-gain module as a lazy-loaded dedicated view', async () => {
