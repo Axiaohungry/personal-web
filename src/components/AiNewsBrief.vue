@@ -5,6 +5,7 @@ const loading = ref(true)
 const error = ref('')
 const updatedAt = ref('')
 const stories = ref([])
+const requestSequence = ref(0)
 
 const timestampLabel = computed(() => {
   if (!updatedAt.value) {
@@ -26,6 +27,12 @@ const displayStories = computed(() => stories.value.slice(0, 3))
 const firstStorySourceUrl = computed(() => displayStories.value[0]?.sourceUrl || '')
 const hasSourceAction = computed(() => Boolean(firstStorySourceUrl.value))
 
+function storyVariantClass(index) {
+  if (index === 0) return 'ai-news-brief__story-card--lead'
+  if (index === 1) return 'ai-news-brief__story-card--secondary'
+  return 'ai-news-brief__story-card--tertiary'
+}
+
 function formatPublishedAt(value) {
   if (!value) return ''
 
@@ -43,6 +50,7 @@ function formatPublishedAt(value) {
 }
 
 async function loadBrief() {
+  const requestId = ++requestSequence.value
   loading.value = true
   error.value = ''
 
@@ -53,20 +61,34 @@ async function loadBrief() {
       },
     })
 
+    if (requestId !== requestSequence.value) {
+      return
+    }
+
     if (!response.ok) {
       throw new Error('Request failed.')
     }
 
     const payload = await response.json()
 
+    if (requestId !== requestSequence.value) {
+      return
+    }
+
     updatedAt.value = typeof payload?.updatedAt === 'string' ? payload.updatedAt : ''
     stories.value = Array.isArray(payload?.stories) ? payload.stories.slice(0, 3) : []
   } catch {
+    if (requestId !== requestSequence.value) {
+      return
+    }
+
     stories.value = []
     updatedAt.value = ''
     error.value = '暂时无法加载最新动态，请稍后再试。'
   } finally {
-    loading.value = false
+    if (requestId === requestSequence.value) {
+      loading.value = false
+    }
   }
 }
 
@@ -138,9 +160,10 @@ onMounted(() => {
 
       <template v-else>
         <a-card
-          v-for="story in displayStories"
+          v-for="(story, index) in displayStories"
           :key="`${story.title}-${story.publishedAt}`"
           class="ai-news-brief__story-card ant-surface-card"
+          :class="storyVariantClass(index)"
           :bordered="false"
         >
           <p class="ai-news-brief__story-label">{{ story.sourceLabel }}</p>

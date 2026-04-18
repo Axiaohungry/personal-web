@@ -104,13 +104,13 @@
     linear-gradient(180deg, color-mix(in srgb, var(--panel) 88%, var(--accent-soft) 12%), var(--panel));
 }
 
-.ai-news-brief__story-card.ant-card:nth-child(2) {
+.ai-news-brief__story-card--secondary.ant-card {
   border-color: color-mix(in srgb, var(--line) 66%, var(--teal) 34%);
   background:
     linear-gradient(180deg, color-mix(in srgb, var(--panel) 88%, var(--teal-soft) 12%), var(--panel));
 }
 
-.ai-news-brief__story-card.ant-card:nth-child(3) {
+.ai-news-brief__story-card--tertiary.ant-card {
   border-color: color-mix(in srgb, var(--line) 66%, var(--gold) 34%);
   background:
     linear-gradient(180deg, color-mix(in srgb, var(--panel) 88%, var(--gold-soft) 12%), var(--panel));
