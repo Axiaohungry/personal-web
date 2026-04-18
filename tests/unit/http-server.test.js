@@ -17,6 +17,16 @@ test('resolveRequestTarget routes fitness API endpoints explicitly', () => {
     kind: 'api',
     apiKind: 'supplement',
   })
+
+  assert.deepEqual(resolveRequestTarget('/api/ai/news-brief'), {
+    kind: 'api',
+    apiKind: 'ai-news',
+  })
+
+  assert.deepEqual(resolveRequestTarget('/api/fitness/assistant'), {
+    kind: 'api',
+    apiKind: 'fitness-assistant',
+  })
 })
 
 test('resolveRequestTarget serves static assets by relative dist path', () => {
