@@ -1,4 +1,5 @@
 <script setup>
+import AiNewsBrief from '@/components/AiNewsBrief.vue'
 import ContentSection from '@/components/ContentSection.vue'
 import HomeHero from '@/components/HomeHero.vue'
 import SiteHeader from '@/components/SiteHeader.vue'
@@ -72,6 +73,8 @@ const narrativeCards = [
           :featured-signals="featuredSignals"
         />
       </section>
+
+      <AiNewsBrief />
 
       <section class="home-page__body-shell home-page__body-shell--dossier shell-surface motion-rise motion-rise--2">
         <section class="home-overview">
