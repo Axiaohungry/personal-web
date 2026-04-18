@@ -18,6 +18,12 @@ function createHttpError(statusCode, message) {
   return error
 }
 
+function createRetryableHttpError(statusCode, message) {
+  const error = createHttpError(statusCode, message)
+  error.retryable = true
+  return error
+}
+
 function cleanText(value) {
   return typeof value === 'string' ? value.trim() : ''
 }
@@ -163,7 +169,7 @@ function extractJsonPayload(text) {
       }
     }
 
-    throw createHttpError(502, `Gemini returned invalid JSON: ${firstError.message}`)
+    throw createHttpError(502, 'Unable to refresh AI news right now.')
   }
 }
 
@@ -275,18 +281,27 @@ async function fetchGeminiJson(requestBody, options = {}) {
     throw createHttpError(500, 'Missing GEMINI_API_KEY configuration.')
   }
 
-  const response = await fetchImpl(`${GEMINI_API_ROOT}/models/${model}:generateContent`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-goog-api-key': apiKey,
-    },
-    body: JSON.stringify(requestBody),
-  })
+  let response
+
+  try {
+    response = await fetchImpl(`${GEMINI_API_ROOT}/models/${model}:generateContent`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-goog-api-key': apiKey,
+      },
+      body: JSON.stringify(requestBody),
+    })
+  } catch {
+    throw createRetryableHttpError(502, 'Gemini upstream unavailable.')
+  }
 
   if (!response.ok) {
-    const errorText = await response.text()
-    throw createHttpError(502, `Gemini request failed: ${response.status} ${errorText}`.trim())
+    if (response.status >= 500 || response.status === 429 || response.status === 408) {
+      throw createRetryableHttpError(502, 'Gemini upstream unavailable.')
+    }
+
+    throw createHttpError(502, 'Unable to refresh AI news right now.')
   }
 
   const payload = await response.json()
@@ -321,7 +336,7 @@ export async function fetchAiNewsBrief(options = {}) {
   } catch (error) {
     const staleValue = cache?.getStaleValue?.()
 
-    if (staleValue) {
+    if (staleValue && error?.retryable) {
       return staleValue
     }
 
@@ -336,6 +351,12 @@ export async function handleNodeAiNewsRequest(req, res, options = {}) {
     return sendJson(res, 405, { error: 'Method not allowed.' })
   }
 
+  if ((req.method || 'GET') === 'HEAD') {
+    res.statusCode = 200
+    res.setHeader('Content-Type', 'application/json; charset=utf-8')
+    return res.end()
+  }
+
   try {
     const url = new URL(req.url || '/', 'http://127.0.0.1')
     const nowIso = url.searchParams.get('nowIso') || new Date().toISOString()
@@ -343,12 +364,6 @@ export async function handleNodeAiNewsRequest(req, res, options = {}) {
       ...options,
       nowIso,
     })
-
-    if ((req.method || 'GET') === 'HEAD') {
-      res.statusCode = 200
-      res.setHeader('Content-Type', 'application/json; charset=utf-8')
-      return res.end()
-    }
 
     return sendJson(res, 200, payload)
   } catch (error) {

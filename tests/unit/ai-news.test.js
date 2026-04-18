@@ -12,6 +12,40 @@ test('buildAiNewsRequestBody requests JSON output and grounded search tooling', 
   assert.ok(requestBody.tools.some((tool) => tool.googleSearch))
 })
 
+test('handleNodeAiNewsRequest short-circuits HEAD before fetch work', async () => {
+  const { handleNodeAiNewsRequest } = await import('../../server/aiNewsGemini.js')
+
+  let fetchCalls = 0
+  let ended = false
+  const response = {
+    statusCode: 0,
+    headers: {},
+    setHeader(name, value) {
+      this.headers[name] = value
+    },
+    end() {
+      ended = true
+    },
+  }
+
+  await handleNodeAiNewsRequest(
+    { method: 'HEAD', url: '/api/ai-news' },
+    response,
+    {
+      apiKey: 'test-key',
+      fetchImpl: async () => {
+        fetchCalls += 1
+        throw new Error('should not run')
+      },
+    }
+  )
+
+  assert.equal(fetchCalls, 0)
+  assert.equal(ended, true)
+  assert.equal(response.statusCode, 200)
+  assert.equal(response.headers['Content-Type'], 'application/json; charset=utf-8')
+})
+
 test('normalizeAiNewsPayload keeps only grounded stories with source fields', async () => {
   const { normalizeAiNewsPayload } = await import('../../server/aiNewsGemini.js')
 
@@ -84,6 +118,99 @@ test('normalizeAiNewsPayload keeps only grounded stories with source fields', as
   })
 })
 
+test('fetchAiNewsBrief serves stale cache for retryable upstream errors', async () => {
+  const { createAiNewsCache, fetchAiNewsBrief } = await import('../../server/aiNewsGemini.js')
+
+  let currentTime = 1000
+  const cache = createAiNewsCache({ ttlMs: 1, now: () => currentTime })
+  cache.set({
+    updatedAt: '2026-04-18T08:00:00.000Z',
+    stories: [
+      {
+        title: 'Cached story',
+        summary: 'Cached summary.',
+        whyItMatters: 'Cached reason.',
+        sourceLabel: 'Reuters',
+        sourceUrl: 'https://example.com/cached-story',
+        publishedAt: '2026-04-18T07:30:00.000Z',
+      },
+    ],
+  })
+  currentTime = 1005
+
+  const result = await fetchAiNewsBrief({
+    apiKey: 'test-key',
+    cache,
+    fetchImpl: async () => {
+      throw new TypeError('fetch failed')
+    },
+  })
+
+  assert.deepEqual(result, {
+    updatedAt: '2026-04-18T08:00:00.000Z',
+    stories: [
+      {
+        title: 'Cached story',
+        summary: 'Cached summary.',
+        whyItMatters: 'Cached reason.',
+        sourceLabel: 'Reuters',
+        sourceUrl: 'https://example.com/cached-story',
+        publishedAt: '2026-04-18T07:30:00.000Z',
+      },
+    ],
+  })
+})
+
+test('fetchAiNewsBrief rejects malformed upstream payloads with a stable fallback message', async () => {
+  const { createAiNewsCache, fetchAiNewsBrief } = await import('../../server/aiNewsGemini.js')
+
+  let currentTime = 1000
+  const cache = createAiNewsCache({ ttlMs: 1, now: () => currentTime })
+  cache.set({
+    updatedAt: '2026-04-18T08:00:00.000Z',
+    stories: [
+      {
+        title: 'Cached story',
+        summary: 'Cached summary.',
+        whyItMatters: 'Cached reason.',
+        sourceLabel: 'Reuters',
+        sourceUrl: 'https://example.com/cached-story',
+        publishedAt: '2026-04-18T07:30:00.000Z',
+      },
+    ],
+  })
+  currentTime = 1005
+
+  await assert.rejects(
+    () =>
+      fetchAiNewsBrief({
+        apiKey: 'test-key',
+        cache,
+        fetchImpl: async () =>
+          new Response(
+            JSON.stringify({
+              candidates: [
+                {
+                  content: {
+                    parts: [
+                      {
+                        text: 'not-json',
+                      },
+                    ],
+                  },
+                },
+              ],
+            }),
+            {
+              status: 200,
+              headers: { 'Content-Type': 'application/json' },
+            }
+          ),
+      }),
+    /Unable to refresh AI news right now\./
+  )
+})
+
 test('fetchAiNewsBrief throws a stable fallback message without stale cache', async () => {
   const { fetchAiNewsBrief } = await import('../../server/aiNewsGemini.js')
 
@@ -91,11 +218,9 @@ test('fetchAiNewsBrief throws a stable fallback message without stale cache', as
     () =>
       fetchAiNewsBrief({
         apiKey: 'test-key',
-        fetchImpl: async () =>
-          new Response('upstream exploded', {
-            status: 500,
-            headers: { 'Content-Type': 'text/plain' },
-          }),
+        fetchImpl: async () => {
+          throw new TypeError('fetch failed')
+        },
       }),
     /Unable to refresh AI news right now\./
   )
