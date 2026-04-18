@@ -8,7 +8,7 @@ const stories = ref([])
 
 const timestampLabel = computed(() => {
   if (!updatedAt.value) {
-    return loading.value ? '正在刷新' : '暂无更新时间'
+    return loading.value ? '正在更新' : '暂无更新时间'
   }
 
   try {
@@ -23,6 +23,8 @@ const timestampLabel = computed(() => {
 })
 
 const displayStories = computed(() => stories.value.slice(0, 3))
+const firstStorySourceUrl = computed(() => displayStories.value[0]?.sourceUrl || '')
+const hasSourceAction = computed(() => Boolean(firstStorySourceUrl.value))
 
 function formatPublishedAt(value) {
   if (!value) return ''
@@ -62,7 +64,7 @@ async function loadBrief() {
   } catch {
     stories.value = []
     updatedAt.value = ''
-    error.value = 'AI 新闻简报暂时无法加载。'
+    error.value = '暂时无法加载最新动态，请稍后再试。'
   } finally {
     loading.value = false
   }
@@ -80,10 +82,10 @@ onMounted(() => {
 <template>
   <section class="ai-news-brief shell-surface motion-rise motion-rise--2">
     <div class="ai-news-brief__copy">
-      <p class="ai-news-brief__eyebrow">AI News</p>
-      <h2 class="ai-news-brief__title">首页 AI 简报</h2>
+      <p class="ai-news-brief__eyebrow">AI 最新动态</p>
+      <h2 class="ai-news-brief__title">AI 最新动态</h2>
       <p class="ai-news-brief__summary">
-        从公开来源提炼三条最新 AI 动态，帮助你快速判断行业变化是否值得继续跟进。
+        从公开来源整理三条最新 AI 变化，帮助你快速判断哪些信息值得继续关注。
       </p>
 
       <p class="ai-news-brief__timestamp">
@@ -93,22 +95,30 @@ onMounted(() => {
 
       <div class="ai-news-brief__actions">
         <a-button type="primary" size="large" :loading="loading" @click="refreshBrief">
-          刷新简报
+          刷新动态
         </a-button>
-        <a-button size="large" href="/fitness/">打开健身工具</a-button>
+        <a-button
+          v-if="hasSourceAction"
+          size="large"
+          :href="firstStorySourceUrl"
+          target="_blank"
+          rel="noreferrer"
+        >
+          查看来源
+        </a-button>
       </div>
     </div>
 
-    <div class="ai-news-brief__stories" aria-label="AI news stories">
+    <div class="ai-news-brief__stories" aria-label="AI 最新动态">
       <a-card
         v-if="error"
         class="ai-news-brief__fallback ant-surface-card"
         :bordered="false"
       >
-        <p class="ai-news-brief__story-label">更新失败</p>
-        <h3 class="ai-news-brief__story-title">暂时无法加载最新 AI 简报</h3>
+        <p class="ai-news-brief__story-label">更新状态</p>
+        <h3 class="ai-news-brief__story-title">暂时无法获取最新动态</h3>
         <p class="ai-news-brief__story-summary">{{ error }}</p>
-        <p class="ai-news-brief__story-note">请稍后再试，或直接手动刷新这一模块。</p>
+        <p class="ai-news-brief__story-note">你可以稍后重新刷新，等接口恢复后再查看三条精选动态。</p>
         <a-button type="link" class="ai-news-brief__retry" @click="refreshBrief">
           重新加载
         </a-button>
@@ -120,9 +130,9 @@ onMounted(() => {
         :bordered="false"
       >
         <p class="ai-news-brief__story-label">加载中</p>
-        <h3 class="ai-news-brief__story-title">正在整理最新 AI 报道</h3>
+        <h3 class="ai-news-brief__story-title">正在整理最新动态</h3>
         <p class="ai-news-brief__story-summary">
-          我们正在从同源接口读取最新简报，完成后这里会显示三条精选故事。
+          我们正在从同源接口读取最新内容，准备好后这里会显示三条精选动态。
         </p>
       </a-card>
 
@@ -146,7 +156,7 @@ onMounted(() => {
               target="_blank"
               rel="noreferrer"
             >
-              Source
+              原文
             </a>
           </div>
         </a-card>
