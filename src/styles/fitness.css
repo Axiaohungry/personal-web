@@ -156,6 +156,13 @@
   gap: 1rem;
 }
 
+.fitness-assistant-panel--embedded {
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--panel-soft);
+}
+
 .fitness-assistant-panel__header {
   align-items: end;
 }
@@ -178,6 +185,8 @@
   background: var(--panel-soft);
   color: var(--muted);
   font-size: 0.84rem;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
 .fitness-assistant-panel__form {
@@ -216,6 +225,7 @@
   margin: 0;
   font-size: 0.84rem;
   line-height: 1.45;
+  overflow-wrap: anywhere;
 }
 
 .fitness-assistant-panel__chips {
@@ -231,6 +241,10 @@
   background: transparent;
   color: var(--text);
   cursor: pointer;
+  text-align: left;
+  white-space: normal;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
   transition:
     border-color 160ms ease,
     transform 160ms ease,
@@ -257,6 +271,7 @@
 
 .fitness-assistant-panel__summary {
   color: var(--muted);
+  overflow-wrap: anywhere;
 }
 
 .fitness-assistant-panel__result {
@@ -274,6 +289,7 @@
 .fitness-assistant-panel__result-title {
   margin: 0.2rem 0 0;
   font-size: 1.18rem;
+  overflow-wrap: anywhere;
 }
 
 .fitness-assistant-panel__result-grid {
@@ -299,6 +315,10 @@
   line-height: 1.65;
 }
 
+.fitness-assistant-panel__list li {
+  overflow-wrap: anywhere;
+}
+
 .fitness-assistant-panel__module-links {
   display: flex;
   flex-wrap: wrap;
@@ -314,6 +334,8 @@
   border-radius: 999px;
   color: var(--text);
   background: var(--panel);
+  white-space: normal;
+  overflow-wrap: anywhere;
   transition:
     border-color 160ms ease,
     transform 160ms ease,

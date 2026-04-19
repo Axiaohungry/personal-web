@@ -1,6 +1,7 @@
 <script setup>
 import { computed, inject, nextTick, ref, watch } from 'vue'
 
+import FitnessAssistantPanel from '@/components/FitnessAssistantPanel.vue'
 import { getGoalClampGuidance } from '@/utils/caloriePlanning.js'
 import { buildEmbeddedModuleContext, buildEmbeddedModuleQuery } from '@/utils/embeddedModuleContext.js'
 
@@ -190,6 +191,16 @@ watch(
       />
     </div>
 
+    <div class="modules-assistant-slot">
+      <FitnessAssistantPanel
+        embedded
+        :context="props.context"
+        :goal="props.goal"
+        :weeks="props.weeks"
+        :target-kg="props.targetKg"
+      />
+    </div>
+
     <div class="modules-tabs" role="tablist" aria-label="Fitness workbench modules">
       <button
         v-for="module in props.modules"
@@ -298,6 +309,10 @@ watch(
 
 .modules-toolbar__alert {
   align-self: end;
+}
+
+.modules-assistant-slot {
+  margin-bottom: 1rem;
 }
 
 .modules-tabs {

@@ -73,44 +73,6 @@ function isValidStory(story) {
   )
 }
 
-function buildAiNewsResponseSchema() {
-  return {
-    type: 'object',
-    additionalProperties: false,
-    properties: {
-      updatedAt: {
-        type: 'string',
-        format: 'date-time',
-      },
-      stories: {
-        type: 'array',
-        maxItems: 3,
-        items: {
-          type: 'object',
-          additionalProperties: false,
-          properties: {
-            title: { type: 'string' },
-            summary: { type: 'string' },
-            whyItMatters: { type: 'string' },
-            sourceLabel: { type: 'string' },
-            sourceUrl: { type: 'string' },
-            publishedAt: { type: 'string', format: 'date-time' },
-          },
-          required: [
-            'title',
-            'summary',
-            'whyItMatters',
-            'sourceLabel',
-            'sourceUrl',
-            'publishedAt',
-          ],
-        },
-      },
-    },
-    required: ['updatedAt', 'stories'],
-  }
-}
-
 function normalizeStory(story) {
   if (!isValidStory(story)) {
     return null
@@ -175,7 +137,6 @@ function extractJsonPayload(text) {
 
 export function buildAiNewsRequestBody(nowIso) {
   const currentIso = isValidIsoDate(nowIso) ? cleanText(nowIso) : new Date().toISOString()
-  const responseJsonSchema = buildAiNewsResponseSchema()
 
   return {
     systemInstruction: {
@@ -195,6 +156,8 @@ export function buildAiNewsRequestBody(nowIso) {
               'Use the Google Search tool to ground each story in a recent, publicly accessible source.',
               'Return only JSON with this shape:',
               '{"updatedAt":"ISO-8601 string","stories":[{"title":"","summary":"","whyItMatters":"","sourceLabel":"","sourceUrl":"","publishedAt":"ISO-8601 string"}]}',
+              'Return exactly three stories when enough grounded sources are available.',
+              'Do not use markdown fences, commentary, or explanatory prose outside the JSON object.',
               'Keep stories concise, factual, and suitable for a product homepage.',
               'Do not include unsupported claims or personal commentary.',
             ].join('\n'),
@@ -209,8 +172,6 @@ export function buildAiNewsRequestBody(nowIso) {
     ],
     generationConfig: {
       temperature: 0.2,
-      responseMimeType: 'application/json',
-      responseJsonSchema,
     },
   }
 }
