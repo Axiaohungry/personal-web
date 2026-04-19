@@ -13,6 +13,16 @@ test('classifyAssistantQuestion rejects unrelated prompts and medical prompts', 
   assert.deepEqual(classifyAssistantQuestion('How do I start a beginner lifting plan?'), {
     status: 'ok',
   })
+  assert.deepEqual(
+    classifyAssistantQuestion('把当前目标压成执行步骤', {
+      goal: 'cut',
+      weeks: 8,
+      targetKg: 3,
+    }),
+    {
+      status: 'ok',
+    }
+  )
 })
 
 test('normalizeAssistantPayload keeps the assistant answer contract stable', async () => {

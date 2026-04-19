@@ -192,3 +192,61 @@ test('createHttpHandler allows POST only for the fitness assistant endpoint', as
   assert.equal(foodResponse.statusCode, 405)
   assert.equal(JSON.parse(foodResponse.body).error, 'Method not allowed.')
 })
+
+test('createHttpHandler proxies POST assistant bodies and content type upstream', async () => {
+  const { createHttpHandler } = await import('../../server/httpServer.js')
+
+  const fetchCalls = []
+  const assistantResponse = {
+    statusCode: 0,
+    headers: {},
+    body: '',
+    setHeader(name, value) {
+      this.headers[name] = value
+    },
+    end(payload = '') {
+      this.body = payload
+      return this
+    },
+  }
+
+  const handler = createHttpHandler({
+    upstreamBaseUrl: 'https://upstream.example',
+    fetchImpl: async (url, init) => {
+      fetchCalls.push({ url, init })
+      return new Response(JSON.stringify({ ok: true }), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json; charset=utf-8' },
+      })
+    },
+  })
+
+  const requestBody = JSON.stringify({
+    question: '把当前目标压成执行步骤',
+    context: {
+      goal: 'cut',
+      weeks: 8,
+      targetKg: 3,
+    },
+  })
+
+  await handler(
+    {
+      method: 'POST',
+      url: '/api/fitness/assistant',
+      headers: {
+        'content-type': 'application/json; charset=utf-8',
+      },
+      body: requestBody,
+    },
+    assistantResponse
+  )
+
+  assert.equal(fetchCalls.length, 1)
+  assert.equal(fetchCalls[0].url, 'https://upstream.example/api/fitness/assistant')
+  assert.equal(fetchCalls[0].init.method, 'POST')
+  assert.equal(fetchCalls[0].init.body, requestBody)
+  assert.equal(fetchCalls[0].init.headers['content-type'], 'application/json; charset=utf-8')
+  assert.equal(assistantResponse.statusCode, 200)
+  assert.deepEqual(JSON.parse(assistantResponse.body), { ok: true })
+})

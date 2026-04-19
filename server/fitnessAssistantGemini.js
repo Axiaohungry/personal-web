@@ -503,19 +503,45 @@ function stringifyContext(context) {
   return cleanText(String(context)).slice(0, 500)
 }
 
-export function classifyAssistantQuestion(question) {
+function looksLikePlanningFollowUp(text) {
+  const normalized = cleanText(text).toLowerCase()
+  if (!normalized) return false
+
+  return [
+    '步骤',
+    '执行',
+    '压成',
+    '拆成',
+    '整理',
+    '规划',
+    '计划',
+    '安排',
+    '下一步',
+    'follow-up',
+    'follow up',
+    'next step',
+    'next steps',
+  ].some((needle) => normalized.includes(needle.toLowerCase()))
+}
+
+export function classifyAssistantQuestion(question, context = '') {
   const text = normalizeQuestion(question)
+  const combinedText = [text, stringifyContext(context)].filter(Boolean).join(' ')
 
   if (!text) {
     return { status: 'out_of_scope' }
   }
 
-  if (hasMedicalBoundary(text)) {
+  if (hasMedicalBoundary(combinedText)) {
     return { status: 'medical_boundary' }
   }
 
   const topic = detectScopeTopic(text)
   if (topic !== 'general') {
+    return { status: 'ok' }
+  }
+
+  if (looksLikePlanningFollowUp(text) && detectScopeTopic(combinedText) !== 'general') {
     return { status: 'ok' }
   }
 
@@ -626,7 +652,7 @@ async function requestGeminiJson(question, context, options = {}) {
 }
 
 async function fetchFitnessAssistantPayload(question, context, options = {}) {
-  const classification = classifyAssistantQuestion(question)
+  const classification = classifyAssistantQuestion(question, context)
 
   if (classification.status === 'out_of_scope' || classification.status === 'medical_boundary') {
     return buildSafeRefusalPayload(classification.status, question)

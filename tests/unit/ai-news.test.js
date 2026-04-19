@@ -46,6 +46,84 @@ test('handleNodeAiNewsRequest short-circuits HEAD before fetch work', async () =
   assert.equal(response.headers['Content-Type'], 'application/json; charset=utf-8')
 })
 
+test('handleNodeAiNewsRequest reuses the shared TTL cache across repeated GETs', async () => {
+  const { handleNodeAiNewsRequest } = await import('../../server/aiNewsGemini.js')
+
+  let fetchCalls = 0
+  const responseOne = {
+    statusCode: 0,
+    headers: {},
+    body: '',
+    setHeader(name, value) {
+      this.headers[name] = value
+    },
+    end(payload = '') {
+      this.body = payload
+      return this
+    },
+  }
+
+  const responseTwo = {
+    statusCode: 0,
+    headers: {},
+    body: '',
+    setHeader(name, value) {
+      this.headers[name] = value
+    },
+    end(payload = '') {
+      this.body = payload
+      return this
+    },
+  }
+
+  const request = { method: 'GET', url: '/api/ai/news-brief' }
+  const options = {
+    apiKey: 'test-key',
+    fetchImpl: async () => {
+      fetchCalls += 1
+      return new Response(
+        JSON.stringify({
+          candidates: [
+            {
+              content: {
+                parts: [
+                  {
+                    text: JSON.stringify({
+                      updatedAt: '2026-04-18T08:00:00.000Z',
+                      stories: [
+                        {
+                          title: 'Grounded story',
+                          summary: 'A relevant update for readers.',
+                          whyItMatters: 'It explains a meaningful shift for readers.',
+                          sourceLabel: 'Reuters',
+                          sourceUrl: 'https://example.com/reuters-story',
+                          publishedAt: '2026-04-18T07:30:00.000Z',
+                        },
+                      ],
+                    }),
+                  },
+                ],
+              },
+            },
+          ],
+        }),
+        {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' },
+        }
+      )
+    },
+  }
+
+  await handleNodeAiNewsRequest(request, responseOne, options)
+  await handleNodeAiNewsRequest(request, responseTwo, options)
+
+  assert.equal(fetchCalls, 1)
+  assert.equal(responseOne.statusCode, 200)
+  assert.equal(responseTwo.statusCode, 200)
+  assert.deepEqual(JSON.parse(responseOne.body), JSON.parse(responseTwo.body))
+})
+
 test('normalizeAiNewsPayload keeps only grounded stories with source fields', async () => {
   const { normalizeAiNewsPayload } = await import('../../server/aiNewsGemini.js')
 

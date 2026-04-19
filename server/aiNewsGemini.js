@@ -272,6 +272,8 @@ export function createAiNewsCache({ ttlMs = DEFAULT_AI_NEWS_TTL_MS, now = () => 
   }
 }
 
+const sharedAiNewsCache = createAiNewsCache()
+
 async function fetchGeminiJson(requestBody, options = {}) {
   const apiKey = options.apiKey || process.env.GEMINI_API_KEY
   const model = options.model || process.env.GEMINI_MODEL || DEFAULT_GEMINI_MODEL
@@ -362,6 +364,7 @@ export async function handleNodeAiNewsRequest(req, res, options = {}) {
     const nowIso = url.searchParams.get('nowIso') || new Date().toISOString()
     const payload = await fetchAiNewsBrief({
       ...options,
+      cache: options.cache || sharedAiNewsCache,
       nowIso,
     })
 

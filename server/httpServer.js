@@ -129,20 +129,69 @@ async function serveFile(res, filePath, method = 'GET') {
   return createReadStream(filePath).pipe(res)
 }
 
+async function readProxyRequestBody(req) {
+  if (req && Object.prototype.hasOwnProperty.call(req, 'body')) {
+    if (typeof req.body === 'string') {
+      return req.body
+    }
+
+    if (Buffer.isBuffer(req.body)) {
+      return req.body.toString('utf8')
+    }
+
+    if (req.body && typeof req.body === 'object') {
+      return JSON.stringify(req.body)
+    }
+
+    return req.body == null ? '' : String(req.body)
+  }
+
+  if (typeof req?.on !== 'function') {
+    return ''
+  }
+
+  const chunks = []
+  await new Promise((resolve, reject) => {
+    req.on('data', (chunk) => {
+      chunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk))
+    })
+    req.on('end', resolve)
+    req.on('error', reject)
+  })
+
+  return Buffer.concat(chunks).toString('utf8')
+}
+
 async function proxyApiRequest(req, res, proxyUrl, fetchImpl = fetch) {
   try {
+    const method = req.method || 'GET'
+    const headers = { ...(req.headers || {}) }
+    const hasContentType = Object.keys(headers).some(
+      (name) => name.toLowerCase() === 'content-type'
+    )
+
+    if (method === 'POST' && !hasContentType) {
+      headers['content-type'] = 'application/json; charset=utf-8'
+    }
+
+    const requestInit = {
+      method,
+      headers,
+    }
+
+    if (method === 'POST') {
+      requestInit.body = await readProxyRequestBody(req)
+    }
+
     const upstreamResponse = await fetchImpl(proxyUrl, {
-      method: req.method || 'GET',
-      headers: {
-        Accept: 'application/json',
-      },
+      ...requestInit,
     })
 
     const contentType = upstreamResponse.headers.get('content-type') || 'application/json; charset=utf-8'
     res.statusCode = upstreamResponse.status
     res.setHeader('Content-Type', contentType)
 
-    if ((req.method || 'GET') === 'HEAD') {
+    if (method === 'HEAD') {
       return res.end()
     }
 
