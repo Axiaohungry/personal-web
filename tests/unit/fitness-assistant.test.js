@@ -55,7 +55,7 @@ test('normalizeFitnessAssistantPayload keeps the assistant answer contract stabl
   })
 })
 
-test('normalizeFitnessAssistantPayload falls back to an unavailable state for malformed payloads', async () => {
+test('normalizeFitnessAssistantPayload returns null for malformed assistant payloads', async () => {
   const { normalizeFitnessAssistantPayload } = await import('../../server/fitnessAssistantGemini.js')
 
   const normalized = normalizeFitnessAssistantPayload({
@@ -63,16 +63,10 @@ test('normalizeFitnessAssistantPayload falls back to an unavailable state for ma
     summary: 'Missing the rest of the response contract.',
   })
 
-  assert.equal(normalized.status, 'service_unavailable')
-  assert.equal(typeof normalized.answerTitle, 'string')
-  assert.equal(typeof normalized.summary, 'string')
-  assert.ok(normalized.answerTitle.length > 0)
-  assert.ok(normalized.summary.length > 0)
-  assert.ok(Array.isArray(normalized.relatedModules))
-  assert.ok(normalized.relatedModules.every((module) => module.href.startsWith('/fitness/modules/')))
+  assert.equal(normalized, null)
 })
 
-test('handleNodeFitnessAssistantRequest returns a distinct unavailable state for Gemini failures', async () => {
+test('handleNodeFitnessAssistantRequest returns a stable error for Gemini failures', async () => {
   const { handleNodeFitnessAssistantRequest } = await import('../../server/fitnessAssistantGemini.js')
 
   const response = {
@@ -103,9 +97,7 @@ test('handleNodeFitnessAssistantRequest returns a distinct unavailable state for
   )
 
   const payload = JSON.parse(response.body)
-  assert.equal(payload.status, 'service_unavailable')
-  assert.notEqual(payload.status, 'out_of_scope')
-  assert.notEqual(payload.status, 'medical_boundary')
+  assert.deepEqual(payload, { error: 'Unable to answer right now.' })
+  assert.equal(response.statusCode, 500)
   assert.equal(response.headers['Content-Type'], 'application/json; charset=utf-8')
-  assert.equal(response.statusCode, 200)
 })

@@ -355,23 +355,6 @@ function buildSafeRefusalPayload(status, question) {
   }
 }
 
-function buildUnavailablePayload(question) {
-  return {
-    status: 'service_unavailable',
-    answerTitle: '健身助手暂时不可用',
-    summary: '请稍后再试，或者继续问训练、饮食、恢复、补剂和健康习惯。',
-    actions: [
-      '稍后重新提交同一个问题。',
-      '如果你愿意，也可以先问训练、饮食、恢复、补剂或健康习惯相关的问题。',
-    ],
-    cautions: [
-      '这不是对问题的拒绝，而是当前服务暂时无法生成结果。',
-      '如果一直失败，请稍后再试或换一种更具体的问法。',
-    ],
-    relatedModules: buildAssistantRelatedModules(question),
-  }
-}
-
 function isValidAssistantResponse(payload) {
   return Boolean(
     cleanText(payload?.answerTitle) &&
@@ -568,7 +551,7 @@ export function normalizeFitnessAssistantPayload(payload, options = {}) {
     }
   }
 
-  return buildUnavailablePayload(question)
+  return null
 }
 
 async function requestGeminiJson(question, context, options = {}) {
@@ -614,13 +597,17 @@ async function fetchFitnessAssistantPayload(question, context, options = {}) {
     const rawPayload = await requestGeminiJson(question, context, options)
     const normalized = normalizeFitnessAssistantPayload(rawPayload, { question })
 
-    if (normalized.status !== 'ok') {
-      return normalized
+    if (!normalized) {
+      throw createHttpError(500, 'Unable to answer right now.')
     }
 
     return normalized
-  } catch {
-    return buildUnavailablePayload(question)
+  } catch (error) {
+    if (error?.statusCode === 500 && error.message === 'Unable to answer right now.') {
+      throw error
+    }
+
+    throw createHttpError(500, 'Unable to answer right now.')
   }
 }
 
@@ -642,14 +629,9 @@ export async function handleNodeFitnessAssistantRequest(req, res, options = {}) 
     const payload = await fetchFitnessAssistantPayload(question, context, options)
 
     return sendJson(res, 200, payload)
-  } catch {
-    return sendJson(res, 500, {
-      status: 'service_unavailable',
-      answerTitle: '健身助手暂时不可用',
-      summary: '请稍后再试。',
-      actions: [],
-      cautions: [],
-      relatedModules: buildAssistantRelatedModules(''),
+  } catch (error) {
+    return sendJson(res, error?.statusCode || 500, {
+      error: 'Unable to answer right now.',
     })
   }
 }
