@@ -302,6 +302,53 @@ function normalizeStringArray(value) {
   return value.map(cleanText).filter(Boolean)
 }
 
+function looksFitnessDomainAnswer(payload, question) {
+  const combinedText = [
+    payload?.answerTitle,
+    payload?.summary,
+    ...(Array.isArray(payload?.actions) ? payload.actions : []),
+    ...(Array.isArray(payload?.cautions) ? payload.cautions : []),
+    ...(Array.isArray(payload?.relatedModules)
+      ? payload.relatedModules.map((module) => module?.label)
+      : []),
+    question,
+  ]
+    .map(cleanText)
+    .filter(Boolean)
+    .join(' ')
+    .toLowerCase()
+
+  if (!combinedText) return false
+
+  return [
+    'training',
+    'workout',
+    'exercise',
+    'fitness',
+    'diet',
+    'nutrition',
+    'meal',
+    'calorie',
+    'protein',
+    'recovery',
+    'sleep',
+    'supplement',
+    'strength',
+    'muscle',
+    'fat loss',
+    '增肌',
+    '减脂',
+    '训练',
+    '饮食',
+    '恢复',
+    '补剂',
+    '健身',
+    '热量',
+    '蛋白',
+    '睡眠',
+  ].some((needle) => combinedText.includes(needle.toLowerCase()))
+}
+
 function normalizeRelatedModules(value, question) {
   const modules = Array.isArray(value)
     ? value
@@ -524,6 +571,10 @@ export function normalizeAssistantPayload(payload, options = {}) {
   const status = normalizeStatus(payload?.status)
 
   if (status === 'ok' && isValidAssistantResponse(payload)) {
+    if (!looksFitnessDomainAnswer(payload, question)) {
+      return buildSafeRefusalPayload('out_of_scope', question)
+    }
+
     const normalized = {
       status: 'ok',
       answerTitle: cleanText(payload.answerTitle),
