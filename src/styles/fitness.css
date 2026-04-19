@@ -151,6 +151,183 @@
   margin: 0;
 }
 
+.fitness-assistant-panel {
+  display: grid;
+  gap: 1rem;
+}
+
+.fitness-assistant-panel__header {
+  align-items: end;
+}
+
+.fitness-assistant-panel__scope-note {
+  max-width: 34rem;
+  margin: 0.4rem 0 0;
+}
+
+.fitness-assistant-panel__context {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.fitness-assistant-panel__context-item {
+  padding: 0.45rem 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--panel-soft);
+  color: var(--muted);
+  font-size: 0.84rem;
+}
+
+.fitness-assistant-panel__form {
+  display: grid;
+  gap: 0.9rem;
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--panel-soft);
+}
+
+.fitness-assistant-panel__field {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.fitness-assistant-panel__label,
+.fitness-assistant-panel__hint {
+  color: var(--muted);
+}
+
+.fitness-assistant-panel__label {
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.fitness-assistant-panel__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.8rem 1rem;
+}
+
+.fitness-assistant-panel__hint {
+  margin: 0;
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+
+.fitness-assistant-panel__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.fitness-assistant-panel__chip {
+  padding: 0.55rem 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  transition:
+    border-color 160ms ease,
+    transform 160ms ease,
+    background 160ms ease;
+}
+
+.fitness-assistant-panel__chip:hover,
+.fitness-assistant-panel__chip:focus-visible {
+  border-color: var(--teal);
+  background: rgba(15, 118, 110, 0.08);
+  transform: translateY(-1px);
+  outline: none;
+}
+
+.fitness-assistant-panel__alert {
+  margin-top: 0.15rem;
+}
+
+.fitness-assistant-panel__state-copy,
+.fitness-assistant-panel__summary {
+  margin: 0;
+  line-height: 1.65;
+}
+
+.fitness-assistant-panel__summary {
+  color: var(--muted);
+}
+
+.fitness-assistant-panel__result {
+  display: grid;
+  gap: 1rem;
+}
+
+.fitness-assistant-panel__result-header {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.fitness-assistant-panel__result-title {
+  margin: 0.2rem 0 0;
+  font-size: 1.18rem;
+}
+
+.fitness-assistant-panel__result-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.fitness-assistant-panel__result-block {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.fitness-assistant-panel__subheading {
+  margin: 0;
+  font-size: 0.96rem;
+}
+
+.fitness-assistant-panel__list {
+  margin: 0;
+  padding-left: 1.15rem;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.fitness-assistant-panel__module-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.fitness-assistant-panel__module-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.2rem;
+  padding: 0.45rem 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--text);
+  background: var(--panel);
+  transition:
+    border-color 160ms ease,
+    transform 160ms ease,
+    background 160ms ease;
+}
+
+.fitness-assistant-panel__module-link:hover,
+.fitness-assistant-panel__module-link:focus-visible {
+  border-color: var(--teal);
+  background: rgba(15, 118, 110, 0.08);
+  transform: translateY(-1px);
+  outline: none;
+}
+
 .scenario-card__target {
   margin: 0.6rem 0 0;
   font-size: 1.36rem;
@@ -182,11 +359,16 @@
 @media (max-width: 1024px) {
   .fitness-hero,
   .fitness-grid,
-  .fitness-summary__header {
+  .fitness-summary__header,
+  .fitness-assistant-panel__result-grid {
     grid-template-columns: 1fr;
   }
 
   .fitness-summary__header {
+    align-items: flex-start;
+  }
+
+  .fitness-assistant-panel__result-header {
     align-items: flex-start;
   }
 }
@@ -204,5 +386,16 @@
   .history-list__row {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .fitness-assistant-panel__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .fitness-assistant-panel__chip,
+  .fitness-assistant-panel__module-link {
+    width: 100%;
+    justify-content: flex-start;
   }
 }
