@@ -14,10 +14,10 @@ test('classifyAssistantQuestion rejects unrelated prompts and medical prompts', 
   })
 })
 
-test('normalizeFitnessAssistantPayload keeps the assistant answer contract stable', async () => {
-  const { normalizeFitnessAssistantPayload } = await import('../../server/fitnessAssistantGemini.js')
+test('normalizeAssistantPayload keeps the assistant answer contract stable', async () => {
+  const { normalizeAssistantPayload } = await import('../../server/fitnessAssistantGemini.js')
 
-  const normalized = normalizeFitnessAssistantPayload({
+  const normalized = normalizeAssistantPayload({
     status: 'ok',
     answerTitle: 'Start with a simple weekly plan',
     summary: 'Use a consistent target and review symptoms before increasing load.',
@@ -55,15 +55,36 @@ test('normalizeFitnessAssistantPayload keeps the assistant answer contract stabl
   })
 })
 
-test('normalizeFitnessAssistantPayload returns null for malformed assistant payloads', async () => {
-  const { normalizeFitnessAssistantPayload } = await import('../../server/fitnessAssistantGemini.js')
+test('normalizeAssistantPayload returns a refusal shape for malformed assistant payloads', async () => {
+  const { normalizeAssistantPayload } = await import('../../server/fitnessAssistantGemini.js')
 
-  const normalized = normalizeFitnessAssistantPayload({
+  const normalized = normalizeAssistantPayload({
     status: 'ok',
     summary: 'Missing the rest of the response contract.',
   })
 
-  assert.equal(normalized, null)
+  assert.equal(normalized.status, 'out_of_scope')
+  assert.equal(typeof normalized.answerTitle, 'string')
+  assert.ok(normalized.answerTitle.length > 0)
+  assert.ok(Array.isArray(normalized.actions))
+  assert.ok(Array.isArray(normalized.cautions))
+  assert.ok(Array.isArray(normalized.relatedModules))
+})
+
+test('normalizeAssistantPayload rejects invalid model statuses without fabricating ok', async () => {
+  const { normalizeAssistantPayload } = await import('../../server/fitnessAssistantGemini.js')
+
+  const normalized = normalizeAssistantPayload({
+    status: 'maybe',
+    answerTitle: 'Looks valid at a glance',
+    summary: 'But the status is not approved.',
+    actions: ['Do one thing.'],
+    cautions: ['Do another thing.'],
+    relatedModules: [],
+  })
+
+  assert.equal(normalized.status, 'out_of_scope')
+  assert.notEqual(normalized.status, 'ok')
 })
 
 test('handleNodeFitnessAssistantRequest returns a stable error for Gemini failures', async () => {

@@ -519,7 +519,7 @@ export function buildFitnessAssistantRequestBody(question, context) {
   }
 }
 
-export function normalizeFitnessAssistantPayload(payload, options = {}) {
+export function normalizeAssistantPayload(payload, options = {}) {
   const question = typeof options === 'string' ? options : options?.question
   const status = normalizeStatus(payload?.status)
 
@@ -540,19 +540,10 @@ export function normalizeFitnessAssistantPayload(payload, options = {}) {
     return buildSafeRefusalPayload(status, question)
   }
 
-  if (isValidAssistantResponse(payload)) {
-    return {
-      status: 'ok',
-      answerTitle: cleanText(payload.answerTitle),
-      summary: cleanText(payload.summary),
-      actions: normalizeStringArray(payload.actions).slice(0, 5),
-      cautions: normalizeStringArray(payload.cautions).slice(0, 5),
-      relatedModules: normalizeRelatedModules(payload.relatedModules, question),
-    }
-  }
-
-  return null
+  return buildSafeRefusalPayload('out_of_scope', question)
 }
+
+export const normalizeFitnessAssistantPayload = normalizeAssistantPayload
 
 async function requestGeminiJson(question, context, options = {}) {
   const apiKey = options.apiKey || process.env.GEMINI_API_KEY
@@ -595,18 +586,8 @@ async function fetchFitnessAssistantPayload(question, context, options = {}) {
 
   try {
     const rawPayload = await requestGeminiJson(question, context, options)
-    const normalized = normalizeFitnessAssistantPayload(rawPayload, { question })
-
-    if (!normalized) {
-      throw createHttpError(500, 'Unable to answer right now.')
-    }
-
-    return normalized
+    return normalizeAssistantPayload(rawPayload, { question })
   } catch (error) {
-    if (error?.statusCode === 500 && error.message === 'Unable to answer right now.') {
-      throw error
-    }
-
     throw createHttpError(500, 'Unable to answer right now.')
   }
 }
