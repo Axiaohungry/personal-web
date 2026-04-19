@@ -5,6 +5,7 @@ import vue from '@vitejs/plugin-vue'
 
 import { handleNodeSearchRequest } from './server/fitnessGemini.js'
 import { handleNodeAiNewsRequest } from './server/aiNewsGemini.js'
+import { handleNodeFitnessAssistantRequest } from './server/fitnessAssistantGemini.js'
 
 function createFitnessApiPlugin(options) {
   async function middleware(req, res, next) {
@@ -20,6 +21,10 @@ function createFitnessApiPlugin(options) {
 
     if (url.pathname === '/api/ai/news-brief') {
       return handleNodeAiNewsRequest(req, res, options)
+    }
+
+    if (url.pathname === '/api/fitness/assistant') {
+      return handleNodeFitnessAssistantRequest(req, res, options)
     }
 
     return next()

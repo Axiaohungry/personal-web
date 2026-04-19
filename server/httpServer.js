@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url'
 
 import { handleNodeSearchRequest, sendJson } from './fitnessGemini.js'
 import { handleNodeAiNewsRequest } from './aiNewsGemini.js'
+import { handleNodeFitnessAssistantRequest } from './fitnessAssistantGemini.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const DEFAULT_DIST_ROOT = path.resolve(__dirname, '..', 'dist')
@@ -193,6 +194,10 @@ export function createHttpHandler(options = {}) {
 
       if (target.apiKind === 'ai-news') {
         return handleNodeAiNewsRequest(req, res, options)
+      }
+
+      if (target.apiKind === 'fitness-assistant') {
+        return handleNodeFitnessAssistantRequest(req, res, options)
       }
 
       if (target.apiKind === 'food' || target.apiKind === 'supplement') {
