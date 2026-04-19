@@ -119,7 +119,6 @@ async function submitQuestion() {
 
   if (isClearlyUnrelatedPrompt(prompt)) {
     localNudge.value = '这个问题更像站外内容。你可以把它收回到训练、饮食、恢复、补剂、体重管理或周期安排。'
-    return
   }
 
   loading.value = true
