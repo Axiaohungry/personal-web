@@ -4,6 +4,7 @@ import { EventEmitter } from 'node:events'
 
 test('classifyAssistantQuestion rejects unrelated prompts and medical prompts', async () => {
   const { classifyAssistantQuestion } = await import('../../server/fitnessAssistantGemini.js')
+  const planningPrompt = '\u628a\u5f53\u524d\u76ee\u6807\u538b\u6210\u6267\u884c\u6b65\u9aa4'
 
   assert.equal(classifyAssistantQuestion('How do I fix a printer jam?').status, 'out_of_scope')
   assert.equal(
@@ -14,10 +15,20 @@ test('classifyAssistantQuestion rejects unrelated prompts and medical prompts', 
     status: 'ok',
   })
   assert.deepEqual(
-    classifyAssistantQuestion('把当前目标压成执行步骤', {
+    classifyAssistantQuestion(planningPrompt, {
       goal: 'cut',
       weeks: 8,
       targetKg: 3,
+    }),
+    {
+      status: 'ok',
+    }
+  )
+  assert.deepEqual(
+    classifyAssistantQuestion(planningPrompt, {
+      goal: 'gain',
+      weeks: 12,
+      targetKg: 4,
     }),
     {
       status: 'ok',

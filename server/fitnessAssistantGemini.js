@@ -508,20 +508,28 @@ function looksLikePlanningFollowUp(text) {
   if (!normalized) return false
 
   return [
-    '步骤',
-    '执行',
-    '压成',
-    '拆成',
-    '整理',
-    '规划',
-    '计划',
-    '安排',
-    '下一步',
+    '\u6b65\u9aa4',
+    '\u6267\u884c',
+    '\u538b\u6210',
+    '\u62c6\u6210',
+    '\u6574\u7406',
+    '\u89c4\u5212',
+    '\u8ba1\u5212',
+    '\u5b89\u6392',
+    '\u4e0b\u4e00\u6b65',
     'follow-up',
     'follow up',
     'next step',
     'next steps',
   ].some((needle) => normalized.includes(needle.toLowerCase()))
+}
+
+function hasRecognizedFitnessGoalContext(context) {
+  const normalized = stringifyContext(context).toLowerCase()
+  if (!normalized) return false
+
+  return /"goal"s*:s*"(cut|gain|bulk|lean gain)"/i.test(normalized)
+    || /goal:s*'(cut|gain|bulk|lean gain)'/i.test(normalized)
 }
 
 export function classifyAssistantQuestion(question, context = '') {
@@ -541,7 +549,7 @@ export function classifyAssistantQuestion(question, context = '') {
     return { status: 'ok' }
   }
 
-  if (looksLikePlanningFollowUp(text) && detectScopeTopic(combinedText) !== 'general') {
+  if (looksLikePlanningFollowUp(text) && hasRecognizedFitnessGoalContext(context)) {
     return { status: 'ok' }
   }
 
