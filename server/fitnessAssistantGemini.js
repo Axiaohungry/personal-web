@@ -320,16 +320,6 @@ function looksClearlyOffDomainAnswer(payload) {
   if (!combinedText) return false
 
   return [
-    'office',
-    'workflow',
-    'calendar',
-    'inbox',
-    'email',
-    'meeting',
-    'spreadsheet',
-    'presentation',
-    'document',
-    'project management',
     'programming',
     'code',
     'coding',
@@ -344,19 +334,15 @@ function looksClearlyOffDomainAnswer(payload) {
     'desktop',
     'printer',
     'browser',
+    'software',
     'customer support',
     'sales',
     'marketing',
-    '财务',
-    '办公',
-    '排期',
-    '邮件',
-    '代码',
     '编程',
     '数据库',
-    '项目管理',
-    '表格',
-    '演示',
+    '代码',
+    '程序',
+    '打印机',
   ].some((needle) => combinedText.includes(needle.toLowerCase()))
 }
 

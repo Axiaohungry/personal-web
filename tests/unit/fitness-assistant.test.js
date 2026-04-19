@@ -96,10 +96,10 @@ test('normalizeAssistantPayload refuses off-domain ok payloads even for fitness 
   const normalized = normalizeAssistantPayload(
     {
       status: 'ok',
-      answerTitle: 'Organize your office workflow',
-      summary: 'Use a shared calendar and clear inbox rules to keep projects moving.',
-      actions: ['Sort your files by project.', 'Schedule a weekly admin review.'],
-      cautions: ['Do not let meetings stack up.'],
+      answerTitle: 'Build a small Node API',
+      summary: 'Use Express, connect to a database, and keep your routes organized.',
+      actions: ['Create a repository.', 'Add SQL migrations.'],
+      cautions: ['Avoid shipping secrets in code.'],
       relatedModules: [
         {
           label: 'Random notes',
