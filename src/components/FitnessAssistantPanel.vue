@@ -77,14 +77,15 @@ const contextSummary = computed(() => [
 ])
 
 const hasResult = computed(() => Boolean(result.value?.status))
-const isInScopePrompt = computed(() => {
-  const text = question.value.trim().toLowerCase()
-  if (!text) return true
-  return fitKeywords.some((keyword) => text.includes(keyword.toLowerCase()))
-})
 
 function normalizeText(value) {
   return typeof value === 'string' ? value.trim() : ''
+}
+
+function isClearlyUnrelatedPrompt(prompt) {
+  const text = normalizeText(prompt).toLowerCase()
+  if (!text) return false
+  return !fitKeywords.some((keyword) => text.includes(keyword.toLowerCase()))
 }
 
 function setQuickPrompt(prompt) {
@@ -114,14 +115,16 @@ async function submitQuestion() {
   const prompt = normalizeText(question.value)
   if (!prompt || loading.value) return
 
-  if (!isInScopePrompt.value) {
-    localNudge.value = '这更像是站外问题。你可以把问题收回到训练、饮食、恢复、补剂、体重管理或周期安排。'
-  } else {
-    localNudge.value = ''
+  result.value = null
+  error.value = ''
+  localNudge.value = ''
+
+  if (isClearlyUnrelatedPrompt(prompt)) {
+    localNudge.value = '这个问题更像站外内容。你可以把它收回到训练、饮食、恢复、补剂、体重管理或周期安排。'
+    return
   }
 
   loading.value = true
-  error.value = ''
 
   try {
     const response = await fetch('/api/fitness/assistant', {
@@ -158,7 +161,7 @@ function handleSubmit() {
         <p class="fitness-panel__eyebrow">训练与健康助手</p>
         <h2 class="fitness-panel__title">训练与健康助手</h2>
         <p class="fitness-panel__note fitness-assistant-panel__scope-note">
-          面向训练、饮食、恢复、补剂和模块跳转的结构化建议。先给出可执行结论，再补必要说明。
+          面向训练、饮食、恢复、补剂和模块跳转的结构化建议。先给结论，再给执行路径。
         </p>
       </div>
     </div>

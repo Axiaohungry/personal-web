@@ -1,5 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
+import { EventEmitter } from 'node:events'
 
 test('classifyAssistantQuestion rejects unrelated prompts and medical prompts', async () => {
   const { classifyAssistantQuestion } = await import('../../server/fitnessAssistantGemini.js')
@@ -192,6 +193,59 @@ test('handleNodeFitnessAssistantRequest accepts POST JSON bodies and prefers bod
   const payload = JSON.parse(response.body)
   assert.equal(response.statusCode, 200)
   assert.equal(response.headers['Content-Type'], 'application/json; charset=utf-8')
+  assert.equal(payload.status, 'out_of_scope')
+  assert.ok(payload.summary.length > 0)
+})
+
+test('handleNodeFitnessAssistantRequest reads POST JSON from a stream when req.body is absent', async () => {
+  const { handleNodeFitnessAssistantRequest } = await import('../../server/fitnessAssistantGemini.js')
+
+  const response = {
+    statusCode: 0,
+    headers: {},
+    body: '',
+    setHeader(name, value) {
+      this.headers[name] = value
+    },
+    end(payload = '') {
+      this.body = payload
+      return this
+    },
+  }
+
+  const request = new EventEmitter()
+  request.method = 'POST'
+  request.url = '/fitness/assistant'
+
+  const promise = handleNodeFitnessAssistantRequest(request, response, {
+    apiKey: 'test-key',
+    fetchImpl: async () => {
+      throw new Error('should not reach Gemini for out-of-scope prompts')
+    },
+  })
+
+  process.nextTick(() => {
+    request.emit(
+      'data',
+      Buffer.from(
+        JSON.stringify({
+          question: 'How do I fix a printer jam?',
+          context: {
+            goal: 'cut',
+            weeks: 8,
+            targetKg: 3,
+            tdee: 2100,
+          },
+        })
+      )
+    )
+    request.emit('end')
+  })
+
+  await promise
+
+  const payload = JSON.parse(response.body)
+  assert.equal(response.statusCode, 200)
   assert.equal(payload.status, 'out_of_scope')
   assert.ok(payload.summary.length > 0)
 })
