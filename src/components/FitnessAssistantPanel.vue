@@ -27,34 +27,32 @@ const quickPrompts = [
   '把当前目标压成执行步骤',
 ]
 
-const fitKeywords = [
-  'training',
-  'workout',
-  'lift',
-  'strength',
-  'diet',
-  'nutrition',
-  'calorie',
-  'calories',
-  'macro',
-  'protein',
-  'cardio',
-  'recovery',
-  'supplement',
-  'sleep',
-  'weight',
-  'body fat',
-  'cut',
-  'gain',
-  '减脂',
-  '增肌',
-  '训练',
-  '饮食',
-  '热量',
-  '蛋白',
-  '补剂',
-  '恢复',
-  '体重',
+const offDomainKeywords = [
+  'printer',
+  'password',
+  'javascript',
+  'typescript',
+  'python',
+  'database',
+  'sql',
+  'git',
+  'browser',
+  'wifi',
+  'phone',
+  'email',
+  'invoice',
+  'refund',
+  'customer support',
+  'tax',
+  'resume',
+  'printer jam',
+  'code',
+  '代码',
+  '打印机',
+  '密码',
+  '报销',
+  '发票',
+  '浏览器',
 ]
 
 const loading = ref(false)
@@ -85,7 +83,7 @@ function normalizeText(value) {
 function isClearlyUnrelatedPrompt(prompt) {
   const text = normalizeText(prompt).toLowerCase()
   if (!text) return false
-  return !fitKeywords.some((keyword) => text.includes(keyword.toLowerCase()))
+  return offDomainKeywords.some((keyword) => text.includes(keyword.toLowerCase()))
 }
 
 function setQuickPrompt(prompt) {
