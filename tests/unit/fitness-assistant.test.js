@@ -55,7 +55,7 @@ test('normalizeFitnessAssistantPayload keeps the assistant answer contract stabl
   })
 })
 
-test('normalizeFitnessAssistantPayload falls back to Chinese-first refusal copy for malformed payloads', async () => {
+test('normalizeFitnessAssistantPayload falls back to an unavailable state for malformed payloads', async () => {
   const { normalizeFitnessAssistantPayload } = await import('../../server/fitnessAssistantGemini.js')
 
   const normalized = normalizeFitnessAssistantPayload({
@@ -63,11 +63,49 @@ test('normalizeFitnessAssistantPayload falls back to Chinese-first refusal copy 
     summary: 'Missing the rest of the response contract.',
   })
 
-  assert.equal(normalized.status, 'out_of_scope')
-  assert.equal(normalized.answerTitle, '我只能回答健身相关问题')
-  assert.equal(normalized.summary, '我可以回答训练、饮食、恢复、补剂和健康习惯。')
-  assert.deepEqual(normalized.relatedModules[0], {
-    label: '谭成义焚诀训练体系',
-    href: '/fitness/modules/fenjue-training-system',
-  })
+  assert.equal(normalized.status, 'service_unavailable')
+  assert.equal(typeof normalized.answerTitle, 'string')
+  assert.equal(typeof normalized.summary, 'string')
+  assert.ok(normalized.answerTitle.length > 0)
+  assert.ok(normalized.summary.length > 0)
+  assert.ok(Array.isArray(normalized.relatedModules))
+  assert.ok(normalized.relatedModules.every((module) => module.href.startsWith('/fitness/modules/')))
+})
+
+test('handleNodeFitnessAssistantRequest returns a distinct unavailable state for Gemini failures', async () => {
+  const { handleNodeFitnessAssistantRequest } = await import('../../server/fitnessAssistantGemini.js')
+
+  const response = {
+    statusCode: 0,
+    headers: {},
+    body: '',
+    setHeader(name, value) {
+      this.headers[name] = value
+    },
+    end(payload = '') {
+      this.body = payload
+      return this
+    },
+  }
+
+  await handleNodeFitnessAssistantRequest(
+    {
+      method: 'GET',
+      url: '/fitness/assistant?q=How%20do%20I%20set%20up%20a%20beginner%20lifting%20plan%3F',
+    },
+    response,
+    {
+      apiKey: 'test-key',
+      fetchImpl: async () => {
+        throw new Error('network down')
+      },
+    }
+  )
+
+  const payload = JSON.parse(response.body)
+  assert.equal(payload.status, 'service_unavailable')
+  assert.notEqual(payload.status, 'out_of_scope')
+  assert.notEqual(payload.status, 'medical_boundary')
+  assert.equal(response.headers['Content-Type'], 'application/json; charset=utf-8')
+  assert.equal(response.statusCode, 200)
 })
