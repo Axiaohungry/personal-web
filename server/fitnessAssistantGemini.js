@@ -640,8 +640,41 @@ async function fetchFitnessAssistantPayload(question, context, options = {}) {
   }
 }
 
+async function readRequestJsonBody(req) {
+  if (req && Object.prototype.hasOwnProperty.call(req, 'body')) {
+    if (typeof req.body === 'string') {
+      const trimmed = req.body.trim()
+      if (!trimmed) return {}
+      return JSON.parse(trimmed)
+    }
+
+    if (req.body && typeof req.body === 'object') {
+      return req.body
+    }
+
+    return {}
+  }
+
+  if (typeof req?.on !== 'function') {
+    return {}
+  }
+
+  const chunks = []
+  await new Promise((resolve, reject) => {
+    req.on('data', (chunk) => {
+      chunks.push(chunk)
+    })
+    req.on('end', resolve)
+    req.on('error', reject)
+  })
+
+  const rawBody = Buffer.concat(chunks).toString('utf8').trim()
+  if (!rawBody) return {}
+  return JSON.parse(rawBody)
+}
+
 export async function handleNodeFitnessAssistantRequest(req, res, options = {}) {
-  if (req.method && req.method !== 'GET' && req.method !== 'HEAD') {
+  if (req.method && req.method !== 'GET' && req.method !== 'HEAD' && req.method !== 'POST') {
     return sendJson(res, 405, { error: 'Method not allowed.' })
   }
 
@@ -653,8 +686,15 @@ export async function handleNodeFitnessAssistantRequest(req, res, options = {}) 
 
   try {
     const url = new URL(req.url || '/', 'http://127.0.0.1')
-    const question = url.searchParams.get('q') || ''
-    const context = url.searchParams.get('context') || ''
+    const body = (req.method || 'GET') === 'POST' ? await readRequestJsonBody(req) : {}
+    const question =
+      typeof body?.question === 'string' && body.question.trim()
+        ? body.question
+        : url.searchParams.get('q') || ''
+    const context =
+      body && typeof body.context !== 'undefined'
+        ? body.context
+        : url.searchParams.get('context') || ''
     const payload = await fetchFitnessAssistantPayload(question, context, options)
 
     return sendJson(res, 200, payload)

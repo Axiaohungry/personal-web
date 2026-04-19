@@ -124,3 +124,71 @@ test('buildUpstreamProxyUrl preserves query strings and trims trailing slash', (
     'https://personal-web-blue-six.vercel.app/api/fitness/food-search?q=oats'
   )
 })
+
+test('createHttpHandler allows POST only for the fitness assistant endpoint', async () => {
+  const { createHttpHandler } = await import('../../server/httpServer.js')
+
+  const assistantResponse = {
+    statusCode: 0,
+    headers: {},
+    body: '',
+    setHeader(name, value) {
+      this.headers[name] = value
+    },
+    end(payload = '') {
+      this.body = payload
+      return this
+    },
+  }
+
+  const handler = createHttpHandler({
+    apiKey: 'test-key',
+    fetchImpl: async () => {
+      throw new Error('assistant POST should stay on the local refusal path for this test')
+    },
+  })
+
+  await handler(
+    {
+      method: 'POST',
+      url: '/api/fitness/assistant',
+      body: JSON.stringify({
+        question: 'How do I fix a printer jam?',
+        context: {
+          goal: 'cut',
+          weeks: 8,
+          targetKg: 3,
+        },
+      }),
+    },
+    assistantResponse
+  )
+
+  assert.equal(assistantResponse.statusCode, 200)
+  assert.equal(assistantResponse.headers['Content-Type'], 'application/json; charset=utf-8')
+  assert.equal(JSON.parse(assistantResponse.body).status, 'out_of_scope')
+
+  const foodResponse = {
+    statusCode: 0,
+    headers: {},
+    body: '',
+    setHeader(name, value) {
+      this.headers[name] = value
+    },
+    end(payload = '') {
+      this.body = payload
+      return this
+    },
+  }
+
+  await handler(
+    {
+      method: 'POST',
+      url: '/api/fitness/food-search?q=oats',
+    },
+    foodResponse
+  )
+
+  assert.equal(foodResponse.statusCode, 405)
+  assert.equal(JSON.parse(foodResponse.body).error, 'Method not allowed.')
+})

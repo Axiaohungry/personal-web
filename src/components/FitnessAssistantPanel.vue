@@ -1,5 +1,5 @@
 <script setup>
-import { computed, reactive, ref } from 'vue'
+import { computed, ref } from 'vue'
 
 const props = defineProps({
   context: {
@@ -21,76 +21,126 @@ const props = defineProps({
 })
 
 const quickPrompts = [
-  '帮我把这周的计划说清楚',
-  '给我一个更稳妥的饮食建议',
-  '我想调整训练和恢复节奏',
-  '把当前目标压缩成执行步骤',
+  '把这周的训练和饮食说清楚',
+  '给我一个更稳妥的减脂建议',
+  '我想调整恢复和补剂节奏',
+  '把当前目标压成执行步骤',
+]
+
+const fitKeywords = [
+  'training',
+  'workout',
+  'lift',
+  'strength',
+  'diet',
+  'nutrition',
+  'calorie',
+  'calories',
+  'macro',
+  'protein',
+  'cardio',
+  'recovery',
+  'supplement',
+  'sleep',
+  'weight',
+  'body fat',
+  'cut',
+  'gain',
+  '减脂',
+  '增肌',
+  '训练',
+  '饮食',
+  '热量',
+  '蛋白',
+  '补剂',
+  '恢复',
+  '体重',
 ]
 
 const loading = ref(false)
 const error = ref('')
+const localNudge = ref('')
 const result = ref(null)
 const question = ref('')
 
-const contextSummary = computed(() => {
+const goalLabel = computed(() => (props.goal === 'gain' ? '增肌' : '减脂'))
+const caloriesLabel = computed(() => {
   const calories = Number(props.context.currentCalories ?? props.context.tdee)
-  const currentCalories = Number.isFinite(calories) ? `${calories} kcal` : 'not set'
-  return [
-    `goal: ${props.goal === 'gain' ? 'gain' : 'cut'}`,
-    `weeks: ${props.weeks}`,
-    `target: ${props.targetKg} kg`,
-    `calories: ${currentCalories}`,
-  ]
+  return Number.isFinite(calories) ? `${calories} kcal` : '未提供'
 })
 
-const contextPayload = computed(() => ({
-  goal: props.goal,
-  weeks: props.weeks,
-  targetKg: props.targetKg,
-  context: props.context,
-}))
+const contextSummary = computed(() => [
+  `目标：${goalLabel.value}`,
+  `周期：${props.weeks} 周`,
+  `目标变化：${props.targetKg} kg`,
+  `当前热量：${caloriesLabel.value}`,
+])
 
 const hasResult = computed(() => Boolean(result.value?.status))
-
-function setQuickPrompt(prompt) {
-  question.value = prompt
-}
+const isInScopePrompt = computed(() => {
+  const text = question.value.trim().toLowerCase()
+  if (!text) return true
+  return fitKeywords.some((keyword) => text.includes(keyword.toLowerCase()))
+})
 
 function normalizeText(value) {
   return typeof value === 'string' ? value.trim() : ''
+}
+
+function setQuickPrompt(prompt) {
+  question.value = prompt
+  localNudge.value = ''
+  error.value = ''
+}
+
+function resetTransientState() {
+  error.value = ''
+  localNudge.value = ''
+}
+
+function buildRequestBody(prompt) {
+  return {
+    question: prompt,
+    context: {
+      ...props.context,
+      goal: props.goal,
+      weeks: props.weeks,
+      targetKg: props.targetKg,
+    },
+  }
 }
 
 async function submitQuestion() {
   const prompt = normalizeText(question.value)
   if (!prompt || loading.value) return
 
-  const requestContext = {
-    ...contextPayload.value,
-    question: prompt,
+  if (!isInScopePrompt.value) {
+    localNudge.value = '这更像是站外问题。你可以把问题收回到训练、饮食、恢复、补剂、体重管理或周期安排。'
+  } else {
+    localNudge.value = ''
   }
 
   loading.value = true
   error.value = ''
 
   try {
-    const response = await fetch(
-      `/api/fitness/assistant?q=${encodeURIComponent(prompt)}&context=${encodeURIComponent(JSON.stringify(requestContext))}`,
-      {
-        headers: {
-          Accept: 'application/json',
-        },
-      }
-    )
+    const response = await fetch('/api/fitness/assistant', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(buildRequestBody(prompt)),
+    })
 
     if (!response.ok) {
       throw new Error('Request failed.')
     }
 
-    const payload = await response.json()
-    result.value = payload
+    result.value = await response.json()
   } catch {
     result.value = null
-    error.value = 'Assistant request failed. Please try again.'
+    error.value = '助手暂时不可用，请稍后再试。'
   } finally {
     loading.value = false
   }
@@ -99,25 +149,21 @@ async function submitQuestion() {
 function handleSubmit() {
   void submitQuestion()
 }
-
-function resetTransientState() {
-  error.value = ''
-}
 </script>
 
 <template>
   <section class="fitness-panel fitness-assistant-panel shell-surface motion-rise motion-rise--3">
     <div class="fitness-panel__header fitness-assistant-panel__header">
       <div>
-        <p class="fitness-panel__eyebrow">Assistant</p>
-        <h2 class="fitness-panel__title">Fitness assistant</h2>
+        <p class="fitness-panel__eyebrow">训练与健康助手</p>
+        <h2 class="fitness-panel__title">训练与健康助手</h2>
         <p class="fitness-panel__note fitness-assistant-panel__scope-note">
-          Structured guidance for training, nutrition, recovery, and module routing. Not a chat toy.
+          面向训练、饮食、恢复、补剂和模块跳转的结构化建议。先给出可执行结论，再补必要说明。
         </p>
       </div>
     </div>
 
-    <div class="fitness-assistant-panel__context" aria-label="Current fitness context">
+    <div class="fitness-assistant-panel__context" aria-label="当前目标摘要">
       <span v-for="item in contextSummary" :key="item" class="fitness-assistant-panel__context-item">
         {{ item }}
       </span>
@@ -125,11 +171,11 @@ function resetTransientState() {
 
     <form class="fitness-assistant-panel__form" @submit.prevent="handleSubmit">
       <label class="fitness-assistant-panel__field">
-        <span class="fitness-assistant-panel__label">Prompt</span>
+        <span class="fitness-assistant-panel__label">问题</span>
         <a-input
           v-model:value="question"
           class="fitness-assistant-panel__input"
-          placeholder="Ask for a practical plan, review, or adjustment"
+          placeholder="例如：这周应该怎么安排训练和饮食？"
           :disabled="loading"
           @input="resetTransientState"
         />
@@ -137,15 +183,15 @@ function resetTransientState() {
 
       <div class="fitness-assistant-panel__actions">
         <a-button type="primary" html-type="submit" :loading="loading" :disabled="!question.trim()">
-          Submit
+          发送
         </a-button>
         <p class="fitness-assistant-panel__hint">
-          Uses the same-origin assistant endpoint and returns a compact fitness answer.
+          会通过同源接口提交到训练与健康助手，返回简洁、可执行的答案。
         </p>
       </div>
     </form>
 
-    <div class="fitness-assistant-panel__chips" aria-label="Quick prompts">
+    <div class="fitness-assistant-panel__chips" aria-label="快捷提问">
       <button
         v-for="prompt in quickPrompts"
         :key="prompt"
@@ -159,6 +205,15 @@ function resetTransientState() {
     </div>
 
     <a-alert
+      v-if="localNudge"
+      class="fitness-assistant-panel__alert"
+      type="info"
+      show-icon
+      message="本地提示"
+      :description="localNudge"
+    />
+
+    <a-alert
       v-if="error"
       class="fitness-assistant-panel__alert"
       type="error"
@@ -167,12 +222,57 @@ function resetTransientState() {
     />
 
     <template v-if="hasResult">
+      <a-card
+        v-if="result.status === 'ok'"
+        class="fitness-assistant-panel__result ant-surface-card"
+        :bordered="false"
+      >
+        <div class="fitness-assistant-panel__result-header">
+          <div>
+            <p class="fitness-panel__eyebrow">结果</p>
+            <h3 class="fitness-assistant-panel__result-title">{{ result.answerTitle }}</h3>
+          </div>
+        </div>
+
+        <p class="fitness-assistant-panel__summary">{{ result.summary }}</p>
+
+        <div class="fitness-assistant-panel__result-grid">
+          <section class="fitness-assistant-panel__result-block">
+            <h4 class="fitness-assistant-panel__subheading">建议动作</h4>
+            <ul class="fitness-assistant-panel__list">
+              <li v-for="item in result.actions" :key="item">{{ item }}</li>
+            </ul>
+          </section>
+
+          <section class="fitness-assistant-panel__result-block">
+            <h4 class="fitness-assistant-panel__subheading">注意事项</h4>
+            <ul class="fitness-assistant-panel__list">
+              <li v-for="item in result.cautions" :key="item">{{ item }}</li>
+            </ul>
+          </section>
+        </div>
+
+        <section class="fitness-assistant-panel__result-block">
+          <h4 class="fitness-assistant-panel__subheading">相关模块</h4>
+          <div class="fitness-assistant-panel__module-links">
+            <a
+              v-for="module in result.relatedModules"
+              :key="module.href"
+              class="fitness-assistant-panel__module-link"
+              :href="module.href"
+            >
+              {{ module.label }}
+            </a>
+          </div>
+        </section>
+      </a-card>
+
       <a-alert
-        v-if="result.status === 'out_of_scope'"
+        v-else-if="result.status === 'out_of_scope'"
         class="fitness-assistant-panel__alert"
         type="warning"
         show-icon
-        message="Out of scope"
+        message="范围外"
       >
         <template #description>
           <p class="fitness-assistant-panel__state-copy">{{ result.summary }}</p>
@@ -187,7 +287,7 @@ function resetTransientState() {
         class="fitness-assistant-panel__alert"
         type="warning"
         show-icon
-        message="Medical boundary"
+        message="医疗边界"
       >
         <template #description>
           <p class="fitness-assistant-panel__state-copy">{{ result.summary }}</p>
@@ -196,47 +296,6 @@ function resetTransientState() {
           </ul>
         </template>
       </a-alert>
-
-      <a-card v-else class="fitness-assistant-panel__result ant-surface-card" :bordered="false">
-        <div class="fitness-assistant-panel__result-header">
-          <div>
-            <p class="fitness-panel__eyebrow">Response</p>
-            <h3 class="fitness-assistant-panel__result-title">{{ result.answerTitle }}</h3>
-          </div>
-        </div>
-
-        <p class="fitness-assistant-panel__summary">{{ result.summary }}</p>
-
-        <div class="fitness-assistant-panel__result-grid">
-          <section class="fitness-assistant-panel__result-block">
-            <h4 class="fitness-assistant-panel__subheading">Actions</h4>
-            <ul class="fitness-assistant-panel__list">
-              <li v-for="item in result.actions" :key="item">{{ item }}</li>
-            </ul>
-          </section>
-
-          <section class="fitness-assistant-panel__result-block">
-            <h4 class="fitness-assistant-panel__subheading">Cautions</h4>
-            <ul class="fitness-assistant-panel__list">
-              <li v-for="item in result.cautions" :key="item">{{ item }}</li>
-            </ul>
-          </section>
-        </div>
-
-        <section class="fitness-assistant-panel__result-block">
-          <h4 class="fitness-assistant-panel__subheading">Related modules</h4>
-          <div class="fitness-assistant-panel__module-links">
-            <a
-              v-for="module in result.relatedModules"
-              :key="module.href"
-              class="fitness-assistant-panel__module-link"
-              :href="module.href"
-            >
-              {{ module.label }}
-            </a>
-          </div>
-        </section>
-      </a-card>
     </template>
   </section>
 </template>

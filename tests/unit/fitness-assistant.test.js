@@ -149,3 +149,49 @@ test('handleNodeFitnessAssistantRequest returns a stable error for Gemini failur
   assert.equal(response.statusCode, 500)
   assert.equal(response.headers['Content-Type'], 'application/json; charset=utf-8')
 })
+
+test('handleNodeFitnessAssistantRequest accepts POST JSON bodies and prefers body question data', async () => {
+  const { handleNodeFitnessAssistantRequest } = await import('../../server/fitnessAssistantGemini.js')
+
+  const response = {
+    statusCode: 0,
+    headers: {},
+    body: '',
+    setHeader(name, value) {
+      this.headers[name] = value
+    },
+    end(payload = '') {
+      this.body = payload
+      return this
+    },
+  }
+
+  await handleNodeFitnessAssistantRequest(
+    {
+      method: 'POST',
+      url: '/fitness/assistant?q=How%20do%20I%20start%20a%20beginner%20lifting%20plan%3F',
+      body: JSON.stringify({
+        question: 'How do I fix a printer jam?',
+        context: {
+          goal: 'cut',
+          weeks: 8,
+          targetKg: 3,
+          tdee: 2100,
+        },
+      }),
+    },
+    response,
+    {
+      apiKey: 'test-key',
+      fetchImpl: async () => {
+        throw new Error('should not reach Gemini for out-of-scope prompts')
+      },
+    }
+  )
+
+  const payload = JSON.parse(response.body)
+  assert.equal(response.statusCode, 200)
+  assert.equal(response.headers['Content-Type'], 'application/json; charset=utf-8')
+  assert.equal(payload.status, 'out_of_scope')
+  assert.ok(payload.summary.length > 0)
+})

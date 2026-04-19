@@ -166,12 +166,14 @@ export function createHttpHandler(options = {}) {
 
   return async function httpHandler(req, res) {
     const method = req.method || 'GET'
-    if (!['GET', 'HEAD'].includes(method)) {
-      return sendJson(res, 405, { error: 'Method not allowed.' })
-    }
-
     const url = new URL(req.url || '/', 'http://127.0.0.1')
     const target = resolveRequestTarget(url.pathname)
+    const allowFitnessAssistantPost =
+      method === 'POST' && target.kind === 'api' && target.apiKind === 'fitness-assistant'
+
+    if (!['GET', 'HEAD'].includes(method) && !allowFitnessAssistantPost) {
+      return sendJson(res, 405, { error: 'Method not allowed.' })
+    }
 
     if (target.kind === 'invalid') {
       return sendJson(res, 400, { error: 'Invalid path.' })
