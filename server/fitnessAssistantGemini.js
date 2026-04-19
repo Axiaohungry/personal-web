@@ -302,7 +302,7 @@ function normalizeStringArray(value) {
   return value.map(cleanText).filter(Boolean)
 }
 
-function looksFitnessDomainAnswer(payload) {
+function looksClearlyOffDomainAnswer(payload) {
   const combinedText = [
     payload?.answerTitle,
     payload?.summary,
@@ -320,31 +320,43 @@ function looksFitnessDomainAnswer(payload) {
   if (!combinedText) return false
 
   return [
-    'training',
-    'workout',
-    'exercise',
-    'fitness',
-    'diet',
-    'nutrition',
-    'meal',
-    'calorie',
-    'protein',
-    'recovery',
-    'sleep',
-    'supplement',
-    'strength',
-    'muscle',
-    'fat loss',
-    '增肌',
-    '减脂',
-    '训练',
-    '饮食',
-    '恢复',
-    '补剂',
-    '健身',
-    '热量',
-    '蛋白',
-    '睡眠',
+    'office',
+    'workflow',
+    'calendar',
+    'inbox',
+    'email',
+    'meeting',
+    'spreadsheet',
+    'presentation',
+    'document',
+    'project management',
+    'programming',
+    'code',
+    'coding',
+    'javascript',
+    'typescript',
+    'python',
+    'api',
+    'database',
+    'sql',
+    'git',
+    'repository',
+    'desktop',
+    'printer',
+    'browser',
+    'customer support',
+    'sales',
+    'marketing',
+    '财务',
+    '办公',
+    '排期',
+    '邮件',
+    '代码',
+    '编程',
+    '数据库',
+    '项目管理',
+    '表格',
+    '演示',
   ].some((needle) => combinedText.includes(needle.toLowerCase()))
 }
 
@@ -570,7 +582,7 @@ export function normalizeAssistantPayload(payload, options = {}) {
   const status = normalizeStatus(payload?.status)
 
   if (status === 'ok' && isValidAssistantResponse(payload)) {
-    if (!looksFitnessDomainAnswer(payload)) {
+    if (looksClearlyOffDomainAnswer(payload)) {
       return buildSafeRefusalPayload('out_of_scope', question)
     }
 

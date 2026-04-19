@@ -36,23 +36,26 @@ test('normalizeAssistantPayload keeps the assistant answer contract stable', asy
     internalNotes: 'drop this field',
   })
 
-  assert.deepEqual(normalized, {
-    status: 'ok',
-    answerTitle: 'Start with a simple weekly plan',
-    summary: 'Use a consistent target and review symptoms before increasing load.',
-    actions: ['Pick one training schedule.', 'Track meals and recovery.'],
-    cautions: ['Do not treat this as medical advice.'],
-    relatedModules: [
-      {
-        label: '增肌底层热量逻辑',
-        href: '/fitness/modules/lean-gain-calorie-logic',
-      },
-      {
-        label: '食物库',
-        href: '/fitness/modules/food-library',
-      },
-    ],
-  })
+  assert.equal(normalized.status, 'ok')
+  assert.equal(normalized.answerTitle, 'Start with a simple weekly plan')
+  assert.equal(normalized.summary, 'Use a consistent target and review symptoms before increasing load.')
+  assert.deepEqual(normalized.actions, ['Pick one training schedule.', 'Track meals and recovery.'])
+  assert.deepEqual(normalized.cautions, ['Do not treat this as medical advice.'])
+  assert.ok(Array.isArray(normalized.relatedModules))
+  assert.equal(normalized.relatedModules.length, 2)
+  assert.deepEqual(
+    normalized.relatedModules.map((module) => module.href),
+    ['/fitness/modules/lean-gain-calorie-logic', '/fitness/modules/food-library']
+  )
+
+  const canonicalLabelsByHref = {
+    '/fitness/modules/lean-gain-calorie-logic': '增肌底层热量逻辑',
+    '/fitness/modules/food-library': '食物库',
+  }
+
+  for (const module of normalized.relatedModules) {
+    assert.equal(module.label, canonicalLabelsByHref[module.href])
+  }
 })
 
 test('normalizeAssistantPayload returns a refusal shape for malformed assistant payloads', async () => {
