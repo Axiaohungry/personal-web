@@ -302,7 +302,7 @@ function normalizeStringArray(value) {
   return value.map(cleanText).filter(Boolean)
 }
 
-function looksFitnessDomainAnswer(payload, question) {
+function looksFitnessDomainAnswer(payload) {
   const combinedText = [
     payload?.answerTitle,
     payload?.summary,
@@ -311,7 +311,6 @@ function looksFitnessDomainAnswer(payload, question) {
     ...(Array.isArray(payload?.relatedModules)
       ? payload.relatedModules.map((module) => module?.label)
       : []),
-    question,
   ]
     .map(cleanText)
     .filter(Boolean)
@@ -571,7 +570,7 @@ export function normalizeAssistantPayload(payload, options = {}) {
   const status = normalizeStatus(payload?.status)
 
   if (status === 'ok' && isValidAssistantResponse(payload)) {
-    if (!looksFitnessDomainAnswer(payload, question)) {
+    if (!looksFitnessDomainAnswer(payload)) {
       return buildSafeRefusalPayload('out_of_scope', question)
     }
 

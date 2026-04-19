@@ -87,22 +87,25 @@ test('normalizeAssistantPayload rejects invalid model statuses without fabricati
   assert.notEqual(normalized.status, 'ok')
 })
 
-test('normalizeAssistantPayload refuses structurally valid but off-domain ok payloads', async () => {
+test('normalizeAssistantPayload refuses off-domain ok payloads even for fitness questions', async () => {
   const { normalizeAssistantPayload } = await import('../../server/fitnessAssistantGemini.js')
 
-  const normalized = normalizeAssistantPayload({
-    status: 'ok',
-    answerTitle: 'Organize your office workflow',
-    summary: 'Use a shared calendar and clear inbox rules to keep projects moving.',
-    actions: ['Sort your files by project.', 'Schedule a weekly admin review.'],
-    cautions: ['Do not let meetings stack up.'],
-    relatedModules: [
-      {
-        label: 'Random notes',
-        href: '/fitness/modules/food-library',
-      },
-    ],
-  })
+  const normalized = normalizeAssistantPayload(
+    {
+      status: 'ok',
+      answerTitle: 'Organize your office workflow',
+      summary: 'Use a shared calendar and clear inbox rules to keep projects moving.',
+      actions: ['Sort your files by project.', 'Schedule a weekly admin review.'],
+      cautions: ['Do not let meetings stack up.'],
+      relatedModules: [
+        {
+          label: 'Random notes',
+          href: '/fitness/modules/food-library',
+        },
+      ],
+    },
+    { question: 'How do I build a beginner lifting plan?' }
+  )
 
   assert.equal(normalized.status, 'out_of_scope')
   assert.notEqual(normalized.status, 'ok')
