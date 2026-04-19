@@ -5,19 +5,19 @@ const DEFAULT_GEMINI_MODEL = 'gemini-2.5-flash'
 
 const FITNESS_MODULES = {
   training: {
-    label: 'Fenjue training system',
+    label: '谭成义焚诀训练体系',
     href: '/fitness/modules/fenjue-training-system',
   },
   food: {
-    label: 'Food library',
+    label: '食物库',
     href: '/fitness/modules/food-library',
   },
   supplements: {
-    label: 'Supplement library',
+    label: '补剂库',
     href: '/fitness/modules/supplement-library',
   },
   leanGain: {
-    label: 'Lean gain calorie logic',
+    label: '增肌底层热量逻辑',
     href: '/fitness/modules/lean-gain-calorie-logic',
   },
 }
@@ -281,6 +281,23 @@ function pickModulesByTopic(topic) {
   }
 }
 
+function canonicalModuleLabelForHref(href) {
+  const normalizedHref = cleanText(href)
+
+  switch (normalizedHref) {
+    case '/fitness/modules/fenjue-training-system':
+      return FITNESS_MODULES.training.label
+    case '/fitness/modules/food-library':
+      return FITNESS_MODULES.food.label
+    case '/fitness/modules/supplement-library':
+      return FITNESS_MODULES.supplements.label
+    case '/fitness/modules/lean-gain-calorie-logic':
+      return FITNESS_MODULES.leanGain.label
+    default:
+      return ''
+  }
+}
+
 function normalizeStringArray(value) {
   if (!Array.isArray(value)) return []
   return value.map(cleanText).filter(Boolean)
@@ -290,8 +307,8 @@ function normalizeRelatedModules(value, question) {
   const modules = Array.isArray(value)
     ? value
         .map((module) => ({
-          label: cleanText(module?.label),
           href: cleanText(module?.href),
+          label: canonicalModuleLabelForHref(module?.href) || cleanText(module?.label),
         }))
         .filter((module) => module.label && module.href && module.href.startsWith('/fitness/modules/'))
     : []
@@ -307,16 +324,16 @@ function buildSafeRefusalPayload(status, question) {
   if (status === 'medical_boundary') {
     return {
       status,
-      answerTitle: 'I cannot help with diagnosis or treatment',
+      answerTitle: '我不能帮你判断诊断或用药',
       summary:
-        'I can help with training, diet, recovery, supplements, and general health habits, but not diagnosis, prescriptions, pharmacy questions, or lab-result interpretation.',
+        '我可以回答训练、饮食、恢复、补剂和健康习惯，但不能做诊断、处方、药房问题或化验结果解读。',
       actions: [
-        'Ask a licensed clinician about diagnosis, treatment, or medication decisions.',
-        'Use this assistant for training, nutrition, recovery, supplements, or health habits instead.',
+        '请咨询有执照的医生或药师来处理诊断、治疗或用药决定。',
+        '如果是训练、营养、恢复、补剂或习惯问题，我可以继续帮你。',
       ],
       cautions: [
-        'Do not use this assistant as a substitute for medical care.',
-        'Seek urgent care immediately for severe or rapidly worsening symptoms.',
+        '不要把这个助手当作医疗建议的替代品。',
+        '如果症状严重或快速加重，请尽快就医。',
       ],
       relatedModules,
     }
@@ -324,16 +341,16 @@ function buildSafeRefusalPayload(status, question) {
 
   return {
     status: 'out_of_scope',
-    answerTitle: topic === 'general' ? 'I can only help with fitness topics' : 'I can only help with fitness guidance',
+    answerTitle: topic === 'general' ? '我只能回答健身相关问题' : '我只能回答健身指导问题',
     summary:
-      'I can help with training, diet, recovery, supplements, and general health habits.',
+      '我可以回答训练、饮食、恢复、补剂和健康习惯。',
     actions: [
-      'Ask about a workout plan, nutrition strategy, recovery routine, supplement choice, or healthy habit.',
-      'If you want, narrow the question to a goal such as fat loss, muscle gain, or recovery.',
+      '你可以继续问训练计划、饮食策略、恢复安排、补剂选择或健康习惯。',
+      '如果愿意，可以把问题收窄到减脂、增肌或恢复这类具体目标。',
     ],
     cautions: [
-      'I cannot answer unrelated non-fitness topics.',
-      'I will refuse medical diagnosis, prescriptions, and lab-result interpretation.',
+      '我不会回答与健身无关的话题。',
+      '我会拒绝诊断、处方和化验结果解读。',
     ],
     relatedModules,
   }
@@ -447,19 +464,19 @@ export function classifyAssistantQuestion(question) {
   const text = normalizeQuestion(question)
 
   if (!text) {
-    return { status: 'out_of_scope', topic: 'general' }
+    return { status: 'out_of_scope' }
   }
 
   if (hasMedicalBoundary(text)) {
-    return { status: 'medical_boundary', topic: detectScopeTopic(text) }
+    return { status: 'medical_boundary' }
   }
 
   const topic = detectScopeTopic(text)
   if (topic !== 'general') {
-    return { status: 'in_scope', topic }
+    return { status: 'ok' }
   }
 
-  return { status: 'out_of_scope', topic }
+  return { status: 'out_of_scope' }
 }
 
 export function buildAssistantRelatedModules(question) {
@@ -612,8 +629,8 @@ export async function handleNodeFitnessAssistantRequest(req, res, options = {}) 
   } catch {
     return sendJson(res, 500, {
       status: 'out_of_scope',
-      answerTitle: 'Fitness assistant unavailable',
-      summary: 'Please try again later.',
+      answerTitle: '健身助手暂时不可用',
+      summary: '请稍后再试。',
       actions: [],
       cautions: [],
       relatedModules: buildAssistantRelatedModules(''),
