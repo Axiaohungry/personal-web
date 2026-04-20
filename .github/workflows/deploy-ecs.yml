@@ -25,6 +25,7 @@ jobs:
       - name: Deploy to local ECS runtime
         shell: bash
         env:
+          MODE: ${{ vars.ECS_DEPLOY_MODE || 'proxy' }}
           FITNESS_API_UPSTREAM_BASE_URL: ${{ secrets.FITNESS_API_UPSTREAM_BASE_URL }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
