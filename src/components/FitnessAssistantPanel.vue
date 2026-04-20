@@ -6,6 +6,10 @@ const props = defineProps({
     type: Object,
     default: () => ({}),
   },
+  embedded: {
+    type: Boolean,
+    default: false,
+  },
   goal: {
     type: String,
     default: 'cut',
@@ -152,7 +156,13 @@ function handleSubmit() {
 </script>
 
 <template>
-  <section class="fitness-panel fitness-assistant-panel shell-surface motion-rise motion-rise--3">
+  <section
+    class="fitness-panel fitness-assistant-panel"
+    :class="{
+      'shell-surface motion-rise motion-rise--3': !props.embedded,
+      'fitness-assistant-panel--embedded': props.embedded,
+    }"
+  >
     <div class="fitness-panel__header fitness-assistant-panel__header">
       <div>
         <p class="fitness-panel__eyebrow">训练与健康助手</p>

@@ -7,6 +7,7 @@ const DEFAULT_AI_NEWS_TTL_MS = 20 * 60 * 1000
 const AI_NEWS_SYSTEM_INSTRUCTION = [
   'You are an editorial assistant for a homepage AI news brief.',
   'Return only JSON.',
+  'Use Chinese field values for story title, summary, whyItMatters, and sourceLabel.',
   'Use a source-oriented, factual tone.',
   'Do not add personal commentary, hype, or speculation.',
   'Ground every story in public reporting or an official announcement that can be cited.',
@@ -73,44 +74,6 @@ function isValidStory(story) {
   )
 }
 
-function buildAiNewsResponseSchema() {
-  return {
-    type: 'object',
-    additionalProperties: false,
-    properties: {
-      updatedAt: {
-        type: 'string',
-        format: 'date-time',
-      },
-      stories: {
-        type: 'array',
-        maxItems: 3,
-        items: {
-          type: 'object',
-          additionalProperties: false,
-          properties: {
-            title: { type: 'string' },
-            summary: { type: 'string' },
-            whyItMatters: { type: 'string' },
-            sourceLabel: { type: 'string' },
-            sourceUrl: { type: 'string' },
-            publishedAt: { type: 'string', format: 'date-time' },
-          },
-          required: [
-            'title',
-            'summary',
-            'whyItMatters',
-            'sourceLabel',
-            'sourceUrl',
-            'publishedAt',
-          ],
-        },
-      },
-    },
-    required: ['updatedAt', 'stories'],
-  }
-}
-
 function normalizeStory(story) {
   if (!isValidStory(story)) {
     return null
@@ -175,7 +138,6 @@ function extractJsonPayload(text) {
 
 export function buildAiNewsRequestBody(nowIso) {
   const currentIso = isValidIsoDate(nowIso) ? cleanText(nowIso) : new Date().toISOString()
-  const responseJsonSchema = buildAiNewsResponseSchema()
 
   return {
     systemInstruction: {
@@ -193,8 +155,11 @@ export function buildAiNewsRequestBody(nowIso) {
               `Current UTC timestamp: ${currentIso}`,
               'Write a short homepage AI news brief with the latest public AI developments.',
               'Use the Google Search tool to ground each story in a recent, publicly accessible source.',
+              'Translate the story title, summary, whyItMatters, and sourceLabel into concise Chinese for display.',
               'Return only JSON with this shape:',
               '{"updatedAt":"ISO-8601 string","stories":[{"title":"","summary":"","whyItMatters":"","sourceLabel":"","sourceUrl":"","publishedAt":"ISO-8601 string"}]}',
+              'Return exactly three stories when enough grounded sources are available.',
+              'Do not use markdown fences, commentary, or explanatory prose outside the JSON object.',
               'Keep stories concise, factual, and suitable for a product homepage.',
               'Do not include unsupported claims or personal commentary.',
             ].join('\n'),
@@ -209,8 +174,6 @@ export function buildAiNewsRequestBody(nowIso) {
     ],
     generationConfig: {
       temperature: 0.2,
-      responseMimeType: 'application/json',
-      responseJsonSchema,
     },
   }
 }

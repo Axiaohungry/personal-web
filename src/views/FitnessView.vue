@@ -3,7 +3,6 @@ import { computed, reactive, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 
 import FutureModules from '@/components/FutureModules.vue'
-import FitnessAssistantPanel from '@/components/FitnessAssistantPanel.vue'
 import SiteHeader from '@/components/SiteHeader.vue'
 import TdeeBreakdown from '@/components/TdeeBreakdown.vue'
 import TdeeForm from '@/components/TdeeForm.vue'
@@ -255,13 +254,6 @@ const moduleContext = computed(() => ({
           :history="history"
           :planning="planningContext"
           :active-key="currentScenarioKey"
-        />
-
-        <FitnessAssistantPanel
-          :context="moduleContext"
-          :goal="moduleGoal"
-          :weeks="moduleWeeks"
-          :target-kg="moduleTargetKg"
         />
 
         <div class="motion-rise motion-rise--4">

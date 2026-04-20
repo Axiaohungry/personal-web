@@ -22,10 +22,15 @@ test('home view imports or renders the AI news brief', async () => {
 
 test('fitness view imports or renders the fitness assistant panel', async () => {
   const fitnessView = await readFile(new URL('../../src/views/FitnessView.vue', import.meta.url), 'utf8')
+  const modulesView = await readFile(new URL('../../src/components/FutureModules.vue', import.meta.url), 'utf8')
 
   assert.match(
     fitnessView,
-    /<TdeeSummary[\s\S]*<FitnessAssistantPanel\b[\s\S]*<FutureModules/
+    /<TdeeSummary[\s\S]*<FutureModules/
+  )
+  assert.match(
+    modulesView,
+    /modules-toolbar[\s\S]*<FitnessAssistantPanel\b[\s\S]*modules-tabs/
   )
 })
 
