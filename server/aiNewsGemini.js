@@ -1,4 +1,9 @@
 import { sendJson } from './fitnessGemini.js'
+import {
+  attachUpstreamDebugInfo,
+  buildDebugErrorPayload,
+  extractUpstreamErrorMessage,
+} from './geminiErrorDebug.js'
 
 // 这个模块专门负责首页“AI 最新动态”：
 // - 组织 Gemini 请求；
@@ -269,15 +274,36 @@ async function fetchGeminiJson(requestBody, options = {}) {
       body: JSON.stringify(requestBody),
     })
   } catch {
-    throw createRetryableHttpError(502, 'Gemini upstream unavailable.')
+    // 新闻简报有 stale cache 兜底；这里仍保留模型名，便于本地判断上游是否根本没响应。
+    throw attachUpstreamDebugInfo(
+      createRetryableHttpError(502, 'Gemini upstream unavailable.'),
+      {
+        upstreamError: 'Network request failed before a Gemini response was received.',
+        model,
+      }
+    )
   }
 
   if (!response.ok) {
-    if (response.status >= 500 || response.status === 429 || response.status === 408) {
-      throw createRetryableHttpError(502, 'Gemini upstream unavailable.')
+    const errorText = await response.text()
+    // Gemini 返回非 2xx 时，先提取稳定的调试字段，再根据状态决定是否可复用旧缓存。
+    const upstreamDetails = {
+      upstreamStatus: response.status,
+      upstreamError: extractUpstreamErrorMessage(errorText),
+      model,
     }
 
-    throw createHttpError(502, 'Unable to refresh AI news right now.')
+    if (response.status >= 500 || response.status === 429 || response.status === 408) {
+      throw attachUpstreamDebugInfo(
+        createRetryableHttpError(502, 'Gemini upstream unavailable.'),
+        upstreamDetails
+      )
+    }
+
+    throw attachUpstreamDebugInfo(
+      createHttpError(502, 'Unable to refresh AI news right now.'),
+      upstreamDetails
+    )
   }
 
   const payload = await response.json()
@@ -320,7 +346,12 @@ export async function fetchAiNewsBrief(options = {}) {
       return staleValue
     }
 
-    const stableError = createStableAiNewsError()
+    // 没有可用旧缓存时仍返回统一错误，同时把底层调试信息传给本地 handler。
+    const stableError = attachUpstreamDebugInfo(createStableAiNewsError(), {
+      upstreamStatus: error?.upstreamStatus,
+      upstreamError: error?.upstreamError,
+      model: error?.model,
+    })
     stableError.cause = error
     throw stableError
   }
@@ -348,8 +379,11 @@ export async function handleNodeAiNewsRequest(req, res, options = {}) {
 
     return sendJson(res, 200, payload)
   } catch (error) {
-    return sendJson(res, error.statusCode || 500, {
-      error: error.message,
-    })
+    return sendJson(
+      res,
+      error.statusCode || 500,
+      // 生产环境只给稳定文案；本地开发模式才把 Gemini 上游字段附到响应里。
+      buildDebugErrorPayload(error, 'Unable to refresh AI news right now.', options)
+    )
   }
 }

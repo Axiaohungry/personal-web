@@ -1,5 +1,10 @@
 import { sendJson } from './fitnessGemini.js'
 import {
+  attachUpstreamDebugInfo,
+  buildDebugErrorPayload,
+  extractUpstreamErrorMessage,
+} from './geminiErrorDebug.js'
+import {
   getFitnessModuleByRoutePath,
   pickFitnessModulesByAssistantTopic,
 } from '../src/data/fitnessModules.js'
@@ -604,11 +609,33 @@ async function requestGeminiJson(question, context, options = {}) {
     })
   } catch {
     // 网络层失败和模型 5xx 都对外统一成稳定文案，避免前端暴露上游细节。
-    throw createHttpError(502, 'Gemini upstream unavailable.')
+    // 但本地排查 502 时仍需要知道请求是在拿到响应前就失败了。
+    throw attachUpstreamDebugInfo(createHttpError(502, 'Gemini upstream unavailable.'), {
+      upstreamError: 'Network request failed before a Gemini response was received.',
+      model,
+    })
   }
 
   if (!response.ok) {
-    throw createHttpError(502, 'Unable to answer right now.')
+    const errorText = await response.text()
+    // 训练助手会再次包装错误，所以先把上游状态和模型名集中成一个可传递对象。
+    const upstreamDetails = {
+      upstreamStatus: response.status,
+      upstreamError: extractUpstreamErrorMessage(errorText),
+      model,
+    }
+
+    if (response.status >= 500 || response.status === 429 || response.status === 408) {
+      throw attachUpstreamDebugInfo(
+        createHttpError(502, 'Gemini upstream unavailable.'),
+        upstreamDetails
+      )
+    }
+
+    throw attachUpstreamDebugInfo(
+      createHttpError(502, 'Unable to answer right now.'),
+      upstreamDetails
+    )
   }
 
   const payload = await response.json()
@@ -627,7 +654,17 @@ async function fetchFitnessAssistantPayload(question, context, options = {}) {
     const rawPayload = await requestGeminiJson(question, context, options)
     return normalizeAssistantPayload(rawPayload, { question })
   } catch (error) {
-    throw createHttpError(500, 'Unable to answer right now.')
+    // 对用户仍然是稳定文案；本地 debug 字段从底层错误一路透传到 handler。
+    const stableError = attachUpstreamDebugInfo(
+      createHttpError(500, 'Unable to answer right now.'),
+      {
+        upstreamStatus: error?.upstreamStatus,
+        upstreamError: error?.upstreamError,
+        model: error?.model,
+      }
+    )
+    stableError.cause = error
+    throw stableError
   }
 }
 
@@ -691,8 +728,11 @@ export async function handleNodeFitnessAssistantRequest(req, res, options = {}) 
 
     return sendJson(res, 200, payload)
   } catch (error) {
-    return sendJson(res, error?.statusCode || 500, {
-      error: 'Unable to answer right now.',
-    })
+    return sendJson(
+      res,
+      error?.statusCode || 500,
+      // 线上不暴露 Gemini 细节，本地开发则可看到 upstreamStatus/upstreamError/model。
+      buildDebugErrorPayload(error, 'Unable to answer right now.', options)
+    )
   }
 }

@@ -1,7 +1,11 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 
-import { fetchFoodResults, fetchSupplementResults } from '../../server/fitnessGemini.js'
+import {
+  fetchFoodResults,
+  fetchSupplementResults,
+  handleNodeSearchRequest,
+} from '../../server/fitnessGemini.js'
 
 test('fetchFoodResults calls Gemini JSON mode and normalizes 100g rows', async () => {
   let capturedRequest = null
@@ -119,4 +123,117 @@ test('fetchFoodResults rejects missing Gemini credentials', async () => {
     () => fetchFoodResults('鸡胸肉', { apiKey: '' }),
     /GEMINI_API_KEY/
   )
+})
+
+test('handleNodeSearchRequest exposes upstream details only when local debug is enabled', async () => {
+  const createResponse = () => ({
+    statusCode: 0,
+    headers: {},
+    body: '',
+    setHeader(name, value) {
+      this.headers[name] = value
+    },
+    end(payload = '') {
+      this.body = payload
+      return this
+    },
+  })
+
+  const fetchImpl = async () =>
+    new Response(
+      JSON.stringify({
+        error: {
+          code: 429,
+          message: 'Your prepayment credits are depleted.',
+          status: 'RESOURCE_EXHAUSTED',
+        },
+      }),
+      {
+        status: 429,
+        headers: { 'Content-Type': 'application/json' },
+      }
+    )
+
+  const productionResponse = createResponse()
+  await handleNodeSearchRequest(
+    {
+      method: 'GET',
+      url: '/api/fitness/food-search?q=banana',
+    },
+    productionResponse,
+    'food',
+    {
+      apiKey: 'test-key',
+      fetchImpl,
+      model: 'gemma-4-31b-it',
+    }
+  )
+
+  assert.equal(productionResponse.statusCode, 502)
+  assert.deepEqual(JSON.parse(productionResponse.body), {
+    error: 'Gemini request failed.',
+  })
+
+  const debugResponse = createResponse()
+  await handleNodeSearchRequest(
+    {
+      method: 'GET',
+      url: '/api/fitness/food-search?q=banana',
+    },
+    debugResponse,
+    'food',
+    {
+      apiKey: 'test-key',
+      fetchImpl,
+      model: 'gemma-4-31b-it',
+      debugUpstreamErrors: true,
+    }
+  )
+
+  assert.equal(debugResponse.statusCode, 502)
+  assert.deepEqual(JSON.parse(debugResponse.body), {
+    error: 'Gemini request failed.',
+    upstreamStatus: 429,
+    upstreamError: 'Your prepayment credits are depleted.',
+    model: 'gemma-4-31b-it',
+  })
+})
+
+test('handleNodeSearchRequest reports local debug details for network failures before Gemini responds', async () => {
+  const response = {
+    statusCode: 0,
+    headers: {},
+    body: '',
+    setHeader(name, value) {
+      this.headers[name] = value
+    },
+    end(payload = '') {
+      this.body = payload
+      return this
+    },
+  }
+
+  await handleNodeSearchRequest(
+    {
+      method: 'GET',
+      url: '/api/fitness/supplement-search?q=creatine',
+    },
+    response,
+    'supplement',
+    {
+      apiKey: 'test-key',
+      model: 'gemma-4-31b-it',
+      debugUpstreamErrors: true,
+      fetchImpl: async () => {
+        throw new TypeError('fetch failed')
+      },
+    }
+  )
+
+  assert.equal(response.statusCode, 502)
+  assert.deepEqual(JSON.parse(response.body), {
+    error: 'Gemini request failed.',
+    upstreamError: 'Network request failed before a Gemini response was received.',
+    model: 'gemma-4-31b-it',
+  })
 })

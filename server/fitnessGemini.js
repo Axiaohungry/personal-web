@@ -1,3 +1,9 @@
+import {
+  attachUpstreamDebugInfo,
+  buildDebugErrorPayload,
+  extractUpstreamErrorMessage,
+} from './geminiErrorDebug.js'
+
 const GEMINI_API_ROOT = 'https://generativelanguage.googleapis.com/v1beta'
 const DEFAULT_GEMINI_MODEL = 'gemini-2.5-flash'
 
@@ -201,18 +207,36 @@ async function requestGemini(kind, query, options = {}) {
     throw createHttpError(500, 'Missing GEMINI_API_KEY configuration.')
   }
 
-  const response = await fetchImpl(`${GEMINI_API_ROOT}/models/${model}:generateContent`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-goog-api-key': apiKey,
-    },
-    body: JSON.stringify(buildRequestBody(kind, normalizedQuery)),
-  })
+  let response
+
+  try {
+    response = await fetchImpl(`${GEMINI_API_ROOT}/models/${model}:generateContent`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-goog-api-key': apiKey,
+      },
+      body: JSON.stringify(buildRequestBody(kind, normalizedQuery)),
+    })
+  } catch {
+    // 请求还没拿到 Gemini 响应时，也保留模型名，方便本地判断网络、代理或区域问题。
+    throw attachUpstreamDebugInfo(createHttpError(502, 'Gemini request failed.'), {
+      upstreamError: 'Network request failed before a Gemini response was received.',
+      model,
+    })
+  }
 
   if (!response.ok) {
     const errorText = await response.text()
-    throw createHttpError(502, `Gemini request failed: ${response.status} ${errorText}`.trim())
+    // 上游已返回错误时只提取可读信息；是否对外展示由 buildDebugErrorPayload 决定。
+    throw attachUpstreamDebugInfo(
+      createHttpError(502, 'Gemini request failed.'),
+      {
+        upstreamStatus: response.status,
+        upstreamError: extractUpstreamErrorMessage(errorText),
+        model,
+      }
+    )
   }
 
   const payload = await response.json()
@@ -252,6 +276,11 @@ export async function handleNodeSearchRequest(req, res, kind, options = {}) {
 
     return sendJson(res, 200, { items })
   } catch (error) {
-    return sendJson(res, error.statusCode || 500, { error: error.message })
+    // 这里统一收口响应结构，避免各入口自己决定是否暴露 Gemini 的原始错误。
+    return sendJson(
+      res,
+      error.statusCode || 500,
+      buildDebugErrorPayload(error, 'Gemini request failed.', options)
+    )
   }
 }

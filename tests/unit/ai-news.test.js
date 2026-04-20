@@ -317,3 +317,56 @@ test('AI news brief keeps actions in the header and stacks story cards below', a
   assert.match(styleFile, /\.ai-news-brief__stories\s*\{[^}]*flex-direction:\s*column;/)
   assert.doesNotMatch(styleFile, /\.ai-news-brief__stories\s*\{[^}]*grid-template-columns:\s*repeat\(3,\s*minmax\(0,\s*1fr\)\);/)
 })
+
+test('handleNodeAiNewsRequest includes upstream details in local debug mode', async () => {
+  const { createAiNewsCache, handleNodeAiNewsRequest } = await import('../../server/aiNewsGemini.js')
+
+  const response = {
+    statusCode: 0,
+    headers: {},
+    body: '',
+    setHeader(name, value) {
+      this.headers[name] = value
+    },
+    end(payload = '') {
+      this.body = payload
+      return this
+    },
+  }
+
+  await handleNodeAiNewsRequest(
+    {
+      method: 'GET',
+      url: '/api/ai/news-brief?nowIso=2026-04-20T00%3A00%3A00.000Z',
+    },
+    response,
+    {
+      apiKey: 'test-key',
+      model: 'gemma-4-31b-it',
+      debugUpstreamErrors: true,
+      cache: createAiNewsCache(),
+      fetchImpl: async () =>
+        new Response(
+          JSON.stringify({
+            error: {
+              code: 429,
+              message: 'Your prepayment credits are depleted.',
+              status: 'RESOURCE_EXHAUSTED',
+            },
+          }),
+          {
+            status: 429,
+            headers: { 'Content-Type': 'application/json' },
+          }
+        ),
+    }
+  )
+
+  assert.equal(response.statusCode, 502)
+  assert.deepEqual(JSON.parse(response.body), {
+    error: 'Unable to refresh AI news right now.',
+    upstreamStatus: 429,
+    upstreamError: 'Your prepayment credits are depleted.',
+    model: 'gemma-4-31b-it',
+  })
+})

@@ -46,6 +46,8 @@ export default defineConfig(({ mode }) => {
   const apiOptions = {
     apiKey: env.GEMINI_API_KEY || process.env.GEMINI_API_KEY,
     model: env.GEMINI_MODEL || process.env.GEMINI_MODEL,
+    // 只在本地 dev/preview 暴露上游调试信息，production 仍保持模糊错误文案。
+    debugUpstreamErrors: mode !== 'production',
   }
 
   return {

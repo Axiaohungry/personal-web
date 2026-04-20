@@ -270,3 +270,55 @@ test('handleNodeFitnessAssistantRequest reads POST JSON from a stream when req.b
   assert.equal(payload.status, 'out_of_scope')
   assert.ok(payload.summary.length > 0)
 })
+
+test('handleNodeFitnessAssistantRequest includes upstream details in local debug mode', async () => {
+  const { handleNodeFitnessAssistantRequest } = await import('../../server/fitnessAssistantGemini.js')
+
+  const response = {
+    statusCode: 0,
+    headers: {},
+    body: '',
+    setHeader(name, value) {
+      this.headers[name] = value
+    },
+    end(payload = '') {
+      this.body = payload
+      return this
+    },
+  }
+
+  await handleNodeFitnessAssistantRequest(
+    {
+      method: 'GET',
+      url: '/fitness/assistant?q=How%20do%20I%20set%20up%20a%20beginner%20lifting%20plan%3F',
+    },
+    response,
+    {
+      apiKey: 'test-key',
+      model: 'gemma-4-31b-it',
+      debugUpstreamErrors: true,
+      fetchImpl: async () =>
+        new Response(
+          JSON.stringify({
+            error: {
+              code: 429,
+              message: 'Your prepayment credits are depleted.',
+              status: 'RESOURCE_EXHAUSTED',
+            },
+          }),
+          {
+            status: 429,
+            headers: { 'Content-Type': 'application/json' },
+          }
+        ),
+    }
+  )
+
+  assert.equal(response.statusCode, 500)
+  assert.deepEqual(JSON.parse(response.body), {
+    error: 'Unable to answer right now.',
+    upstreamStatus: 429,
+    upstreamError: 'Your prepayment credits are depleted.',
+    model: 'gemma-4-31b-it',
+  })
+})
