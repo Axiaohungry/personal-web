@@ -470,3 +470,74 @@ test('handleNodeAiNewsRequest accepts Gemma news JSON wrapped in prose and commo
     ],
   })
 })
+
+test('handleNodeAiNewsRequest prefers the final grounded JSON over prompt example JSON embedded in reasoning', async () => {
+  const { createAiNewsCache, handleNodeAiNewsRequest } = await import('../../server/aiNewsGemini.js')
+
+  const response = {
+    statusCode: 0,
+    headers: {},
+    body: '',
+    setHeader(name, value) {
+      this.headers[name] = value
+    },
+    end(payload = '') {
+      this.body = payload
+      return this
+    },
+  }
+
+  await handleNodeAiNewsRequest(
+    {
+      method: 'GET',
+      url: '/api/ai/news-brief?nowIso=2026-04-20T08%3A00%3A00.000Z',
+    },
+    response,
+    {
+      apiKey: 'test-key',
+      model: 'gemma-4-31b-it',
+      cache: createAiNewsCache(),
+      fetchImpl: async () =>
+        new Response(
+          JSON.stringify({
+            candidates: [
+              {
+                content: {
+                  parts: [
+                    {
+                      text: [
+                        'Thinking about the request.',
+                        'Use this JSON shape as a guide:',
+                        '{"updatedAt":"ISO-8601 string","stories":[{"title":"","summary":"","whyItMatters":"","sourceLabel":"","sourceUrl":"","publishedAt":"ISO-8601 string"}]}',
+                        'Now here is the grounded result:',
+                        '{"updatedAt":"2026-04-20T15:02:00Z","stories":[{"title":"Anthropic 发布 Claude Opus 4.7","summary":"Anthropic 于 4 月 16 日推出 Claude Opus 4.7。","whyItMatters":"说明模型在专业技术任务上的自主性继续提升。","sourceLabel":"Anthropic","sourceUrl":"https://www.anthropic.com/news/claude-opus-4-7","publishedAt":"2026-04-16T00:00:00Z"}]}',
+                      ].join('\n'),
+                    },
+                  ],
+                },
+              },
+            ],
+          }),
+          {
+            status: 200,
+            headers: { 'Content-Type': 'application/json' },
+          }
+        ),
+    }
+  )
+
+  assert.equal(response.statusCode, 200)
+  assert.deepEqual(JSON.parse(response.body), {
+    updatedAt: '2026-04-20T15:02:00Z',
+    stories: [
+      {
+        title: 'Anthropic 发布 Claude Opus 4.7',
+        summary: 'Anthropic 于 4 月 16 日推出 Claude Opus 4.7。',
+        whyItMatters: '说明模型在专业技术任务上的自主性继续提升。',
+        sourceLabel: 'Anthropic',
+        sourceUrl: 'https://www.anthropic.com/news/claude-opus-4-7',
+        publishedAt: '2026-04-16T00:00:00Z',
+      },
+    ],
+  })
+})

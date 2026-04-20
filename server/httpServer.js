@@ -77,8 +77,8 @@ export function resolveRequestTarget(rawPathname) {
     return { kind: 'asset', relativePath: pathname.slice(1) }
   }
 
-  // Project pages and project images share the /projects/ prefix.
-  // Only treat /projects/* as a static asset when the request clearly targets a file.
+  // 项目详情页和项目图片都共用 /projects/ 前缀。
+  // 只有当路径明确指向某个文件时，才把 /projects/* 识别成静态资源。
   if (pathname.startsWith('/projects/') && path.extname(pathname)) {
     return { kind: 'asset', relativePath: pathname.slice(1) }
   }

@@ -3,7 +3,7 @@ function cleanText(value) {
 }
 
 function createJsonParseError(message, cause, sourceText) {
-  // 这里不仅抛一个“JSON 失败”的错误，还保留上游预览片段，便于本地 debug 看见模型原始漂移形态。
+  // 保留一小段上游预览，方便本地排查模型输出为什么偏离预期。
   const error = new Error(message)
   error.statusCode = 502
   error.upstreamError = `${message}: ${cause?.message || 'unknown parse error'}`
@@ -12,30 +12,29 @@ function createJsonParseError(message, cause, sourceText) {
 }
 
 function stripMarkdownFence(text) {
-  // 模型最常见的漂移之一是把 JSON 包进 ```json 代码块里，先做一层剥离。
+  // 有些模型即使被要求只回 JSON，仍会额外包上一层 ```json 代码块。
   const trimmed = cleanText(text)
   const fencedMatch = trimmed.match(/```(?:json)?\s*([\s\S]*?)\s*```/i)
   return cleanText(fencedMatch?.[1] || trimmed)
 }
 
 function removeTrailingCommas(text) {
-  // Gemma 偶尔会在对象或数组最后多一个逗号；这里只做非常保守的 JSON 修复，
-  // 不尝试“智能猜测”更多语法，避免把错误内容修成另一个错误结果。
+  // 这里只做保守修复，避免把坏输出“修”成另一个错误结构。
   return cleanText(text).replace(/,\s*([}\]])/g, '$1')
 }
 
-function findBalancedJsonSlice(text) {
-  // 如果模型在 JSON 前后夹了说明文字，这里尝试只截出第一段括号配平的 JSON 主体。
+function findBalancedJsonSlices(text) {
+  // 某些 Gemma 响应会同时包含多个顶层 JSON 片段：
+  // 前面是示例结构，后面才是真正的落地结果。
+  // 这里先收集所有括号配平的顶层片段，后面再优先尝试更靠后的真实结果。
   const source = cleanText(text)
-  const start = source.search(/[\[{]/)
-
-  if (start < 0) return ''
-
+  const slices = []
   const stack = []
+  let start = -1
   let inString = false
   let escaped = false
 
-  for (let index = start; index < source.length; index += 1) {
+  for (let index = 0; index < source.length; index += 1) {
     const char = source[index]
 
     if (inString) {
@@ -55,36 +54,54 @@ function findBalancedJsonSlice(text) {
     }
 
     if (char === '{' || char === '[') {
+      if (stack.length === 0) {
+        start = index
+      }
       stack.push(char)
       continue
     }
 
-    if (char === '}' || char === ']') {
-      const opening = stack.pop()
-      const matched = (opening === '{' && char === '}') || (opening === '[' && char === ']')
+    if (char !== '}' && char !== ']') {
+      continue
+    }
 
-      if (!matched) {
-        return ''
-      }
+    const opening = stack.pop()
+    const matched = (opening === '{' && char === '}') || (opening === '[' && char === ']')
 
-      if (stack.length === 0) {
-        return source.slice(start, index + 1)
-      }
+    if (!matched) {
+      stack.length = 0
+      start = -1
+      continue
+    }
+
+    if (stack.length === 0 && start >= 0) {
+      slices.push(source.slice(start, index + 1))
+      start = -1
     }
   }
 
-  return ''
+  return slices
 }
 
 function buildJsonCandidates(text) {
-  // 解析顺序从“最接近原始输出”到“轻量修复后输出”，尽量避免过度处理模型文本。
+  // 先尝试配平后的 JSON 片段，并优先尝试更靠后的候选。
+  // 这样可以避免误命中推理过程里提前出现的示例对象。
   const raw = cleanText(text).replace(/^\uFEFF/, '')
   const fenced = stripMarkdownFence(raw)
-  const balanced = findBalancedJsonSlice(fenced) || findBalancedJsonSlice(raw)
+  const balancedCandidates = [
+    ...findBalancedJsonSlices(fenced),
+    ...findBalancedJsonSlices(raw),
+  ].reverse()
 
-  return [...new Set([raw, fenced, balanced, removeTrailingCommas(fenced), removeTrailingCommas(balanced)])].filter(
-    Boolean
-  )
+  return [
+    ...new Set([
+      ...balancedCandidates,
+      raw,
+      fenced,
+      removeTrailingCommas(fenced),
+      ...balancedCandidates.map((candidate) => removeTrailingCommas(candidate)),
+    ]),
+  ].filter(Boolean)
 }
 
 export function parseGeminiJsonText(text, message = 'Gemini returned invalid JSON.') {
@@ -92,7 +109,6 @@ export function parseGeminiJsonText(text, message = 'Gemini returned invalid JSO
   let firstError = null
 
   for (const candidate of candidates) {
-    // 先直接尝试原候选，再尝试只去尾逗号的保守修复版本。
     try {
       return JSON.parse(candidate)
     } catch (error) {
@@ -109,6 +125,5 @@ export function parseGeminiJsonText(text, message = 'Gemini returned invalid JSO
     }
   }
 
-  // 所有候选都失败时，返回统一错误，并把首个真实解析异常保留下来。
   throw createJsonParseError(message, firstError, text)
 }

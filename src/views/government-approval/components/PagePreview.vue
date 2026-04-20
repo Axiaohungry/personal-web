@@ -129,21 +129,6 @@ watch(
   }
 )
 
-function controlLabel(type) {
-  const map = {
-    radio: '单选',
-    select: '下拉选择',
-    'table-select': '弹窗选择',
-    textarea: '多行文本',
-    number: '数字',
-    date: '日期',
-    button: '按钮',
-    input: '文本',
-  }
-
-  return map[type] || '文本'
-}
-
 function fieldStyle(field) {
   return {
     '--field-span': clampSpan(field.span),

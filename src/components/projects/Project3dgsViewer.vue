@@ -172,7 +172,7 @@ function disposeAssetHandle(handle) {
   try {
     handle.dispose?.()
   } catch (disposeError) {
-    // Keep disposal failures non-fatal so asset switching remains recoverable.
+    // 释放失败只记日志，不中断切换流程，避免单个资源清理异常把整个查看器卡住。
     console.warn('[Project3dgsViewer] Failed to dispose active asset.', disposeError)
   }
 }

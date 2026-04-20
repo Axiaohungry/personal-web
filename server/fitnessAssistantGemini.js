@@ -599,8 +599,6 @@ export function normalizeAssistantPayload(payload, options = {}) {
   return buildSafeRefusalPayload('out_of_scope', question)
 }
 
-export const normalizeFitnessAssistantPayload = normalizeAssistantPayload
-
 async function requestGeminiJson(question, context, options = {}) {
   const apiKey = options.apiKey || process.env.GEMINI_API_KEY
   const model = options.model || process.env.GEMINI_MODEL || DEFAULT_GEMINI_MODEL
