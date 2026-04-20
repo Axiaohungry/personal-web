@@ -20,6 +20,7 @@ ENV PORT=3000
 
 COPY --from=build /app/dist ./dist
 COPY --from=build /app/server ./server
+COPY --from=build /app/src/data/fitnessModules.js ./src/data/fitnessModules.js
 
 EXPOSE 3000
 
