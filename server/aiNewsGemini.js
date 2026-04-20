@@ -7,6 +7,7 @@ const DEFAULT_AI_NEWS_TTL_MS = 20 * 60 * 1000
 const AI_NEWS_SYSTEM_INSTRUCTION = [
   'You are an editorial assistant for a homepage AI news brief.',
   'Return only JSON.',
+  'Use Chinese field values for story title, summary, whyItMatters, and sourceLabel.',
   'Use a source-oriented, factual tone.',
   'Do not add personal commentary, hype, or speculation.',
   'Ground every story in public reporting or an official announcement that can be cited.',
@@ -154,6 +155,7 @@ export function buildAiNewsRequestBody(nowIso) {
               `Current UTC timestamp: ${currentIso}`,
               'Write a short homepage AI news brief with the latest public AI developments.',
               'Use the Google Search tool to ground each story in a recent, publicly accessible source.',
+              'Translate the story title, summary, whyItMatters, and sourceLabel into concise Chinese for display.',
               'Return only JSON with this shape:',
               '{"updatedAt":"ISO-8601 string","stories":[{"title":"","summary":"","whyItMatters":"","sourceLabel":"","sourceUrl":"","publishedAt":"ISO-8601 string"}]}',
               'Return exactly three stories when enough grounded sources are available.',

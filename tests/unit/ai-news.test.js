@@ -1,7 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 
-test('buildAiNewsRequestBody keeps grounded search tooling without unsupported JSON mime mode', async () => {
+test('buildAiNewsRequestBody keeps grounded search tooling and requests Chinese display fields', async () => {
   const { buildAiNewsRequestBody } = await import('../../server/aiNewsGemini.js')
 
   const requestBody = buildAiNewsRequestBody('2026-04-18T08:00:00.000Z')
@@ -11,6 +11,8 @@ test('buildAiNewsRequestBody keeps grounded search tooling without unsupported J
   assert.equal(requestBody.generationConfig.responseJsonSchema, undefined)
   assert.ok(Array.isArray(requestBody.tools))
   assert.ok(requestBody.tools.some((tool) => tool.googleSearch))
+  assert.match(requestBody.systemInstruction.parts[0].text, /Chinese/i)
+  assert.match(requestBody.contents[0].parts[0].text, /Chinese/i)
 })
 
 test('handleNodeAiNewsRequest short-circuits HEAD before fetch work', async () => {
