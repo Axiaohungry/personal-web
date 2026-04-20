@@ -4,6 +4,8 @@ import {
   buildDebugErrorPayload,
   extractUpstreamErrorMessage,
 } from './geminiErrorDebug.js'
+import { parseGeminiJsonText } from './geminiJson.js'
+import { buildJsonGenerationConfig } from './geminiModelConfig.js'
 import {
   getFitnessModuleByRoutePath,
   pickFitnessModulesByAssistantTopic,
@@ -163,6 +165,8 @@ const FITNESS_SYSTEM_INSTRUCTION = [
   'If the prompt is unrelated, return status out_of_scope.',
   'If the prompt asks about diagnosis, symptoms, prescriptions, pharmacies, lab results, or medication decisions, return status medical_boundary.',
   'Return only JSON.',
+  'The response must start with { and end with }.',
+  'Do not wrap JSON in Markdown fences.',
   'Do not provide raw markdown, disclaimers outside JSON, or hidden chain-of-thought.',
   'Keep responses practical, concise, and safe.',
 ].join(' ')
@@ -244,6 +248,14 @@ function canonicalModuleLabelForHref(href) {
 }
 
 function normalizeStringArray(value) {
+  // Gemma 有时会把 actions / cautions 压成一整段字符串，这里按常见分隔符拆回数组。
+  if (typeof value === 'string') {
+    return value
+      .split(/\n|;|；|。/)
+      .map(cleanText)
+      .filter(Boolean)
+  }
+
   if (!Array.isArray(value)) return []
   return value.map(cleanText).filter(Boolean)
 }
@@ -357,27 +369,22 @@ function isValidAssistantResponse(payload) {
   )
 }
 
-function parseJsonPayload(text) {
-  const trimmed = cleanText(text)
-  const fencedMatch = trimmed.match(/```(?:json)?\s*([\s\S]*?)\s*```/i)
-  const candidate = cleanText(fencedMatch?.[1] || trimmed)
-
-  try {
-    return JSON.parse(candidate)
-  } catch (firstError) {
-    const objectStart = candidate.search(/[\[{]/)
-    const objectEnd = Math.max(candidate.lastIndexOf('}'), candidate.lastIndexOf(']'))
-
-    if (objectStart >= 0 && objectEnd > objectStart) {
-      try {
-        return JSON.parse(candidate.slice(objectStart, objectEnd + 1))
-      } catch {
-        // fall through to the canonical error below
-      }
-    }
-
-    throw createHttpError(502, `Gemini returned invalid JSON: ${firstError.message}`)
+function canonicalizeAssistantPayload(payload) {
+  // Gemma 偶尔会用 title / warnings / related_modules 等近义字段；
+  // 这里先规整成前端固定协议，再进入安全边界和模块链接校验。
+  return {
+    ...payload,
+    answerTitle: payload?.answerTitle || payload?.answer_title || payload?.title,
+    actions: payload?.actions || payload?.steps || payload?.recommendations,
+    cautions: payload?.cautions || payload?.warnings || payload?.risks,
+    relatedModules: payload?.relatedModules || payload?.related_modules || payload?.modules,
   }
+}
+
+function parseJsonPayload(text) {
+  // 训练助手是用户最常交互的入口，允许 Gemma 的轻微格式噪声，
+  // 但只放宽 JSON 外壳，不放宽后续 status / modules / 安全边界校验。
+  return parseGeminiJsonText(text)
 }
 
 function extractCandidateText(payload) {
@@ -516,7 +523,7 @@ export function buildAssistantRelatedModules(question) {
   return uniqueModules(pickModulesByTopic(detectScopeTopic(question))).slice(0, 4)
 }
 
-export function buildFitnessAssistantRequestBody(question, context) {
+export function buildFitnessAssistantRequestBody(question, context, model = DEFAULT_GEMINI_MODEL) {
   const cleanQuestion = normalizeQuestion(question)
   const cleanContext = stringifyContext(context)
 
@@ -539,6 +546,8 @@ export function buildFitnessAssistantRequestBody(question, context) {
               cleanContext ? `Context: ${cleanContext}` : 'Context: none',
               'Return only JSON with this shape:',
               '{"status":"ok|out_of_scope|medical_boundary","answerTitle":"","summary":"","actions":[""],"cautions":[""],"relatedModules":[{"label":"","href":""}]}',
+              'The first character must be { and the last character must be }.',
+              'Use only these top-level keys: status, answerTitle, summary, actions, cautions, relatedModules.',
               'If the question is unrelated, return status out_of_scope and do not answer the question.',
               'If the question is medical, return status medical_boundary and do not give diagnosis, prescription, or lab-result guidance.',
               'For in-scope questions, keep the response concise, practical, and fitness-oriented.',
@@ -547,32 +556,37 @@ export function buildFitnessAssistantRequestBody(question, context) {
         ],
       },
     ],
-    generationConfig: {
+    // Gemini 模型使用结构化输出；Gemma 模型不强塞 schema，
+    // 改用 thinking + 提示词 + 本地校验兜底，减少 400 和格式漂移。
+    generationConfig: buildJsonGenerationConfig(model, {
+      schema: buildResponseJsonSchema(),
       temperature: 0.2,
-      responseMimeType: 'application/json',
-      responseJsonSchema: buildResponseJsonSchema(),
-    },
+    }),
   }
 }
 
 export function normalizeAssistantPayload(payload, options = {}) {
   const question = typeof options === 'string' ? options : options?.question
-  const status = normalizeStatus(payload?.status)
+  const canonicalPayload = canonicalizeAssistantPayload(payload)
+  const explicitStatus = cleanText(canonicalPayload?.status)
+  const status =
+    normalizeStatus(explicitStatus) ||
+    (!explicitStatus && isValidAssistantResponse(canonicalPayload) ? 'ok' : '')
 
-  if (status === 'ok' && isValidAssistantResponse(payload)) {
+  if (status === 'ok' && isValidAssistantResponse(canonicalPayload)) {
     // 即便模型返回了 status=ok，也要再做一轮本地校验，
     // 防止模型把编程 / 客服之类的站外内容误包装成“看起来合法”的 JSON。
-    if (looksClearlyOffDomainAnswer(payload)) {
+    if (looksClearlyOffDomainAnswer(canonicalPayload)) {
       return buildSafeRefusalPayload('out_of_scope', question)
     }
 
     const normalized = {
       status: 'ok',
-      answerTitle: cleanText(payload.answerTitle),
-      summary: cleanText(payload.summary),
-      actions: normalizeStringArray(payload.actions).slice(0, 5),
-      cautions: normalizeStringArray(payload.cautions).slice(0, 5),
-      relatedModules: normalizeRelatedModules(payload.relatedModules, question),
+      answerTitle: cleanText(canonicalPayload.answerTitle),
+      summary: cleanText(canonicalPayload.summary),
+      actions: normalizeStringArray(canonicalPayload.actions).slice(0, 5),
+      cautions: normalizeStringArray(canonicalPayload.cautions).slice(0, 5),
+      relatedModules: normalizeRelatedModules(canonicalPayload.relatedModules, question),
     }
 
     return normalized
@@ -605,7 +619,7 @@ async function requestGeminiJson(question, context, options = {}) {
         'Content-Type': 'application/json',
         'x-goog-api-key': apiKey,
       },
-      body: JSON.stringify(buildFitnessAssistantRequestBody(question, context)),
+      body: JSON.stringify(buildFitnessAssistantRequestBody(question, context, model)),
     })
   } catch {
     // 网络层失败和模型 5xx 都对外统一成稳定文案，避免前端暴露上游细节。
@@ -646,7 +660,7 @@ async function fetchFitnessAssistantPayload(question, context, options = {}) {
   const classification = classifyAssistantQuestion(question, context)
 
   if (classification.status === 'out_of_scope' || classification.status === 'medical_boundary') {
-    // 本地能判断的边界问题直接返回，不浪费模型请求。
+    // 本地能判断的边界问题直接返回，不浪费模型请求，也不把医疗边界判断交给模型。
     return buildSafeRefusalPayload(classification.status, question)
   }
 
@@ -654,7 +668,8 @@ async function fetchFitnessAssistantPayload(question, context, options = {}) {
     const rawPayload = await requestGeminiJson(question, context, options)
     return normalizeAssistantPayload(rawPayload, { question })
   } catch (error) {
-    // 对用户仍然是稳定文案；本地 debug 字段从底层错误一路透传到 handler。
+    // 对用户仍然是稳定文案；本地 debug 字段从底层错误一路透传到 handler，
+    // 这样既不暴露线上细节，也不会把根因丢在中间层。
     const stableError = attachUpstreamDebugInfo(
       createHttpError(500, 'Unable to answer right now.'),
       {

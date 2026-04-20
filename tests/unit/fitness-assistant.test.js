@@ -322,3 +322,83 @@ test('handleNodeFitnessAssistantRequest includes upstream details in local debug
     model: 'gemma-4-31b-it',
   })
 })
+
+test('handleNodeFitnessAssistantRequest accepts Gemma JSON with prose wrappers and softened field names', async () => {
+  const { handleNodeFitnessAssistantRequest } = await import('../../server/fitnessAssistantGemini.js')
+
+  let capturedRequest = null
+  const response = {
+    statusCode: 0,
+    headers: {},
+    body: '',
+    setHeader(name, value) {
+      this.headers[name] = value
+    },
+    end(payload = '') {
+      this.body = payload
+      return this
+    },
+  }
+
+  await handleNodeFitnessAssistantRequest(
+    {
+      method: 'GET',
+      url: '/fitness/assistant?q=How%20do%20I%20start%20a%20beginner%20lifting%20plan%3F',
+    },
+    response,
+    {
+      apiKey: 'test-key',
+      model: 'gemma-4-26b-a4b-it',
+      fetchImpl: async (url, init) => {
+        capturedRequest = { url, init }
+
+        return new Response(
+          JSON.stringify({
+            candidates: [
+              {
+                content: {
+                  parts: [
+                    {
+                      text: [
+                        'Sure, JSON only below:',
+                        '{',
+                        '  "status": "ok",',
+                        '  "title": "Begin with three full-body sessions",',
+                        '  "summary": "Keep the first month simple and repeatable.",',
+                        '  "actions": "Train three days per week\\nAdd weight only when form is stable",',
+                        '  "warnings": "Stop if sharp pain appears",',
+                        '  "related_modules": [{ "label": "Food Library", "href": "/fitness/modules/food-library" }],',
+                        '}',
+                      ].join('\n'),
+                    },
+                  ],
+                },
+              },
+            ],
+          }),
+          {
+            status: 200,
+            headers: { 'Content-Type': 'application/json' },
+          }
+        )
+      },
+    }
+  )
+
+  const requestBody = JSON.parse(capturedRequest.init.body)
+  assert.equal(requestBody.generationConfig.responseMimeType, undefined)
+  assert.equal(requestBody.generationConfig.responseJsonSchema, undefined)
+  assert.deepEqual(requestBody.generationConfig.thinkingConfig, {
+    thinkingLevel: 'high',
+  })
+
+  const payload = JSON.parse(response.body)
+  assert.equal(response.statusCode, 200)
+  assert.equal(payload.status, 'ok')
+  assert.equal(payload.answerTitle, 'Begin with three full-body sessions')
+  assert.deepEqual(payload.actions, [
+    'Train three days per week',
+    'Add weight only when form is stable',
+  ])
+  assert.deepEqual(payload.cautions, ['Stop if sharp pain appears'])
+})

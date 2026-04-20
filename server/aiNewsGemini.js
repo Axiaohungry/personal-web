@@ -4,6 +4,8 @@ import {
   buildDebugErrorPayload,
   extractUpstreamErrorMessage,
 } from './geminiErrorDebug.js'
+import { parseGeminiJsonText } from './geminiJson.js'
+import { buildJsonGenerationConfig } from './geminiModelConfig.js'
 
 // 这个模块专门负责首页“AI 最新动态”：
 // - 组织 Gemini 请求；
@@ -17,11 +19,39 @@ const DEFAULT_AI_NEWS_TTL_MS = 20 * 60 * 1000
 const AI_NEWS_SYSTEM_INSTRUCTION = [
   'You are an editorial assistant for a homepage AI news brief.',
   'Return only JSON.',
+  'The response must start with { and end with }.',
+  'Do not wrap JSON in Markdown fences.',
   'Use Chinese field values for story title, summary, whyItMatters, and sourceLabel.',
   'Use a source-oriented, factual tone.',
   'Do not add personal commentary, hype, or speculation.',
   'Ground every story in public reporting or an official announcement that can be cited.',
 ].join(' ')
+
+function buildAiNewsResponseJsonSchema() {
+  // 首页新闻卡片最终只消费这几个字段，因此 schema 只保留展示层真正需要的结构。
+  return {
+    type: 'object',
+    properties: {
+      updatedAt: { type: 'string' },
+      stories: {
+        type: 'array',
+        items: {
+          type: 'object',
+          properties: {
+            title: { type: 'string' },
+            summary: { type: 'string' },
+            whyItMatters: { type: 'string' },
+            sourceLabel: { type: 'string' },
+            sourceUrl: { type: 'string' },
+            publishedAt: { type: 'string' },
+          },
+          required: ['title', 'summary', 'whyItMatters', 'sourceLabel', 'sourceUrl', 'publishedAt'],
+        },
+      },
+    },
+    required: ['updatedAt', 'stories'],
+  }
+}
 
 function createHttpError(statusCode, message) {
   const error = new Error(message)
@@ -86,23 +116,30 @@ function isValidStory(story) {
 
 function normalizeStory(story) {
   // 首页卡片要展示的字段有限，所以这里把模型输出压缩成稳定的展示协议。
-  if (!isValidStory(story)) {
+  const normalizedStory = {
+    title: cleanText(story?.title || story?.headline),
+    summary: cleanText(story?.summary || story?.description),
+    whyItMatters: cleanText(story?.whyItMatters || story?.why_it_matters || story?.impact),
+    sourceLabel: cleanText(story?.sourceLabel || story?.source_label || story?.source),
+    sourceUrl: cleanText(story?.sourceUrl || story?.source_url || story?.url),
+    publishedAt: cleanText(story?.publishedAt || story?.published_at || story?.date),
+  }
+
+  // 首页卡片需要完整来源；Gemma 输出别名时先归一化，再做可信度校验。
+  if (!isValidStory(normalizedStory)) {
     return null
   }
 
-  return {
-    title: cleanText(story.title),
-    summary: cleanText(story.summary),
-    whyItMatters: cleanText(story.whyItMatters),
-    sourceLabel: cleanText(story.sourceLabel),
-    sourceUrl: cleanText(story.sourceUrl),
-    publishedAt: cleanText(story.publishedAt),
-  }
+  return normalizedStory
 }
 
 function toStories(payload) {
+  // Gemma 和 Gemini 在新闻列表字段名上可能有漂移，先把常见别名统一进来。
   if (Array.isArray(payload)) return payload
   if (Array.isArray(payload?.stories)) return payload.stories
+  if (Array.isArray(payload?.articles)) return payload.articles
+  if (Array.isArray(payload?.items)) return payload.items
+  if (Array.isArray(payload?.news)) return payload.news
   return []
 }
 
@@ -125,29 +162,12 @@ function extractCandidateText(payload) {
 }
 
 function extractJsonPayload(text) {
-  const trimmed = cleanText(text)
-  const fencedMatch = trimmed.match(/```(?:json)?\s*([\s\S]*?)\s*```/i)
-  const candidate = cleanText(fencedMatch?.[1] || trimmed)
-
-  try {
-    return JSON.parse(candidate)
-  } catch (firstError) {
-    const objectStart = candidate.search(/[\[{]/)
-    const objectEnd = Math.max(candidate.lastIndexOf('}'), candidate.lastIndexOf(']'))
-
-    if (objectStart >= 0 && objectEnd > objectStart) {
-      try {
-        return JSON.parse(candidate.slice(objectStart, objectEnd + 1))
-      } catch {
-        // fall through to the canonical error below
-      }
-    }
-
-    throw createHttpError(502, 'Unable to refresh AI news right now.')
-  }
+  // AI 新闻最容易混入引用说明、来源注脚和 Markdown，这里只负责提取 JSON 外壳，
+  // 真正的可信来源校验仍放在 normalizeStory / isValidStory。
+  return parseGeminiJsonText(text, 'Unable to refresh AI news right now.')
 }
 
-export function buildAiNewsRequestBody(nowIso) {
+export function buildAiNewsRequestBody(nowIso, model = DEFAULT_GEMINI_MODEL) {
   const currentIso = isValidIsoDate(nowIso) ? cleanText(nowIso) : new Date().toISOString()
 
   // 这里明确要求模型：
@@ -173,6 +193,8 @@ export function buildAiNewsRequestBody(nowIso) {
               'Translate the story title, summary, whyItMatters, and sourceLabel into concise Chinese for display.',
               'Return only JSON with this shape:',
               '{"updatedAt":"ISO-8601 string","stories":[{"title":"","summary":"","whyItMatters":"","sourceLabel":"","sourceUrl":"","publishedAt":"ISO-8601 string"}]}',
+              'The first character must be { and the last character must be }.',
+              'Use only these top-level keys: updatedAt, stories.',
               'Return exactly three stories when enough grounded sources are available.',
               'Do not use markdown fences, commentary, or explanatory prose outside the JSON object.',
               'Keep stories concise, factual, and suitable for a product homepage.',
@@ -187,14 +209,18 @@ export function buildAiNewsRequestBody(nowIso) {
         googleSearch: {},
       },
     ],
-    generationConfig: {
+    // Gemini 模型用 responseJsonSchema 稳住结构；Gemma 或带工具但不兼容 schema 的模型，
+    // 改用 thinking 和本地 JSON 容错，避免 Google Search + schema 直接触发 400。
+    generationConfig: buildJsonGenerationConfig(model, {
+      schema: buildAiNewsResponseJsonSchema(),
       temperature: 0.2,
-    },
+      usesTools: true,
+    }),
   }
 }
 
 export function normalizeAiNewsPayload(payload) {
-  const updatedAt = cleanText(payload?.updatedAt)
+  const updatedAt = cleanText(payload?.updatedAt || payload?.updated_at)
   const stories = toStories(payload)
     .map(normalizeStory)
     .filter(Boolean)
@@ -329,7 +355,9 @@ export async function fetchAiNewsBrief(options = {}) {
   }
 
   try {
-    const rawPayload = await fetchGeminiJson(buildAiNewsRequestBody(nowIso), options)
+    const requestModel = options.model || process.env.GEMINI_MODEL || DEFAULT_GEMINI_MODEL
+    // 把模型名显式传进请求体构造器，确保“是否启用 schema”与真正请求的模型一致。
+    const rawPayload = await fetchGeminiJson(buildAiNewsRequestBody(nowIso, requestModel), options)
     const normalized = normalizeAiNewsPayload(rawPayload)
 
     if (!normalized.updatedAt) {

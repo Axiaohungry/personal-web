@@ -237,3 +237,226 @@ test('handleNodeSearchRequest reports local debug details for network failures b
     model: 'gemma-4-31b-it',
   })
 })
+
+test('fetchSupplementResults tolerates Gemma prose, trailing commas, and omits unsupported structured config', async () => {
+  let capturedRequest = null
+
+  const rows = await fetchSupplementResults('creatine', {
+    apiKey: 'test-key',
+    model: 'gemma-4-26b-a4b-it',
+    fetchImpl: async (url, init) => {
+      capturedRequest = { url, init }
+
+      return new Response(
+        JSON.stringify({
+          candidates: [
+            {
+              content: {
+                parts: [
+                  {
+                    text: [
+                      'Here is the JSON:',
+                      '{',
+                      '  "items": [',
+                      '    { "name": "Creatine monohydrate", "dosage": "3-5g/day", "use_case": "Strength training and muscle gain", },',
+                      '  ],',
+                      '}',
+                      'Hope this helps.',
+                    ].join('\n'),
+                  },
+                ],
+              },
+            },
+          ],
+        }),
+        {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' },
+        }
+      )
+    },
+  })
+
+  const requestBody = JSON.parse(capturedRequest.init.body)
+  assert.equal(
+    capturedRequest.url,
+    'https://generativelanguage.googleapis.com/v1beta/models/gemma-4-26b-a4b-it:generateContent'
+  )
+  assert.equal(requestBody.generationConfig.responseMimeType, undefined)
+  assert.equal(requestBody.generationConfig.responseJsonSchema, undefined)
+  assert.deepEqual(requestBody.generationConfig.thinkingConfig, {
+    thinkingLevel: 'high',
+  })
+
+  assert.deepEqual(rows, [
+    {
+      name: 'Creatine monohydrate',
+      dose: '3-5g/day',
+      bestFor: 'Strength training and muscle gain',
+    },
+  ])
+})
+
+test('fetchSupplementResults falls back to parsing Gemma markdown bullet lists when no JSON is returned', async () => {
+  const rows = await fetchSupplementResults('creatine', {
+    apiKey: 'test-key',
+    model: 'gemma-4-26b-a4b-it',
+    fetchImpl: async () =>
+      new Response(
+        JSON.stringify({
+          candidates: [
+            {
+              content: {
+                parts: [
+                  {
+                    text: [
+                      '*   User query: creatine',
+                      '*   Results:',
+                      '*   Supplement: Creatine monohydrate',
+                      '    *   Common dose: 3-5g/day',
+                      '    *   Use case: Strength training and muscle gain',
+                    ].join('\n'),
+                  },
+                ],
+              },
+            },
+          ],
+        }),
+        {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' },
+        }
+      ),
+  })
+
+  assert.deepEqual(rows, [
+    {
+      name: 'Creatine monohydrate',
+      dose: '3-5g/day',
+      bestFor: 'Strength training and muscle gain',
+    },
+  ])
+})
+
+test('fetchFoodResults falls back to parsing Gemma markdown nutrition lists with units', async () => {
+  const rows = await fetchFoodResults('banana', {
+    apiKey: 'test-key',
+    model: 'gemma-4-26b-a4b-it',
+    fetchImpl: async () =>
+      new Response(
+        JSON.stringify({
+          candidates: [
+            {
+              content: {
+                parts: [
+                  {
+                    text: [
+                      '*   User query: banana',
+                      '*   Results:',
+                      '*   Food: Banana',
+                      '    *   Calories: 89 kcal',
+                      '    *   Carbs: 22.8 g',
+                      '    *   Protein: 1.1 g',
+                      '    *   Fat: 0.3 g',
+                      '    *   Use case: Pre-workout carbohydrate',
+                    ].join('\n'),
+                  },
+                ],
+              },
+            },
+          ],
+        }),
+        {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' },
+        }
+      ),
+  })
+
+  assert.deepEqual(rows, [
+    {
+      name: 'Banana 100g',
+      calories: 89,
+      carbs: 22.8,
+      protein: 1.1,
+      fat: 0.3,
+      scene: 'Pre-workout carbohydrate',
+    },
+  ])
+})
+
+test('food and supplement prompts explicitly require simplified Chinese values', async () => {
+  let foodRequest = null
+  let supplementRequest = null
+
+  await fetchFoodResults('香蕉', {
+    apiKey: 'test-key',
+    fetchImpl: async (url, init) => {
+      foodRequest = JSON.parse(init.body)
+      return new Response(
+        JSON.stringify({
+          candidates: [
+            {
+              content: {
+                parts: [
+                  {
+                    text: JSON.stringify({
+                      items: [
+                        {
+                          name: '香蕉',
+                          calories: 89,
+                          carbs: 22.8,
+                          protein: 1.1,
+                          fat: 0.3,
+                          scene: '训练前快速补碳',
+                        },
+                      ],
+                    }),
+                  },
+                ],
+              },
+            },
+          ],
+        }),
+        { status: 200, headers: { 'Content-Type': 'application/json' } }
+      )
+    },
+  })
+
+  await fetchSupplementResults('肌酸', {
+    apiKey: 'test-key',
+    model: 'gemma-4-26b-a4b-it',
+    fetchImpl: async (url, init) => {
+      supplementRequest = JSON.parse(init.body)
+      return new Response(
+        JSON.stringify({
+          candidates: [
+            {
+              content: {
+                parts: [
+                  {
+                    text: JSON.stringify({
+                      items: [
+                        {
+                          name: '肌酸一水合物',
+                          dose: '3-5g/天',
+                          bestFor: '力量训练与增肌期',
+                        },
+                      ],
+                    }),
+                  },
+                ],
+              },
+            },
+          ],
+        }),
+        { status: 200, headers: { 'Content-Type': 'application/json' } }
+      )
+    },
+  })
+
+  assert.match(foodRequest.systemInstruction.parts[0].text, /Simplified Chinese/)
+  assert.match(foodRequest.contents[0].parts[0].text, /简体中文/)
+  assert.match(supplementRequest.systemInstruction.parts[0].text, /Simplified Chinese/)
+  assert.match(supplementRequest.contents[0].parts[0].text, /简体中文/)
+})

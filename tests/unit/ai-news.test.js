@@ -16,6 +16,15 @@ test('buildAiNewsRequestBody keeps grounded search tooling and requests Chinese 
   assert.match(requestBody.contents[0].parts[0].text, /Chinese/i)
 })
 
+test('buildAiNewsRequestBody enables schema only for tool-compatible Gemini 3 models', async () => {
+  const { buildAiNewsRequestBody } = await import('../../server/aiNewsGemini.js')
+
+  const requestBody = buildAiNewsRequestBody('2026-04-18T08:00:00.000Z', 'gemini-3.0-pro-preview')
+
+  assert.equal(requestBody.generationConfig.responseMimeType, 'application/json')
+  assert.equal(requestBody.generationConfig.responseJsonSchema.required.includes('stories'), true)
+})
+
 test('handleNodeAiNewsRequest short-circuits HEAD before fetch work', async () => {
   const { handleNodeAiNewsRequest } = await import('../../server/aiNewsGemini.js')
 
@@ -368,5 +377,96 @@ test('handleNodeAiNewsRequest includes upstream details in local debug mode', as
     upstreamStatus: 429,
     upstreamError: 'Your prepayment credits are depleted.',
     model: 'gemma-4-31b-it',
+  })
+})
+
+test('handleNodeAiNewsRequest accepts Gemma news JSON wrapped in prose and common alias fields', async () => {
+  const { createAiNewsCache, handleNodeAiNewsRequest } = await import('../../server/aiNewsGemini.js')
+
+  let capturedRequest = null
+  const response = {
+    statusCode: 0,
+    headers: {},
+    body: '',
+    setHeader(name, value) {
+      this.headers[name] = value
+    },
+    end(payload = '') {
+      this.body = payload
+      return this
+    },
+  }
+
+  await handleNodeAiNewsRequest(
+    {
+      method: 'GET',
+      url: '/api/ai/news-brief?nowIso=2026-04-20T00%3A00%3A00.000Z',
+    },
+    response,
+    {
+      apiKey: 'test-key',
+      model: 'gemma-4-26b-a4b-it',
+      cache: createAiNewsCache(),
+      fetchImpl: async (url, init) => {
+        capturedRequest = { url, init }
+
+        return new Response(
+          JSON.stringify({
+            candidates: [
+              {
+                content: {
+                  parts: [
+                    {
+                      text: [
+                        'I found the following grounded stories:',
+                        '{',
+                        '  "updated_at": "2026-04-20T00:00:00.000Z",',
+                        '  "articles": [',
+                        '    {',
+                        '      "title": "Open model update",',
+                        '      "summary": "A lab released a model update for developers.",',
+                        '      "why_it_matters": "It changes how small teams prototype AI features.",',
+                        '      "source": "Google AI",',
+                        '      "url": "https://example.com/open-model-update",',
+                        '      "date": "2026-04-19T12:00:00.000Z",',
+                        '    }',
+                        '  ],',
+                        '}',
+                      ].join('\n'),
+                    },
+                  ],
+                },
+              },
+            ],
+          }),
+          {
+            status: 200,
+            headers: { 'Content-Type': 'application/json' },
+          }
+        )
+      },
+    }
+  )
+
+  const requestBody = JSON.parse(capturedRequest.init.body)
+  assert.equal(requestBody.generationConfig.responseMimeType, undefined)
+  assert.equal(requestBody.generationConfig.responseJsonSchema, undefined)
+  assert.deepEqual(requestBody.generationConfig.thinkingConfig, {
+    thinkingLevel: 'high',
+  })
+
+  assert.equal(response.statusCode, 200)
+  assert.deepEqual(JSON.parse(response.body), {
+    updatedAt: '2026-04-20T00:00:00.000Z',
+    stories: [
+      {
+        title: 'Open model update',
+        summary: 'A lab released a model update for developers.',
+        whyItMatters: 'It changes how small teams prototype AI features.',
+        sourceLabel: 'Google AI',
+        sourceUrl: 'https://example.com/open-model-update',
+        publishedAt: '2026-04-19T12:00:00.000Z',
+      },
+    ],
   })
 })

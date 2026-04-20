@@ -3,6 +3,8 @@ import {
   buildDebugErrorPayload,
   extractUpstreamErrorMessage,
 } from './geminiErrorDebug.js'
+import { parseGeminiJsonText } from './geminiJson.js'
+import { buildJsonGenerationConfig } from './geminiModelConfig.js'
 
 const GEMINI_API_ROOT = 'https://generativelanguage.googleapis.com/v1beta'
 const DEFAULT_GEMINI_MODEL = 'gemini-2.5-flash'
@@ -14,6 +16,9 @@ const DEFAULT_GEMINI_MODEL = 'gemini-2.5-flash'
 const FOOD_SYSTEM_INSTRUCTION = [
   'You format food lookup results for a Chinese fitness workbench.',
   'Return only JSON.',
+  'The response must start with { and end with }.',
+  'Do not wrap JSON in Markdown fences.',
+  'All string values must be Simplified Chinese.',
   'Use Chinese field values.',
   'Every row must describe nutrients for exactly 100g edible portion.',
   'Keep scene short, practical, and fitness-oriented.',
@@ -22,10 +27,60 @@ const FOOD_SYSTEM_INSTRUCTION = [
 const SUPPLEMENT_SYSTEM_INSTRUCTION = [
   'You format supplement lookup results for a Chinese fitness workbench.',
   'Return only JSON.',
+  'The response must start with { and end with }.',
+  'Do not wrap JSON in Markdown fences.',
+  'All string values must be Simplified Chinese.',
   'Use Chinese field values.',
   'List common supplement ingredients, not brands.',
   'Keep dose and use case concise and non-medical.',
 ].join(' ')
+
+function buildFoodResponseJsonSchema() {
+  // 这个 schema 只约束前端真正消费的字段，避免把模型逼到返回无关元信息。
+  return {
+    type: 'object',
+    properties: {
+      items: {
+        type: 'array',
+        items: {
+          type: 'object',
+          properties: {
+            name: { type: 'string' },
+            calories: { type: 'number' },
+            carbs: { type: 'number' },
+            protein: { type: 'number' },
+            fat: { type: 'number' },
+            scene: { type: 'string' },
+          },
+          required: ['name', 'calories', 'carbs', 'protein', 'fat', 'scene'],
+        },
+      },
+    },
+    required: ['items'],
+  }
+}
+
+function buildSupplementResponseJsonSchema() {
+  // 补剂库只需要“补剂 / 常见剂量 / 适用场景”，这里刻意不开放更多自由字段。
+  return {
+    type: 'object',
+    properties: {
+      items: {
+        type: 'array',
+        items: {
+          type: 'object',
+          properties: {
+            name: { type: 'string' },
+            dose: { type: 'string' },
+            bestFor: { type: 'string' },
+          },
+          required: ['name', 'dose', 'bestFor'],
+        },
+      },
+    },
+    required: ['items'],
+  }
+}
 
 function createHttpError(statusCode, message) {
   const error = new Error(message)
@@ -52,6 +107,7 @@ function buildFoodPrompt(query) {
     `用户查询: ${query}`,
     '返回 1 到 8 个最相关的常见食物结果。',
     '严格输出 JSON 对象，格式为 {"items":[{"name":"","calories":0,"carbs":0,"protein":0,"fat":0,"scene":""}]}。',
+    '所有字符串字段必须使用简体中文，不要返回英文食物名或英文使用场景。',
     '热量单位是 kcal，三大营养素单位是 g。',
     '不要输出解释、Markdown、注释或额外字段。',
   ].join('\n')
@@ -62,13 +118,15 @@ function buildSupplementPrompt(query) {
     `用户查询: ${query}`,
     '返回 1 到 8 个最相关的常见补剂结果。',
     '严格输出 JSON 对象，格式为 {"items":[{"name":"","dose":"","bestFor":""}]}。',
+    '所有字符串字段必须使用简体中文，不要返回英文补剂名或英文适用场景。',
     'dose 写常见剂量，bestFor 写适用场景。',
     '不要输出解释、Markdown、注释或额外字段。',
   ].join('\n')
 }
 
-function buildRequestBody(kind, query) {
+function buildRequestBody(kind, query, model = DEFAULT_GEMINI_MODEL) {
   const isFood = kind === 'food'
+  const schema = isFood ? buildFoodResponseJsonSchema() : buildSupplementResponseJsonSchema()
 
   // food / supplement 的请求体结构几乎一致，只在系统提示词和用户提示词上切换。
   // 收口到一个构造器里后，后续如果要统一调模型参数，只改这里即可。
@@ -89,10 +147,8 @@ function buildRequestBody(kind, query) {
         ],
       },
     ],
-    generationConfig: {
-      temperature: 0.2,
-      responseMimeType: 'application/json',
-    },
+    // Gemini 模型走结构化输出；Gemma 模型走 thinking + 提示词约束，避免不支持 schema 时 400/502。
+    generationConfig: buildJsonGenerationConfig(model, { schema, temperature: 0.2 }),
   }
 }
 
@@ -114,33 +170,163 @@ function extractCandidateText(payload) {
   throw createHttpError(502, 'Gemini returned an empty response.')
 }
 
-function extractJsonPayload(text) {
-  const trimmed = text.trim()
-  const fencedMatch = trimmed.match(/```(?:json)?\s*([\s\S]*?)\s*```/i)
-  const candidate = fencedMatch?.[1]?.trim() || trimmed
+function normalizeLooseKey(value) {
+  // Markdown 兜底解析会把 key 做扁平化，统一处理 best_for / best-for / best for 这类写法。
+  return cleanText(value)
+    .toLowerCase()
+    .replace(/[_\s-]+/g, '')
+}
 
-  try {
-    return JSON.parse(candidate)
-  } catch (firstError) {
-    // 模型偶尔会把 JSON 包在代码块里，或者前后夹带一小段说明。
-    // 这里做一次“尽量提纯”的兜底，避免前端因为轻微格式噪声直接拿不到结果。
-    const objectStart = candidate.search(/[\[{]/)
-    const objectEnd = Math.max(candidate.lastIndexOf('}'), candidate.lastIndexOf(']'))
+function cleanMarkdownLine(line) {
+  // 去掉常见项目符号和首尾空白，保留真正的键值文本。
+  return cleanText(line).replace(/^[-*•]\s*/, '').trim()
+}
 
-    if (objectStart >= 0 && objectEnd > objectStart) {
-      try {
-        return JSON.parse(candidate.slice(objectStart, objectEnd + 1))
-      } catch {
-        // fall through to the canonical error below
+function isIgnoredMarkdownLine(line) {
+  // 这些是模型常见的“包装说明”，对表格内容没有价值，直接跳过。
+  const normalized = normalizeLooseKey(line)
+  return (
+    !normalized ||
+    normalized.startsWith('userquery') ||
+    normalized === 'results' ||
+    normalized === 'result' ||
+    normalized === 'json' ||
+    normalized === 'items'
+  )
+}
+
+function splitMarkdownKeyValue(line) {
+  // 同时兼容英文冒号和中文冒号，便于解析 Gemma 漂移成列表说明的情况。
+  const match = cleanMarkdownLine(line).match(/^([^:：]+)[:：]\s*(.+)$/)
+  if (!match) return null
+
+  return {
+    key: normalizeLooseKey(match[1]),
+    value: cleanText(match[2]),
+  }
+}
+
+function parseSupplementMarkdownPayload(text) {
+  const items = []
+  let current = {}
+
+  function flushCurrent() {
+    // 只在三列核心字段都齐全时才接收，避免把半截说明误当成补剂结果。
+    if (current.name && current.dose && current.bestFor) {
+      items.push(current)
+    }
+    current = {}
+  }
+
+  for (const rawLine of String(text || '').split(/\r?\n/)) {
+    const line = cleanMarkdownLine(rawLine)
+    if (isIgnoredMarkdownLine(line)) continue
+
+    const pair = splitMarkdownKeyValue(line)
+
+    if (pair) {
+      if (['name', 'supplement', 'item', 'ingredient'].includes(pair.key)) {
+        // 一旦遇到新的补剂名，就把上一个条目先入列。
+        flushCurrent()
+        current.name = pair.value
+        continue
       }
+
+      if (['dose', 'dosage', 'commondose', 'commondosage'].includes(pair.key)) {
+        current.dose = pair.value
+        continue
+      }
+
+      if (['bestfor', 'usecase', 'scenario', 'suitablefor', 'fitfor'].includes(pair.key)) {
+        current.bestFor = pair.value
+        continue
+      }
+
+      continue
     }
 
-    throw createHttpError(502, `Gemini returned invalid JSON: ${firstError.message}`)
+    if (!current.name) {
+      current.name = line
+    }
+  }
+
+  flushCurrent()
+  return items.length ? { items } : null
+}
+
+function parseFoodMarkdownPayload(text) {
+  const items = []
+  let current = {}
+
+  function flushCurrent() {
+    // 食物表要求五列都完整，且营养值必须至少能提取出数字。
+    const hasMacroValues =
+      cleanText(current.calories) &&
+      cleanText(current.carbs) &&
+      cleanText(current.protein) &&
+      cleanText(current.fat)
+
+    if (
+      current.name &&
+      current.scene &&
+      hasMacroValues
+    ) {
+      items.push(current)
+    }
+    current = {}
+  }
+
+  for (const rawLine of String(text || '').split(/\r?\n/)) {
+    const line = cleanMarkdownLine(rawLine)
+    if (isIgnoredMarkdownLine(line)) continue
+
+    const pair = splitMarkdownKeyValue(line)
+    if (!pair) {
+      // 某些模型会把第一行直接写成食物名而不是 Food: xxx，这里给一个窄范围容错。
+      if (!current.name) current.name = line
+      continue
+    }
+
+    if (['name', 'food', 'item'].includes(pair.key)) {
+      // 碰到新食物时先收口上一条，避免多条结果串在一起。
+      flushCurrent()
+      current.name = pair.value
+      continue
+    }
+
+    if (['calories', 'kcal', 'energy'].includes(pair.key)) current.calories = pair.value
+    if (['carbs', 'carbohydrate', 'carbohydrates'].includes(pair.key)) current.carbs = pair.value
+    if (['protein'].includes(pair.key)) current.protein = pair.value
+    if (['fat', 'fats'].includes(pair.key)) current.fat = pair.value
+    if (['scene', 'usecase', 'bestfor', 'scenario'].includes(pair.key)) current.scene = pair.value
+  }
+
+  flushCurrent()
+  return items.length ? { items } : null
+}
+
+function extractJsonPayload(text, kind) {
+  // 默认仍然以严格 JSON 为主；只有 JSON 彻底失败时，才进入食物/补剂专属 Markdown 兜底。
+  try {
+    return parseGeminiJsonText(text)
+  } catch (error) {
+    // 这样可以修复 Gemma 偶发的“项目列表回答”，又不会放宽训练助手和新闻接口的协议边界。
+    const markdownPayload =
+      kind === 'supplement' ? parseSupplementMarkdownPayload(text) : parseFoodMarkdownPayload(text)
+
+    if (markdownPayload) {
+      return markdownPayload
+    }
+
+    throw error
   }
 }
 
 function roundToSingleDecimal(value) {
-  const numericValue = Number(value)
+  // 兼容 "89 kcal" / "22.8 g" 这类带单位写法，只抽取第一个数值部分参与计算。
+  const normalizedValue =
+    typeof value === 'string' ? value.replace(/,/g, '').match(/-?\d+(?:\.\d+)?/)?.[0] : value
+  const numericValue = Number(normalizedValue)
   if (!Number.isFinite(numericValue)) return null
   return Math.round(numericValue * 10) / 10
 }
@@ -187,11 +373,14 @@ function normalizeFoodRows(payload) {
 }
 
 function normalizeSupplementRows(payload) {
+  // Gemma 常见别名会落在 dosage / use_case 等字段上，这里统一收口到前端固定列名。
   return toItems(payload)
     .map((item) => ({
       name: cleanText(item?.name || item?.supplement),
-      dose: cleanText(item?.dose || item?.commonDose),
-      bestFor: cleanText(item?.bestFor || item?.scenario || item?.useCase),
+      dose: cleanText(item?.dose || item?.dosage || item?.commonDose || item?.common_dose),
+      bestFor: cleanText(
+        item?.bestFor || item?.best_for || item?.scenario || item?.useCase || item?.use_case
+      ),
     }))
     .filter((item) => item.name && item.dose && item.bestFor)
     .slice(0, 8)
@@ -216,7 +405,7 @@ async function requestGemini(kind, query, options = {}) {
         'Content-Type': 'application/json',
         'x-goog-api-key': apiKey,
       },
-      body: JSON.stringify(buildRequestBody(kind, normalizedQuery)),
+      body: JSON.stringify(buildRequestBody(kind, normalizedQuery, model)),
     })
   } catch {
     // 请求还没拿到 Gemini 响应时，也保留模型名，方便本地判断网络、代理或区域问题。
@@ -240,7 +429,7 @@ async function requestGemini(kind, query, options = {}) {
   }
 
   const payload = await response.json()
-  return extractJsonPayload(extractCandidateText(payload))
+  return extractJsonPayload(extractCandidateText(payload), kind)
 }
 
 export async function fetchFoodResults(query, options = {}) {
