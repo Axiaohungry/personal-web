@@ -1,5 +1,10 @@
 import { sendJson } from './fitnessGemini.js'
 
+// 这个模块专门负责首页“AI 最新动态”：
+// - 组织 Gemini 请求；
+// - 约束返回格式必须是可落地的 JSON；
+// - 对故事字段做可信度校验；
+// - 提供带 TTL 的缓存，避免每次刷新都直打模型。
 const GEMINI_API_ROOT = 'https://generativelanguage.googleapis.com/v1beta'
 const DEFAULT_GEMINI_MODEL = 'gemini-2.5-flash'
 const DEFAULT_AI_NEWS_TTL_MS = 20 * 60 * 1000
@@ -75,6 +80,7 @@ function isValidStory(story) {
 }
 
 function normalizeStory(story) {
+  // 首页卡片要展示的字段有限，所以这里把模型输出压缩成稳定的展示协议。
   if (!isValidStory(story)) {
     return null
   }
@@ -139,6 +145,10 @@ function extractJsonPayload(text) {
 export function buildAiNewsRequestBody(nowIso) {
   const currentIso = isValidIsoDate(nowIso) ? cleanText(nowIso) : new Date().toISOString()
 
+  // 这里明确要求模型：
+  // 1. 使用搜索工具；
+  // 2. 只返回 JSON；
+  // 3. 输出适合首页展示的中文字段。
   return {
     systemInstruction: {
       parts: [
@@ -212,6 +222,7 @@ export function createAiNewsCache({ ttlMs = DEFAULT_AI_NEWS_TTL_MS, now = () => 
   return {
     ttlMs,
     getFreshValue() {
+      // 只要没过期，就直接复用缓存，避免首页每次进来都重复请求模型。
       if (!entry) return null
       return now() <= entry.expiresAt ? entry.value : null
     },
@@ -278,6 +289,10 @@ function createStableAiNewsError() {
 }
 
 export async function fetchAiNewsBrief(options = {}) {
+  // 读取流程：
+  // 1. 先看有没有新鲜缓存；
+  // 2. 没有就请求 Gemini；
+  // 3. 如果请求失败但本地还有可复用的旧数据，就优先回退到 stale cache。
   const cache = options.cache || null
   const now = options.now || (() => Date.now())
   const nowIso = cleanText(options.nowIso) || new Date(now()).toISOString()

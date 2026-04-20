@@ -5,6 +5,8 @@ import ProjectCaseSignalRail from '@/components/projects/ProjectCaseSignalRail.v
 import ProjectEvidenceGrid from '@/components/projects/ProjectEvidenceGrid.vue'
 import { fitnessCoachingCase } from '@/data/projectCases/fitnessCoaching.js'
 
+// 健身顾问案例页在常规案例壳层之上，自定义了一版 hero，
+// 用来更直接地展示“服务结果 + 工作台闭环”的关系。
 const page = fitnessCoachingCase
 </script>
 

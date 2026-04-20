@@ -1,4 +1,7 @@
 <script setup>
+// TDEE 输入表单本身不保存数据。
+// 父组件把一个响应式 form 对象传进来，这里直接读写这个对象，
+// 所以每次输入都会立即反映到父层计算结果上。
 const props = defineProps({
   form: {
     type: Object,
@@ -8,6 +11,7 @@ const props = defineProps({
 
 defineEmits(['record'])
 
+// 选项表在组件内部声明，避免模板里直接硬编码字符串数组。
 const sexOptions = [
   { label: '男', value: 'male' },
   { label: '女', value: 'female' },

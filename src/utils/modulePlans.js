@@ -17,6 +17,7 @@ function roundToOneDecimal(value) {
 }
 
 function splitWeeks(totalWeeks) {
+  // 把总周期大致均分成三段，用于阶段型模块（比如碳水渐降）的阶段展示。
   const weeks = normalizeWeeks(totalWeeks)
   const base = Math.floor(weeks / 3)
   const remainder = weeks % 3
@@ -33,6 +34,7 @@ function formatCarbDensity(carbs, weightKg) {
 }
 
 function distributeTotal(total, ratios) {
+  // 把热量或蛋白按比例拆到多餐/多阶段，同时保证拆分后的整数和仍然等于总量。
   const safeTotal = round(total)
   const base = ratios.map((ratio) => Math.floor(safeTotal * ratio))
   let remainder = safeTotal - base.reduce((sum, item) => sum + item, 0)
@@ -60,6 +62,8 @@ function getFatMultiplier({ sex, dayType }) {
 }
 
 function buildMacroSplit({ weightKg, targetCalories, proteinMultiplier, fatMultiplier }) {
+  // 模块页里的宏量拆分比主工作台更细：
+  // 这里允许不同日类型/阶段使用不同蛋白和脂肪倍率。
   const protein = round(weightKg * proteinMultiplier)
   const fat = round(weightKg * fatMultiplier)
   const carbs = Math.max(0, round((targetCalories - protein * 4 - fat * 9) / 4))
@@ -112,6 +116,9 @@ export function buildCarbCyclingPlan({
   targetKg = 3,
   sex = 'male',
 }) {
+  // 碳循环的核心逻辑：
+  // 先根据目标推导日均调整量，再叠加“高/中/低碳日偏移量”，
+  // 最终得到每种日类型的热量与宏量。
   const normalizedGoal = normalizeGoal(goal)
   const cycleWeeks = normalizeWeeks(weeks)
   const normalizedTargetKg = getPlanningTargetKg(normalizedGoal, targetKg)
@@ -212,6 +219,8 @@ export function buildCarbTaperPlan({
   targetKg = 3,
   sex = 'male',
 }) {
+  // 碳水渐降更像“分阶段收口”。
+  // 它不在一开始就极端压碳，而是按周期拆成三个阶段，逐步调整目标热量与密度。
   const normalizedGoal = normalizeGoal(goal)
   const cycleWeeks = normalizeWeeks(weeks)
   const normalizedTargetKg = getPlanningTargetKg(normalizedGoal, targetKg)
@@ -286,6 +295,8 @@ export function buildFiveTwoFastingPlan({
   targetKg = 3,
   sex = 'male',
 }) {
+  // 5+2 模块的关键不是精确到每餐，而是回答：
+  // 两天轻断食 + 五天常规吃，平均下来会落到什么热量节奏、适不适合当前目标。
   const normalizedGoal = normalizeGoal(goal)
   const cycleWeeks = normalizeWeeks(weeks)
   const normalizedTargetKg = getPlanningTargetKg(normalizedGoal, targetKg)
@@ -395,6 +406,8 @@ export function buildSixteenEightFastingPlan({
   targetKg = 3,
   sex = 'male',
 }) {
+  // 16:8 模块不把“进食窗口”当成魔法，
+  // 而是先确定当天目标热量，再把热量和蛋白分配到窗口里的 2~3 餐。
   const normalizedGoal = normalizeGoal(goal)
   const cycleWeeks = normalizeWeeks(weeks)
   const normalizedTargetKg = getPlanningTargetKg(normalizedGoal, targetKg)

@@ -6,6 +6,9 @@ import { useEmbeddedModuleState } from '@/hooks/useEmbeddedModuleState.js'
 import { buildLeanGainCalorieLogicPlan } from '@/utils/leanGainCalorieLogic.js'
 import { createLeanGainLogicStorageApi } from '@/utils/leanGainLogicStorage.js'
 
+// 精益增肌页是一个“周度决策器”：
+// 它会读取工作台共享的体脂/TDEE/体重，再叠加本页单独保存的周均体重历史，
+// 最终判断当前处于哪一阶段、是否该下调碳水。
 const decisionCopy = {
   hold: '维持当前热量',
   'reduce-carbs': '下周下调碳水',
@@ -160,6 +163,8 @@ watch(
 )
 
 function recordWeeklyJudgment() {
+  // 保存动作并不会手动拼装结论，而是把当前计算出来的阶段判断完整入库，
+  // 这样历史记录和当前展示始终使用同一套逻辑来源。
   if (draftWeight.value === null) {
     feedback.value = {
       type: 'warning',

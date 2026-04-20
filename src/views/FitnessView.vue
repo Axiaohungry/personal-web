@@ -7,6 +7,7 @@ import SiteHeader from '@/components/SiteHeader.vue'
 import TdeeBreakdown from '@/components/TdeeBreakdown.vue'
 import TdeeForm from '@/components/TdeeForm.vue'
 import TdeeSummary from '@/components/TdeeSummary.vue'
+import { buildFitnessModuleCards } from '@/data/fitnessModules.js'
 import { navigationItems } from '@/data/navigation.js'
 import { profile } from '@/data/profile.js'
 import { buildMacroPlan, buildScenarioPlans } from '@/utils/macros.js'
@@ -47,6 +48,8 @@ function coerceNumber(value, fallback) {
 function normalizeLatest(latest) {
   const safeLatest = latest && typeof latest === 'object' ? latest : {}
 
+  // localStorage 里的历史数据来自用户长期输入，字段完整性不一定稳定。
+  // 这里统一做一次“按表单结构回填默认值”，让下面的计算逻辑始终吃到完整对象。
   return {
     sex: safeLatest.sex || defaultForm.sex,
     age: coerceNumber(safeLatest.age, defaultForm.age),
@@ -76,53 +79,11 @@ watch(
 const calculation = computed(() => calculateTdee(form))
 const tdeeExplanation = computed(() => explainTdeeModel(form))
 
-const modules = [
-  {
-    title: '碳循环',
-    summary: '把高碳、中碳、低碳安排进训练节奏里，兼顾表现和热量控制。',
-    routePath: '/fitness/modules/carb-cycling',
-  },
-  {
-    title: '碳水渐降',
-    summary: '按阶段慢慢下调，不靠极端低碳硬撑减脂。',
-    routePath: '/fitness/modules/carb-taper',
-  },
-  {
-    title: '5+2 轻断食',
-    summary: '如果你不想天天算得很紧，5 天正常吃、2 天轻一点，往往更容易坚持。',
-    routePath: '/fitness/modules/five-two-fasting',
-  },
-  {
-    title: '16+8 轻断食',
-    summary: '把吃饭时间收得整齐一点，有时候比一味靠意志力更省心。',
-    routePath: '/fitness/modules/sixteen-eight-fasting',
-  },
-  {
-    title: '食物库',
-    summary: '用更直观的方式看常见食物和外部食品数据。',
-    routePath: '/fitness/modules/food-library',
-  },
-  {
-    title: '增肌底层热量逻辑',
-    summary: '从 BMR、TDEE、体脂和增肌目标出发，拆出可重载的热量决策入口。',
-    routePath: '/fitness/modules/lean-gain-calorie-logic',
-  },
-  {
-    title: '谭成义焚诀训练体系',
-    summary: '把原则、热身、分部位训练、风险修正和新手四周计划收成一套更容易进入的训练地图。',
-    routePath: '/fitness/modules/fenjue-training-system',
-  },
-  {
-    title: '补剂库',
-    summary: '把补剂、优先级、剂量和证据放到一页里看清楚。',
-    routePath: '/fitness/modules/supplement-library',
-  },
-].map((module) => ({
-  ...module,
-  href: router.resolve({ path: module.routePath }).href,
-}))
+// 工作台和服务端助手共享同一份模块注册表。
+// 这里不再手写模块数组，只负责把 routePath 解析成当前站点环境下的 href。
+const modules = buildFitnessModuleCards((routePath) => router.resolve({ path: routePath }).href)
 
-const activeModulePath = ref(modules[0].routePath)
+const activeModulePath = ref(modules[0]?.routePath || '')
 const currentScenarioKey = computed(() => (planningContext.value.goal === 'gain' ? 'lean-gain' : 'cut'))
 
 function describeScenarioPace(key, scenarioPlan) {
@@ -135,6 +96,8 @@ function describeScenarioPace(key, scenarioPlan) {
 }
 
 const scenarios = computed(() => {
+  // 主工作台只负责先给出“维持 / 减脂 / 增肌”三个入口级方案，
+  // 具体怎么落地，再交给下面的模块页继续细化。
   const scenarioPlans = buildScenarioPlans({
     sex: form.sex,
     weeks: moduleWeeks.value,
@@ -183,6 +146,8 @@ const scenarios = computed(() => {
 })
 
 function recordCurrent() {
+  // 这里存的是主工作台摘要，不是完整档案。
+  // 这样历史记录足够轻，能用于趋势对比，又不会把整个表单快照不断堆进存储里。
   history.value = storage.pushHistory({
     savedAt: Date.now(),
     tdee: calculation.value.tdee,
@@ -196,6 +161,8 @@ function handleSelectModule(path) {
 }
 
 const moduleContext = computed(() => ({
+  // 这份上下文会传给 iframe 内的模块页和训练助手。
+  // 保持字段集中，能避免模块页各自重新推导一遍同样的数据。
   goal: planningContext.value.goal,
   sex: form.sex,
   age: form.age,

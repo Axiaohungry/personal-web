@@ -62,11 +62,18 @@ test('fenjue module page file exists', async () => {
   await access(new URL('../../src/views/modules/FenjueTrainingSystemView.vue', import.meta.url))
 })
 
-test('fitness workbench exposes the fenjue module entry', async () => {
-  const fitnessView = await readFile(new URL('../../src/views/FitnessView.vue', import.meta.url), 'utf8')
+test('fitness module catalog centralizes workbench metadata', async () => {
+  const { buildFitnessModuleCards, pickFitnessModulesByAssistantTopic } = await import('../../src/data/fitnessModules.js')
+  const cards = buildFitnessModuleCards()
 
-  assert.match(fitnessView, /title:\s*['"]谭成义焚诀训练体系['"]/)
-  assert.match(fitnessView, /routePath:\s*['"]\/fitness\/modules\/fenjue-training-system['"]/)
+  assert.ok(cards.some((module) => module.title === '谭成义焚诀训练体系'))
+  assert.ok(cards.some((module) => module.routePath === '/fitness/modules/fenjue-training-system'))
+  assert.ok(cards.some((module) => module.routePath === '/fitness/modules/lean-gain-calorie-logic'))
+
+  assert.deepEqual(
+    pickFitnessModulesByAssistantTopic('diet').map((module) => module.routePath).slice(0, 2),
+    ['/fitness/modules/lean-gain-calorie-logic', '/fitness/modules/food-library']
+  )
 })
 
 test('embedded module frame keeps a fixed viewport height instead of growing with content sections', async () => {
@@ -79,8 +86,10 @@ test('embedded module frame keeps a fixed viewport height instead of growing wit
 
 test('embedded module serialization preserves the shared context contract and missing body-fat state', async () => {
   const fitnessView = await readFile(new URL('../../src/views/FitnessView.vue', import.meta.url), 'utf8')
+  const { buildFitnessModuleCards } = await import('../../src/data/fitnessModules.js')
 
-  assert.match(fitnessView, /routePath:\s*['"]\/fitness\/modules\/lean-gain-calorie-logic['"]/)
+  assert.match(fitnessView, /buildFitnessModuleCards/)
+  assert.ok(buildFitnessModuleCards().some((module) => module.routePath === '/fitness/modules/lean-gain-calorie-logic'))
 
   const sharedContext = buildEmbeddedModuleContext({
     context: {
@@ -142,6 +151,16 @@ test('embedded module state keeps the existing Chinese goal labels for other mod
   assert.match(hookFile, /const titleSuffix = computed\(\(\) =>/)
   assert.doesNotMatch(hookFile, /cutting/)
   assert.doesNotMatch(hookFile, /lean gain/)
+})
+
+test('food and supplement views share the remote lookup composable', async () => {
+  const [foodView, supplementView] = await Promise.all([
+    readFile(new URL('../../src/views/modules/FoodLibraryView.vue', import.meta.url), 'utf8'),
+    readFile(new URL('../../src/views/modules/SupplementLibraryView.vue', import.meta.url), 'utf8'),
+  ])
+
+  assert.match(foodView, /useRemoteLookup/)
+  assert.match(supplementView, /useRemoteLookup/)
 })
 
 test('lean-gain module page keeps neutral copy and avoids re-appending a just-saved weekly average', async () => {

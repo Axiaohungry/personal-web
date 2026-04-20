@@ -1,6 +1,10 @@
 const GEMINI_API_ROOT = 'https://generativelanguage.googleapis.com/v1beta'
 const DEFAULT_GEMINI_MODEL = 'gemini-2.5-flash'
 
+// 这里负责两类“结构化搜索”：
+// - 食物营养搜索；
+// - 补剂信息搜索。
+// 核心目标不是让模型自由回答，而是逼它稳定返回可落进表格的 JSON。
 const FOOD_SYSTEM_INSTRUCTION = [
   'You format food lookup results for a Chinese fitness workbench.',
   'Return only JSON.',
@@ -60,6 +64,8 @@ function buildSupplementPrompt(query) {
 function buildRequestBody(kind, query) {
   const isFood = kind === 'food'
 
+  // food / supplement 的请求体结构几乎一致，只在系统提示词和用户提示词上切换。
+  // 收口到一个构造器里后，后续如果要统一调模型参数，只改这里即可。
   return {
     systemInstruction: {
       parts: [
@@ -110,6 +116,8 @@ function extractJsonPayload(text) {
   try {
     return JSON.parse(candidate)
   } catch (firstError) {
+    // 模型偶尔会把 JSON 包在代码块里，或者前后夹带一小段说明。
+    // 这里做一次“尽量提纯”的兜底，避免前端因为轻微格式噪声直接拿不到结果。
     const objectStart = candidate.search(/[\[{]/)
     const objectEnd = Math.max(candidate.lastIndexOf('}'), candidate.lastIndexOf(']'))
 
@@ -149,6 +157,7 @@ function toItems(payload) {
 }
 
 function normalizeFoodRows(payload) {
+  // 页面表格需要的是稳定、可比较的数据结构，所以这里强制规整成 100g 口径。
   return toItems(payload)
     .map((item) => ({
       name: ensure100gName(item?.name || item?.food),
@@ -234,6 +243,8 @@ export async function handleNodeSearchRequest(req, res, kind, options = {}) {
   try {
     const url = new URL(req.url || '/', 'http://127.0.0.1')
     const query = url.searchParams.get('q') || ''
+    // 这里保持 handler 尽量薄：只负责解析请求、调用对应能力、把结果序列化回去。
+    // 具体的字段清洗和模型交互都放在上面的纯函数里，方便单测覆盖。
     const items =
       kind === 'food'
         ? await fetchFoodResults(query, options)

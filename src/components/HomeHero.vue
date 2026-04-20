@@ -1,4 +1,7 @@
 <script setup>
+// 首页 Hero 组件只做一件事：
+// 把外层传进来的个人资料与关键信号按固定版式排出来，
+// 自身不保存状态，也不参与业务计算。
 defineProps({
   profile: {
     type: Object,

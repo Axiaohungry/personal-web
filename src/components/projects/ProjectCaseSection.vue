@@ -1,4 +1,6 @@
 <script setup>
+// 项目案例里的分区容器。
+// 作用和首页的 ContentSection 类似，但样式与视觉语气更贴近案例页。
 const props = defineProps({
   eyebrow: {
     type: String,

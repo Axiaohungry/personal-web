@@ -6,6 +6,8 @@ import { moduleSources } from '@/data/moduleSources.js'
 import { useEmbeddedModuleState } from '@/hooks/useEmbeddedModuleState.js'
 import { buildCarbTaperPlan } from '@/utils/modulePlans.js'
 
+// 碳水渐降页关心的是“阶段”而不是“某一天怎么吃”。
+// 所以页面核心是根据共享状态生成三段计划，再把每段计划可视化出来。
 const { state, titleSuffix } = useEmbeddedModuleState()
 
 const plan = computed(() => buildCarbTaperPlan({

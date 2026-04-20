@@ -5,6 +5,9 @@ function round(value) {
 }
 
 export function buildMacroPlan({ weightKg, targetCalories, mode }) {
+  // 宏量营养的分配思路是：
+  // 先按目标模式锁一个蛋白倍率，再给脂肪一个最低保护值，
+  // 剩余热量全部回填给碳水，确保不同模式下都能快速得到一套可执行起点。
   const proteinRatioByMode = {
     maintain: 1.8,
     cut: 2.2,
@@ -24,6 +27,10 @@ export function buildMacroPlan({ weightKg, targetCalories, mode }) {
 }
 
 export function buildScenarioPlans(input, legacyTdee) {
+  // 这里兼容了两种调用方式：
+  // 1. 新版传对象；
+  // 2. 旧版只传一个 tdee。
+  // 这样改动调用方时不需要一次性改完整个项目。
   const options = input && typeof input === 'object'
     ? input
     : { tdee: legacyTdee }
@@ -65,6 +72,7 @@ export function buildScenarioPlans(input, legacyTdee) {
   } = leanGain
 
   return {
+    // 维持方案不需要额外区间，只保留当前 TDEE 作为中性起点。
     maintain: { target: round(tdee) },
     cut: {
       min: cutMin,

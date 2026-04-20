@@ -73,6 +73,8 @@ const targetKgHint = computed(() => {
 const iframeSrc = computed(() => {
   if (!activeModule.value) return ''
 
+  // iframe 首次加载依赖 query 拿到基础上下文；
+  // 后续主工作台状态变化，再通过 postMessage 做增量同步。
   const search = buildEmbeddedModuleQuery({
     context: props.context,
     goal: props.goal,
@@ -92,6 +94,8 @@ async function postContext() {
   const frame = iframeRef.value
   if (!frame?.contentWindow) return
 
+  // 第一条消息负责同步营养 / 周期 / 身体数据；
+  // 第二条消息负责同步主题，让 iframe 内页和外层容器保持同一视觉状态。
   frame.contentWindow.postMessage(
     {
       type: 'fitness-module-context',

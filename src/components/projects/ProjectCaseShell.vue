@@ -6,6 +6,9 @@ import ProjectCaseSignalRail from '@/components/projects/ProjectCaseSignalRail.v
 import { navigationItems } from '@/data/navigation.js'
 import { profile } from '@/data/profile.js'
 
+// 项目案例外壳组件负责统一案例页的公共框架：
+// 顶部站点导航、hero 信息区和右侧信号栏都在这里收口，
+// 具体案例内容通过 slot 注入。
 const props = defineProps({
   variant: {
     type: String,
@@ -18,6 +21,7 @@ const props = defineProps({
 })
 
 const heroSignals = computed(() => {
+  // 不同案例页传进来的字段名可能略有差异，这里统一兼容 signals / signalItems 两种写法。
   const hero = props.hero || {}
 
   if (Array.isArray(hero.signals)) {

@@ -1,4 +1,6 @@
 <script setup>
+// TDEE 总结卡的作用是把父组件生成的三套场景方案可视化，
+// 同时展示最近几次记录，帮助用户从“单次计算”进入“持续校准”。
 defineProps({
   scenarios: {
     type: Array,

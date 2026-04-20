@@ -1,6 +1,11 @@
 <script setup>
 import { computed, onMounted, ref } from 'vue'
 
+// 首页 AI 动态卡片的运行逻辑：
+// 1. 组件挂载时主动请求同源 API；
+// 2. 把返回结果裁成最多 3 条故事；
+// 3. 根据 loading / error / data 三种状态渲染不同卡片；
+// 4. 通过 requestSequence 防止旧请求晚到后覆盖新结果。
 const loading = ref(true)
 const error = ref('')
 const updatedAt = ref('')
@@ -50,6 +55,8 @@ function formatPublishedAt(value) {
 }
 
 async function loadBrief() {
+  // 每次刷新都会生成新的 requestId。
+  // 只有“最后一次请求”的结果才允许写回状态，避免连续点击刷新时出现结果回退。
   const requestId = ++requestSequence.value
   loading.value = true
   error.value = ''

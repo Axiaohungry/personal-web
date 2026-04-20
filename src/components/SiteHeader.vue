@@ -1,6 +1,10 @@
 <script setup>
 import { computed, inject, ref } from 'vue'
 
+// 站点头部承担三件事：
+// 1. 展示品牌名和地点；
+// 2. 桌面端/移动端导航切换；
+// 3. 通过注入的 theme-mode 控制全站主题。
 const props = defineProps({
   siteName: {
     type: String,
@@ -28,6 +32,7 @@ const isDark = computed(() => themeMode.appearance.value === 'dark')
 const themeLabel = computed(() => (isDark.value ? '深色' : '浅色'))
 
 function handleThemeToggle() {
+  // 具体的主题存储与同步逻辑由根组件提供，这里只负责触发切换动作。
   themeMode.toggleTheme()
 }
 </script>

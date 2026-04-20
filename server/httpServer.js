@@ -28,13 +28,16 @@ const CONTENT_TYPES = {
 const STATIC_ASSET_PREFIXES = ['/assets/', '/3dgs/']
 
 function normalizeBaseUrl(baseUrl) {
+  // 上游地址允许用户带尾部斜杠，这里先统一裁掉，避免后面拼出双斜杠 URL。
   return String(baseUrl || '').trim().replace(/\/+$/, '')
 }
 
 function normalizePathname(pathname) {
   try {
+    // 先做 decodeURIComponent，是为了正确处理像 %2e%2e 这样的编码路径。
     return decodeURIComponent(pathname || '/')
   } catch {
+    // 如果解码本身失败，就退回原始路径，让后续流程按“普通非法路径”处理。
     return pathname || '/'
   }
 }
@@ -42,6 +45,9 @@ function normalizePathname(pathname) {
 export function resolveRequestTarget(rawPathname) {
   const pathname = normalizePathname(rawPathname)
 
+  // 这一步负责把所有请求先分流成几类：
+  // 健康检查、API、本地静态资源、非法路径、以及最终回退给 SPA 的页面路由。
+  // 后续 handler 只需要按 kind 分支处理，不必每次重新写一遍字符串判断。
   if (pathname === '/healthz') {
     return { kind: 'health' }
   }
@@ -63,6 +69,7 @@ export function resolveRequestTarget(rawPathname) {
   }
 
   if (pathname.includes('..')) {
+    // 一旦出现路径穿越特征，直接判 invalid，不再继续尝试解析成静态资源。
     return { kind: 'invalid' }
   }
 
@@ -92,6 +99,8 @@ export function buildUpstreamProxyUrl(baseUrl, requestUrl) {
 export function resolveApiExecutionMode({ upstreamBaseUrl, apiKind, requestUrl }) {
   const proxyUrl = buildUpstreamProxyUrl(upstreamBaseUrl, requestUrl)
 
+  // 如果配置了上游地址，就把请求代理给线上服务；
+  // 否则直接走本地 Node 处理器，方便本地开发和部署环境共用一套入口。
   if (proxyUrl) {
     return {
       mode: 'proxy',
@@ -111,6 +120,7 @@ function getContentType(filePath) {
 
 async function serveFile(res, filePath, method = 'GET') {
   try {
+    // serveFile 的第一步不是直接读文件，而是先确认目标存在且确实是文件，不是目录。
     const fileStat = await stat(filePath)
     if (!fileStat.isFile()) {
       return sendJson(res, 404, { error: 'Not found.' })
@@ -123,6 +133,7 @@ async function serveFile(res, filePath, method = 'GET') {
   res.setHeader('Content-Type', getContentType(filePath))
 
   if (method === 'HEAD') {
+    // HEAD 只返回头，不返回内容体；这里提前结束，避免无意义地打开文件流。
     return res.end()
   }
 
@@ -130,6 +141,8 @@ async function serveFile(res, filePath, method = 'GET') {
 }
 
 async function readProxyRequestBody(req) {
+  // 在 Vercel / Node / 单元测试三种场景里，请求体的形态可能不同。
+  // 这里统一把 body 读成字符串，避免代理层和本地 handler 各自维护一套读取逻辑。
   if (req && Object.prototype.hasOwnProperty.call(req, 'body')) {
     if (typeof req.body === 'string') {
       return req.body
@@ -171,6 +184,8 @@ async function proxyApiRequest(req, res, proxyUrl, fetchImpl = fetch) {
     )
 
     if (method === 'POST' && !hasContentType) {
+      // 某些测试或简化调用不会显式带 content-type。
+      // 对 POST 请求默认补成 JSON，减少上游解析失败的概率。
       headers['content-type'] = 'application/json; charset=utf-8'
     }
 
@@ -192,6 +207,7 @@ async function proxyApiRequest(req, res, proxyUrl, fetchImpl = fetch) {
     res.setHeader('Content-Type', contentType)
 
     if (method === 'HEAD') {
+      // 代理模式下也保持与本地 serveFile 一样的 HEAD 语义。
       return res.end()
     }
 
@@ -225,6 +241,8 @@ export function createHttpHandler(options = {}) {
     const allowFitnessAssistantPost =
       method === 'POST' && target.kind === 'api' && target.apiKind === 'fitness-assistant'
 
+    // 这里只给训练助手开放 POST。
+    // 其他 API 仍然只接受 GET/HEAD，避免误把搜索接口当成可写接口。
     if (!['GET', 'HEAD'].includes(method) && !allowFitnessAssistantPost) {
       return sendJson(res, 405, { error: 'Method not allowed.' })
     }
@@ -241,9 +259,12 @@ export function createHttpHandler(options = {}) {
       })
 
       if (executionMode.mode === 'proxy') {
+        // 配了 upstream 时，本地只做网关，不再本地执行 AI 逻辑。
         return proxyApiRequest(req, res, executionMode.url, fetchImpl)
       }
 
+      // 本地执行时再继续细分到各个 Gemini 能力处理器。
+      // 这样代理与本地分支共享同一套路由判定，避免线上线下行为飘移。
       if (target.apiKind === 'ai-news') {
         return handleNodeAiNewsRequest(req, res, options)
       }
@@ -263,11 +284,13 @@ export function createHttpHandler(options = {}) {
     if (target.kind === 'asset') {
       const assetPath = path.resolve(distRoot, target.relativePath)
       if (!assetPath.startsWith(distRoot)) {
+        // 双保险：就算前面分流通过了，这里仍再检查一次最终路径是否还在 dist 目录里。
         return sendJson(res, 400, { error: 'Invalid asset path.' })
       }
       return serveFile(res, assetPath, method)
     }
 
+    // 其余合法路径全部回退到前端入口，让 Vue Router 自己接管页面级路由。
     const indexPath = path.resolve(distRoot, 'index.html')
     return serveFile(res, indexPath, method)
   }
@@ -289,6 +312,7 @@ export function startHttpServer(options = {}) {
 export async function verifyDistExists(distRoot = DEFAULT_DIST_ROOT) {
   const indexPath = path.resolve(distRoot, 'index.html')
   if (!existsSync(indexPath)) {
+    // 生产入口依赖 dist，所以缺包时直接抛错，比启动空服务更容易定位问题。
     throw new Error(`Missing built frontend output at ${indexPath}. Run "pnpm build" first.`)
   }
 

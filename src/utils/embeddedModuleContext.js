@@ -7,6 +7,8 @@ function toQueryValue(value, fallback = '') {
 }
 
 export function buildEmbeddedModuleContext({ context = {}, goal = 'cut', weeks = 8, targetKg = 3 } = {}) {
+  // 父页面会不断更新 goal / weeks / targetKg，但模块内部还需要保留共享的人体数据与热量上下文。
+  // 这里把“共享基础信息”和“当前推演目标”合并成一份轻量上下文，作为 iframe 和助手的统一输入。
   return {
     ...context,
     goal,
@@ -18,6 +20,8 @@ export function buildEmbeddedModuleContext({ context = {}, goal = 'cut', weeks =
 export function buildEmbeddedModuleQuery(input = {}) {
   const sharedContext = buildEmbeddedModuleContext(input)
 
+  // 这里序列化的是“模块页首屏必须知道的最小上下文”。
+  // 即使 iframe 还没收到 postMessage，模块页也能先用 query 渲染出基础内容。
   return new URLSearchParams({
     goal: toQueryValue(sharedContext.goal, 'cut'),
     sex: toQueryValue(sharedContext.sex, 'male'),

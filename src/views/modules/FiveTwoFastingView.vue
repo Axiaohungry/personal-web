@@ -6,6 +6,8 @@ import { moduleSources } from '@/data/moduleSources.js'
 import { useEmbeddedModuleState } from '@/hooks/useEmbeddedModuleState.js'
 import { buildFiveTwoFastingPlan } from '@/utils/modulePlans.js'
 
+// 5+2 页把周节奏计划化：
+// 先判断当前目标是否适合 5+2，再决定展示完整执行表还是只展示边界提醒。
 const { state, titleSuffix } = useEmbeddedModuleState()
 
 const plan = computed(() => buildFiveTwoFastingPlan({

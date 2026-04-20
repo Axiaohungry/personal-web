@@ -1,17 +1,24 @@
 <script setup>
-import { ref } from 'vue'
-
 import ModuleWorkbenchLayout from '@/components/modules/ModuleWorkbenchLayout.vue'
 import { moduleSources } from '@/data/moduleSources.js'
 import { aisGroupA, aisGroupB, supplementCatalog } from '@/data/supplementCatalog.js'
 import { useEmbeddedModuleState } from '@/hooks/useEmbeddedModuleState.js'
+import { useRemoteLookup } from '@/hooks/useRemoteLookup.js'
 
+// 补剂库和食物库一样采用“静态资料 + 远程查询”的双层结构。
+// 区别在于这里先给 AIS 分组和核心补剂说明，再允许用户补查具体补剂。
 useEmbeddedModuleState()
 
-const searchKeyword = ref('')
-const loading = ref(false)
-const remoteRows = ref([])
-const remoteError = ref('')
+const {
+  searchKeyword,
+  loading,
+  remoteRows,
+  remoteError,
+  handleSearch,
+} = useRemoteLookup({
+  endpoint: '/api/fitness/supplement-search',
+  keyPrefix: 'supplement-result',
+})
 
 const supplementColumns = [
   { title: '补剂', dataIndex: 'name', key: 'name' },
@@ -27,36 +34,6 @@ const remoteColumns = [
   { title: '适用场景', dataIndex: 'bestFor', key: 'bestFor' },
 ]
 
-async function handleSearch() {
-  const keyword = searchKeyword.value.trim()
-  if (!keyword) return
-
-  loading.value = true
-  remoteError.value = ''
-
-  try {
-    const response = await fetch(`/api/fitness/supplement-search?q=${encodeURIComponent(keyword)}`)
-    const data = await response.json().catch(() => ({}))
-
-    if (!response.ok) {
-      throw new Error(data.error || `接口响应 ${response.status}`)
-    }
-
-    remoteRows.value = (data.items || []).map((item, index) => ({
-      ...item,
-      key: `supplement-result-${index}`,
-    }))
-
-    if (!remoteRows.value.length) {
-      remoteError.value = '没有拿到可用结果，换个关键词再试试。'
-    }
-  } catch (error) {
-    remoteRows.value = []
-    remoteError.value = error.message || '搜索失败，请稍后再试。'
-  } finally {
-    loading.value = false
-  }
-}
 </script>
 
 <template>

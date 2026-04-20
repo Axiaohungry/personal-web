@@ -1,6 +1,8 @@
 <script setup>
 import { computed } from 'vue'
 
+// 透明计算面板的职责是把父组件已经算好的结果拆开显示，
+// 方便用户理解“总 TDEE”是由哪些部分叠加出来的。
 const props = defineProps({
   calculation: {
     type: Object,
@@ -13,6 +15,7 @@ const props = defineProps({
 })
 
 const rows = computed(() => [
+  // 这里把 calculation 对象转成列表结构，模板层只负责渲染，不再关心字段名。
   { label: '基础代谢', value: props.calculation.bmr },
   { label: '步数活动', value: props.calculation.stepCalories },
   { label: '职业活动', value: props.calculation.occupationCalories },

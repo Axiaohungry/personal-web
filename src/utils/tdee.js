@@ -10,24 +10,28 @@ function calculateBmr({ sex, age, heightCm, weightKg, bodyFatPct }) {
   const hasValidBodyFat = isValidNumber(bodyFatPct) && bodyFatPct > 0 && bodyFatPct < 100
 
   if (hasValidBodyFat) {
-    // Lean-mass formulas already absorb much of the sex difference through body composition.
+    // 已知体脂率时，优先走瘦体重公式。
+    // 这样能把个体差异更多地落在真实体成分上，而不是只靠性别项粗略区分。
     const leanMassKg = weightKg * (1 - bodyFatPct / 100)
     return round(370 + 21.6 * leanMassKg)
   }
 
-  // Sex-specific fallback: Mifflin-St Jeor.
+  // 未填写体脂率时，退回到更通用的 Mifflin-St Jeor。
+  // 这时性别项会显式参与计算。
   const base = 10 * weightKg + 6.25 * heightCm - 5 * age
   return sex === 'female' ? round(base - 161) : round(base + 5)
 }
 
 function calculateStepCalories({ sex, heightCm, stepsPerDay, weightKg }) {
-  // Common height-based walking stride heuristic with a sex-specific coefficient.
+  // 用“身高 * 步长系数”估算单步长度，再换算日行走距离和大致消耗。
+  // 这里保留了男女不同的步长系数。
   const stepLengthM = sex === 'female' ? heightCm * 0.413 / 100 : heightCm * 0.415 / 100
   const distanceKm = (stepsPerDay * stepLengthM) / 1000
   return round(distanceKm * weightKg * 0.53)
 }
 
 function calculateOccupationCalories(occupation) {
+  // 职业活动强度直接映射成固定热量补偿，目的是让输入模型保持直观稳定。
   const map = {
     sedentary: 0,
     light: 120,
@@ -38,6 +42,8 @@ function calculateOccupationCalories(occupation) {
 }
 
 function calculateTrainingCalories({ weightKg, met, sessionsPerWeek, sessionMinutes }) {
+  // 力量和有氧最终都走这一套通用计算：
+  // 先按 MET 估算周总消耗，再折算成日均值，方便与 BMR / 步数 / 职业活动直接相加。
   if (!isValidNumber(sessionsPerWeek) || !isValidNumber(sessionMinutes) || sessionsPerWeek <= 0 || sessionMinutes <= 0) {
     return 0
   }
@@ -46,6 +52,8 @@ function calculateTrainingCalories({ weightKg, met, sessionsPerWeek, sessionMinu
 }
 
 export function calculateTdee(input) {
+  // TDEE 是一个“分项累加模型”：
+  // 基础代谢 + 步数活动 + 职业活动 + 力量训练日均 + 有氧训练日均。
   const bmr = calculateBmr(input)
   const stepCalories = calculateStepCalories(input)
   const occupationCalories = calculateOccupationCalories(input.occupation)
@@ -79,6 +87,7 @@ export function calculateTdee(input) {
 }
 
 export function explainTdeeModel({ sex, bodyFatPct }) {
+  // 这个函数不再重复计算热量，而是专门把“当前版本用了哪套规则”翻译成用户能看懂的说明文案。
   const normalizedSex = sex === 'female' ? 'female' : 'male'
   const sexLabel = normalizedSex === 'female' ? '女性' : '男性'
   const hasValidBodyFat = isValidNumber(bodyFatPct) && bodyFatPct > 0 && bodyFatPct < 100

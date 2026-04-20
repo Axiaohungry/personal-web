@@ -4,6 +4,8 @@ const OPENCV_JET_RGB_HEX =
 export const JET_COLORMAP_SIZE = 256
 
 function decodeHexToBytes(hex) {
+  // OpenCV JET 色带以十六进制字符串形式内置在文件里，
+  // 这里把它解码成 Uint8Array，方便后续直接上传到 GPU 或做像素映射。
   const bytes = new Uint8Array(hex.length / 2)
 
   for (let index = 0; index < bytes.length; index += 1) {
@@ -16,6 +18,7 @@ function decodeHexToBytes(hex) {
 
 export const JET_COLORMAP_RGB_BYTES = decodeHexToBytes(OPENCV_JET_RGB_HEX)
 export const JET_COLORMAP_RGBA_BYTES = (() => {
+  // WebGL 纹理通常更适合直接使用 RGBA，所以这里再补一层 alpha=255 的展开版本。
   const rgba = new Uint8Array(JET_COLORMAP_SIZE * 4)
 
   for (let grayByte = 0; grayByte < JET_COLORMAP_SIZE; grayByte += 1) {

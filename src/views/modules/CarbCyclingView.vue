@@ -6,6 +6,8 @@ import { moduleSources } from '@/data/moduleSources.js'
 import { useEmbeddedModuleState } from '@/hooks/useEmbeddedModuleState.js'
 import { buildCarbCyclingPlan } from '@/utils/modulePlans.js'
 
+// 碳循环页本身不重复实现营养计算。
+// 它只是读取共享上下文，再把 buildCarbCyclingPlan 的结果翻译成卡片、表格和解释文案。
 const { state, titleSuffix } = useEmbeddedModuleState()
 
 const plan = computed(() => buildCarbCyclingPlan({
@@ -48,6 +50,8 @@ const weeklyColumns = [
 ]
 
 const rationaleRows = computed(() => [
+  // 这些解释块对应页面里的“为什么这样安排”，
+  // 目的是把公式结果再翻译成普通用户能理解的执行逻辑。
   {
     title: '为什么高碳日低脂',
     content: '高碳日的目标是把更多热量空间让给碳水，优先服务高强度和高容量训练。脂肪保留基础下限即可，避免把碳水挤掉。',

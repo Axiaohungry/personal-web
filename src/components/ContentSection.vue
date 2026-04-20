@@ -1,4 +1,7 @@
 <script setup>
+// 统一内容分区外壳：
+// 每个首页分区都通过这个组件复用标题、眉题和简介的结构，
+// 具体内容则由 slot 注入。
 defineProps({
   sectionId: {
     type: String,

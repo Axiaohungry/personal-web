@@ -1,26 +1,16 @@
 import { sendJson } from './fitnessGemini.js'
+import {
+  getFitnessModuleByRoutePath,
+  pickFitnessModulesByAssistantTopic,
+} from '../src/data/fitnessModules.js'
 
+// 训练助手与食物/补剂搜索不同，它不只是查表，而是要：
+// 1. 判断问题是否属于健身领域；
+// 2. 拦截医疗边界；
+// 3. 在安全范围内请求 Gemini；
+// 4. 把结果规整成前端统一消费的 JSON 协议。
 const GEMINI_API_ROOT = 'https://generativelanguage.googleapis.com/v1beta'
 const DEFAULT_GEMINI_MODEL = 'gemini-2.5-flash'
-
-const FITNESS_MODULES = {
-  training: {
-    label: '谭成义焚诀训练体系',
-    href: '/fitness/modules/fenjue-training-system',
-  },
-  food: {
-    label: '食物库',
-    href: '/fitness/modules/food-library',
-  },
-  supplements: {
-    label: '补剂库',
-    href: '/fitness/modules/supplement-library',
-  },
-  leanGain: {
-    label: '增肌底层热量逻辑',
-    href: '/fitness/modules/lean-gain-calorie-logic',
-  },
-}
 
 const SCOPE_KEYWORDS = {
   training: [
@@ -209,6 +199,8 @@ function detectScopeTopic(question) {
 
   if (!text) return 'general'
 
+  // 这里的匹配顺序有意从“最常见健身主题”往下走。
+  // 一旦命中就立即返回，让一个问题只落进一个主主题，方便后面推荐相关模块。
   if (includesAny(text, SCOPE_KEYWORDS.training)) return 'training'
   if (includesAny(text, SCOPE_KEYWORDS.diet)) return 'diet'
   if (includesAny(text, SCOPE_KEYWORDS.recovery)) return 'recovery'
@@ -227,6 +219,7 @@ function uniqueModules(modules) {
     if (!href.startsWith('/fitness/modules/')) return false
 
     const key = `${label}|${href}`
+    // 用 label + href 共同去重，避免模型返回同一路由但不同文案时重复展示。
     if (seen.has(key)) return false
     seen.add(key)
     return true
@@ -234,67 +227,15 @@ function uniqueModules(modules) {
 }
 
 function pickModulesByTopic(topic) {
-  switch (topic) {
-    case 'training':
-      return [
-        FITNESS_MODULES.training,
-        FITNESS_MODULES.leanGain,
-        FITNESS_MODULES.food,
-        FITNESS_MODULES.supplements,
-      ]
-    case 'diet':
-      return [
-        FITNESS_MODULES.leanGain,
-        FITNESS_MODULES.food,
-        FITNESS_MODULES.supplements,
-        FITNESS_MODULES.training,
-      ]
-    case 'recovery':
-      return [
-        FITNESS_MODULES.training,
-        FITNESS_MODULES.supplements,
-        FITNESS_MODULES.food,
-        FITNESS_MODULES.leanGain,
-      ]
-    case 'supplements':
-      return [
-        FITNESS_MODULES.supplements,
-        FITNESS_MODULES.food,
-        FITNESS_MODULES.leanGain,
-        FITNESS_MODULES.training,
-      ]
-    case 'habits':
-      return [
-        FITNESS_MODULES.training,
-        FITNESS_MODULES.food,
-        FITNESS_MODULES.leanGain,
-        FITNESS_MODULES.supplements,
-      ]
-    default:
-      return [
-        FITNESS_MODULES.training,
-        FITNESS_MODULES.food,
-        FITNESS_MODULES.leanGain,
-        FITNESS_MODULES.supplements,
-      ]
-  }
+  // 助手和前端工作台共享同一份模块注册表，保证模块标题和 href 不会在两边写出两套版本。
+  return pickFitnessModulesByAssistantTopic(topic).map((module) => ({
+    label: module.title,
+    href: module.routePath,
+  }))
 }
 
 function canonicalModuleLabelForHref(href) {
-  const normalizedHref = cleanText(href)
-
-  switch (normalizedHref) {
-    case '/fitness/modules/fenjue-training-system':
-      return FITNESS_MODULES.training.label
-    case '/fitness/modules/food-library':
-      return FITNESS_MODULES.food.label
-    case '/fitness/modules/supplement-library':
-      return FITNESS_MODULES.supplements.label
-    case '/fitness/modules/lean-gain-calorie-logic':
-      return FITNESS_MODULES.leanGain.label
-    default:
-      return ''
-  }
+  return getFitnessModuleByRoutePath(cleanText(href))?.title || ''
 }
 
 function normalizeStringArray(value) {
@@ -357,6 +298,7 @@ function normalizeRelatedModules(value, question) {
     : []
 
   const fallback = buildAssistantRelatedModules(question)
+  // 只要模型给出的 relatedModules 不可用，就回退到本地推荐结果，保证前端始终有稳定模块链接可渲染。
   return uniqueModules(modules.length ? modules : fallback).slice(0, 4)
 }
 
@@ -364,6 +306,8 @@ function buildSafeRefusalPayload(status, question) {
   const topic = detectScopeTopic(question)
   const relatedModules = buildAssistantRelatedModules(question)
 
+  // 拒答不是简单返回 error，而是给出稳定结构，
+  // 这样前端不需要区分“正常回答”和“边界提示”两套完全不同的渲染协议。
   if (status === 'medical_boundary') {
     return {
       status,
@@ -507,6 +451,8 @@ function looksLikePlanningFollowUp(text) {
   const normalized = cleanText(text).toLowerCase()
   if (!normalized) return false
 
+  // 这类词本身不一定是健身问题，但如果上下文里已经有 cut/gain 目标，
+  // 就很可能是在追问“接下来怎么执行”。
   return [
     '\u6b65\u9aa4',
     '\u6267\u884c',
@@ -528,6 +474,8 @@ function hasRecognizedFitnessGoalContext(context) {
   const normalized = stringifyContext(context).toLowerCase()
   if (!normalized) return false
 
+  // 这里只认结构化上下文里的 goal，不靠模糊词猜。
+  // 这样能避免把别的业务上下文误当成健身目标。
   return /"goal"s*:s*"(cut|gain|bulk|lean gain)"/i.test(normalized)
     || /goal:s*'(cut|gain|bulk|lean gain)'/i.test(normalized)
 }
@@ -536,6 +484,9 @@ export function classifyAssistantQuestion(question, context = '') {
   const text = normalizeQuestion(question)
   const combinedText = [text, stringifyContext(context)].filter(Boolean).join(' ')
 
+  // 这里先做本地快速分流：
+  // 范围外或医疗边界的问题直接拒绝，只有明确属于健身领域时才去调用 Gemini。
+  // 这样既省请求，也能把高风险问题挡在模型前面。
   if (!text) {
     return { status: 'out_of_scope' }
   }
@@ -564,6 +515,8 @@ export function buildFitnessAssistantRequestBody(question, context) {
   const cleanQuestion = normalizeQuestion(question)
   const cleanContext = stringifyContext(context)
 
+  // 这里把“问题 + 上下文 + 严格 JSON 协议”一起发给模型，
+  // 目的是尽量减少模型自由发挥，把输出压缩在前端能稳定消费的范围里。
   return {
     systemInstruction: {
       parts: [
@@ -602,6 +555,8 @@ export function normalizeAssistantPayload(payload, options = {}) {
   const status = normalizeStatus(payload?.status)
 
   if (status === 'ok' && isValidAssistantResponse(payload)) {
+    // 即便模型返回了 status=ok，也要再做一轮本地校验，
+    // 防止模型把编程 / 客服之类的站外内容误包装成“看起来合法”的 JSON。
     if (looksClearlyOffDomainAnswer(payload)) {
       return buildSafeRefusalPayload('out_of_scope', question)
     }
@@ -648,6 +603,7 @@ async function requestGeminiJson(question, context, options = {}) {
       body: JSON.stringify(buildFitnessAssistantRequestBody(question, context)),
     })
   } catch {
+    // 网络层失败和模型 5xx 都对外统一成稳定文案，避免前端暴露上游细节。
     throw createHttpError(502, 'Gemini upstream unavailable.')
   }
 
@@ -663,6 +619,7 @@ async function fetchFitnessAssistantPayload(question, context, options = {}) {
   const classification = classifyAssistantQuestion(question, context)
 
   if (classification.status === 'out_of_scope' || classification.status === 'medical_boundary') {
+    // 本地能判断的边界问题直接返回，不浪费模型请求。
     return buildSafeRefusalPayload(classification.status, question)
   }
 
@@ -721,6 +678,7 @@ export async function handleNodeFitnessAssistantRequest(req, res, options = {}) 
   try {
     const url = new URL(req.url || '/', 'http://127.0.0.1')
     const body = (req.method || 'GET') === 'POST' ? await readRequestJsonBody(req) : {}
+    // POST body 优先级高于 query，便于前端显式传入结构化上下文。
     const question =
       typeof body?.question === 'string' && body.question.trim()
         ? body.question

@@ -1,17 +1,26 @@
 <script setup>
-import { ref } from 'vue'
-
 import ModuleWorkbenchLayout from '@/components/modules/ModuleWorkbenchLayout.vue'
 import { foodLibraryGroups } from '@/data/foodLibraryCatalog.js'
 import { moduleSources } from '@/data/moduleSources.js'
 import { useEmbeddedModuleState } from '@/hooks/useEmbeddedModuleState.js'
+import { useRemoteLookup } from '@/hooks/useRemoteLookup.js'
 
+// 食物库由两部分组成：
+// 1. 本地静态高频食物表；
+// 2. 远程 Gemini 搜索结果。
+// 两部分共用同一张展示表，但数据来源不同。
 useEmbeddedModuleState()
 
-const searchKeyword = ref('')
-const loading = ref(false)
-const remoteRows = ref([])
-const remoteError = ref('')
+const {
+  searchKeyword,
+  loading,
+  remoteRows,
+  remoteError,
+  handleSearch,
+} = useRemoteLookup({
+  endpoint: '/api/fitness/food-search',
+  keyPrefix: 'food-result',
+})
 
 const foodColumns = [
   { title: '食物', dataIndex: 'name', key: 'name' },
@@ -22,36 +31,6 @@ const foodColumns = [
   { title: '使用场景', dataIndex: 'scene', key: 'scene' },
 ]
 
-async function handleSearch() {
-  const keyword = searchKeyword.value.trim()
-  if (!keyword) return
-
-  loading.value = true
-  remoteError.value = ''
-
-  try {
-    const response = await fetch(`/api/fitness/food-search?q=${encodeURIComponent(keyword)}`)
-    const data = await response.json().catch(() => ({}))
-
-    if (!response.ok) {
-      throw new Error(data.error || `接口响应 ${response.status}`)
-    }
-
-    remoteRows.value = (data.items || []).map((item, index) => ({
-      ...item,
-      key: `food-result-${index}`,
-    }))
-
-    if (!remoteRows.value.length) {
-      remoteError.value = '没有拿到可用结果，换个关键词再试试。'
-    }
-  } catch (error) {
-    remoteRows.value = []
-    remoteError.value = error.message || '搜索失败，请稍后再试。'
-  } finally {
-    loading.value = false
-  }
-}
 </script>
 
 <template>

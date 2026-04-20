@@ -4,6 +4,8 @@ import ProjectCaseShell from '@/components/projects/ProjectCaseShell.vue'
 import ProjectEvidenceGrid from '@/components/projects/ProjectEvidenceGrid.vue'
 import { approvalMapWorkflowCase } from '@/data/projectCases/approvalMapWorkflow.js'
 
+// 审批工作流案例页几乎不做运行时计算，
+// 它主要把结构化案例数据按固定版式拆成多个 section，方便读者顺着叙事阅读。
 const page = approvalMapWorkflowCase
 </script>
 

@@ -4,6 +4,8 @@ import { computed, ref, watch } from 'vue'
 import PagePreview from './components/PagePreview.vue'
 import { approvalStaticCatalog } from './data/approvalPageCatalog.js'
 
+// 这个页面把政务审批项目里的静态表单页整理成可浏览的页面目录。
+// 它负责把原始 catalog 数据规整成统一结构，并维护当前选中的页面与检索状态。
 function toArray(value) {
   return Array.isArray(value) ? value.filter(Boolean) : []
 }
@@ -15,6 +17,7 @@ function toText(value) {
 }
 
 function normalizeMatterPage(page, index) {
+  // catalog 来源可能不完全整齐，这里先把 id / 标题 / 编号等关键字段补齐，保证后续 UI 稳定。
   const safePage = page && typeof page === 'object' ? page : {}
   const itemNo = toText(safePage.itemNo) || String(index + 1).padStart(2, '0')
 

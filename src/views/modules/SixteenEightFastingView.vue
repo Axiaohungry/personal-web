@@ -6,6 +6,8 @@ import { moduleSources } from '@/data/moduleSources.js'
 import { useEmbeddedModuleState } from '@/hooks/useEmbeddedModuleState.js'
 import { buildSixteenEightFastingPlan } from '@/utils/modulePlans.js'
 
+// 16:8 页不是在算“神奇效果”，而是在把目标热量重新分配到进食窗口里。
+// 页面拿到 plan 后，重点展示的是窗口模板、餐次分配和执行边界。
 const { state, titleSuffix } = useEmbeddedModuleState()
 
 const plan = computed(() => buildSixteenEightFastingPlan({

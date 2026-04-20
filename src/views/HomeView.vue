@@ -10,6 +10,9 @@ import { profile } from '@/data/profile.js'
 import { projects } from '@/data/projects.js'
 import { skillGroups } from '@/data/skills.js'
 
+// 首页本身不做复杂交互，它负责把“个人介绍 / 最新动态 / 经历 / 项目 / 技能 / 联系方式”
+// 这几组内容组织成一个可快速浏览的叙事顺序。
+// 下面这些数组就是首页首屏和各分区要消费的展示数据。
 const quickStats = [
   { label: '当前角色', value: '解决方案 + 前端' },
   { label: '工作现场', value: '真实业务 / 自用工具' },

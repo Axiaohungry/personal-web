@@ -1,4 +1,6 @@
 <script setup>
+// 证据网格把案例里的图片/证据卡统一渲染成一个重复布局，
+// 这样案例数据层只管提供标题、说明和资源地址即可。
 const props = defineProps({
   items: {
     type: Array,
@@ -7,6 +9,7 @@ const props = defineProps({
 })
 
 function getEvidenceText(item) {
+  // caption 优先作为短说明，detail 作为备用。
   return item.caption || item.detail || ''
 }
 

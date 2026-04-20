@@ -1,6 +1,9 @@
 <script setup>
 import { computed } from 'vue'
 
+// 3DGS 折线图组件只做一件事：
+// 把外部传入的实验数据转成图表布局所需的坐标、标签和趋势样式，
+// 自身不参与数据生成。
 const props = defineProps({
   title: {
     type: String,

@@ -7,6 +7,8 @@ import Project3dgsViewer from '@/components/projects/Project3dgsViewer.vue'
 import { navigationItems } from '@/data/navigation.js'
 import { profile } from '@/data/profile.js'
 
+// 3DGS 项目页负责把实验资源、视角预设、图表和说明组织成一个可切换的研究展示界面。
+// 真正的渲染细节在 Project3dgsViewer 里，这里主要维护“当前看哪组结果、用什么模式看”。
 const PRESET_LABEL_MAP = {
   oblique: '斜视',
   topdown: '顶视',

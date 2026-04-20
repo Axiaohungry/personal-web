@@ -9,6 +9,8 @@ import {
 } from '@/data/fenjueTrainingSystem.js'
 import { useEmbeddedModuleState } from '@/hooks/useEmbeddedModuleState.js'
 
+// 焚诀训练体系页不是动态计算器，而是一张“内容导航地图”。
+// 它根据当前目标自动聚焦饮食恢复部分，但整体内容主要来自结构化训练资料。
 const { state } = useEmbeddedModuleState()
 
 const primarySection = ref('overview')

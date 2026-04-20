@@ -4,6 +4,7 @@ import ProjectCaseShell from '@/components/projects/ProjectCaseShell.vue'
 import ProjectEvidenceGrid from '@/components/projects/ProjectEvidenceGrid.vue'
 import { campusCollaborationCase } from '@/data/projectCases/campusCollaboration.js'
 
+// 校园协同案例页负责把同一份案例数据拆成“定位 / 复杂度 / 过程 / 结果”几个阅读层次。
 const page = campusCollaborationCase
 
 const positioningKicker = '项目视角'

@@ -1,6 +1,11 @@
 <script setup>
 import { computed, ref } from 'vue'
 
+// 训练助手面板负责：
+// 1. 读取当前目标上下文；
+// 2. 接收用户问题；
+// 3. 通过同源接口请求服务端助手；
+// 4. 按返回状态渲染正常答案、范围外提示或医疗边界提示。
 const props = defineProps({
   context: {
     type: Object,
@@ -85,6 +90,8 @@ function normalizeText(value) {
 }
 
 function isClearlyUnrelatedPrompt(prompt) {
+  // 这是前端本地的“轻量预警”。
+  // 它不会阻止请求发送，只是先提醒用户问题可能偏离站点领域。
   const text = normalizeText(prompt).toLowerCase()
   if (!text) return false
   return offDomainKeywords.some((keyword) => text.includes(keyword.toLowerCase()))
@@ -102,6 +109,7 @@ function resetTransientState() {
 }
 
 function buildRequestBody(prompt) {
+  // 助手回答必须带上下文，否则模型只知道“问题”，不知道用户当前是减脂还是增肌。
   return {
     question: prompt,
     context: {
@@ -117,6 +125,7 @@ async function submitQuestion() {
   const prompt = normalizeText(question.value)
   if (!prompt || loading.value) return
 
+  // 每次发新问题前都清空上次返回，避免旧结果和新请求同时停留在界面上。
   result.value = null
   error.value = ''
   localNudge.value = ''
@@ -151,6 +160,7 @@ async function submitQuestion() {
 }
 
 function handleSubmit() {
+  // 模板层统一走表单提交，这里只负责把异步逻辑安全地触发出去。
   void submitQuestion()
 }
 </script>

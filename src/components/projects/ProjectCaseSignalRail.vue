@@ -1,4 +1,6 @@
 <script setup>
+// 右侧信号栏组件负责兼容不同案例页传进来的指标字段名，
+// 把 label / value / note / subtext 统一整理成一个可重复渲染的卡片结构。
 const props = defineProps({
   items: {
     type: Array,
@@ -28,6 +30,7 @@ function getSignalSubtext(item) {
 }
 
 function getSignalKey(item, index) {
+  // 这里优先使用最稳定的业务文本作为 key，兜底再回退到索引。
   return item?.label ?? item?.title ?? item?.name ?? index
 }
 </script>

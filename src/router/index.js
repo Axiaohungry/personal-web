@@ -1,5 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
+// 路由职责说明：
+// - 首页与健身工作台是两条一级主线；
+// - 健身工作台下的每个模块页都保留独立 URL，方便直接打开或被 iframe 嵌入；
+// - 项目案例页也都拆成独立路由，便于首页卡片直接跳转。
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
