@@ -1,5 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
+import { readFile } from 'node:fs/promises'
 
 test('buildAiNewsRequestBody keeps grounded search tooling and requests Chinese display fields', async () => {
   const { buildAiNewsRequestBody } = await import('../../server/aiNewsGemini.js')
@@ -305,4 +306,14 @@ test('fetchAiNewsBrief throws a stable fallback message without stale cache', as
       }),
     /Unable to refresh AI news right now\./
   )
+})
+
+test('AI news brief keeps actions in the header and stacks story cards below', async () => {
+  const componentFile = await readFile(new URL('../../src/components/AiNewsBrief.vue', import.meta.url), 'utf8')
+  const styleFile = await readFile(new URL('../../src/styles/home.css', import.meta.url), 'utf8')
+
+  assert.match(componentFile, /ai-news-brief__header[\s\S]*ai-news-brief__actions[\s\S]*ai-news-brief__stories/)
+  assert.match(styleFile, /\.ai-news-brief__header\s*\{[\s\S]*justify-content:\s*space-between;/)
+  assert.match(styleFile, /\.ai-news-brief__stories\s*\{[^}]*flex-direction:\s*column;/)
+  assert.doesNotMatch(styleFile, /\.ai-news-brief__stories\s*\{[^}]*grid-template-columns:\s*repeat\(3,\s*minmax\(0,\s*1fr\)\);/)
 })

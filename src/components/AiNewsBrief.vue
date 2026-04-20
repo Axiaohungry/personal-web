@@ -103,18 +103,19 @@ onMounted(() => {
 
 <template>
   <section class="ai-news-brief shell-surface motion-rise motion-rise--2">
-    <div class="ai-news-brief__copy">
-      <p class="ai-news-brief__eyebrow">AI 最新动态</p>
-      <h2 class="ai-news-brief__title">AI 最新动态</h2>
-      <p class="ai-news-brief__summary">
-        从公开来源整理三条最新 AI 变化，帮助你快速判断哪些信息值得继续关注。
-      </p>
+    <div class="ai-news-brief__header">
+      <div class="ai-news-brief__copy">
+        <p class="ai-news-brief__eyebrow">AI 最新动态</p>
+        <h2 class="ai-news-brief__title">AI 最新动态</h2>
+        <p class="ai-news-brief__summary">
+          从公开来源整理三条最新 AI 变化，帮助你快速判断哪些信息值得继续关注。
+        </p>
 
-      <p class="ai-news-brief__timestamp">
-        <span class="ai-news-brief__timestamp-label">更新时间</span>
-        <time class="ai-news-brief__timestamp-value">{{ timestampLabel }}</time>
-      </p>
-
+        <p class="ai-news-brief__timestamp">
+          <span class="ai-news-brief__timestamp-label">更新时间</span>
+          <time class="ai-news-brief__timestamp-value">{{ timestampLabel }}</time>
+        </p>
+      </div>
       <div class="ai-news-brief__actions">
         <a-button type="primary" size="large" :loading="loading" @click="refreshBrief">
           刷新动态
