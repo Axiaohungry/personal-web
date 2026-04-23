@@ -23,6 +23,7 @@ test('study routes are declared as lazy-loaded study entrypoints', () => {
 })
 
 test('homepage surfaces the study entry beside fitness in the same row before the main grid', () => {
+  assert.match(homeViewSource, /今天学习了吗？/)
   assert.match(homeViewSource, /href=['"]\/study\/['"]/)
   assert.match(homeViewSource, /href=['"]\/fitness\/['"]/)
 
