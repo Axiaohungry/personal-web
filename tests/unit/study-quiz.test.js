@@ -17,25 +17,7 @@ test('shuffleQuizQuestions can be made deterministic with an injected random sou
   assert.deepEqual(questions.map((question) => question.id), ['a', 'b', 'c', 'd'])
 })
 
-test('answerQuizQuestion hides explanation until an answer is recorded', () => {
-  const question = {
-    id: 'chapter-2',
-    prompt: 'Which muscle is trained?',
-    answer: 'Quadriceps',
-    explanation: 'The explanation should stay hidden until the learner answers.',
-  }
-
-  const preview = answerQuizQuestion(question)
-  const answered = answerQuizQuestion(question, 'Hamstrings')
-
-  assert.equal(preview.explanation, undefined)
-  assert.equal(preview.isLocked, false)
-  assert.equal(answered.userAnswer, 'Hamstrings')
-  assert.equal(answered.explanation, question.explanation)
-  assert.equal(answered.isLocked, true)
-})
-
-test('answerQuizQuestion locks a question after the first answer', () => {
+test('answerQuizQuestion locks the result after the first answer', () => {
   const question = {
     id: 'chapter-1',
     prompt: 'What is NASM?',
@@ -48,7 +30,26 @@ test('answerQuizQuestion locks a question after the first answer', () => {
 
   assert.equal(firstAnswer.isLocked, true)
   assert.equal(firstAnswer.isCorrect, true)
-  assert.equal(secondAnswer.userAnswer, 'A certification framework')
   assert.equal(secondAnswer.isLocked, true)
   assert.equal(secondAnswer.isCorrect, true)
+  assert.equal(secondAnswer.userAnswer, 'A certification framework')
+})
+
+test('answerQuizQuestion keeps explanation hidden until an answer is recorded', () => {
+  const question = {
+    id: 'chapter-2',
+    prompt: 'Which muscle is trained?',
+    answer: 'Quadriceps',
+    explanation: 'The explanation should stay hidden until the learner answers.',
+  }
+
+  const preview = answerQuizQuestion(question)
+  const answered = answerQuizQuestion(question, 'Hamstrings')
+
+  assert.equal(preview.explanation, undefined)
+  assert.equal(preview.userAnswer, undefined)
+  assert.equal(preview.isLocked, false)
+  assert.equal(answered.explanation, question.explanation)
+  assert.equal(answered.userAnswer, 'Hamstrings')
+  assert.equal(answered.isLocked, true)
 })

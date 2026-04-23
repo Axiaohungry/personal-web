@@ -14,35 +14,37 @@ const homeViewSource = readFileSync(
 )
 
 test('study routes are declared as lazy-loaded study entrypoints', () => {
-  assert.match(routerSource, /path:\s*['"]\/study['"]/)
-  assert.match(routerSource, /import\(['"]@\/views\/StudyView\.vue['"]\)/)
-  assert.match(routerSource, /path:\s*['"]\/study\/frontend\/fundamentals['"]/)
-  assert.match(routerSource, /import\(['"]@\/views\/FrontendStudyDetailView\.vue['"]\)/)
-  assert.match(routerSource, /path:\s*['"]\/study\/nasm\/:chapterSlug['"]/)
-  assert.match(routerSource, /import\(['"]@\/views\/NasmChapterView\.vue['"]\)/)
+  assert.match(
+    routerSource,
+    /\{\s*path:\s*['"]\/study['"][\s\S]*?component:\s*\(\)\s*=>\s*import\(['"]@\/views\/study\/StudyView\.vue['"]\)/
+  )
+  assert.match(
+    routerSource,
+    /\{\s*path:\s*['"]\/study\/frontend\/fundamentals['"][\s\S]*?component:\s*\(\)\s*=>\s*import\(['"]@\/views\/study\/FrontendStudyDetailView\.vue['"]\)/
+  )
+  assert.match(
+    routerSource,
+    /\{\s*path:\s*['"]\/study\/nasm\/:chapterSlug['"][\s\S]*?component:\s*\(\)\s*=>\s*import\(['"]@\/views\/study\/NasmChapterView\.vue['"]\)/
+  )
 })
 
-test('homepage surfaces the study entry beside fitness in the same row before the main grid', () => {
+test('homepage surfaces the study entry beside fitness before the main grid', () => {
   assert.match(homeViewSource, /今天学习了吗？/)
   assert.match(homeViewSource, /href=['"]\/study\/['"]/)
   assert.match(homeViewSource, /href=['"]\/fitness\/['"]/)
 
   const bodyShellStart = homeViewSource.indexOf('<section class="home-page__body-shell')
   const mainGridStart = homeViewSource.indexOf('<div class="home-page__grid">')
-  const fitnessHrefStart = homeViewSource.indexOf("href='/fitness/'")
-  const studyHrefStart = homeViewSource.indexOf("href='/study/'")
 
   assert.ok(bodyShellStart !== -1)
   assert.ok(mainGridStart !== -1)
-  assert.ok(fitnessHrefStart !== -1)
-  assert.ok(studyHrefStart !== -1)
-  assert.ok(fitnessHrefStart > bodyShellStart)
-  assert.ok(studyHrefStart > bodyShellStart)
-  assert.ok(fitnessHrefStart < mainGridStart)
-  assert.ok(studyHrefStart < mainGridStart)
+  assert.ok(bodyShellStart < mainGridStart)
 
-  assert.match(
-    homeViewSource,
-    /<section class="home-page__body-shell[\s\S]*?<a-row[\s\S]*?href=['"]\/fitness\/['"][\s\S]*?href=['"]\/study\/['"][\s\S]*?<\/a-row>[\s\S]*?<div class="home-page__grid">/
-  )
+  const preGridBody = homeViewSource.slice(bodyShellStart, mainGridStart)
+  const postGridBody = homeViewSource.slice(mainGridStart)
+
+  assert.match(preGridBody, /今天学习了吗？/)
+  assert.match(preGridBody, /href=['"]\/fitness\/['"]/)
+  assert.match(preGridBody, /href=['"]\/study\/['"]/)
+  assert.ok(!postGridBody.includes("href='/study/'"))
 })

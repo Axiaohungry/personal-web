@@ -10,8 +10,12 @@ test('study topic catalog stays intentionally small', () => {
   assert.equal(studyTopics.length, 3)
 })
 
-test('frontend study categories stay locked to fundamentals, interview, and coding', () => {
-  assert.deepEqual(Object.keys(frontendStudyCategories), ['fundamentals', 'interview', 'coding'])
+test('frontend study categories stay locked to the ordered card shape', () => {
+  assert.ok(Array.isArray(frontendStudyCategories))
+  assert.deepEqual(
+    frontendStudyCategories.map((category) => category.key),
+    ['fundamentals', 'interview', 'coding']
+  )
 })
 
 test('NASM catalog stays at the expected chapter count', () => {
