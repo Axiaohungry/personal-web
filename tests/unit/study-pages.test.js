@@ -22,12 +22,26 @@ test('study routes are declared as lazy-loaded study entrypoints', () => {
   assert.match(routerSource, /import\(['"]@\/views\/NasmChapterView\.vue['"]\)/)
 })
 
-test('homepage surfaces the study entry beside fitness in the same section', () => {
-  assert.match(homeViewSource, /今天学习了吗？/)
+test('homepage surfaces the study entry beside fitness in the same row before the main grid', () => {
   assert.match(homeViewSource, /href=['"]\/study\/['"]/)
+  assert.match(homeViewSource, /href=['"]\/fitness\/['"]/)
+
+  const bodyShellStart = homeViewSource.indexOf('<section class="home-page__body-shell')
+  const mainGridStart = homeViewSource.indexOf('<div class="home-page__grid">')
+  const fitnessHrefStart = homeViewSource.indexOf("href='/fitness/'")
+  const studyHrefStart = homeViewSource.indexOf("href='/study/'")
+
+  assert.ok(bodyShellStart !== -1)
+  assert.ok(mainGridStart !== -1)
+  assert.ok(fitnessHrefStart !== -1)
+  assert.ok(studyHrefStart !== -1)
+  assert.ok(fitnessHrefStart > bodyShellStart)
+  assert.ok(studyHrefStart > bodyShellStart)
+  assert.ok(fitnessHrefStart < mainGridStart)
+  assert.ok(studyHrefStart < mainGridStart)
 
   assert.match(
     homeViewSource,
-    /<section[\s\S]*?今天学习了吗？[\s\S]*?href=['"]\/fitness\/['"][\s\S]*?href=['"]\/study\/['"][\s\S]*?<\/section>/
+    /<section class="home-page__body-shell[\s\S]*?<a-row[\s\S]*?href=['"]\/fitness\/['"][\s\S]*?href=['"]\/study\/['"][\s\S]*?<\/a-row>[\s\S]*?<div class="home-page__grid">/
   )
 })

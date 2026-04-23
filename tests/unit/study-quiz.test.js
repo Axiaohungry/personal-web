@@ -17,6 +17,24 @@ test('shuffleQuizQuestions can be made deterministic with an injected random sou
   assert.deepEqual(questions.map((question) => question.id), ['a', 'b', 'c', 'd'])
 })
 
+test('answerQuizQuestion hides explanation until an answer is recorded', () => {
+  const question = {
+    id: 'chapter-2',
+    prompt: 'Which muscle is trained?',
+    answer: 'Quadriceps',
+    explanation: 'The explanation should stay hidden until the learner answers.',
+  }
+
+  const preview = answerQuizQuestion(question)
+  const answered = answerQuizQuestion(question, 'Hamstrings')
+
+  assert.equal(preview.explanation, undefined)
+  assert.equal(preview.isLocked, false)
+  assert.equal(answered.userAnswer, 'Hamstrings')
+  assert.equal(answered.explanation, question.explanation)
+  assert.equal(answered.isLocked, true)
+})
+
 test('answerQuizQuestion locks a question after the first answer', () => {
   const question = {
     id: 'chapter-1',
@@ -33,19 +51,4 @@ test('answerQuizQuestion locks a question after the first answer', () => {
   assert.equal(secondAnswer.userAnswer, 'A certification framework')
   assert.equal(secondAnswer.isLocked, true)
   assert.equal(secondAnswer.isCorrect, true)
-})
-
-test('answerQuizQuestion reveals the explanation only after an answer is recorded', () => {
-  const question = {
-    id: 'chapter-2',
-    prompt: 'Which muscle is trained?',
-    answer: 'Quadriceps',
-    explanation: 'The explanation should stay hidden until the learner answers.',
-  }
-
-  const answered = answerQuizQuestion(question, 'Hamstrings')
-
-  assert.equal(answered.userAnswer, 'Hamstrings')
-  assert.equal(answered.explanation, question.explanation)
-  assert.equal(answered.isLocked, true)
 })
