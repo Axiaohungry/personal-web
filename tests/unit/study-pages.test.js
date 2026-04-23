@@ -28,14 +28,18 @@ test('study routes are declared as lazy-loaded study entrypoints', () => {
   )
 })
 
-test('homepage surfaces the study entry beside fitness before the main grid', () => {
-  assert.match(homeViewSource, /今天学习了吗？/)
-  assert.match(homeViewSource, /href=['"]\/study\/['"]/)
-  assert.match(homeViewSource, /href=['"]\/fitness\/['"]/)
+test('homepage keeps the study entry once in the pre-grid body shell alongside fitness', () => {
+  const studyHrefPattern = /href=(['"])\/study\/\1/g
+  const fitnessHrefPattern = /href=(['"])\/fitness\/\1/g
+  const studyHrefMatches = homeViewSource.match(studyHrefPattern) ?? []
+  const fitnessHrefMatches = homeViewSource.match(fitnessHrefPattern) ?? []
+  const bodyShellStart = homeViewSource.indexOf('home-page__body-shell')
+  const mainGridStart = homeViewSource.indexOf('home-page__grid')
+  const studyLabelPattern = /\u4eca\u5929\u5b66\u4e60\u4e86\u5417\uff1f/
 
-  const bodyShellStart = homeViewSource.indexOf('<section class="home-page__body-shell')
-  const mainGridStart = homeViewSource.indexOf('<div class="home-page__grid">')
-
+  assert.match(homeViewSource, studyLabelPattern)
+  assert.equal(studyHrefMatches.length, 1)
+  assert.equal(fitnessHrefMatches.length, 1)
   assert.ok(bodyShellStart !== -1)
   assert.ok(mainGridStart !== -1)
   assert.ok(bodyShellStart < mainGridStart)
@@ -43,8 +47,8 @@ test('homepage surfaces the study entry beside fitness before the main grid', ()
   const preGridBody = homeViewSource.slice(bodyShellStart, mainGridStart)
   const postGridBody = homeViewSource.slice(mainGridStart)
 
-  assert.match(preGridBody, /今天学习了吗？/)
-  assert.match(preGridBody, /href=['"]\/fitness\/['"]/)
-  assert.match(preGridBody, /href=['"]\/study\/['"]/)
-  assert.ok(!postGridBody.includes("href='/study/'"))
+  assert.match(preGridBody, studyLabelPattern)
+  assert.match(preGridBody, fitnessHrefPattern)
+  assert.match(preGridBody, studyHrefPattern)
+  assert.equal((postGridBody.match(studyHrefPattern) ?? []).length, 0)
 })

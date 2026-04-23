@@ -3,53 +3,86 @@ import assert from 'node:assert/strict'
 
 import { answerQuizQuestion, shuffleQuizQuestions } from '../../src/utils/studyQuiz.js'
 
-test('shuffleQuizQuestions can be made deterministic with an injected random source', () => {
+function createRandomSequence(values) {
+  let index = 0
+  return () => values[index++ % values.length]
+}
+
+test('shuffleQuizQuestions is deterministic with injected random and does not mutate input', () => {
   const questions = [
     { id: 'a' },
     { id: 'b' },
     { id: 'c' },
     { id: 'd' },
   ]
+  const originalIds = questions.map((question) => question.id)
 
-  const shuffled = shuffleQuizQuestions(questions, () => 0)
+  const shuffledA = shuffleQuizQuestions(questions, createRandomSequence([0.91, 0.17, 0.63, 0.28]))
+  const shuffledB = shuffleQuizQuestions(questions, createRandomSequence([0.91, 0.17, 0.63, 0.28]))
+  const shuffledC = shuffleQuizQuestions(questions, createRandomSequence([0.12, 0.84, 0.39, 0.57]))
 
-  assert.deepEqual(shuffled.map((question) => question.id), ['b', 'c', 'd', 'a'])
-  assert.deepEqual(questions.map((question) => question.id), ['a', 'b', 'c', 'd'])
+  assert.notStrictEqual(shuffledA, questions)
+  assert.deepEqual(questions.map((question) => question.id), originalIds)
+  assert.deepEqual(shuffledA, shuffledB)
+  assert.notDeepEqual(shuffledA, shuffledC)
+  assert.deepEqual(
+    shuffledA.map((question) => question.id).sort(),
+    originalIds.slice().sort()
+  )
 })
 
 test('answerQuizQuestion locks the result after the first answer', () => {
-  const question = {
-    id: 'chapter-1',
-    prompt: 'What is NASM?',
-    answer: 'A certification framework',
-    explanation: 'NASM focuses on structured programming and clear standards.',
+  const questionId = 'chapter-1'
+  const initialState = {
+    questions: {
+      [questionId]: {
+        prompt: 'What is NASM?',
+        explanation: 'NASM focuses on structured programming and clear standards.',
+        isLocked: false,
+        explanationVisible: false,
+        options: {
+          'choice-a': 'A certification framework',
+          'choice-b': 'Something else',
+        },
+      },
+    },
   }
 
-  const firstAnswer = answerQuizQuestion(question, 'A certification framework')
-  const secondAnswer = answerQuizQuestion(firstAnswer, 'Something else')
+  const answeredState = answerQuizQuestion(initialState, questionId, 'choice-a')
+  const secondAnswerState = answerQuizQuestion(answeredState, questionId, 'choice-b')
 
-  assert.equal(firstAnswer.isLocked, true)
-  assert.equal(firstAnswer.isCorrect, true)
-  assert.equal(secondAnswer.isLocked, true)
-  assert.equal(secondAnswer.isCorrect, true)
-  assert.equal(secondAnswer.userAnswer, 'A certification framework')
+  assert.notStrictEqual(answeredState, initialState)
+  assert.equal(initialState.questions[questionId].isLocked, false)
+  assert.equal(initialState.questions[questionId].explanationVisible, false)
+  assert.equal(answeredState.questions[questionId].isLocked, true)
+  assert.equal(answeredState.questions[questionId].selectedOptionKey, 'choice-a')
+  assert.equal(answeredState.questions[questionId].isCorrect, true)
+  assert.equal(secondAnswerState.questions[questionId].selectedOptionKey, 'choice-a')
+  assert.equal(secondAnswerState.questions[questionId].isLocked, true)
 })
 
 test('answerQuizQuestion keeps explanation hidden until an answer is recorded', () => {
-  const question = {
-    id: 'chapter-2',
-    prompt: 'Which muscle is trained?',
-    answer: 'Quadriceps',
-    explanation: 'The explanation should stay hidden until the learner answers.',
+  const questionId = 'chapter-2'
+  const state = {
+    questions: {
+      [questionId]: {
+        prompt: 'Which muscle is trained?',
+        explanation: 'The explanation should stay hidden until the learner answers.',
+        isLocked: false,
+        explanationVisible: false,
+        options: {
+          'choice-a': 'Quadriceps',
+          'choice-b': 'Hamstrings',
+        },
+      },
+    },
   }
 
-  const preview = answerQuizQuestion(question)
-  const answered = answerQuizQuestion(question, 'Hamstrings')
+  const previewState = state
+  const answeredState = answerQuizQuestion(state, questionId, 'choice-a')
 
-  assert.equal(preview.explanation, undefined)
-  assert.equal(preview.userAnswer, undefined)
-  assert.equal(preview.isLocked, false)
-  assert.equal(answered.explanation, question.explanation)
-  assert.equal(answered.userAnswer, 'Hamstrings')
-  assert.equal(answered.isLocked, true)
+  assert.equal(previewState.questions[questionId].explanationVisible, false)
+  assert.ok(!('selectedOptionKey' in previewState.questions[questionId]))
+  assert.equal(answeredState.questions[questionId].explanationVisible, true)
+  assert.equal(answeredState.questions[questionId].selectedOptionKey, 'choice-a')
 })

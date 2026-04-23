@@ -1,8 +1,11 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 
-import { studyTopics } from '../../src/data/study/studyTopics.js'
-import { frontendStudyCategories } from '../../src/data/study/frontendStudy.js'
+import { studyHomeCard, studyTopics } from '../../src/data/study/studyTopics.js'
+import {
+  frontendStudyCategories,
+  frontendStudySections,
+} from '../../src/data/study/frontendStudy.js'
 import { nasmCatalog } from '../../src/data/study/nasmCatalog.js'
 import { nasmChapters } from '../../src/data/study/generated/nasmChapters.js'
 
@@ -16,6 +19,20 @@ test('frontend study categories stay locked to the ordered card shape', () => {
     frontendStudyCategories.map((category) => category.key),
     ['fundamentals', 'interview', 'coding']
   )
+})
+
+test('frontend study sections expose the planned keyed section collections', () => {
+  assert.ok(frontendStudySections)
+  assert.ok('fundamentals' in frontendStudySections)
+  assert.ok('interview' in frontendStudySections)
+  assert.ok('coding' in frontendStudySections)
+  assert.ok(Array.isArray(frontendStudySections.fundamentals))
+  assert.ok(frontendStudySections.fundamentals.length > 0)
+})
+
+test('study home card points to the study route', () => {
+  assert.ok(studyHomeCard)
+  assert.equal(studyHomeCard.href, '/study/')
 })
 
 test('NASM catalog stays at the expected chapter count', () => {
