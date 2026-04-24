@@ -17,7 +17,7 @@ defineProps({
 
 <template>
   <section class="empty-study-placeholder study-surface">
-    <p class="empty-study-placeholder__eyebrow">Study In Progress</p>
+    <p class="empty-study-placeholder__eyebrow">学习内容整理中</p>
     <h2 class="empty-study-placeholder__title">{{ title }}</h2>
     <p class="empty-study-placeholder__summary">{{ summary }}</p>
     <p v-if="hint" class="empty-study-placeholder__hint">{{ hint }}</p>
