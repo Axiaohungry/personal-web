@@ -101,6 +101,18 @@ const router = createRouter({
       component: () => import('@/views/study/ProductStudyView.vue'),
     },
     {
+      path: '/study/nasm',
+      alias: ['/study/nasm/'],
+      name: 'study-nasm',
+      component: () => import('@/views/study/NasmStudyIndexView.vue'),
+    },
+    {
+      path: '/study/nasm/:chapterSlug',
+      alias: ['/study/nasm/:chapterSlug/'],
+      name: 'study-nasm-chapter',
+      component: () => import('@/views/study/NasmChapterView.vue'),
+    },
+    {
       path: '/projects/approval-map-workflow',
       alias: ['/projects/approval-map-workflow/'],
       name: 'project-approval-map-workflow',

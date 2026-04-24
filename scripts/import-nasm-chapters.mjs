@@ -8,13 +8,15 @@ const repoRoot = path.resolve(__dirname, '..')
 
 const sourceDir =
   process.env.NASM_SOURCE_DIR ??
-  'E:\\BaiduNetdiskDownload\\NSCA第三版教材按章节拆分\\outputs\\chapters'
+  'E:\\BaiduNetdiskDownload\\NSCA教材\\outputs\\chapters'
 const docsDir = path.join(repoRoot, 'docs', 'study', 'nasm', 'chapters')
 const generatedDir = path.join(repoRoot, 'src', 'data', 'study', 'generated')
 const generatedFile = path.join(generatedDir, 'nasmChapters.js')
 
 const HEADING_RE = /^(#{1,6})\s+(.*)$/
 const BULLET_RE = /^(\s*)[-*]\s+(.*)$/
+const NUMBERED_PROMPT_RE = /^\s*\d+(?:[.)]|[．、:：])\s*/
+const OPTION_RE = /^\s*([A-Z])(?:[.)]|[．、:：])\s*(.*)$/
 
 function normalizeLine(line) {
   return line.replace(/\uFEFF/g, '').trimEnd()
@@ -27,11 +29,15 @@ function slugify(value) {
     .replace(/^-+|-+$/g, '')
 }
 
-function stripHeadingNumber(value) {
+function stripHeadingNumber(value = '') {
   return value
     .replace(/^[A-Z]\.\s*/i, '')
     .replace(/^\d+([.)]|[.:：])\s*/, '')
     .trim()
+}
+
+function createQuestionKey(prefix, index) {
+  return `${prefix}-${String(index + 1).padStart(2, '0')}`
 }
 
 function collectBullets(lines) {
@@ -55,6 +61,7 @@ function getHeadingBlocks(lines) {
 
   for (let index = 0; index < lines.length; index += 1) {
     const match = lines[index].match(HEADING_RE)
+
     if (!match) {
       continue
     }
@@ -74,20 +81,18 @@ function findOutlineHeading(headings) {
 }
 
 function findQuizStartIndex(headings, lines) {
-  const questionHeading = headings.find(
-    (heading) => heading.depth === 3 && /^[A-Z]\./i.test(heading.text)
-  )
+  const quizHeading = headings.find((heading) => /quiz|question|题|测验|练习/i.test(heading.text))
 
-  if (questionHeading) {
-    return questionHeading.index
+  if (quizHeading) {
+    return quizHeading.index
   }
 
-  const quizSection = headings.find((heading) =>
-    /quiz|question|练习|习题|测试|题目|复习|思考/i.test(heading.text)
+  const numberedHeading = headings.find(
+    (heading) => heading.depth === 3 && NUMBERED_PROMPT_RE.test(heading.text)
   )
 
-  if (quizSection) {
-    return quizSection.index
+  if (numberedHeading) {
+    return numberedHeading.index
   }
 
   const fallbackIndex = lines.findIndex((line) => /^###\s+\d+/.test(line))
@@ -107,8 +112,7 @@ function buildOutline(lines, outlineHeading, quizStartIndex) {
       ? quizStartIndex
       : Math.min(outlineHeading.index + 1 + nextHeadingIndex, quizStartIndex)
 
-  const bulletLines = collectBullets(lines.slice(outlineHeading.index + 1, endIndex))
-  return bulletLines
+  return collectBullets(lines.slice(outlineHeading.index + 1, endIndex))
 }
 
 function extractKnowledgeSections(lines, headings, boundaryIndex) {
@@ -134,7 +138,7 @@ function extractKnowledgeSections(lines, headings, boundaryIndex) {
     sections.push({
       key: slugify(stripHeadingNumber(heading.text)) || `section-${index + 1}`,
       title: stripHeadingNumber(heading.text) || `Section ${index + 1}`,
-      summary: summary || '本章内容整理中。',
+      summary: summary || 'Chapter summary pending.',
       bullets: bullets.slice(0, 8),
     })
   }
@@ -149,14 +153,75 @@ function extractKnowledgeSections(lines, headings, boundaryIndex) {
   return [
     {
       key: 'core-points',
-      title: '核心知识点',
+      title: 'Core points',
       summary:
         fallbackParagraphs[0] ??
         fallbackBullets.slice(0, 2).join(' ') ??
-        '当前章节保留原文，待后续精修。',
+        'Chapter summary pending.',
       bullets: fallbackBullets,
     },
   ]
+}
+
+function parseQuizAnswerPoints(question, answerPoints = [], index = 0) {
+  const lines = answerPoints.map((line) => normalizeLine(line)).filter(Boolean)
+  const promptLine = lines.find((line) => NUMBERED_PROMPT_RE.test(line)) ?? lines[0] ?? question.prompt
+  const optionLines = lines.filter((line) => OPTION_RE.test(line))
+  const explanationLines = lines.filter(
+    (line) => line !== promptLine && !optionLines.includes(line)
+  )
+
+  return {
+    id: createQuestionKey('nasm-question', index),
+    prompt: stripHeadingNumber(promptLine || question.prompt),
+    options: optionLines.map((line, optionIndex) => {
+      const match = line.match(OPTION_RE)
+
+      return {
+        key: match?.[1]
+          ? `choice-${match[1].toLowerCase()}`
+          : createQuestionKey('choice', optionIndex),
+        label: match?.[2]?.trim() ?? line,
+      }
+    }),
+    explanation:
+      explanationLines.join(' ') ||
+      [question.prompt, ...optionLines].filter(Boolean).join(' '),
+  }
+}
+
+function parseQuizQuestionGroups(question, answerPoints = [], sectionIndex = 0) {
+  const lines = answerPoints.map((line) => normalizeLine(line)).filter(Boolean)
+  const groups = []
+  let currentGroup = []
+
+  for (const line of lines) {
+    if (NUMBERED_PROMPT_RE.test(line) && currentGroup.length > 0) {
+      groups.push(currentGroup)
+      currentGroup = [line]
+      continue
+    }
+
+    currentGroup.push(line)
+  }
+
+  if (currentGroup.length > 0) {
+    groups.push(currentGroup)
+  }
+
+  const parsedGroups = groups
+    .map((groupLines, groupIndex) =>
+      parseQuizAnswerPoints(question, groupLines, sectionIndex * 10 + groupIndex)
+    )
+    .filter((entry) => entry.options.length > 0)
+
+  if (parsedGroups.length > 0) {
+    return parsedGroups
+  }
+
+  return [parseQuizAnswerPoints(question, lines, sectionIndex)].filter(
+    (entry) => entry.options.length > 0
+  )
 }
 
 function extractQuizQuestions(lines, headings, quizStartIndex, knowledgeSections) {
@@ -165,7 +230,7 @@ function extractQuizQuestions(lines, headings, quizStartIndex, knowledgeSections
   )
 
   const questions = questionHeadings
-    .map((heading, index) => {
+    .flatMap((heading, index) => {
       const nextHeading = questionHeadings[index + 1]
       const bodyLines = lines.slice(
         heading.index + 1,
@@ -174,23 +239,30 @@ function extractQuizQuestions(lines, headings, quizStartIndex, knowledgeSections
       const bullets = collectBullets(bodyLines)
       const paragraphs = collectParagraphs(bodyLines)
 
-      return {
-        prompt: stripHeadingNumber(heading.text),
-        answerPoints: bullets.length > 0 ? bullets.slice(0, 6) : paragraphs.slice(0, 3),
-      }
+      return parseQuizQuestionGroups(
+        {
+          prompt: stripHeadingNumber(heading.text),
+        },
+        bullets.length > 0 ? bullets : paragraphs,
+        index
+      )
     })
-    .filter((question) => question.prompt)
+    .filter((question) => question.prompt && question.options.length > 0)
 
   if (questions.length > 0) {
     return questions
   }
 
-  return knowledgeSections.slice(0, 5).map((section) => ({
-    prompt: `${section.title} 里最值得复习的是什么？`,
-    answerPoints:
-      section.bullets.length > 0
-        ? section.bullets.slice(0, 4)
-        : [section.summary || '回看章节原文并整理关键词。'],
+  return knowledgeSections.slice(0, 5).map((section, index) => ({
+    id: createQuestionKey('nasm-fallback', index),
+    prompt: `${section.title} review check`,
+    options: (section.bullets.length > 0 ? section.bullets.slice(0, 2) : [section.summary])
+      .filter(Boolean)
+      .map((label, optionIndex) => ({
+        key: createQuestionKey('choice', optionIndex),
+        label,
+      })),
+    explanation: section.summary || section.bullets.join(' '),
   }))
 }
 
@@ -205,12 +277,7 @@ export function parseChapterMarkdown(raw, filename) {
 
   const knowledgeSections = extractKnowledgeSections(lines, headings, contentBoundary)
   const outline = buildOutline(lines, outlineHeading, quizStartIndex)
-  const quizQuestions = extractQuizQuestions(
-    lines,
-    headings,
-    quizStartIndex,
-    knowledgeSections
-  )
+  const quizQuestions = extractQuizQuestions(lines, headings, quizStartIndex, knowledgeSections)
   const summarySource =
     knowledgeSections[0]?.summary ||
     collectParagraphs(lines).find(Boolean) ||

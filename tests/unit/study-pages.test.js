@@ -54,6 +54,10 @@ test('frontend interview detail keeps both prompts and guidance visible', () => 
 test('future nasm study routes remain declared for later tasks', () => {
   assert.match(
     routerSource,
+    /\{\s*path:\s*['"]\/study\/nasm['"][\s\S]*?component:\s*\(\)\s*=>\s*import\(['"]@\/views\/study\/NasmStudyIndexView\.vue['"]\)/
+  )
+  assert.match(
+    routerSource,
     /\{\s*path:\s*['"]\/study\/nasm\/:chapterSlug['"][\s\S]*?component:\s*\(\)\s*=>\s*import\(['"]@\/views\/study\/NasmChapterView\.vue['"]\)/
   )
 })
