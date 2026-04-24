@@ -44,7 +44,7 @@ function handleAnswer(optionKey) {
 </script>
 
 <template>
-  <article class="quiz-question-card ant-surface-card">
+  <article class="quiz-question-card study-surface">
     <header class="quiz-question-card__header">
       <p class="quiz-question-card__eyebrow">
         第 {{ index + 1 }} 题<span v-if="total"> / {{ total }}</span>
@@ -83,7 +83,13 @@ function handleAnswer(optionKey) {
       :class="{ 'is-correct': question.isCorrect, 'is-incorrect': question.isCorrect === false }"
     >
       <p class="quiz-question-card__feedback-title">
-        {{ question.isCorrect ? '回答正确' : '再看一眼本章重点' }}
+        {{
+          question.isCorrect === true
+            ? '回答正确'
+            : question.isCorrect === false
+              ? '再看一眼本章重点'
+              : '这题暂不判对错，先看解析'
+        }}
       </p>
       <p v-if="question.explanation" class="quiz-question-card__explanation">
         {{ question.explanation }}

@@ -24,7 +24,7 @@ defineProps({
 </script>
 
 <template>
-  <section :id="sectionId || undefined" class="study-article-section ant-surface-card">
+  <section :id="sectionId || undefined" class="study-article-section study-surface">
     <header class="study-article-section__header">
       <p v-if="eyebrow" class="eyebrow">{{ eyebrow }}</p>
       <h2 class="study-article-section__title">{{ title }}</h2>

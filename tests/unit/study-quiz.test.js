@@ -38,6 +38,7 @@ test('answerQuizQuestion locks the result after the first answer', () => {
       [questionId]: {
         prompt: 'What is NASM?',
         explanation: 'NASM focuses on structured programming and clear standards.',
+        correctOptionKey: 'choice-a',
         isLocked: false,
         explanationVisible: false,
         options: {
@@ -68,6 +69,7 @@ test('answerQuizQuestion keeps explanation hidden until an answer is recorded', 
       [questionId]: {
         prompt: 'Which muscle is trained?',
         explanation: 'The explanation should stay hidden until the learner answers.',
+        correctOptionKey: 'choice-a',
         isLocked: false,
         explanationVisible: false,
         options: {
@@ -85,4 +87,29 @@ test('answerQuizQuestion keeps explanation hidden until an answer is recorded', 
   assert.ok(!('selectedOptionKey' in previewState.questions[questionId]))
   assert.equal(answeredState.questions[questionId].explanationVisible, true)
   assert.equal(answeredState.questions[questionId].selectedOptionKey, 'choice-a')
+})
+
+test('answerQuizQuestion keeps unverifiable questions locked without guessing correctness', () => {
+  const questionId = 'chapter-3'
+  const state = {
+    questions: {
+      [questionId]: {
+        prompt: 'Which statement is best supported?',
+        explanation: 'This review card should still reveal its explanation after answering.',
+        isLocked: false,
+        explanationVisible: false,
+        options: {
+          'choice-a': 'Option A',
+          'choice-b': 'Option B',
+        },
+      },
+    },
+  }
+
+  const answeredState = answerQuizQuestion(state, questionId, 'choice-a')
+
+  assert.equal(answeredState.questions[questionId].selectedOptionKey, 'choice-a')
+  assert.equal(answeredState.questions[questionId].isLocked, true)
+  assert.equal(answeredState.questions[questionId].explanationVisible, true)
+  assert.ok(!('isCorrect' in answeredState.questions[questionId]))
 })

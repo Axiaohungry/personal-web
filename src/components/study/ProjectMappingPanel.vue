@@ -16,7 +16,7 @@ defineProps({
 </script>
 
 <template>
-  <section class="project-mapping-panel ant-surface-card">
+  <section class="project-mapping-panel study-surface">
     <header class="project-mapping-panel__header">
       <h2 class="project-mapping-panel__title">{{ title }}</h2>
       <p v-if="summary" class="project-mapping-panel__summary">{{ summary }}</p>

@@ -16,10 +16,6 @@ function resolveCorrectOptionKey(question) {
     return correctOption?.key
   }
 
-  if (question.options && typeof question.options === 'object') {
-    return Object.keys(question.options)[0]
-  }
-
   return undefined
 }
 
@@ -56,9 +52,9 @@ export function answerQuizQuestion(state, questionId, selectedOptionKey) {
       [questionId]: {
         ...question,
         selectedOptionKey,
-        isCorrect: correctOptionKey ? selectedOptionKey === correctOptionKey : false,
         isLocked: true,
         explanationVisible: true,
+        ...(correctOptionKey ? { isCorrect: selectedOptionKey === correctOptionKey } : {}),
       },
     },
   }

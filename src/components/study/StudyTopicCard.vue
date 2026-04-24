@@ -31,7 +31,7 @@ defineProps({
   <component
     :is="href ? 'a' : 'article'"
     :href="href || undefined"
-    class="study-topic-card ant-surface-card"
+    class="study-topic-card study-surface"
   >
     <p v-if="label" class="study-topic-card__label">{{ label }}</p>
     <h2 class="study-topic-card__title">{{ title }}</h2>
