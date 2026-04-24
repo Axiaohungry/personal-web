@@ -1,7 +1,11 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 
-import { answerQuizQuestion, shuffleQuizQuestions } from '../../src/utils/studyQuiz.js'
+import {
+  answerQuizQuestion,
+  normalizeQuizQuestion,
+  shuffleQuizQuestions,
+} from '../../src/utils/studyQuiz.js'
 
 function createRandomSequence(values) {
   let index = 0
@@ -112,4 +116,39 @@ test('answerQuizQuestion keeps unverifiable questions locked without guessing co
   assert.equal(answeredState.questions[questionId].isLocked, true)
   assert.equal(answeredState.questions[questionId].explanationVisible, true)
   assert.ok(!('isCorrect' in answeredState.questions[questionId]))
+})
+
+test('normalizeQuizQuestion keeps generated fallback keys aligned with array-option correctness metadata', () => {
+  const normalizedQuestion = normalizeQuizQuestion(
+    {
+      id: 'chapter-4',
+      prompt: 'Which option should still grade correctly?',
+      explanation: 'Fallback-generated option keys should still map to the correct answer.',
+      options: [
+        { label: 'First option' },
+        { label: 'Second option', isCorrect: true },
+      ],
+    },
+    {
+      chapterKey: 'nasm-ch04',
+      index: 0,
+    }
+  )
+
+  const answeredState = answerQuizQuestion(
+    {
+      questions: {
+        [normalizedQuestion.id]: normalizedQuestion,
+      },
+    },
+    normalizedQuestion.id,
+    'choice-b'
+  )
+
+  assert.deepEqual(normalizedQuestion.options, {
+    'choice-a': 'First option',
+    'choice-b': 'Second option',
+  })
+  assert.equal(normalizedQuestion.correctOptionKey, 'choice-b')
+  assert.equal(answeredState.questions[normalizedQuestion.id].isCorrect, true)
 })

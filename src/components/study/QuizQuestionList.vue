@@ -2,7 +2,11 @@
 import { computed, ref, watch } from 'vue'
 
 import QuizQuestionCard from './QuizQuestionCard.vue'
-import { answerQuizQuestion, shuffleQuizQuestions } from '@/utils/studyQuiz.js'
+import {
+  answerQuizQuestion,
+  normalizeQuizQuestion,
+  shuffleQuizQuestions,
+} from '@/utils/studyQuiz.js'
 
 const props = defineProps({
   chapterKey: {
@@ -19,42 +23,16 @@ const props = defineProps({
   },
 })
 
-function normalizeQuestion(rawQuestion, index) {
-  const rawOptions = rawQuestion?.options
-  let options = {}
-
-  if (Array.isArray(rawOptions)) {
-    options = rawOptions.reduce((result, option, optionIndex) => {
-      const key = option.key ?? `choice-${String.fromCharCode(97 + optionIndex)}`
-      result[key] = option.label ?? option.text ?? ''
-      return result
-    }, {})
-  } else if (rawOptions && typeof rawOptions === 'object') {
-    options = { ...rawOptions }
-  }
-
-  return {
-    id: rawQuestion?.id ?? rawQuestion?.key ?? `${props.chapterKey || 'quiz'}-${index + 1}`,
-    prompt: rawQuestion?.prompt ?? rawQuestion?.question ?? `第 ${index + 1} 题`,
-    explanation:
-      rawQuestion?.explanation ??
-      rawQuestion?.summary ??
-      (Array.isArray(rawQuestion?.answerPoints) ? rawQuestion.answerPoints.join(' ') : ''),
-    options,
-    correctOptionKey:
-      rawQuestion?.correctOptionKey ??
-      rawQuestion?.correctAnswerKey ??
-      (Array.isArray(rawOptions) ? rawOptions.find((option) => option?.isCorrect)?.key : undefined),
-    isLocked: false,
-    explanationVisible: false,
-  }
-}
-
 const orderedQuestions = ref([])
 const quizState = ref({ questions: {} })
 
 function resetQuizSession() {
-  const normalizedQuestions = props.questions.map((question, index) => normalizeQuestion(question, index))
+  const normalizedQuestions = props.questions.map((question, index) =>
+    normalizeQuizQuestion(question, {
+      chapterKey: props.chapterKey,
+      index,
+    })
+  )
   orderedQuestions.value = shuffleQuizQuestions(normalizedQuestions, props.random)
   quizState.value = {
     questions: orderedQuestions.value.reduce((result, question) => {

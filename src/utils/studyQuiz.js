@@ -19,6 +19,43 @@ function resolveCorrectOptionKey(question) {
   return undefined
 }
 
+export function normalizeQuizQuestion(rawQuestion, { chapterKey = '', index = 0 } = {}) {
+  const rawOptions = rawQuestion?.options
+  let options = {}
+  let derivedCorrectOptionKey
+
+  if (Array.isArray(rawOptions)) {
+    options = rawOptions.reduce((result, option, optionIndex) => {
+      const key = option.key ?? `choice-${String.fromCharCode(97 + optionIndex)}`
+      result[key] = option.label ?? option.text ?? ''
+
+      if (option?.isCorrect) {
+        derivedCorrectOptionKey = key
+      }
+
+      return result
+    }, {})
+  } else if (rawOptions && typeof rawOptions === 'object') {
+    options = { ...rawOptions }
+  }
+
+  return {
+    id: rawQuestion?.id ?? rawQuestion?.key ?? `${chapterKey || 'quiz'}-${index + 1}`,
+    prompt: rawQuestion?.prompt ?? rawQuestion?.question ?? `第 ${index + 1} 题`,
+    explanation:
+      rawQuestion?.explanation ??
+      rawQuestion?.summary ??
+      (Array.isArray(rawQuestion?.answerPoints) ? rawQuestion.answerPoints.join(' ') : ''),
+    options,
+    correctOptionKey:
+      rawQuestion?.correctOptionKey ??
+      rawQuestion?.correctAnswerKey ??
+      derivedCorrectOptionKey,
+    isLocked: false,
+    explanationVisible: false,
+  }
+}
+
 export function shuffleQuizQuestions(questions = [], random = Math.random) {
   const shuffled = Array.isArray(questions) ? questions.slice() : []
 
