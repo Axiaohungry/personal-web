@@ -1,6 +1,6 @@
 import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises'
 import path from 'node:path'
-import { fileURLToPath } from 'node:url'
+import { fileURLToPath, pathToFileURL } from 'node:url'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -226,8 +226,25 @@ export function parseChapterMarkdown(raw, filename) {
   }
 }
 
+function buildChapterCatalog(chapters) {
+  return chapters.map((chapter, index) => ({
+    slug: chapter.slug,
+    order: index + 1,
+    title: chapter.title,
+    summary: chapter.summary,
+    knowledgeSectionCount: chapter.knowledgeSections.length,
+    quizQuestionCount: chapter.quizQuestions.length,
+  }))
+}
+
 function toGeneratedModule(chapters) {
-  return `export const nasmChapters = ${JSON.stringify(chapters, null, 2)}\n`
+  const chapterCatalog = buildChapterCatalog(chapters)
+
+  return [
+    `export const nasmChapterCatalog = ${JSON.stringify(chapterCatalog, null, 2)}`,
+    `export const nasmChapters = ${JSON.stringify(chapters, null, 2)}`,
+    '',
+  ].join('\n')
 }
 
 async function main() {
@@ -254,7 +271,17 @@ async function main() {
   console.log(`Imported ${chapters.length} NASM chapters into repo-local study data.`)
 }
 
-main().catch((error) => {
-  console.error(error)
-  process.exitCode = 1
-})
+function isDirectExecution() {
+  if (!process.argv[1]) {
+    return false
+  }
+
+  return import.meta.url === pathToFileURL(process.argv[1]).href
+}
+
+if (isDirectExecution()) {
+  main().catch((error) => {
+    console.error(error)
+    process.exitCode = 1
+  })
+}

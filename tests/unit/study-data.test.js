@@ -7,7 +7,10 @@ import {
   frontendStudySections,
 } from '../../src/data/study/frontendStudy.js'
 import { nasmCatalog } from '../../src/data/study/nasmCatalog.js'
-import { nasmChapters } from '../../src/data/study/generated/nasmChapters.js'
+import {
+  nasmChapterCatalog,
+  nasmChapters,
+} from '../../src/data/study/generated/nasmChapters.js'
 
 test('study topic catalog stays intentionally small', () => {
   assert.equal(studyTopics.length, 3)
@@ -53,4 +56,39 @@ test('generated NASM chapters always expose quiz-ready chapter metadata', () => 
     assert.ok(Array.isArray(chapter.quizQuestions))
     assert.ok(chapter.quizQuestions.length > 0)
   }
+})
+
+test('generated NASM chapter module also exposes lightweight catalog metadata', () => {
+  assert.ok(Array.isArray(nasmChapterCatalog))
+  assert.equal(nasmChapterCatalog.length, 26)
+
+  for (const chapter of nasmChapterCatalog) {
+    assert.equal(typeof chapter.slug, 'string')
+    assert.ok(chapter.slug.trim().length > 0)
+    assert.equal(typeof chapter.title, 'string')
+    assert.ok(chapter.title.trim().length > 0)
+    assert.equal(typeof chapter.summary, 'string')
+    assert.equal(typeof chapter.knowledgeSectionCount, 'number')
+    assert.equal(typeof chapter.quizQuestionCount, 'number')
+    assert.equal(chapter.knowledgeSections, undefined)
+    assert.equal(chapter.quizQuestions, undefined)
+  }
+})
+
+test('import script stays reusable when imported as a module', async () => {
+  const previousSourceDir = process.env.NASM_SOURCE_DIR
+  const previousExitCode = process.exitCode
+
+  process.env.NASM_SOURCE_DIR = 'Z:\\codex-missing-nasm-source'
+  process.exitCode = undefined
+
+  const module = await import(
+    `../../scripts/import-nasm-chapters.mjs?study-data-test=${Date.now()}`
+  )
+
+  assert.equal(typeof module.parseChapterMarkdown, 'function')
+  assert.equal(process.exitCode, undefined)
+
+  process.env.NASM_SOURCE_DIR = previousSourceDir
+  process.exitCode = previousExitCode
 })
