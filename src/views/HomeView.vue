@@ -1,4 +1,6 @@
 <script setup>
+import { computed } from 'vue'
+
 import AiNewsBrief from '@/components/AiNewsBrief.vue'
 import ContentSection from '@/components/ContentSection.vue'
 import HomeHero from '@/components/HomeHero.vue'
@@ -9,6 +11,7 @@ import { navigationItems } from '@/data/navigation.js'
 import { profile } from '@/data/profile.js'
 import { projects } from '@/data/projects.js'
 import { skillGroups } from '@/data/skills.js'
+import { studyHomeCard } from '@/data/study/studyTopics.js'
 
 // 首页本身不做复杂交互，它负责把“个人介绍 / 最新动态 / 经历 / 项目 / 技能 / 联系方式”
 // 这几组内容组织成一个可快速浏览的叙事顺序。
@@ -57,6 +60,9 @@ const narrativeCards = [
       '对我来说，前端、数据和方案设计并不是分开的标签，而是一套协同工作的能力，用来把想法落成可运行、可调整的结果。',
   },
 ]
+
+const fitnessWorkbench = computed(() => projects.find((project) => project.href === '/fitness/'))
+const otherProjects = computed(() => projects.filter((project) => project.href !== '/fitness/'))
 </script>
 
 <template>
@@ -95,6 +101,35 @@ const narrativeCards = [
               </a-card>
             </a-col>
           </a-row>
+        </section>
+
+        <section class="home-workbench-pair" aria-label="Featured workbenches">
+          <article
+            v-if="fitnessWorkbench"
+            class="home-workbench-pair__card home-workbench-pair__card--fitness ant-surface-card"
+          >
+            <div class="home-workbench-pair__topline">
+              <p class="home-workbench-pair__label">{{ fitnessWorkbench.status }}</p>
+              <a class="home-workbench-pair__link" href="/fitness/">打开工具</a>
+            </div>
+            <h2 class="home-workbench-pair__title">{{ fitnessWorkbench.name }}</h2>
+            <p class="home-workbench-pair__summary">{{ fitnessWorkbench.summary }}</p>
+            <div v-if="fitnessWorkbench.tags?.length" class="home-workbench-pair__tags">
+              <a-tag v-for="tag in fitnessWorkbench.tags" :key="tag">{{ tag }}</a-tag>
+            </div>
+          </article>
+
+          <article class="home-workbench-pair__card home-workbench-pair__card--study ant-surface-card">
+            <div class="home-workbench-pair__topline">
+              <p class="home-workbench-pair__label">今天学习了吗？</p>
+              <a class="home-workbench-pair__link" href="/study/">进入学习台</a>
+            </div>
+            <h2 class="home-workbench-pair__title">{{ studyHomeCard.title }}</h2>
+            <p class="home-workbench-pair__summary">{{ studyHomeCard.summary }}</p>
+            <div v-if="studyHomeCard.tags?.length" class="home-workbench-pair__tags">
+              <a-tag v-for="tag in studyHomeCard.tags" :key="tag">{{ tag }}</a-tag>
+            </div>
+          </article>
         </section>
 
         <div class="home-page__grid">
@@ -138,7 +173,7 @@ const narrativeCards = [
           >
             <a-row :gutter="[18, 18]" class="feature-grid">
               <a-col
-                v-for="(project, index) in projects"
+                v-for="(project, index) in otherProjects"
                 :key="project.name"
                 :xs="24"
                 :md="index === 0 ? 24 : 12"
@@ -220,7 +255,9 @@ const narrativeCards = [
                 <a-button type="primary" size="large" :href="contact.cta.href">
                   {{ contact.cta.label }}
                 </a-button>
-                <a-button size="large" href="/fitness/">打开健身工作台</a-button>
+                <a-button v-if="fitnessWorkbench" size="large" :href="fitnessWorkbench.href">
+                  打开健身工作台
+                </a-button>
               </a-space>
             </a-card>
           </ContentSection>

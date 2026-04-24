@@ -71,6 +71,24 @@ const router = createRouter({
       component: () => import('@/views/study/FrontendStudyIndexView.vue'),
     },
     {
+      path: '/study/frontend/fundamentals',
+      alias: ['/study/frontend/fundamentals/'],
+      name: 'study-frontend-fundamentals',
+      component: () => import('@/views/study/FrontendStudyDetailView.vue'),
+    },
+    {
+      path: '/study/frontend/interview',
+      alias: ['/study/frontend/interview/'],
+      name: 'study-frontend-interview',
+      component: () => import('@/views/study/FrontendStudyDetailView.vue'),
+    },
+    {
+      path: '/study/frontend/coding',
+      alias: ['/study/frontend/coding/'],
+      name: 'study-frontend-coding',
+      component: () => import('@/views/study/FrontendStudyDetailView.vue'),
+    },
+    {
       path: '/study/product',
       alias: ['/study/product/', '/study/product-method/'],
       name: 'study-product',
