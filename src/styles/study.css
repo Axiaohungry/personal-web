@@ -1,0 +1,358 @@
+.study-shell {
+  display: grid;
+  gap: 1rem;
+  width: min(100%, var(--content-width));
+  margin: 0 auto;
+}
+
+.study-shell__hero,
+.study-shell__nav {
+  padding: clamp(1.15rem, 3vw, 1.8rem);
+}
+
+.study-shell__hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(16rem, 0.75fr);
+  gap: 1rem 1.25rem;
+}
+
+.study-shell__title,
+.study-topic-card__title,
+.study-article-section__title,
+.project-mapping-panel__title,
+.quiz-question-list__title,
+.empty-study-placeholder__title {
+  margin: 0;
+  font-family: var(--font-display);
+  letter-spacing: -0.04em;
+}
+
+.study-shell__title {
+  font-size: clamp(2.5rem, 6vw, 4.2rem);
+  line-height: 0.98;
+}
+
+.study-shell__intro,
+.study-shell__note,
+.study-topic-card__summary,
+.study-article-section__summary,
+.project-mapping-panel__summary,
+.project-mapping-panel__description,
+.quiz-question-list__summary,
+.quiz-question-card__explanation,
+.empty-study-placeholder__summary,
+.empty-study-placeholder__hint {
+  color: var(--muted);
+}
+
+.study-shell__intro {
+  max-width: 44rem;
+  margin: 1rem 0 0;
+}
+
+.study-shell__aside {
+  align-self: end;
+}
+
+.study-shell__note {
+  margin: 0;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--panel-soft);
+}
+
+.study-shell__metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: 0.8rem;
+  margin-top: 1.15rem;
+}
+
+.study-shell__metric,
+.project-mapping-panel__item {
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--panel-soft);
+}
+
+.study-shell__metric-label,
+.study-topic-card__label,
+.project-mapping-panel__label,
+.quiz-question-card__eyebrow,
+.quiz-question-list__eyebrow,
+.empty-study-placeholder__eyebrow {
+  display: block;
+  margin: 0 0 0.45rem;
+  color: var(--accent);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.study-shell__metric-value {
+  font-size: 1rem;
+}
+
+.study-shell__content {
+  display: grid;
+  gap: 1rem;
+}
+
+.study-topic-card,
+.study-article-section,
+.project-mapping-panel,
+.quiz-question-card,
+.empty-study-placeholder {
+  display: grid;
+  gap: 0.9rem;
+  padding: 1.15rem;
+}
+
+.study-topic-card__title {
+  font-size: 1.7rem;
+  line-height: 1.05;
+}
+
+.study-topic-card__summary,
+.study-article-section__summary,
+.project-mapping-panel__summary,
+.quiz-question-list__summary,
+.empty-study-placeholder__summary {
+  margin: 0;
+}
+
+.study-topic-card__meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+  gap: 0.75rem;
+  margin: 0;
+}
+
+.study-topic-card__meta-item,
+.project-mapping-panel__list,
+.quiz-question-list__items {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.study-topic-card__meta-item dt,
+.project-mapping-panel__label {
+  margin: 0 0 0.25rem;
+  font-size: 0.82rem;
+}
+
+.study-topic-card__meta-item dd {
+  margin: 0;
+  color: var(--text);
+}
+
+.study-topic-card__tags,
+.project-mapping-panel__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.study-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  background: var(--teal-soft);
+  color: var(--text);
+  font-size: 0.88rem;
+}
+
+.study-section-nav {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.study-section-nav__header,
+.quiz-question-list__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.study-section-nav__title,
+.project-mapping-panel__item-title,
+.quiz-question-card__title {
+  margin: 0;
+}
+
+.study-section-nav__items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.study-section-nav__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.72rem 0.92rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--panel-soft);
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+}
+
+.study-section-nav__item.is-active {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.study-section-nav__item-meta {
+  color: var(--muted);
+  font-size: 0.84rem;
+}
+
+.study-article-section__title,
+.project-mapping-panel__title,
+.quiz-question-list__title,
+.empty-study-placeholder__title {
+  font-size: 1.8rem;
+  line-height: 1.04;
+}
+
+.study-article-section__list {
+  margin: 0;
+  padding-left: 1.15rem;
+  color: var(--muted);
+}
+
+.study-article-section__list li + li {
+  margin-top: 0.55rem;
+}
+
+.study-article-section__body {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.project-mapping-panel__header,
+.quiz-question-card__header {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.quiz-question-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.quiz-question-card__options {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.quiz-question-card__option {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.8rem;
+  align-items: start;
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--panel-soft);
+  color: var(--text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.quiz-question-card__option:disabled {
+  cursor: default;
+}
+
+.quiz-question-card__option.is-selected {
+  border-color: var(--accent);
+}
+
+.quiz-question-card__option.is-correct {
+  border-color: var(--teal);
+  background: rgba(31, 123, 104, 0.12);
+}
+
+.quiz-question-card__option.is-incorrect {
+  border-color: var(--accent);
+  background: rgba(180, 85, 45, 0.1);
+}
+
+.quiz-question-card__option-key {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  min-width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  background: var(--surface-soft);
+  font-size: 0.82rem;
+  text-transform: uppercase;
+}
+
+.quiz-question-card__feedback {
+  padding: 0.95rem 1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--line);
+  background: var(--panel-soft);
+}
+
+.quiz-question-card__feedback.is-correct {
+  border-color: var(--teal);
+}
+
+.quiz-question-card__feedback.is-incorrect {
+  border-color: var(--accent);
+}
+
+.quiz-question-card__feedback-title {
+  margin: 0;
+  font-weight: 600;
+}
+
+.quiz-question-card__explanation {
+  margin: 0.45rem 0 0;
+}
+
+.empty-study-placeholder {
+  place-items: start;
+  min-height: 16rem;
+  align-content: center;
+}
+
+@media (max-width: 900px) {
+  .study-shell__hero {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .study-shell__hero,
+  .study-shell__nav,
+  .study-topic-card,
+  .study-article-section,
+  .project-mapping-panel,
+  .quiz-question-card,
+  .empty-study-placeholder {
+    padding: 1rem;
+  }
+
+  .study-section-nav__header,
+  .quiz-question-list__header {
+    display: grid;
+  }
+
+  .quiz-question-card__option {
+    grid-template-columns: 1fr;
+  }
+}
