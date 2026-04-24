@@ -185,7 +185,7 @@ const otherProjects = computed(() => projects.filter((project) => project.href !
                 >
                   <template #extra>
                     <a-button type="link" class="feature-card__link" :href="project.href">
-                      {{ project.href === '/fitness/' ? '打开工具' : '查看案例' }}
+                      查看案例
                     </a-button>
                   </template>
 

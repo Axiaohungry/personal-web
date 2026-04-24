@@ -80,21 +80,47 @@ const conceptSections = computed(() => {
   )
 })
 
-const interviewTakeawaySections = computed(() =>
-  activeSections.value.map((section) => ({
+const interviewTakeawaySections = computed(() => {
+  if (activeDetail.value.key === 'interview') {
+    return []
+  }
+
+  return activeSections.value.map((section) => ({
     key: `${section.key}-takeaways`,
-    eyebrow: activeDetail.value.key === 'fundamentals' ? `${section.title} interview` : section.title,
-    title:
-      activeDetail.value.key === 'fundamentals'
-        ? `${section.title}：面试表达`
-        : section.title,
-    summary:
-      activeDetail.value.key === 'fundamentals'
-        ? '这些要点更偏向“怎么讲”，帮助把概念转换成稳定的表达。'
-        : '围绕高频问题和追问准备，确保回答结构稳定、可展开。',
-    bullets: section.interviewTakeaways ?? section.guidance ?? section.prompts ?? [],
+    eyebrow: `${section.title} interview`,
+    title: `${section.title}：面试表达`,
+    summary: '这些要点更偏向“怎么讲”，帮助把概念转换成稳定的表达。',
+    bullets: section.interviewTakeaways ?? [],
   }))
-)
+})
+
+const interviewPromptSections = computed(() => {
+  if (activeDetail.value.key !== 'interview') {
+    return []
+  }
+
+  return activeSections.value.map((section) => ({
+    key: `${section.key}-prompts`,
+    eyebrow: 'High-frequency prompts',
+    title: section.title,
+    summary: '先把高频问题露出来，再按模块整理表达重点和回答顺序。',
+    bullets: section.prompts ?? [],
+  }))
+})
+
+const interviewGuidanceSections = computed(() => {
+  if (activeDetail.value.key !== 'interview') {
+    return []
+  }
+
+  return activeSections.value.map((section) => ({
+    key: `${section.key}-guidance`,
+    eyebrow: 'Answer framing',
+    title: `${section.title}：回答框架`,
+    summary: '这些提示帮助把问题背景、取舍和验证方式讲得更完整。',
+    bullets: section.guidance ?? [],
+  }))
+})
 
 const projectMappingEntries = computed(() => {
   if (activeDetail.value.key !== 'fundamentals') {
@@ -169,7 +195,16 @@ const codingPracticeSections = computed(() =>
 
         <template v-else-if="activeDetail.key === 'interview'">
           <StudyArticleSection
-            v-for="section in interviewTakeawaySections"
+            v-for="section in interviewPromptSections"
+            :key="section.key"
+            :eyebrow="section.eyebrow"
+            :title="section.title"
+            :summary="section.summary"
+            :bullets="section.bullets"
+          />
+
+          <StudyArticleSection
+            v-for="section in interviewGuidanceSections"
             :key="section.key"
             :eyebrow="section.eyebrow"
             :title="section.title"

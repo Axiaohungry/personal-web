@@ -13,6 +13,11 @@ const homeViewSource = readFileSync(
   'utf8'
 )
 
+const frontendDetailSource = readFileSync(
+  fileURLToPath(new URL('../../src/views/study/FrontendStudyDetailView.vue', import.meta.url)),
+  'utf8'
+)
+
 test('study routes are declared as lazy-loaded study entrypoints', () => {
   assert.match(
     routerSource,
@@ -37,6 +42,13 @@ test('future frontend detail study routes remain declared for later tasks', () =
     routerSource,
     /\{\s*path:\s*['"]\/study\/frontend\/fundamentals['"][\s\S]*?component:\s*\(\)\s*=>\s*import\(['"]@\/views\/study\/FrontendStudyDetailView\.vue['"]\)/
   )
+})
+
+test('frontend interview detail keeps both prompts and guidance visible', () => {
+  assert.match(frontendDetailSource, /const interviewPromptSections = computed/)
+  assert.match(frontendDetailSource, /const interviewGuidanceSections = computed/)
+  assert.match(frontendDetailSource, /v-for="section in interviewPromptSections"/)
+  assert.match(frontendDetailSource, /v-for="section in interviewGuidanceSections"/)
 })
 
 test('future nasm study routes remain declared for later tasks', () => {
