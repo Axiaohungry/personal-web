@@ -59,6 +59,30 @@ const router = createRouter({
       component: () => import('@/views/modules/FenjueTrainingSystemView.vue'),
     },
     {
+      path: '/study',
+      alias: ['/study/'],
+      name: 'study',
+      component: () => import('@/views/study/StudyView.vue'),
+    },
+    {
+      path: '/study/frontend',
+      alias: ['/study/frontend/'],
+      name: 'study-frontend',
+      component: () => import('@/views/study/FrontendStudyIndexView.vue'),
+    },
+    {
+      path: '/study/product',
+      alias: ['/study/product/', '/study/product-method/'],
+      name: 'study-product',
+      component: () => import('@/views/study/ProductStudyView.vue'),
+    },
+    {
+      path: '/study/product/roadmap',
+      alias: ['/study/product/roadmap/', '/study/product-method/roadmap/'],
+      name: 'study-product-roadmap',
+      component: () => import('@/views/study/ProductStudyView.vue'),
+    },
+    {
       path: '/projects/approval-map-workflow',
       alias: ['/projects/approval-map-workflow/'],
       name: 'project-approval-map-workflow',

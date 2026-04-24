@@ -20,8 +20,26 @@ test('study routes are declared as lazy-loaded study entrypoints', () => {
   )
   assert.match(
     routerSource,
+    /\{\s*path:\s*['"]\/study\/frontend['"][\s\S]*?component:\s*\(\)\s*=>\s*import\(['"]@\/views\/study\/FrontendStudyIndexView\.vue['"]\)/
+  )
+  assert.match(
+    routerSource,
+    /\{\s*path:\s*['"]\/study\/product['"][\s\S]*?component:\s*\(\)\s*=>\s*import\(['"]@\/views\/study\/ProductStudyView\.vue['"]\)/
+  )
+  assert.match(
+    routerSource,
+    /\{\s*path:\s*['"]\/study\/product\/roadmap['"][\s\S]*?component:\s*\(\)\s*=>\s*import\(['"]@\/views\/study\/ProductStudyView\.vue['"]\)/
+  )
+})
+
+test('future frontend detail study routes remain declared for later tasks', () => {
+  assert.match(
+    routerSource,
     /\{\s*path:\s*['"]\/study\/frontend\/fundamentals['"][\s\S]*?component:\s*\(\)\s*=>\s*import\(['"]@\/views\/study\/FrontendStudyDetailView\.vue['"]\)/
   )
+})
+
+test('future nasm study routes remain declared for later tasks', () => {
   assert.match(
     routerSource,
     /\{\s*path:\s*['"]\/study\/nasm\/:chapterSlug['"][\s\S]*?component:\s*\(\)\s*=>\s*import\(['"]@\/views\/study\/NasmChapterView\.vue['"]\)/
