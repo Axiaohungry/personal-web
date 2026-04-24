@@ -15,8 +15,10 @@ const generatedFile = path.join(generatedDir, 'nasmChapters.js')
 
 const HEADING_RE = /^(#{1,6})\s+(.*)$/
 const BULLET_RE = /^(\s*)[-*]\s+(.*)$/
-const NUMBERED_PROMPT_RE = /^\s*\d+(?:[.)]|[．、:：])\s*/
+const NUMBERED_PROMPT_RE = /^\s*(\d+)(?:[.)]|[．、:：])\s*(.*)$/
 const OPTION_RE = /^\s*([A-Z])(?:[.)]|[．、:：])\s*(.*)$/
+const ANSWER_HEADING_RE = /答案|解析|answer|solution/i
+const ANSWER_LINE_RE = /^\s*(\d+)\.\s+\*\*.*?([A-Z])\*\*\s*(.*)$/
 
 function normalizeLine(line) {
   return line.replace(/\uFEFF/g, '').trimEnd()
@@ -32,7 +34,7 @@ function slugify(value) {
 function stripHeadingNumber(value = '') {
   return value
     .replace(/^[A-Z]\.\s*/i, '')
-    .replace(/^\d+([.)]|[.:：])\s*/, '')
+    .replace(/^\s*\d+(?:[.)]|[.:：])\s*/, '')
     .trim()
 }
 
@@ -78,6 +80,10 @@ function getHeadingBlocks(lines) {
 
 function findOutlineHeading(headings) {
   return headings.find((heading) => /markdown/i.test(heading.text))
+}
+
+function findAnswerHeading(headings) {
+  return headings.find((heading) => heading.depth === 2 && ANSWER_HEADING_RE.test(heading.text))
 }
 
 function findQuizStartIndex(headings, lines) {
@@ -163,17 +169,53 @@ function extractKnowledgeSections(lines, headings, boundaryIndex) {
   ]
 }
 
-function parseQuizAnswerPoints(question, answerPoints = [], index = 0) {
-  const lines = answerPoints.map((line) => normalizeLine(line)).filter(Boolean)
-  const promptLine = lines.find((line) => NUMBERED_PROMPT_RE.test(line)) ?? lines[0] ?? question.prompt
-  const optionLines = lines.filter((line) => OPTION_RE.test(line))
-  const explanationLines = lines.filter(
-    (line) => line !== promptLine && !optionLines.includes(line)
-  )
+function extractAnswerKeyMap(lines, headings) {
+  const answerHeading = findAnswerHeading(headings)
+
+  if (!answerHeading) {
+    return new Map()
+  }
+
+  const nextHeadingIndex = lines
+    .slice(answerHeading.index + 1)
+    .findIndex((line) => /^##\s+/.test(line))
+  const endIndex =
+    nextHeadingIndex === -1 ? lines.length : answerHeading.index + 1 + nextHeadingIndex
+  const answerLines = lines.slice(answerHeading.index + 1, endIndex)
+  const answerMap = new Map()
+
+  for (const rawLine of answerLines) {
+    const line = normalizeLine(rawLine).trim()
+    const match = line.match(ANSWER_LINE_RE)
+
+    if (!match) {
+      continue
+    }
+
+    const [, questionNumberText, answerLetter, trailingText] = match
+    const explanation = trailingText.replace(/^[\s:：-]*/, '').trim()
+
+    answerMap.set(Number(questionNumberText), {
+      correctOptionKey: `choice-${answerLetter.toLowerCase()}`,
+      explanation,
+    })
+  }
+
+  return answerMap
+}
+
+function parseQuestionGroup(question, groupLines = [], index = 0, answerMap = new Map()) {
+  const normalizedLines = groupLines.map((line) => normalizeLine(line)).filter(Boolean)
+  const promptLine = normalizedLines.find((line) => NUMBERED_PROMPT_RE.test(line)) ?? normalizedLines[0]
+  const promptMatch = promptLine?.match(NUMBERED_PROMPT_RE)
+  const questionNumber = promptMatch ? Number(promptMatch[1]) : undefined
+  const prompt = promptMatch ? promptMatch[2].trim() : stripHeadingNumber(promptLine ?? question.prompt)
+  const optionLines = normalizedLines.filter((line) => OPTION_RE.test(line))
+  const answerMeta = questionNumber ? answerMap.get(questionNumber) : null
 
   return {
     id: createQuestionKey('nasm-question', index),
-    prompt: stripHeadingNumber(promptLine || question.prompt),
+    prompt,
     options: optionLines.map((line, optionIndex) => {
       const match = line.match(OPTION_RE)
 
@@ -181,21 +223,23 @@ function parseQuizAnswerPoints(question, answerPoints = [], index = 0) {
         key: match?.[1]
           ? `choice-${match[1].toLowerCase()}`
           : createQuestionKey('choice', optionIndex),
-        label: match?.[2]?.trim() ?? line,
+        label: match?.[2]?.trim() ?? line.trim(),
       }
     }),
     explanation:
-      explanationLines.join(' ') ||
+      answerMeta?.explanation ||
       [question.prompt, ...optionLines].filter(Boolean).join(' '),
+    ...(answerMeta?.correctOptionKey
+      ? { correctOptionKey: answerMeta.correctOptionKey }
+      : {}),
   }
 }
 
-function parseQuizQuestionGroups(question, answerPoints = [], sectionIndex = 0) {
-  const lines = answerPoints.map((line) => normalizeLine(line)).filter(Boolean)
+function parseQuizQuestionGroups(question, lines = [], sectionIndex = 0, answerMap = new Map()) {
   const groups = []
   let currentGroup = []
 
-  for (const line of lines) {
+  for (const line of lines.map((entry) => normalizeLine(entry)).filter(Boolean)) {
     if (NUMBERED_PROMPT_RE.test(line) && currentGroup.length > 0) {
       groups.push(currentGroup)
       currentGroup = [line]
@@ -209,24 +253,19 @@ function parseQuizQuestionGroups(question, answerPoints = [], sectionIndex = 0) 
     groups.push(currentGroup)
   }
 
-  const parsedGroups = groups
+  return groups
     .map((groupLines, groupIndex) =>
-      parseQuizAnswerPoints(question, groupLines, sectionIndex * 10 + groupIndex)
+      parseQuestionGroup(question, groupLines, sectionIndex * 100 + groupIndex, answerMap)
     )
     .filter((entry) => entry.options.length > 0)
-
-  if (parsedGroups.length > 0) {
-    return parsedGroups
-  }
-
-  return [parseQuizAnswerPoints(question, lines, sectionIndex)].filter(
-    (entry) => entry.options.length > 0
-  )
 }
 
-function extractQuizQuestions(lines, headings, quizStartIndex, knowledgeSections) {
+function extractQuizQuestions(lines, headings, quizStartIndex, knowledgeSections, answerMap) {
   const questionHeadings = headings.filter(
-    (heading) => heading.depth === 3 && heading.index >= quizStartIndex
+    (heading) =>
+      heading.depth === 3 &&
+      heading.index >= quizStartIndex &&
+      !ANSWER_HEADING_RE.test(heading.text)
   )
 
   const questions = questionHeadings
@@ -244,7 +283,8 @@ function extractQuizQuestions(lines, headings, quizStartIndex, knowledgeSections
           prompt: stripHeadingNumber(heading.text),
         },
         bullets.length > 0 ? bullets : paragraphs,
-        index
+        index,
+        answerMap
       )
     })
     .filter((question) => question.prompt && question.options.length > 0)
@@ -271,13 +311,20 @@ export function parseChapterMarkdown(raw, filename) {
   const headings = getHeadingBlocks(lines)
   const firstHeading = headings.find((heading) => heading.depth === 1)
   const outlineHeading = findOutlineHeading(headings)
+  const answerMap = extractAnswerKeyMap(lines, headings)
   const outlineIndex = outlineHeading ? outlineHeading.index : lines.length
   const quizStartIndex = findQuizStartIndex(headings, lines)
   const contentBoundary = Math.min(outlineIndex, quizStartIndex)
 
   const knowledgeSections = extractKnowledgeSections(lines, headings, contentBoundary)
   const outline = buildOutline(lines, outlineHeading, quizStartIndex)
-  const quizQuestions = extractQuizQuestions(lines, headings, quizStartIndex, knowledgeSections)
+  const quizQuestions = extractQuizQuestions(
+    lines,
+    headings,
+    quizStartIndex,
+    knowledgeSections,
+    answerMap
+  )
   const summarySource =
     knowledgeSections[0]?.summary ||
     collectParagraphs(lines).find(Boolean) ||

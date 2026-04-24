@@ -62,6 +62,8 @@ test('generated NASM chapters always expose quiz-ready chapter metadata', () => 
       assert.ok(Array.isArray(question.options))
       assert.ok(question.options.length > 0)
       assert.equal(typeof question.explanation, 'string')
+      assert.equal(typeof question.correctOptionKey, 'string')
+      assert.ok(/^choice-[a-z]$/.test(question.correctOptionKey))
     }
   }
 })

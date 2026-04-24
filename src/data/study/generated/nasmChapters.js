@@ -398,7 +398,8 @@ export const nasmChapters = [
             "label": "肌腱"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 肌束 B. 肌小节 C. 肌外膜 D. 肌腱"
+        "explanation": "解析：肌小节是骨骼肌最基本的收缩与功能单位。出处概念：肌小节。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-02",
@@ -421,7 +422,8 @@ export const nasmChapters = [
             "label": "滑膜"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 肌内膜 B. 肌束膜 C. 肌外膜 D. 滑膜"
+        "explanation": "解析：整块骨骼肌由肌外膜包裹，肌束膜包裹肌束，肌内膜包裹单条肌纤维。出处概念：骨骼肌宏观结构。",
+        "correctOptionKey": "choice-c"
       },
       {
         "id": "nasm-question-03",
@@ -444,7 +446,8 @@ export const nasmChapters = [
             "label": "韧带"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 肌内膜 B. 肌外膜 C. 筋膜 D. 韧带"
+        "explanation": "解析：肌内膜包裹单条肌纤维并分隔彼此。出处概念：骨骼肌宏观结构。",
+        "correctOptionKey": "choice-a"
       },
       {
         "id": "nasm-question-04",
@@ -467,7 +470,8 @@ export const nasmChapters = [
             "label": "形成肌腱"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 储存并释放钙离子 B. 储存糖原 C. 产生红细胞 D. 形成肌腱"
+        "explanation": "解析：肌浆网储存钙离子，并在动作电位传入后释放钙离子参与收缩调节。出处概念：骨骼肌微观结构。",
+        "correctOptionKey": "choice-a"
       },
       {
         "id": "nasm-question-05",
@@ -490,7 +494,8 @@ export const nasmChapters = [
             "label": "胶原蛋白"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 肌钙蛋白 B. 原肌球蛋白 C. 肌动蛋白 D. 胶原蛋白"
+        "explanation": "解析：肌球蛋白头部附着并牵拉肌动蛋白丝。出处概念：肌原纤维与肌丝。",
+        "correctOptionKey": "choice-c"
       },
       {
         "id": "nasm-question-06",
@@ -513,7 +518,8 @@ export const nasmChapters = [
             "label": "肌球蛋白尾部"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 乙酰胆碱 B. 原肌球蛋白 C. 线粒体 D. 肌球蛋白尾部"
+        "explanation": "解析：静息时原肌球蛋白遮挡结合位点；钙与肌钙蛋白结合后其位置改变。出处概念：调节蛋白。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-07",
@@ -536,7 +542,8 @@ export const nasmChapters = [
             "label": "多个"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 1 个 B. 2 个 C. 3 个 D. 多个"
+        "explanation": "解析：每条肌纤维有一个单独的神经肌肉接头。出处概念：神经肌肉接头。",
+        "correctOptionKey": "choice-a"
       },
       {
         "id": "nasm-question-08",
@@ -559,7 +566,8 @@ export const nasmChapters = [
             "label": "血流量下降"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. ATP 完全耗尽 B. 钙离子与肌钙蛋白结合 C. 肌腱被拉长 D. 血流量下降"
+        "explanation": "解析：钙离子与肌钙蛋白结合会引起构象变化，进而暴露结合位点。出处概念：肌丝滑行理论。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-09",
@@ -582,7 +590,8 @@ export const nasmChapters = [
             "label": "被动拉伸"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 离心收缩 B. 等长收缩 C. 向心收缩 D. 被动拉伸"
+        "explanation": "解析：肌肉张力大于外阻时，肌肉缩短并克服阻力，为向心收缩。出处概念：肌肉收缩类型。",
+        "correctOptionKey": "choice-c"
       },
       {
         "id": "nasm-question-10",
@@ -605,10 +614,11 @@ export const nasmChapters = [
             "label": "牵张反射"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 向心收缩 B. 等长收缩 C. 离心收缩 D. 牵张反射"
+        "explanation": "解析：张力与阻力相等时长度不变，为等长收缩。出处概念：肌肉收缩类型。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-11",
+        "id": "nasm-question-101",
         "prompt": "下列哪项最符合肌丝滑行理论中的顺序？",
         "options": [
           {
@@ -628,10 +638,11 @@ export const nasmChapters = [
             "label": "ATP 分解发生在神经元内而非肌纤维相关过程"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 钙释放后才有动作电位 B. ACh 释放后肌纤维膜产生动作电位 C. 肌球蛋白先分离后钙再释放 D. ATP 分解发生在神经元内而非肌纤维相关过程"
+        "explanation": "解析：动作电位使 ACh 释放，ACh 与受体结合后肌纤维膜产生动作电位。出处概念：肌丝滑行理论步骤。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-12",
+        "id": "nasm-question-102",
         "prompt": "肌丝滑行理论认为，肌肉缩短的本质是：",
         "options": [
           {
@@ -651,10 +662,11 @@ export const nasmChapters = [
             "label": "骨骼被压缩"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 肌动蛋白和肌球蛋白本身变短 B. 肌丝之间相互滑行 C. 肌腱主动缩短 D. 骨骼被压缩"
+        "explanation": "解析：理论强调肌动蛋白与肌球蛋白相对滑行，肌丝本身长度不变。出处概念：肌丝滑行理论。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-13",
+        "id": "nasm-question-103",
         "prompt": "DOMS 更可能与下列哪项有关？",
         "options": [
           {
@@ -674,10 +686,11 @@ export const nasmChapters = [
             "label": "神经传导完全阻断"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 单纯乳酸积累 B. 结缔组织和肌肉组织的复合损伤及炎症反应 C. 血红蛋白下降 D. 神经传导完全阻断"
+        "explanation": "解析：本章指出 DOMS 更可能源于结缔组织和肌肉组织的复合损伤及炎症反应。出处概念：DOMS。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-14",
+        "id": "nasm-question-104",
         "prompt": "文本指出最容易引发 DOMS 的收缩类型是：",
         "options": [
           {
@@ -697,10 +710,11 @@ export const nasmChapters = [
             "label": "静态拉伸"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 等长收缩 B. 离心收缩 C. 向心收缩 D. 静态拉伸"
+        "explanation": "解析：离心收缩更容易引起相关微损伤，因此常与 DOMS 相关。出处概念：DOMS 与离心收缩。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-15",
+        "id": "nasm-question-105",
         "prompt": "具有较高氧化能力和抗疲劳能力的肌纤维属于：",
         "options": [
           {
@@ -720,10 +734,11 @@ export const nasmChapters = [
             "label": "仅 FOG 以外的快肌纤维"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 慢肌纤维 B. 快糖酵解肌纤维 C. 仅 IIx 型肌纤维 D. 仅 FOG 以外的快肌纤维"
+        "explanation": "解析：慢肌纤维具有较高氧化能力和抗疲劳能力，但收缩速度较慢。出处概念：肌纤维类型。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-16",
+        "id": "nasm-question-106",
         "prompt": "对自主运动中骨骼肌激活负责的系统是：",
         "options": [
           {
@@ -743,10 +758,11 @@ export const nasmChapters = [
             "label": "仅中枢神经系统而非外周通路"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 躯体神经系统 B. 副交感神经系统 C. 感觉传入系统 D. 仅中枢神经系统而非外周通路"
+        "explanation": "解析：躯体神经系统负责主动、受意识支配的骨骼肌激活。出处概念：神经系统功能划分。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-17",
+        "id": "nasm-question-107",
         "prompt": "将神经冲动从中枢神经系统传导至肌肉的神经元是：",
         "options": [
           {
@@ -766,10 +782,11 @@ export const nasmChapters = [
             "label": "红细胞"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 感觉神经元 B. 运动神经元 C. 联络神经元 D. 红细胞"
+        "explanation": "解析：运动神经元把神经冲动从中枢传向肌肉，引起收缩。出处概念：神经元。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-18",
+        "id": "nasm-question-108",
         "prompt": "肌梭主要感知的是：",
         "options": [
           {
@@ -789,10 +806,11 @@ export const nasmChapters = [
             "label": "关节滑液分泌"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 血液 pH 变化 B. 肌肉长度变化，尤其是快速牵拉 C. 骨密度变化 D. 关节滑液分泌"
+        "explanation": "解析：肌梭主要感知肌肉长度变化，尤其对快速牵拉敏感。出处概念：肌梭。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-19",
+        "id": "nasm-question-109",
         "prompt": "高尔基腱器主要位于：",
         "options": [
           {
@@ -812,10 +830,11 @@ export const nasmChapters = [
             "label": "骨膜表面"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 肌腹中央 B. 肌肉与肌腱连接处 C. 神经元胞体内 D. 骨膜表面"
+        "explanation": "解析：高尔基腱器位于肌肉和肌腱连接处。出处概念：高尔基腱器。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-20",
+        "id": "nasm-question-110",
         "prompt": "文本对运动单位募集顺序的描述是：",
         "options": [
           {
@@ -835,10 +854,11 @@ export const nasmChapters = [
             "label": "只按肌肉体积决定"
           }
         ],
-        "explanation": "机制理解题（11-20） A. IIx 型优先于 I 型 B. 先募集较小的 I 型，再到 IIa，再到 IIx C. 所有类型同时完全募集 D. 只按肌肉体积决定"
+        "explanation": "解析：募集遵循大小原则，先小的 I 型，再 IIa，再 IIx。出处概念：运动单位募集。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-21",
+        "id": "nasm-question-201",
         "prompt": "某客户做静态拉伸时，教练要求其缓慢进入拉伸位，主要是为了：",
         "options": [
           {
@@ -858,10 +878,11 @@ export const nasmChapters = [
             "label": "增加 DOMS"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 提高交感神经兴奋 B. 避免强烈激活肌梭反应 C. 让高尔基腱器完全失效 D. 增加 DOMS"
+        "explanation": "解析：缓慢进入拉伸位有助于避免牵张反射过强，使肌肉更易放松拉伸。出处概念：肌梭与静态拉伸。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-22",
+        "id": "nasm-question-202",
         "prompt": "某客户进行增强式训练前先做快速下蹲再迅速起跳，这一做法利用了：",
         "options": [
           {
@@ -881,10 +902,11 @@ export const nasmChapters = [
             "label": "血红蛋白饱和"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 肌梭与牵张反射 B. 副交感抑制 C. 骨重塑 D. 血红蛋白饱和"
+        "explanation": "解析：快速牵拉激活肌梭和牵张反射，可增强随后向心收缩。出处概念：增强式训练。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-23",
+        "id": "nasm-question-203",
         "prompt": "某训练者最大力量提高的一项神经机制是：",
         "options": [
           {
@@ -904,10 +926,11 @@ export const nasmChapters = [
             "label": "减少肌肉激活"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 仅增加脂肪储备 B. 提高运动单位募集和放电频率 C. 降低骨密度 D. 减少肌肉激活"
+        "explanation": "解析：文本明确指出力量调节除募集数量外，还包括提高已激活运动单位的放电频率。出处概念：募集与速率编码。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-24",
+        "id": "nasm-question-204",
         "prompt": "头骨、椎骨、胸骨和肋骨主要属于：",
         "options": [
           {
@@ -927,10 +950,11 @@ export const nasmChapters = [
             "label": "仅松质骨"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 附肢骨 B. 中轴骨 C. 长骨 D. 仅松质骨"
+        "explanation": "解析：头骨、椎骨、胸骨和肋骨属于中轴骨。出处概念：骨骼分类。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-25",
+        "id": "nasm-question-205",
         "prompt": "上下肢骨主要属于：",
         "options": [
           {
@@ -950,10 +974,11 @@ export const nasmChapters = [
             "label": "仅密质骨"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 中轴骨 B. 附肢骨 C. 扁骨 D. 仅密质骨"
+        "explanation": "解析：上肢骨和下肢骨属于附肢骨。出处概念：骨骼分类。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-26",
+        "id": "nasm-question-206",
         "prompt": "骨骼重塑过程中负责分解骨组织的细胞是：",
         "options": [
           {
@@ -973,10 +998,11 @@ export const nasmChapters = [
             "label": "红细胞"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 成骨细胞 B. 破骨细胞 C. 肌细胞 D. 红细胞"
+        "explanation": "解析：破骨细胞负责分解骨组织，成骨细胞负责骨合成。出处概念：骨重塑。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-27",
+        "id": "nasm-question-207",
         "prompt": "根据本章，哪类训练有助于提高骨密度？",
         "options": [
           {
@@ -996,10 +1022,11 @@ export const nasmChapters = [
             "label": "只做呼吸训练"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 长期完全卧床 B. 负重运动和抗阻训练 C. 只做被动按摩 D. 只做呼吸训练"
+        "explanation": "解析：本章强调负重运动与抗阻训练有助于提高骨密度。出处概念：骨质疏松与运动。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-28",
+        "id": "nasm-question-208",
         "prompt": "连接肌肉与骨骼的结构是：",
         "options": [
           {
@@ -1019,10 +1046,11 @@ export const nasmChapters = [
             "label": "关节囊"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 韧带 B. 软骨 C. 肌腱 D. 关节囊"
+        "explanation": "解析：肌腱把肌肉收缩产生的力传递到骨骼。出处概念：肌腱。",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-29",
+        "id": "nasm-question-209",
         "prompt": "连接骨与骨并兼顾稳定性与一定伸展能力的结构是：",
         "options": [
           {
@@ -1042,10 +1070,11 @@ export const nasmChapters = [
             "label": "骨膜"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 肌腱 B. 韧带 C. 肌原纤维 D. 骨膜"
+        "explanation": "解析：韧带连接骨与骨，兼顾稳定与一定伸展能力。出处概念：韧带。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-30",
+        "id": "nasm-question-210",
         "prompt": "某客户在 1RM 硬拉中始终难以完全发挥最大力量，按本章描述，一个可能原因是：",
         "options": [
           {
@@ -1065,7 +1094,8 @@ export const nasmChapters = [
             "label": "乙酰胆碱完全不存在"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 高尔基腱器触发保护性抑制 B. 肌外膜消失 C. 中轴骨数量减少 D. 乙酰胆碱完全不存在"
+        "explanation": "解析：高尔基腱器可引发保护性反射，限制过大张力导致的潜在损伤。出处概念：高尔基腱器保护作用。",
+        "correctOptionKey": "choice-a"
       }
     ]
   },
@@ -1263,7 +1293,8 @@ export const nasmChapters = [
             "label": "肝脏"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 心脏 B. 血液 C. 肺 D. 肝脏"
+        "explanation": "解析：本章将心肺系统界定为心脏、血液、血管和肺。出处概念：心肺系统组成。",
+        "correctOptionKey": "choice-d"
       },
       {
         "id": "nasm-question-02",
@@ -1286,7 +1317,8 @@ export const nasmChapters = [
             "label": "血小板"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 红细胞 B. 白细胞 C. 血浆 D. 血小板"
+        "explanation": "解析：文本指出血浆约占全血总量 55%，为占比最大成分。出处概念：血液组成。",
+        "correctOptionKey": "choice-c"
       },
       {
         "id": "nasm-question-03",
@@ -1309,7 +1341,8 @@ export const nasmChapters = [
             "label": "7.9"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 6.6 B. 7.0 C. 7.4 D. 7.9"
+        "explanation": "解析：正常人体动脉血 pH 值约为 7.4。出处概念：血液酸碱度。",
+        "correctOptionKey": "choice-c"
       },
       {
         "id": "nasm-question-04",
@@ -1332,7 +1365,8 @@ export const nasmChapters = [
             "label": "血小板"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 血浆蛋白 B. 血红蛋白 C. 白细胞 D. 血小板"
+        "explanation": "解析：氧气主要由血红蛋白携带，直接溶于血液中的比例很小。出处概念：血红蛋白携氧。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-05",
@@ -1355,7 +1389,8 @@ export const nasmChapters = [
             "label": "5"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 2 B. 3 C. 4 D. 5"
+        "explanation": "解析：1 分子血红蛋白可结合 4 分子氧。出处概念：血红蛋白功能。",
+        "correctOptionKey": "choice-c"
       },
       {
         "id": "nasm-question-06",
@@ -1378,7 +1413,8 @@ export const nasmChapters = [
             "label": "不随氧分压变化"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 线性直线 B. S 形关系 C. 完全水平线 D. 不随氧分压变化"
+        "explanation": "解析：氧分压与血红蛋白饱和度之间呈 S 形关系。出处概念：氧离曲线。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-07",
@@ -1401,7 +1437,8 @@ export const nasmChapters = [
             "label": "完全消失"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 左移 B. 右移 C. 不变 D. 完全消失"
+        "explanation": "解析：体温升高、pH 下降会使曲线右移，更利于氧释放。出处概念：氧离曲线影响因素。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-08",
@@ -1424,7 +1461,8 @@ export const nasmChapters = [
             "label": "左心室"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 房室结 B. 浦肯野纤维 C. 窦房结 D. 左心室"
+        "explanation": "解析：窦房结是心脏主要的内在起搏器。出处概念：心脏电传导。",
+        "correctOptionKey": "choice-c"
       },
       {
         "id": "nasm-question-09",
@@ -1447,7 +1485,8 @@ export const nasmChapters = [
             "label": "5"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 2 B. 3 C. 4 D. 5"
+        "explanation": "解析：心脏由左右心房与左右心室四个腔室构成。出处概念：心脏形态学。",
+        "correctOptionKey": "choice-c"
       },
       {
         "id": "nasm-question-10",
@@ -1470,10 +1509,11 @@ export const nasmChapters = [
             "label": "呼吸中枢"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 肌梭系统 B. 浦肯野系统 C. 韧带系统 D. 呼吸中枢"
+        "explanation": "解析：浦肯野系统负责把电脉冲传至心室并促使心室收缩。出处概念：心脏电传导。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-11",
+        "id": "nasm-question-101",
         "prompt": "心电图中的 P 波通常代表：",
         "options": [
           {
@@ -1493,10 +1533,11 @@ export const nasmChapters = [
             "label": "外周血管收缩"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 心房去极化 B. 心室复极化 C. 心室机械舒张 D. 外周血管收缩"
+        "explanation": "解析：P 波表示心房去极化。出处概念：心电图组成。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-12",
+        "id": "nasm-question-102",
         "prompt": "心电图中的 QRS 波群通常代表：",
         "options": [
           {
@@ -1516,10 +1557,11 @@ export const nasmChapters = [
             "label": "肺泡扩张"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 心房复极化 B. 心室去极化 C. 仅心房收缩 D. 肺泡扩张"
+        "explanation": "解析：QRS 波群反映心室去极化。出处概念：心电图组成。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-13",
+        "id": "nasm-question-103",
         "prompt": "心电图中的 T 波通常代表：",
         "options": [
           {
@@ -1539,10 +1581,11 @@ export const nasmChapters = [
             "label": "静脉回流"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 心房去极化 B. 心室去极化 C. 心室复极化 D. 静脉回流"
+        "explanation": "解析：T 波代表心室复极化。出处概念：心电图组成。",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-14",
+        "id": "nasm-question-104",
         "prompt": "将血液从心脏输送至组织和器官的血管是：",
         "options": [
           {
@@ -1562,10 +1605,11 @@ export const nasmChapters = [
             "label": "神经纤维"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 静脉 B. 动脉 C. 毛细淋巴管 D. 神经纤维"
+        "explanation": "解析：动脉把血液从心脏输向组织和器官。出处概念：血液循环。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-15",
+        "id": "nasm-question-105",
         "prompt": "帮助静脉血回流至心脏的重要外周机制是：",
         "options": [
           {
@@ -1585,10 +1629,11 @@ export const nasmChapters = [
             "label": "氧离曲线左移"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 肌肉泵 B. 仅肺活量 C. 肌小节缩短 D. 氧离曲线左移"
+        "explanation": "解析：静脉瓣和骨骼肌泵共同帮助静脉血回流。出处概念：静脉回流。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-16",
+        "id": "nasm-question-106",
         "prompt": "心动周期由哪两期构成？",
         "options": [
           {
@@ -1608,10 +1653,11 @@ export const nasmChapters = [
             "label": "动脉期和静脉期"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 去极化和复极化 B. 舒张期和收缩期 C. 吸气期和呼气期 D. 动脉期和静脉期"
+        "explanation": "解析：心动周期由舒张期和收缩期组成。出处概念：心动周期。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-17",
+        "id": "nasm-question-107",
         "prompt": "心输出量的基本表达式是：",
         "options": [
           {
@@ -1631,10 +1677,11 @@ export const nasmChapters = [
             "label": "Q = V02 ÷ HR"
           }
         ],
-        "explanation": "机制理解题（11-20） A. Q = SV × HR B. Q = MAP ÷ HR C. Q = SBP × DBP D. Q = V02 ÷ HR"
+        "explanation": "解析：心输出量 Q 等于每搏输出量 SV 乘以心率 HR。出处概念：心输出量。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-18",
+        "id": "nasm-question-108",
         "prompt": "每搏输出量可表示为：",
         "options": [
           {
@@ -1654,10 +1701,11 @@ export const nasmChapters = [
             "label": "MAP - DBP"
           }
         ],
-        "explanation": "机制理解题（11-20） A. SBP - DBP B. EDV - ESV C. HR - SV D. MAP - DBP"
+        "explanation": "解析：每搏输出量为舒张末期容积减去收缩末期容积。出处概念：SV 公式。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-19",
+        "id": "nasm-question-109",
         "prompt": "平均动脉压的理解，下列哪项正确？",
         "options": [
           {
@@ -1677,10 +1725,11 @@ export const nasmChapters = [
             "label": "与外周阻力无关"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 就是收缩压和舒张压的简单平均 B. 与整个心动周期的平均血压有关 C. 只反映肺活量 D. 与外周阻力无关"
+        "explanation": "解析：MAP 是整个心动周期的平均血压，不是简单平均值。出处概念：平均动脉压。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-20",
+        "id": "nasm-question-110",
         "prompt": "静息状态下的吸气属于：",
         "options": [
           {
@@ -1700,10 +1749,11 @@ export const nasmChapters = [
             "label": "与膈肌无关"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 完全被动过程 B. 主动过程 C. 仅由腹肌完成 D. 与膈肌无关"
+        "explanation": "解析：吸气是主动过程，主要涉及膈肌和肋间外肌。出处概念：通气机制。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-21",
+        "id": "nasm-question-201",
         "prompt": "静息状态下的呼气通常属于：",
         "options": [
           {
@@ -1723,10 +1773,11 @@ export const nasmChapters = [
             "label": "必须靠高强度用力"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 被动过程 B. 只能依靠肋间内肌 C. 只能依靠腹肌 D. 必须靠高强度用力"
+        "explanation": "解析：静息呼气通常是被动反应；运动中会有更多肌群参与。出处概念：通气机制。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-22",
+        "id": "nasm-question-202",
         "prompt": "人体呼吸通路最终进行气体交换的部位是：",
         "options": [
           {
@@ -1746,10 +1797,11 @@ export const nasmChapters = [
             "label": "食管"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 鼻甲 B. 主支气管 C. 肺泡 D. 食管"
+        "explanation": "解析：肺泡是气体交换的最终场所。出处概念：呼吸系统结构。",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-23",
+        "id": "nasm-question-203",
         "prompt": "肺活量计最常用于：",
         "options": [
           {
@@ -1769,10 +1821,11 @@ export const nasmChapters = [
             "label": "检测肌梭敏感性"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 直接测骨密度 B. 测量肺容量和肺功能相关指标 C. 记录心电活动 D. 检测肌梭敏感性"
+        "explanation": "解析：肺活量计用于测量吸入和呼出的空气量与速度，常见于肺功能测试。出处概念：肺容量/肺活量。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-24",
+        "id": "nasm-question-204",
         "prompt": "在肺泡与毛细血管之间，氧气和二氧化碳交换主要依赖：",
         "options": [
           {
@@ -1792,10 +1845,11 @@ export const nasmChapters = [
             "label": "韧带牵拉"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 主动运输 B. 扩散和压力梯度 C. 神经传导 D. 韧带牵拉"
+        "explanation": "解析：气体交换依赖膜两侧分压差引起的扩散。出处概念：气体交换。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-25",
+        "id": "nasm-question-205",
         "prompt": "Fick 方程表明摄氧量主要与哪两项有关？",
         "options": [
           {
@@ -1815,10 +1869,11 @@ export const nasmChapters = [
             "label": "仅体温和血压"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 心输出量和动静脉血氧差 B. 血糖和体脂率 C. 仅肺活量和心率 D. 仅体温和血压"
+        "explanation": "解析：Fick 方程表明 V02 与心输出量及动静脉血氧差相关。出处概念：摄氧量。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-26",
+        "id": "nasm-question-206",
         "prompt": "最大摄氧量通常被视为哪类能力的重要指标？",
         "options": [
           {
@@ -1838,10 +1893,11 @@ export const nasmChapters = [
             "label": "爆发力技术"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 柔韧性 B. 心血管/有氧耐力 C. 关节稳定性 D. 爆发力技术"
+        "explanation": "解析：V02max 是广泛接受的有氧耐力和心血管健康指标。出处概念：最大摄氧量。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-27",
+        "id": "nasm-question-207",
         "prompt": "一般健康人的 V02max 文本中大致范围是：",
         "options": [
           {
@@ -1861,10 +1917,11 @@ export const nasmChapters = [
             "label": "70-90 ml·kg^-1·min^-1"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 5-15 ml·kg^-1·min^-1 B. 15-25 ml·kg^-1·min^-1 C. 35-45 ml·kg^-1·min^-1 D. 70-90 ml·kg^-1·min^-1"
+        "explanation": "解析：文本指出一般健康人的 V02max 大致在 35-45 ml·kg^-1·min^-1。出处概念：V02max 水平。",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-28",
+        "id": "nasm-question-208",
         "prompt": "有氧耐力训练后，V02max 提升通常与下列哪项一致？",
         "options": [
           {
@@ -1884,10 +1941,11 @@ export const nasmChapters = [
             "label": "氧气提取能力下降"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 最大心率大幅固定上升 B. 每搏输出量和外周适应增加 C. 肌肉泵完全消失 D. 氧气提取能力下降"
+        "explanation": "解析：训练后改善通常与每搏输出量增加及毛细血管、线粒体等外周适应有关。出处概念：V02max 适应。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-29",
+        "id": "nasm-question-209",
         "prompt": "某客户运动时工作肌供血明显增加，这一现象最符合：",
         "options": [
           {
@@ -1907,10 +1965,11 @@ export const nasmChapters = [
             "label": "血红蛋白全部脱氧"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 血液从非活动组织重新分配到工作肌 B. 所有器官供血完全相同 C. 静脉血流停止 D. 血红蛋白全部脱氧"
+        "explanation": "解析：运动时血液会从部分非活动器官重新分配至工作肌。出处概念：血流再分配。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-30",
+        "id": "nasm-question-210",
         "prompt": "如果某客户运动强度不断增加，动静脉血氧差通常会：",
         "options": [
           {
@@ -1930,7 +1989,8 @@ export const nasmChapters = [
             "label": "与强度无关"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 减少 B. 先增后完全归零 C. 随运动强度增加而增加 D. 与强度无关"
+        "explanation": "解析：表 2.1 与正文都提示随运动强度增加，氧提取量即动静脉血氧差增加。出处概念：动静脉血氧差。",
+        "correctOptionKey": "choice-c"
       }
     ]
   },
@@ -2115,7 +2175,8 @@ export const nasmChapters = [
             "label": "关节活动度"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 骨长度变化 B. 生物系统中的能量流动 C. 神经传导速度 D. 关节活动度"
+        "explanation": "解析：生物能量学是生物系统中能量流动及转化的研究。出处概念：生物能量学定义。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-02",
@@ -2138,7 +2199,8 @@ export const nasmChapters = [
             "label": "脂肪酸"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 葡萄糖 B. 糖原 C. ATP D. 脂肪酸"
+        "explanation": "解析：ATP 是肌肉活动的唯一直接能量来源。出处概念：ATP 作用。",
+        "correctOptionKey": "choice-c"
       },
       {
         "id": "nasm-question-03",
@@ -2161,7 +2223,8 @@ export const nasmChapters = [
             "label": "骨重塑系统"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 磷酸原系统 B. 糖酵解系统 C. 氧化系统 D. 骨重塑系统"
+        "explanation": "解析：三大供能系统为磷酸原、糖酵解和氧化系统。出处概念：能量系统。",
+        "correctOptionKey": "choice-d"
       },
       {
         "id": "nasm-question-04",
@@ -2184,7 +2247,8 @@ export const nasmChapters = [
             "label": "长时间中低强度徒步"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 长时间低强度步行 B. 短时间高强度活动 C. 全程静息睡眠 D. 长时间中低强度徒步"
+        "explanation": "解析：磷酸原系统供能速度快，适合跳跃、冲刺等短时间高强度活动。出处概念：磷酸原系统。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-05",
@@ -2207,7 +2271,8 @@ export const nasmChapters = [
             "label": "肌腱和韧带"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. ATP 和磷酸肌酸 B. 乳酸和尿素 C. 血红蛋白和氧 D. 肌腱和韧带"
+        "explanation": "解析：该系统依赖 ATP 与磷酸肌酸相关反应补充能量。出处概念：磷酸原系统。",
+        "correctOptionKey": "choice-a"
       },
       {
         "id": "nasm-question-06",
@@ -2230,7 +2295,8 @@ export const nasmChapters = [
             "label": "仅慢速糖酵解"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 仅氧化系统 B. 磷酸原系统 C. 仅蛋白质氧化 D. 仅慢速糖酵解"
+        "explanation": "解析：即使是慢跑或中等强度课的最初几秒，也主要由磷酸原系统供能。出处概念：运动开始时供能。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-07",
@@ -2253,7 +2319,8 @@ export const nasmChapters = [
             "label": "只在静息时作用"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 几个小时 B. 持续约 2 分钟 C. 24 小时 D. 只在静息时作用"
+        "explanation": "解析：糖酵解在高强度活动中通常可持续成为主要系统约 2 分钟。出处概念：糖酵解系统。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-08",
@@ -2276,7 +2343,8 @@ export const nasmChapters = [
             "label": "是否发生在肌细胞内"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 是否使用葡萄糖 B. 最终底物去向不同 C. 是否消耗 ATP D. 是否发生在肌细胞内"
+        "explanation": "解析：二者差别在最终代谢去向，分别更偏向乳酸盐或丙酮酸继续氧化。出处概念：快速/慢速糖酵解。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-09",
@@ -2299,7 +2367,8 @@ export const nasmChapters = [
             "label": "肌酸酐"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 乳酸盐 B. 尿素 C. 血红蛋白 D. 肌酸酐"
+        "explanation": "解析：快速糖酵解最终产物偏向乳酸盐。出处概念：快速糖酵解。",
+        "correctOptionKey": "choice-a"
       },
       {
         "id": "nasm-question-10",
@@ -2322,10 +2391,11 @@ export const nasmChapters = [
             "label": "直接生成骨密度"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 只产生乳酸盐 B. 丙酮酸继续进入线粒体 C. 只生成蛋白质 D. 直接生成骨密度"
+        "explanation": "解析：慢速糖酵解保留丙酮酸进入线粒体继续代谢。出处概念：慢速糖酵解。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-11",
+        "id": "nasm-question-101",
         "prompt": "一分子葡萄糖经糖酵解净生成 ATP 的数量是：",
         "options": [
           {
@@ -2345,10 +2415,11 @@ export const nasmChapters = [
             "label": "4"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 1 B. 2 C. 3 D. 4"
+        "explanation": "解析：一分子葡萄糖经糖酵解净生成 2 分子 ATP。出处概念：糖酵解产能。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-12",
+        "id": "nasm-question-102",
         "prompt": "如果以糖原作为糖酵解底物，净 ATP 产量通常是：",
         "options": [
           {
@@ -2368,10 +2439,11 @@ export const nasmChapters = [
             "label": "5"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 1 B. 2 C. 3 D. 5"
+        "explanation": "解析：以糖原为底物时可净生成 3 分子 ATP。出处概念：糖酵解产能。",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-13",
+        "id": "nasm-question-103",
         "prompt": "糖酵解过程中的主要限速酶是：",
         "options": [
           {
@@ -2391,10 +2463,11 @@ export const nasmChapters = [
             "label": "ATP 合酶"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 肌酸激酶 B. 磷酸果糖激酶 C. 乳酸脱氢酶 D. ATP 合酶"
+        "explanation": "解析：PFK 是糖酵解的主要限速酶。出处概念：糖酵解调节。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-14",
+        "id": "nasm-question-104",
         "prompt": "文本中与高强度运动时乳酸盐产生增加密切相关的肌纤维类型是：",
         "options": [
           {
@@ -2414,10 +2487,11 @@ export const nasmChapters = [
             "label": "心肌"
           }
         ],
-        "explanation": "机制理解题（11-20） A. I 型肌纤维 B. II 型肌纤维 C. 仅平滑肌 D. 心肌"
+        "explanation": "解析：II 型肌纤维产生乳酸盐的速率较高。出处概念：血乳酸盐。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-15",
+        "id": "nasm-question-105",
         "prompt": "本章对乳酸盐与疲劳的表述更接近下列哪项？",
         "options": [
           {
@@ -2437,10 +2511,11 @@ export const nasmChapters = [
             "label": "乳酸盐只能导致损伤"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 乳酸盐本身就是疲劳唯一原因 B. 疲劳更多与组织 pH 降低有关 C. 乳酸盐完全没有任何代谢价值 D. 乳酸盐只能导致损伤"
+        "explanation": "解析：文本强调疲劳更多与组织酸化和 pH 降低有关，而非把乳酸盐本身视作唯一原因。出处概念：乳酸盐与疲劳。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-16",
+        "id": "nasm-question-106",
         "prompt": "乳酸盐还可以被用作：",
         "options": [
           {
@@ -2460,10 +2535,11 @@ export const nasmChapters = [
             "label": "血小板生成原料"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 仅骨重塑原料 B. 能量底物或糖异生相关底物 C. 韧带合成专用底物 D. 血小板生成原料"
+        "explanation": "解析：乳酸盐可被氧化利用，也可参与糖异生。出处概念：乳酸盐代谢。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-17",
+        "id": "nasm-question-107",
         "prompt": "乳酸盐阈值（LT）代表：",
         "options": [
           {
@@ -2483,10 +2559,11 @@ export const nasmChapters = [
             "label": "静息血压水平"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 对无氧代谢依赖逐渐增加的强度区域 B. 运动完全停止的时刻 C. 骨密度达到峰值 D. 静息血压水平"
+        "explanation": "解析：LT 表示对无氧代谢依赖逐渐增加的强度拐点。出处概念：乳酸盐阈值。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-18",
+        "id": "nasm-question-108",
         "prompt": "静息状态和有氧运动中 ATP 的主要来源是：",
         "options": [
           {
@@ -2506,10 +2583,11 @@ export const nasmChapters = [
             "label": "仅蛋白质氧化"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 氧化系统 B. 仅磷酸原系统 C. 仅快速糖酵解 D. 仅蛋白质氧化"
+        "explanation": "解析：静息和有氧运动时主要依赖氧化系统。出处概念：氧化系统。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-19",
+        "id": "nasm-question-109",
         "prompt": "丙酮酸在线粒体内转化后进入 Krebs 循环前的中间物质是：",
         "options": [
           {
@@ -2529,10 +2607,11 @@ export const nasmChapters = [
             "label": "尿素"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 乳酸 B. 乙酰辅酶 A C. 甘油三酯 D. 尿素"
+        "explanation": "解析：丙酮酸进入线粒体后先转化为乙酰辅酶 A。出处概念：碳水化合物氧化。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-20",
+        "id": "nasm-question-110",
         "prompt": "在电子传递链中，最终电子受体是：",
         "options": [
           {
@@ -2552,10 +2631,11 @@ export const nasmChapters = [
             "label": "乳酸盐"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 氧 B. 氮 C. 肌酸 D. 乳酸盐"
+        "explanation": "解析：电子传递链以氧作为最终电子受体并形成水。出处概念：ETC。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-21",
+        "id": "nasm-question-201",
         "prompt": "文本中对一分子葡萄糖完全氧化 ATP 产量的概括是：",
         "options": [
           {
@@ -2575,10 +2655,11 @@ export const nasmChapters = [
             "label": "约 38 分子"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 约 6 分子 B. 约 12 分子 C. 约 24 分子 D. 约 38 分子"
+        "explanation": "解析：文本概括一分子葡萄糖完全氧化可生成约 38 分子 ATP。出处概念：氧化系统 ATP 产率。",
+        "correctOptionKey": "choice-d"
       },
       {
-        "id": "nasm-question-22",
+        "id": "nasm-question-202",
         "prompt": "在静息状态下，ATP 来源比例更偏向于：",
         "options": [
           {
@@ -2598,10 +2679,11 @@ export const nasmChapters = [
             "label": "完全不依赖脂肪"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 约 70% 来自脂肪，30% 来自碳水化合物 B. 约 100% 来自蛋白质 C. 约 100% 来自磷酸肌酸 D. 完全不依赖脂肪"
+        "explanation": "解析：静息时约 70% ATP 来自脂肪，约 30% 来自碳水化合物。出处概念：底物偏好。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-23",
+        "id": "nasm-question-203",
         "prompt": "随着运动强度增加，底物偏好通常从脂肪转向：",
         "options": [
           {
@@ -2621,10 +2703,11 @@ export const nasmChapters = [
             "label": "水"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 胶原蛋白 B. 钙 C. 碳水化合物 D. 水"
+        "explanation": "解析：随着强度增加，底物偏好逐渐转向碳水化合物。出处概念：底物利用。",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-24",
+        "id": "nasm-question-204",
         "prompt": "文本指出糖原在大约多少最大摄氧量范围内成为首选底物来源？",
         "options": [
           {
@@ -2644,10 +2727,11 @@ export const nasmChapters = [
             "label": "90%-100%"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 10%-20% B. 30%-40% C. 60%-75% D. 90%-100%"
+        "explanation": "解析：文本指出在 60%-75% V02max 时糖原成为首选底物来源。出处概念：交叉概念。",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-25",
+        "id": "nasm-question-205",
         "prompt": "下列哪项最符合“交叉概念”？",
         "options": [
           {
@@ -2667,10 +2751,11 @@ export const nasmChapters = [
             "label": "蛋白质永远是主导底物"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 高强度时脂肪成为首选底物 B. 随强度上升，底物偏好从脂肪转向糖原/碳水化合物 C. 糖原在所有强度下都不重要 D. 蛋白质永远是主导底物"
+        "explanation": "解析：交叉概念即随强度上升，供能底物从脂肪偏向碳水化合物。出处概念：交叉概念。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-26",
+        "id": "nasm-question-206",
         "prompt": "高强度运动后，ATP 的完全再合成大约需要：",
         "options": [
           {
@@ -2690,10 +2775,11 @@ export const nasmChapters = [
             "label": "24 小时"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 10 秒 B. 30 秒 C. 3-5 分钟 D. 24 小时"
+        "explanation": "解析：ATP 完全再合成大约需要 3-5 分钟。出处概念：磷酸原补充。",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-27",
+        "id": "nasm-question-207",
         "prompt": "高强度运动后，磷酸肌酸的完全再合成大约需要：",
         "options": [
           {
@@ -2713,10 +2799,11 @@ export const nasmChapters = [
             "label": "24 小时"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 8 分钟 B. 30 分钟 C. 6 小时 D. 24 小时"
+        "explanation": "解析：磷酸肌酸完全再合成大约需要 8 分钟。出处概念：磷酸原补充。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-28",
+        "id": "nasm-question-208",
         "prompt": "本章建议优化肌糖原补充时，运动后应：",
         "options": [
           {
@@ -2736,10 +2823,11 @@ export const nasmChapters = [
             "label": "完全禁食"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 长时间延迟碳水化合物摄入 B. 尽早进行碳水化合物补充 C. 只补蛋白质 D. 完全禁食"
+        "explanation": "解析：为了优化肌糖原补充，应在运动后尽早摄入碳水化合物。出处概念：糖原再合成。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-29",
+        "id": "nasm-question-209",
         "prompt": "氧亏最符合下列哪项？",
         "options": [
           {
@@ -2759,10 +2847,11 @@ export const nasmChapters = [
             "label": "骨骼肌完全不需氧"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 运动开始阶段无氧代谢补上的那部分能量贡献 B. 血糖完全耗尽 C. 运动后静脉回流停止 D. 骨骼肌完全不需氧"
+        "explanation": "解析：氧亏指运动开始阶段无氧代谢对总能量消耗的那部分贡献。出处概念：氧亏。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-30",
+        "id": "nasm-question-210",
         "prompt": "根据代谢特异性原则，若客户目标是完成 20 英里徒步，更应强化：",
         "options": [
           {
@@ -2782,7 +2871,8 @@ export const nasmChapters = [
             "label": "仅静态拉伸"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 仅短跑冲刺 B. 仅 1RM 练习 C. 有氧氧化系统相关训练活动 D. 仅静态拉伸"
+        "explanation": "解析：长距离徒步更应强化有氧氧化系统相关训练。出处概念：代谢特异性。",
+        "correctOptionKey": "choice-c"
       }
     ]
   },
@@ -2969,7 +3059,8 @@ export const nasmChapters = [
             "label": "只研究运动营养"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 只研究骨骼名称的学科 B. 用机械力学原理理解生物体及其系统功能 C. 只研究血液循环 D. 只研究运动营养"
+        "explanation": "解析：本章将生物力学界定为运用机械力学原理理解生物体及其系统功能。出处概念：生物力学定义。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-02",
@@ -2992,7 +3083,8 @@ export const nasmChapters = [
             "label": "代谢学"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 动力学 B. 运动学 C. 生理学 D. 代谢学"
+        "explanation": "解析：不考虑潜在力作用、只描述运动本身，属于运动学。出处概念：运动学。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-03",
@@ -3015,7 +3107,8 @@ export const nasmChapters = [
             "label": "神经化学"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 运动学 B. 动力学 C. 解剖平面学 D. 神经化学"
+        "explanation": "解析：动力学研究产生或控制运动的力学特征。出处概念：动力学。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-04",
@@ -3038,7 +3131,8 @@ export const nasmChapters = [
             "label": "力矩"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 时间 B. 速度 C. 加速度 D. 力矩"
+        "explanation": "解析：力矩属于动力学变量，不属于运动学变量。出处概念：运动学变量。",
+        "correctOptionKey": "choice-d"
       },
       {
         "id": "nasm-question-05",
@@ -3061,7 +3155,8 @@ export const nasmChapters = [
             "label": "时间"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 位置 B. 位移 C. 力矩 D. 时间"
+        "explanation": "解析：动力学常用变量包括力的产生、做功、功率和力矩。出处概念：动力学变量。",
+        "correctOptionKey": "choice-c"
       },
       {
         "id": "nasm-question-06",
@@ -3084,7 +3179,8 @@ export const nasmChapters = [
             "label": "被动运动"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 旋内运动 B. 一般运动 C. 纯角运动 D. 被动运动"
+        "explanation": "解析：线性运动和角运动的结合称为一般运动。出处概念：运动形式。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-07",
@@ -3107,7 +3203,8 @@ export const nasmChapters = [
             "label": "功率等于力乘距离"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 力等于质量乘加速度 B. 任何物体趋于保持静止或原有运动状态，除非受外力作用 C. 作用力和反作用力方向相同 D. 功率等于力乘距离"
+        "explanation": "解析：牛顿第一定律强调运动状态保持，除非受外力作用。出处概念：牛顿第一定律。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-08",
@@ -3130,7 +3227,8 @@ export const nasmChapters = [
             "label": "V02 = Q × (a-V02)"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. T = F × d B. F = m × a C. Q = SV × HR D. V02 = Q × (a-V02)"
+        "explanation": "解析：F = m × a 是牛顿第二定律。出处概念：牛顿第二定律。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-09",
@@ -3153,7 +3251,8 @@ export const nasmChapters = [
             "label": "胡克定律"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 牛顿第一定律 B. 牛顿第二定律 C. 牛顿第三定律 D. 胡克定律"
+        "explanation": "解析：作用力和反作用力大小相等、方向相反，属于牛顿第三定律。出处概念：牛顿第三定律。",
+        "correctOptionKey": "choice-c"
       },
       {
         "id": "nasm-question-10",
@@ -3176,10 +3275,11 @@ export const nasmChapters = [
             "label": "功率 × 时间"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 质量 × 速度 B. 力 × 距离 C. 力 ÷ 时间 D. 功率 × 时间"
+        "explanation": "解析：线性动量等于质量乘速度。出处概念：动量。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-11",
+        "id": "nasm-question-101",
         "prompt": "冲量等于：",
         "options": [
           {
@@ -3199,10 +3299,11 @@ export const nasmChapters = [
             "label": "速度 ÷ 时间"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 力 × 作用时间 B. 力 × 力臂 C. 质量 × 加速度 D. 速度 ÷ 时间"
+        "explanation": "解析：冲量是力与作用时间的乘积。出处概念：冲量。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-12",
+        "id": "nasm-question-102",
         "prompt": "扭矩（力矩）的定义更接近：",
         "options": [
           {
@@ -3222,10 +3323,11 @@ export const nasmChapters = [
             "label": "静脉回流速度"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 力围绕轴点的转动效应 B. 体表面积与速度平方的乘积 C. 肌纤维长度变化速率 D. 静脉回流速度"
+        "explanation": "解析：扭矩是力围绕轴点产生的转动效应。出处概念：扭矩。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-13",
+        "id": "nasm-question-103",
         "prompt": "扭矩的基本表达式是：",
         "options": [
           {
@@ -3245,10 +3347,11 @@ export const nasmChapters = [
             "label": "T = HR × SV"
           }
         ],
-        "explanation": "机制理解题（11-20） A. T = m × a B. T = F × d C. T = V × t D. T = HR × SV"
+        "explanation": "解析：T = F × d，d 为力臂。出处概念：扭矩公式。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-14",
+        "id": "nasm-question-104",
         "prompt": "当某一力线通过转动轴时，力臂将：",
         "options": [
           {
@@ -3268,10 +3371,11 @@ export const nasmChapters = [
             "label": "等于体重"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 最大 B. 最小但不为零 C. 为零 D. 等于体重"
+        "explanation": "解析：当力线穿过转动轴时，垂直距离为零，因此不产生扭矩。出处概念：力臂。",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-15",
+        "id": "nasm-question-105",
         "prompt": "人体运动多是由多个内外力矩共同作用形成，其结果称为：",
         "options": [
           {
@@ -3291,10 +3395,11 @@ export const nasmChapters = [
             "label": "氧亏"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 单一力矩 B. 净扭矩 C. 绝对力量 D. 氧亏"
+        "explanation": "解析：人体运动通常由所有内外扭矩求和后的净扭矩决定。出处概念：净扭矩。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-16",
+        "id": "nasm-question-106",
         "prompt": "以头部在寰枕关节处的平衡为例，属于哪类杠杆？",
         "options": [
           {
@@ -3314,10 +3419,11 @@ export const nasmChapters = [
             "label": "不属于杠杆"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 第一类杠杆 B. 第二类杠杆 C. 第三类杠杆 D. 不属于杠杆"
+        "explanation": "解析：寰枕关节示例中支点位于两力之间，属于第一类杠杆。出处概念：杠杆系统。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-17",
+        "id": "nasm-question-107",
         "prompt": "提踵练习中跖趾关节的示例最接近：",
         "options": [
           {
@@ -3337,10 +3443,11 @@ export const nasmChapters = [
             "label": "流体阻力系统"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 第一类杠杆 B. 第二类杠杆 C. 第三类杠杆 D. 流体阻力系统"
+        "explanation": "解析：提踵时阻力位于支点和肌力之间，属于第二类杠杆。出处概念：杠杆系统。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-18",
+        "id": "nasm-question-108",
         "prompt": "自由重量在整个运动范围中的外部重量大小虽不变，但阻力扭矩会变化，主要因为：",
         "options": [
           {
@@ -3360,10 +3467,11 @@ export const nasmChapters = [
             "label": "体温变化"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 血液 pH 变化 B. 力臂变化 C. 肌纤维类型变化 D. 体温变化"
+        "explanation": "解析：自由重量本身恒定，但相对关节的力臂变化会让阻力扭矩改变。出处概念：自由重量。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-19",
+        "id": "nasm-question-109",
         "prompt": "在站姿二头弯举中，自由重量力臂通常在何时最大？",
         "options": [
           {
@@ -3383,10 +3491,11 @@ export const nasmChapters = [
             "label": "与姿势无关"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 前臂处于水平位时 B. 杠铃贴近地面时 C. 手臂完全放松时始终最大 D. 与姿势无关"
+        "explanation": "解析：站姿二头弯举在前臂水平位时自由重量力臂最大。出处概念：自由重量力臂。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-20",
+        "id": "nasm-question-110",
         "prompt": "深蹲时如果躯干前倾增大，文本指出通常会：",
         "options": [
           {
@@ -3406,10 +3515,11 @@ export const nasmChapters = [
             "label": "让所有关节需求完全相同"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 增加对伸髋肌群和跖屈肌群的需求 B. 完全消除膝关节力臂 C. 只增加上肢负荷 D. 让所有关节需求完全相同"
+        "explanation": "解析：躯干前倾会使需求更偏向伸髋肌群和跖屈肌群，并减少对伸膝肌群需求。出处概念：深蹲力学。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-21",
+        "id": "nasm-question-201",
         "prompt": "下列哪项最符合“恒定阻力器械”的特点？",
         "options": [
           {
@@ -3429,10 +3539,11 @@ export const nasmChapters = [
             "label": "只能产生流体阻力"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 整个 ROM 中外部阻力方向和大小都随努力自动成比例变化 B. 在整个运动范围内阻力不发生改变 C. 只能用于水中训练 D. 只能产生流体阻力"
+        "explanation": "解析：恒定阻力指整个运动范围内外部阻力不变。出处概念：恒定阻力器械。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-22",
+        "id": "nasm-question-202",
         "prompt": "弹力带、弹力绳这类阻力最符合：",
         "options": [
           {
@@ -3452,10 +3563,11 @@ export const nasmChapters = [
             "label": "只受体温影响"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 恒定阻力 B. 可变阻力 C. 完全无阻力 D. 只受体温影响"
+        "explanation": "解析：弹力带和弹力绳的阻力会随拉伸增加而变化，属于可变阻力。出处概念：可变阻力。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-23",
+        "id": "nasm-question-203",
         "prompt": "根据胡克定律，弹性阻力与哪项关系最直接？",
         "options": [
           {
@@ -3475,10 +3587,11 @@ export const nasmChapters = [
             "label": "永远恒定不变"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 与拉伸增加无关 B. 与从静息长度开始的拉伸变化相关 C. 只由颜色决定 D. 永远恒定不变"
+        "explanation": "解析：弹性阻力与材料从静息长度开始的相对拉伸变化有关。出处概念：胡克定律与弹性阻力。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-24",
+        "id": "nasm-question-204",
         "prompt": "文本对弹性材料的警示是：",
         "options": [
           {
@@ -3498,10 +3611,11 @@ export const nasmChapters = [
             "label": "不需要更换"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 阻力会因重复拉伸而逐渐下降 B. 用得越久阻力一定越高 C. 颜色编码在所有厂商间完全统一 D. 不需要更换"
+        "explanation": "解析：重复拉伸会导致弹性材料劳损，阻力下降。出处概念：弹性材料劳损。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-25",
+        "id": "nasm-question-205",
         "prompt": "在杠铃上加挂链条的主要目的之一是：",
         "options": [
           {
@@ -3521,10 +3635,11 @@ export const nasmChapters = [
             "label": "取代所有自由重量训练"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 让底部阻力进一步减小到零 B. 在动作上升过程中提供更多阻力 C. 让动作失去任务特异性 D. 取代所有自由重量训练"
+        "explanation": "解析：链条在动作上升时更多离地，从而提供更大阻力。出处概念：链条阻力。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-26",
+        "id": "nasm-question-206",
         "prompt": "调节阻力器械的核心特点是：",
         "options": [
           {
@@ -3544,10 +3659,11 @@ export const nasmChapters = [
             "label": "与速度无关"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 阻力与客户努力成正比 B. 阻力永远不变 C. 只能在静止时使用 D. 与速度无关"
+        "explanation": "解析：调节阻力提供的阻力与客户施加的努力成正比。出处概念：调节阻力。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-27",
+        "id": "nasm-question-207",
         "prompt": "等速设备设计的主要目标是：",
         "options": [
           {
@@ -3567,10 +3683,11 @@ export const nasmChapters = [
             "label": "控制骨密度"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 控制角速度 B. 控制血压 C. 控制血糖 D. 控制骨密度"
+        "explanation": "解析：等速设备主要是控制角速度。出处概念：等速设备。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-28",
+        "id": "nasm-question-208",
         "prompt": "飞轮训练在牵拉结束后，练习者通常需要更多完成：",
         "options": [
           {
@@ -3590,10 +3707,11 @@ export const nasmChapters = [
             "label": "神经阻断"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 离心控制 B. 完全静止 C. 肺泡扩散 D. 神经阻断"
+        "explanation": "解析：飞轮回卷时需要练习者用离心收缩去克服。出处概念：飞轮。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-29",
+        "id": "nasm-question-209",
         "prompt": "流体阻力与运动速度的关系最接近：",
         "options": [
           {
@@ -3613,10 +3731,11 @@ export const nasmChapters = [
             "label": "速度越快阻力越小"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 与速度无关 B. 与速度成简单一倍一倍的线性相等增长 C. 与速度平方相关 D. 速度越快阻力越小"
+        "explanation": "解析：文本给出的流体阻力公式表明阻力与速度平方成正比。出处概念：流体阻力。",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-30",
+        "id": "nasm-question-210",
         "prompt": "在水中训练时，如果增大体表面积，通常会：",
         "options": [
           {
@@ -3636,7 +3755,8 @@ export const nasmChapters = [
             "label": "只影响骨密度"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 降低水的阻力 B. 增加阻力，使动作更难 C. 不影响动作难度 D. 只影响骨密度"
+        "explanation": "解析：在水中增大体表面积会增加拖力，使动作更困难。出处概念：水中阻力/拖力。",
+        "correctOptionKey": "choice-b"
       }
     ]
   },
@@ -3803,7 +3923,8 @@ export const nasmChapters = [
             "label": "仅发生于肌肉围度的变化"
           }
         ],
-        "explanation": "概念记忆题（1-10）    A. 停训后持续多月的变化    B. 运动中或运动后不久出现的变化    C. 仅发生于神经系统的变化    D. 仅发生于肌肉围度的变化"
+        "explanation": "解析：急性反应是运动中或运动后不久发生的变化。出处概念：急性反应定义。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-02",
@@ -3826,7 +3947,8 @@ export const nasmChapters = [
             "label": "热身阶段体温升高"
           }
         ],
-        "explanation": "概念记忆题（1-10）    A. 一次训练后即刻心率升高    B. 一次训练中磷酸肌酸耗竭    C. 多次训练后形成、停训后仍能维持一段时间的变化    D. 热身阶段体温升高"
+        "explanation": "解析：慢性适应来自反复训练，并可在停训后维持较长时间。出处概念：慢性适应定义。",
+        "correctOptionKey": "choice-c"
       },
       {
         "id": "nasm-question-03",
@@ -3849,7 +3971,8 @@ export const nasmChapters = [
             "label": "每次都力竭"
           }
         ],
-        "explanation": "概念记忆题（1-10）    A. 固定负荷    B. 渐进超负荷    C. 完全不恢复    D. 每次都力竭"
+        "explanation": "解析：本章反复强调渐进超负荷是诱导适应的关键。出处概念：渐进超负荷。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-04",
@@ -3872,7 +3995,8 @@ export const nasmChapters = [
             "label": "韧带横截面积立即增加"
           }
         ],
-        "explanation": "概念记忆题（1-10）    A. 骨密度明显增加    B. 肌肉力量提高    C. 体脂立即大幅下降    D. 韧带横截面积立即增加"
+        "explanation": "解析：抗阻训练最初最显著的适应是力量提高。出处概念：训练时间进程。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-05",
@@ -3895,7 +4019,8 @@ export const nasmChapters = [
             "label": "ECG"
           }
         ],
-        "explanation": "概念记忆题（1-10）    A. MRI    B. DXA    C. EMG    D. ECG"
+        "explanation": "解析：记录肌肉电活动的技术是肌电图 EMG。出处概念：EMG。",
+        "correctOptionKey": "choice-c"
       },
       {
         "id": "nasm-question-06",
@@ -3918,7 +4043,8 @@ export const nasmChapters = [
             "label": "降低动作电位频率"
           }
         ],
-        "explanation": "概念记忆题（1-10）    A. 肌纤维完全放松    B. 在需要更大力量时激活更多运动单位    C. 仅提高激素水平    D. 降低动作电位频率"
+        "explanation": "解析：运动单位募集指在更大力量需求下激活更多运动单位。出处概念：运动单位募集。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-07",
@@ -3941,7 +4067,8 @@ export const nasmChapters = [
             "label": "骨密度变化速率"
           }
         ],
-        "explanation": "概念记忆题（1-10）    A. 训练周数的安排    B. 肌肉肥大速度    C. 运动单位动作电位释放速率    D. 骨密度变化速率"
+        "explanation": "解析：速率编码是动作电位释放速率的变化。出处概念：速率编码。",
+        "correctOptionKey": "choice-c"
       },
       {
         "id": "nasm-question-08",
@@ -3964,7 +4091,8 @@ export const nasmChapters = [
             "label": "疲劳时募集数量不变"
           }
         ],
-        "explanation": "概念记忆题（1-10）    A. 总是先募集高阈值运动单位    B. 先募集低阈值，再募集高阈值运动单位    C. 小肌肉群比大肌肉群更依赖募集数量    D. 疲劳时募集数量不变"
+        "explanation": "解析：大小原则强调先低阈值、后高阈值的募集顺序。出处概念：大小原则。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-09",
@@ -3987,7 +4115,8 @@ export const nasmChapters = [
             "label": "肌糖原完全消失"
           }
         ],
-        "explanation": "概念记忆题（1-10）    A. 肌肉坏死    B. 肌肉肥大    C. 肌红蛋白清零    D. 肌糖原完全消失"
+        "explanation": "解析：骨骼肌最明显的适应是肌肉肥大。出处概念：肌肉组织变化。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-10",
@@ -4010,10 +4139,11 @@ export const nasmChapters = [
             "label": "以上都是"
           }
         ],
-        "explanation": "概念记忆题（1-10）     A. 年龄     B. 性别     C. 遗传     D. 以上都是"
+        "explanation": "解析：年龄、性别和遗传都被列为重要影响因素。出处概念：个体差异。",
+        "correctOptionKey": "choice-d"
       },
       {
-        "id": "nasm-question-11",
+        "id": "nasm-question-101",
         "prompt": "一般而言，随着力量需求增加，肌肉输出增加主要依赖于：",
         "options": [
           {
@@ -4033,10 +4163,11 @@ export const nasmChapters = [
             "label": "血浆量增加"
           }
         ],
-        "explanation": "机制理解题（11-20）     A. 运动单位募集增加和速率编码提高     B. 体脂率升高     C. 静息心率下降     D. 血浆量增加"
+        "explanation": "解析：力量控制主要依赖募集数量与速率编码两个因素。出处概念：神经系统机制。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-12",
+        "id": "nasm-question-102",
         "prompt": "小肌肉群在较低最大力量输出百分比下即可实现较充分募集，因此其力量输出更依赖于：",
         "options": [
           {
@@ -4056,10 +4187,11 @@ export const nasmChapters = [
             "label": "关节松弛度"
           }
         ],
-        "explanation": "机制理解题（11-20）     A. 血压变化     B. 放电频率     C. 骨密度     D. 关节松弛度"
+        "explanation": "解析：小肌肉群更依赖放电频率来增加力量输出。出处概念：小肌肉群与大肌肉群差异。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-13",
+        "id": "nasm-question-103",
         "prompt": "疲劳加重时，体表 EMG 信号增大通常提示：",
         "options": [
           {
@@ -4079,10 +4211,11 @@ export const nasmChapters = [
             "label": "脂肪利用停止"
           }
         ],
-        "explanation": "机制理解题（11-20）     A. 运动单位募集和放电频率发生变化     B. 肌肉完全不再工作     C. 骨密度下降     D. 脂肪利用停止"
+        "explanation": "解析：疲劳时 EMG 增大，提示募集和放电频率都发生变化。出处概念：疲劳与 EMG。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-14",
+        "id": "nasm-question-104",
         "prompt": "抗阻训练早期力量增长的重要原因之一是：",
         "options": [
           {
@@ -4102,10 +4235,11 @@ export const nasmChapters = [
             "label": "体脂率上升"
           }
         ],
-        "explanation": "机制理解题（11-20）     A. 立即出现巨大肌肉肥大     B. 神经系统适应     C. 骨密度骤增     D. 体脂率上升"
+        "explanation": "解析：早期力量提升常归因于神经系统适应。出处概念：早期神经适应。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-15",
+        "id": "nasm-question-105",
         "prompt": "关于肌肉肥大，下列哪项更符合原文？",
         "options": [
           {
@@ -4125,10 +4259,11 @@ export const nasmChapters = [
             "label": "与肌蛋白合成无关"
           }
         ],
-        "explanation": "机制理解题（11-20）     A. 训练前 4-8 周完全不会发生     B. 训练前 4-8 周通常已发生，但常不易被仪器测得     C. 只发生于 I 型肌纤维     D. 与肌蛋白合成无关"
+        "explanation": "解析：文中指出前 4-8 周肥大常难测得，但并非不发生。出处概念：肌肉肥大时间特征。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-16",
+        "id": "nasm-question-106",
         "prompt": "关于骨组织对抗阻训练的反应，下列哪项正确？",
         "options": [
           {
@@ -4148,10 +4283,11 @@ export const nasmChapters = [
             "label": "骨密度通常在首周就明显上升"
           }
         ],
-        "explanation": "机制理解题（11-20）     A. 骨组织对机械应力不敏感     B. 骨组织形变可刺激骨形成     C. 抗阻训练只影响肌肉不影响骨     D. 骨密度通常在首周就明显上升"
+        "explanation": "解析：骨骼形变会刺激骨细胞形成骨。出处概念：骨组织适应。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-17",
+        "id": "nasm-question-107",
         "prompt": "关于肌腱和韧带的适应，下列哪项更符合本章？",
         "options": [
           {
@@ -4171,10 +4307,11 @@ export const nasmChapters = [
             "label": "结缔组织血供丰富，恢复极快"
           }
         ],
-        "explanation": "机制理解题（11-20）     A. 肌腱对训练负荷完全没有适应     B. 韧带研究多于肌腱     C. 肌腱可出现尺寸和力学性能变化     D. 结缔组织血供丰富，恢复极快"
+        "explanation": "解析：研究显示肌腱可发生尺寸和力学性能变化，韧带资料较少。出处概念：肌腱和韧带变化。",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-18",
+        "id": "nasm-question-108",
         "prompt": "长期抗阻训练对身体成分的典型影响是：",
         "options": [
           {
@@ -4194,10 +4331,11 @@ export const nasmChapters = [
             "label": "一定使体重下降"
           }
         ],
-        "explanation": "机制理解题（11-20）     A. 去脂体重增加有助于体脂率下降     B. 去脂体重增加必然导致脂肪量增加     C. 只改变水分，不改变体脂率     D. 一定使体重下降"
+        "explanation": "解析：去脂体重增加在脂肪量不变时可降低体脂率。出处概念：身体成分变化。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-19",
+        "id": "nasm-question-109",
         "prompt": "关于 ACTN-3 基因型，下列哪项更符合文本？",
         "options": [
           {
@@ -4217,10 +4355,11 @@ export const nasmChapters = [
             "label": "该基因只影响有氧训练"
           }
         ],
-        "explanation": "机制理解题（11-20）     A. ACTN-XX 携带者必然无法从训练中获益     B. ACTN 基因与主要存在于 II 型肌纤维中的结构蛋白有关     C. ACTN-XX 携带者一定有健康损害     D. 该基因只影响有氧训练"
+        "explanation": "解析：ACTN 与主要存在于 II 型肌纤维中的 Z 线结构蛋白相关。出处概念：ACTN-3。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-20",
+        "id": "nasm-question-110",
         "prompt": "对客户训练反应差异的理解，最稳妥的做法是：",
         "options": [
           {
@@ -4240,10 +4379,11 @@ export const nasmChapters = [
             "label": "所有人反应都相同"
           }
         ],
-        "explanation": "机制理解题（11-20）     A. 短期没增肌就判定为真正不响应者     B. 只看外观不看力量     C. 结合年龄、性别、遗传和刺激模式综合判断     D. 所有人反应都相同"
+        "explanation": "解析：训练反应差异应综合多因素判断，不能简单贴标签。出处概念：个体差异与响应者。",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-21",
+        "id": "nasm-question-201",
         "prompt": "新客户训练 3 周后力量上升明显，但围度变化不显著。最合理的解释是：",
         "options": [
           {
@@ -4263,10 +4403,11 @@ export const nasmChapters = [
             "label": "说明过度训练已经发生"
           }
         ],
-        "explanation": "情景应用题（21-30）     A. 训练完全无效     B. 早期力量提高可主要来自神经适应     C. 必须立刻停训     D. 说明过度训练已经发生"
+        "explanation": "解析：早期力量提升通常先于明显围度变化，常与神经适应有关。出处概念：力量与肥大时间进程。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-22",
+        "id": "nasm-question-202",
         "prompt": "客户每次都被安排到力竭，连续多周后力量停滞。最符合本章的判断是：",
         "options": [
           {
@@ -4286,10 +4427,11 @@ export const nasmChapters = [
             "label": "说明骨密度过高"
           }
         ],
-        "explanation": "情景应用题（21-30）     A. 力竭越多越好     B. 可能缺少渐进式与恢复性安排     C. 说明客户遗传绝对不行     D. 说明骨密度过高"
+        "explanation": "解析：连续力竭性训练可能造成停滞，方案应加入恢复模块。出处概念：恢复周与力竭训练警示。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-23",
+        "id": "nasm-question-203",
         "prompt": "某客户训练目标是提高骨密度。私人教练最应强调：",
         "options": [
           {
@@ -4309,10 +4451,11 @@ export const nasmChapters = [
             "label": "与负荷刺激无关"
           }
         ],
-        "explanation": "情景应用题（21-30）     A. 骨适应通常比力量变化更慢     B. 第一次训练后骨密度一定显著改善     C. 只需关注胸围变化     D. 与负荷刺激无关"
+        "explanation": "解析：骨密度改善需要数月到数年，更慢于早期力量变化。出处概念：骨密度时间进程。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-24",
+        "id": "nasm-question-204",
         "prompt": "客户因社交媒体检测得知自己是 ACTN-XX 基因型，便认为训练没有意义。更合适的回应是：",
         "options": [
           {
@@ -4332,10 +4475,11 @@ export const nasmChapters = [
             "label": "只能改做柔韧训练"
           }
         ],
-        "explanation": "情景应用题（21-30）     A. 完全认同，建议放弃     B. 基因差异存在，但不代表不能从抗阻训练中获益     C. 基因决定一切，无需训练     D. 只能改做柔韧训练"
+        "explanation": "解析：文本明确指出特定基因型并不意味着不能获得积极训练收益。出处概念：ACTN-3 与训练反应。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-25",
+        "id": "nasm-question-205",
         "prompt": "客户主诉近期精神疲惫、身体疲劳且表现下降。首先应警惕：",
         "options": [
           {
@@ -4355,10 +4499,11 @@ export const nasmChapters = [
             "label": "正常最佳适应"
           }
         ],
-        "explanation": "情景应用题（21-30）     A. 肌肉肥大过快     B. 过度训练     C. 骨密度过高     D. 正常最佳适应"
+        "explanation": "解析：精神疲惫、身体疲劳与表现下降是过度训练的典型警示。出处概念：过度训练。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-26",
+        "id": "nasm-question-206",
         "prompt": "一位教练向客户解释“每次训练中的底物消耗会逐步积累，最终形成长期适应”。这体现的是：",
         "options": [
           {
@@ -4378,10 +4523,11 @@ export const nasmChapters = [
             "label": "饮食记录法"
           }
         ],
-        "explanation": "情景应用题（21-30）     A. 急性反应与慢性适应的关系     B. 结果目标理论     C. 呼吸交换率原理     D. 饮食记录法"
+        "explanation": "解析：题干描述的是急性反应积累并促成慢性适应。出处概念：急性反应与慢性适应关系。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-27",
+        "id": "nasm-question-207",
         "prompt": "客户希望既增肌又控制体脂率，训练后去脂体重增加而脂肪量未变。依据本章，可推断：",
         "options": [
           {
@@ -4401,10 +4547,11 @@ export const nasmChapters = [
             "label": "说明训练失败"
           }
         ],
-        "explanation": "情景应用题（21-30）     A. 体脂率可下降     B. 体脂率一定上升     C. 身体成分一定恶化     D. 说明训练失败"
+        "explanation": "解析：脂肪量不变而去脂体重增加，可使体脂率下降。出处概念：2C 身体成分模型。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-28",
+        "id": "nasm-question-208",
         "prompt": "在解释大腿大肌群发力时，教练说其力量输出更依赖募集数量而非极高放电频率。这一表述对应：",
         "options": [
           {
@@ -4424,10 +4571,11 @@ export const nasmChapters = [
             "label": "纯心肺机制"
           }
         ],
-        "explanation": "情景应用题（21-30）     A. 小肌肉群特点     B. 大肌肉群特点     C. 纯内分泌机制     D. 纯心肺机制"
+        "explanation": "解析：大肌肉群力量输出更多依赖募集数量。出处概念：大肌肉群募集特征。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-29",
+        "id": "nasm-question-209",
         "prompt": "客户想快速看到全部适应，要求一周内同时明显增肌、增骨密度、显著降脂。最合理的管理方式是：",
         "options": [
           {
@@ -4447,10 +4595,11 @@ export const nasmChapters = [
             "label": "用基因检测代替训练"
           }
         ],
-        "explanation": "情景应用题（21-30）     A. 迎合其预期     B. 说明不同适应的时间进程不同     C. 告诉其所有适应都会同步出现     D. 用基因检测代替训练"
+        "explanation": "解析：不同适应的时间进程不同，需管理客户预期。出处概念：适应时间进程。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-30",
+        "id": "nasm-question-210",
         "prompt": "设计抗阻训练方案时，最符合本章精神的做法是：",
         "options": [
           {
@@ -4470,7 +4619,8 @@ export const nasmChapters = [
             "label": "只根据肌电图决定全部方案"
           }
         ],
-        "explanation": "情景应用题（21-30）     A. 不区分个体差异，统一套用     B. 只重视负荷，不管恢复     C. 同时考虑目标、超负荷、恢复与个体差异     D. 只根据肌电图决定全部方案"
+        "explanation": "解析：方案设计应兼顾目标、超负荷、恢复和个体差异。出处概念：训练设计总原则。",
+        "correctOptionKey": "choice-c"
       }
     ]
   },
@@ -4634,7 +4784,8 @@ export const nasmChapters = [
             "label": "服装品牌"
           }
         ],
-        "explanation": "概念记忆题（1-10）    A. 训练地点    B. 强度    C. 音乐风格    D. 服装品牌"
+        "explanation": "解析：原文明确指出有氧运动效果由多变量决定，但其中最重要的是强度。出处概念：训练变量。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-02",
@@ -4657,7 +4808,8 @@ export const nasmChapters = [
             "label": "只在比赛中出现的变化"
           }
         ],
-        "explanation": "概念记忆题（1-10）    A. 多次训练后的长期变化    B. 一次运动中立即出现的变化    C. 只在停训时出现的变化    D. 只在比赛中出现的变化"
+        "explanation": "解析：急性反应是一场运动中立即出现的变化。出处概念：急性反应定义。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-03",
@@ -4680,7 +4832,8 @@ export const nasmChapters = [
             "label": "舒张压显著线性升高"
           }
         ],
-        "explanation": "概念记忆题（1-10）    A. 心率    B. 总外周阻力    C. 血浆量    D. 舒张压显著线性升高"
+        "explanation": "解析：有氧运动中心率通常上升。出处概念：心血管急性反应。",
+        "correctOptionKey": "choice-a"
       },
       {
         "id": "nasm-question-04",
@@ -4703,7 +4856,8 @@ export const nasmChapters = [
             "label": "先零后升"
           }
         ],
-        "explanation": "概念记忆题（1-10）    A. 显著升高    B. 不变    C. 降低    D. 先零后升"
+        "explanation": "解析：总外周阻力因血管舒张而下降。出处概念：TPR 变化。",
+        "correctOptionKey": "choice-c"
       },
       {
         "id": "nasm-question-05",
@@ -4726,7 +4880,8 @@ export const nasmChapters = [
             "label": "呼吸交换率"
           }
         ],
-        "explanation": "概念记忆题（1-10）    A. 乳酸盐阈值    B. Fick 方程    C. 心率-血压乘积    D. 呼吸交换率"
+        "explanation": "解析：HR × SBP 是心率-血压乘积 RPP。出处概念：RPP。",
+        "correctOptionKey": "choice-c"
       },
       {
         "id": "nasm-question-06",
@@ -4749,7 +4904,8 @@ export const nasmChapters = [
             "label": "V02 × VC02"
           }
         ],
-        "explanation": "概念记忆题（1-10）    A. HR × SV    B. BR × TV    C. SBP × DBP    D. V02 × VC02"
+        "explanation": "解析：每分肺通气量 VE = BR × TV。出处概念：呼吸系统公式。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-07",
@@ -4772,7 +4928,8 @@ export const nasmChapters = [
             "label": "MAP = Q ÷ TPR"
           }
         ],
-        "explanation": "概念记忆题（1-10）    A. V02 = Q × (a-V02) 差    B. V02 = HR × SBP    C. VE = BR ÷ TV    D. MAP = Q ÷ TPR"
+        "explanation": "解析：Fick 方程是 V02 = Q × (a-V02) 差。出处概念：Fick 方程。",
+        "correctOptionKey": "choice-a"
       },
       {
         "id": "nasm-question-08",
@@ -4795,7 +4952,8 @@ export const nasmChapters = [
             "label": "心率不变"
           }
         ],
-        "explanation": "概念记忆题（1-10）    A. 完全不产生二氧化碳    B. 氢离子增加并触发缓冲反应    C. 脂肪氧化完全停止    D. 心率不变"
+        "explanation": "解析：高强度时氢离子积累和碳酸氢盐缓冲使二氧化碳排出增加，RER 可超过 1.0。出处概念：RER 机制。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-09",
@@ -4818,7 +4976,8 @@ export const nasmChapters = [
             "label": "肌红蛋白完全消失"
           }
         ],
-        "explanation": "概念记忆题（1-10）    A. 毛细血管密度增加    B. 线粒体密度增加    C. 氧化酶活性增强    D. 肌红蛋白完全消失"
+        "explanation": "解析：肌红蛋白储量是增加而不是消失。出处概念：骨骼肌慢性适应。",
+        "correctOptionKey": "choice-d"
       },
       {
         "id": "nasm-question-10",
@@ -4841,10 +5000,11 @@ export const nasmChapters = [
             "label": "乳酸盐阈值与表现无关"
           }
         ],
-        "explanation": "概念记忆题（1-10）     A. 无训练者常在较高强度才出现     B. 训练后乳酸盐阈值会降低     C. 训练可使乳酸盐阈值出现在更高 %V02max     D. 乳酸盐阈值与表现无关"
+        "explanation": "解析：训练可把乳酸盐阈值推迟到更高的相对强度。出处概念：乳酸盐阈值。",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-11",
+        "id": "nasm-question-101",
         "prompt": "心输出量增加的直接构成因素是：",
         "options": [
           {
@@ -4864,10 +5024,11 @@ export const nasmChapters = [
             "label": "体脂率和骨密度"
           }
         ],
-        "explanation": "机制理解题（11-20）     A. 心率和每搏输出量     B. 呼吸频率和潮气量     C. 收缩压和舒张压     D. 体脂率和骨密度"
+        "explanation": "解析：Q 由 HR 与 SV 构成。出处概念：心输出量公式。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-12",
+        "id": "nasm-question-102",
         "prompt": "有氧运动中骨骼肌血流增加、内脏血流减少，最主要反映了：",
         "options": [
           {
@@ -4887,10 +5048,11 @@ export const nasmChapters = [
             "label": "体温不变"
           }
         ],
-        "explanation": "机制理解题（11-20）     A. 血流重新分配     B. 骨骼肌完全缺氧     C. 脂肪量增加     D. 体温不变"
+        "explanation": "解析：运动中血流更多流向工作肌，体现血流重新分配。出处概念：血流分配。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-13",
+        "id": "nasm-question-103",
         "prompt": "当 RER 超过 1.0 时，更恰当的理解是：",
         "options": [
           {
@@ -4910,10 +5072,11 @@ export const nasmChapters = [
             "label": "说明没有缓冲反应"
           }
         ],
-        "explanation": "机制理解题（11-20）     A. 仍完全等同于底物利用比例     B. 可作为高强度和疲劳程度的指标     C. 表明运动强度很低     D. 说明没有缓冲反应"
+        "explanation": "解析：RER >1.0 常被作为高强度与疲劳程度指标。出处概念：RER 的解释边界。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-14",
+        "id": "nasm-question-104",
         "prompt": "长期有氧训练提高最大有氧能力的重要途径是：",
         "options": [
           {
@@ -4933,10 +5096,11 @@ export const nasmChapters = [
             "label": "红细胞比容长期恒定不变"
           }
         ],
-        "explanation": "机制理解题（11-20）     A. 最大心率大幅提高     B. 最大心输出量和氧利用能力提高     C. 舒张压持续升高     D. 红细胞比容长期恒定不变"
+        "explanation": "解析：最大有氧能力取决于氧运输与氧利用能力。出处概念：Fick 方程与最大有氧能力。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-15",
+        "id": "nasm-question-105",
         "prompt": "经过长期有氧训练，次最大强度运动中的主要代谢特点是：",
         "options": [
           {
@@ -4956,10 +5120,11 @@ export const nasmChapters = [
             "label": "运动效率下降"
           }
         ],
-        "explanation": "机制理解题（11-20）     A. 脂肪供能比例增加     B. 碳水化合物利用比例增加到唯一来源     C. 乳酸盐阈值降低     D. 运动效率下降"
+        "explanation": "解析：长期训练后次最大强度运动中脂肪作为能量来源的比例增加。出处概念：代谢适应。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-16",
+        "id": "nasm-question-106",
         "prompt": "无训练者乳酸盐阈值常出现于：",
         "options": [
           {
@@ -4979,10 +5144,11 @@ export const nasmChapters = [
             "label": "95%-100% V02max"
           }
         ],
-        "explanation": "机制理解题（11-20）     A. 10%-20% V02max     B. 30%-40% V02max     C. 50%-60% V02max     D. 95%-100% V02max"
+        "explanation": "解析：无训练者乳酸盐阈值常在 50%-60% V02max。出处概念：乳酸盐阈值范围。",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-17",
+        "id": "nasm-question-107",
         "prompt": "对于训练良好的耐力运动员，乳酸盐阈值可能提高至：",
         "options": [
           {
@@ -5002,10 +5168,11 @@ export const nasmChapters = [
             "label": "一定低于 50% V02max"
           }
         ],
-        "explanation": "机制理解题（11-20）     A. 20%-30% V02max     B. 40%-50% V02max     C. 80%-90% V02max     D. 一定低于 50% V02max"
+        "explanation": "解析：高水平耐力运动员乳酸盐阈值可达 80%-90% V02max。出处概念：乳酸盐阈值范围。",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-18",
+        "id": "nasm-question-108",
         "prompt": "次最大强度下，经过长期有氧训练后心率-血压乘积下降，通常意味着：",
         "options": [
           {
@@ -5025,10 +5192,11 @@ export const nasmChapters = [
             "label": "无法再适应训练"
           }
         ],
-        "explanation": "机制理解题（11-20）     A. 心肌耗氧量与工作负荷下降     B. 心脏效率变差     C. 血流无法供应肌肉     D. 无法再适应训练"
+        "explanation": "解析：次最大工作下 HR 与 SBP 都降低，会使 RPP 下降，提示心肌耗氧量下降。出处概念：RPP 适应。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-19",
+        "id": "nasm-question-109",
         "prompt": "过量训练与过度训练的区别之一在于：",
         "options": [
           {
@@ -5048,10 +5216,11 @@ export const nasmChapters = [
             "label": "过量训练一定持续数月"
           }
         ],
-        "explanation": "机制理解题（11-20）     A. 两者没有区别     B. 过量训练通常是短期超负荷，恢复后可逆     C. 过度训练一定有利于表现     D. 过量训练一定持续数月"
+        "explanation": "解析：过量训练多指短期超负荷，经恢复后可逆。出处概念：过量训练与过度训练。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-20",
+        "id": "nasm-question-110",
         "prompt": "关于停训，下列哪项更符合原文？",
         "options": [
           {
@@ -5071,10 +5240,11 @@ export const nasmChapters = [
             "label": "停训只影响心理，不影响生理"
           }
         ],
-        "explanation": "机制理解题（11-20）     A. 停训 2 周后肌肉耐力仍稳定不变     B. 停训 4 周后呼吸能力和代谢功能可下降     C. 停训 12 天不会影响 V02max     D. 停训只影响心理，不影响生理"
+        "explanation": "解析：停训 4 周后呼吸能力下降、糖原降低、乳酸盐分泌增加。出处概念：停训效应。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-21",
+        "id": "nasm-question-201",
         "prompt": "客户进行相同配速慢跑时，数周后感觉轻松许多。最合理的解释是：",
         "options": [
           {
@@ -5094,10 +5264,11 @@ export const nasmChapters = [
             "label": "线粒体减少"
           }
         ],
-        "explanation": "情景应用题（21-30）     A. 运动效率提高     B. 总外周阻力升高     C. 乳酸盐阈值下降     D. 线粒体减少"
+        "explanation": "解析：定期有氧训练会让机体以更少努力完成相同运动。出处概念：训练效率。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-22",
+        "id": "nasm-question-202",
         "prompt": "某客户在高强度测试中 RER 超过 1.0。更稳妥的解释是：",
         "options": [
           {
@@ -5117,10 +5288,11 @@ export const nasmChapters = [
             "label": "说明没有疲劳"
           }
         ],
-        "explanation": "情景应用题（21-30）     A. 说明此时仍能精确代表底物构成     B. 说明存在较大无氧代谢与缓冲反应参与     C. 说明训练强度极低     D. 说明没有疲劳"
+        "explanation": "解析：RER 超过 1.0 多与高强度下无氧代谢参与和缓冲反应增强有关。出处概念：高强度代谢反应。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-23",
+        "id": "nasm-question-203",
         "prompt": "客户想提高长距离运动表现。私人教练应特别关注：",
         "options": [
           {
@@ -5140,10 +5312,11 @@ export const nasmChapters = [
             "label": "只看柔韧性"
           }
         ],
-        "explanation": "情景应用题（21-30）     A. 乳酸盐阈值与最大有氧能力     B. 只看静息心率     C. 只看体重变化     D. 只看柔韧性"
+        "explanation": "解析：长距离表现与乳酸盐阈值和最大有氧能力高度相关。出处概念：表现相关指标。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-24",
+        "id": "nasm-question-204",
         "prompt": "长期有氧训练后，客户次最大运动时 HR 和 SBP 都下降。最可能的结果是：",
         "options": [
           {
@@ -5163,10 +5336,11 @@ export const nasmChapters = [
             "label": "Q 必然归零"
           }
         ],
-        "explanation": "情景应用题（21-30）     A. RPP 下降     B. RPP 上升     C. VE 归零     D. Q 必然归零"
+        "explanation": "解析：RPP = HR × SBP，两者同降则 RPP 下降。出处概念：RPP。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-25",
+        "id": "nasm-question-205",
         "prompt": "某客户连续高强度耐力训练、恢复不足后出现机能下降。最应警惕：",
         "options": [
           {
@@ -5186,10 +5360,11 @@ export const nasmChapters = [
             "label": "骨密度瞬间提升"
           }
         ],
-        "explanation": "情景应用题（21-30）     A. 过度训练     B. 正常超量恢复     C. 单纯热身不足     D. 骨密度瞬间提升"
+        "explanation": "解析：恢复不足伴随机能下降符合过度训练表现。出处概念：过度训练。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-26",
+        "id": "nasm-question-206",
         "prompt": "客户进行了几天远超能力的训练，但安排恢复后预计几天到两周可恢复。这更符合：",
         "options": [
           {
@@ -5209,10 +5384,11 @@ export const nasmChapters = [
             "label": "无氧功率训练"
           }
         ],
-        "explanation": "情景应用题（21-30）     A. 过量训练     B. 过度训练综合征     C. 停训     D. 无氧功率训练"
+        "explanation": "解析：短期超出适应能力且可在数天到两周恢复，更符合过量训练。出处概念：过量训练。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-27",
+        "id": "nasm-question-207",
         "prompt": "某客户停训 2 周后自觉耐力下降。依据原文，这种情况：",
         "options": [
           {
@@ -5232,10 +5408,11 @@ export const nasmChapters = [
             "label": "只会发生在力量训练者"
           }
         ],
-        "explanation": "情景应用题（21-30）     A. 不可能发生     B. 与停训后肌肉耐力下降相符     C. 只能说明心理问题     D. 只会发生在力量训练者"
+        "explanation": "解析：停训 2 周后肌肉耐力可下降。出处概念：停训时间进程。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-28",
+        "id": "nasm-question-208",
         "prompt": "某客户停训仅 12 天。下列哪项最值得提醒？",
         "options": [
           {
@@ -5255,10 +5432,11 @@ export const nasmChapters = [
             "label": "乳酸盐阈值一定提高"
           }
         ],
-        "explanation": "情景应用题（21-30）     A. V02max 与最大心输出量可能开始下降     B. 适应绝不会变化     C. 线粒体一定继续增加     D. 乳酸盐阈值一定提高"
+        "explanation": "解析：原文指出停训仅 12 天后，V02max 和最大心输出量即可下降。出处概念：停训 12 天效应。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-29",
+        "id": "nasm-question-209",
         "prompt": "为高频耐力训练客户做营养提醒时，本章最支持哪一项？",
         "options": [
           {
@@ -5278,10 +5456,11 @@ export const nasmChapters = [
             "label": "补水完全不重要"
           }
         ],
-        "explanation": "情景应用题（21-30）     A. 连续多日高强度训练无需补碳     B. 应重视碳水化合物摄入以维持肌糖原     C. 只补蛋白质即可     D. 补水完全不重要"
+        "explanation": "解析：连续多日高强度训练需要足够碳水化合物维持肌糖原。出处概念：恢复与糖原。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-30",
+        "id": "nasm-question-210",
         "prompt": "制定有氧训练方案时，最符合本章精神的做法是：",
         "options": [
           {
@@ -5301,7 +5480,8 @@ export const nasmChapters = [
             "label": "停训影响可以忽略"
           }
         ],
-        "explanation": "情景应用题（21-30）     A. 只看频率，不管强度和持续时间     B. 把强度、持续时间和频率作为联动变量来安排     C. 每位客户都使用同一阈值     D. 停训影响可以忽略"
+        "explanation": "解析：强度、持续时间与频率必须联动安排。出处概念：训练变量设计。",
+        "correctOptionKey": "choice-b"
       }
     ]
   },
@@ -5466,7 +5646,8 @@ export const nasmChapters = [
             "label": "只推荐补剂"
           }
         ],
-        "explanation": "概念记忆题（1-10）    A. 自行实施医学营养治疗    B. 转介营养专业人士    C. 完全忽略饮食问题    D. 只推荐补剂"
+        "explanation": "解析：营养相关疾病和复杂问题应转介营养专业人士。出处概念：执业范围与转介。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-02",
@@ -5489,7 +5670,8 @@ export const nasmChapters = [
             "label": "疾病营养干预"
           }
         ],
-        "explanation": "概念记忆题（1-10）    A. 一般营养学知识教育    B. 处方药物    C. 治疗饮食紊乱    D. 疾病营养干预"
+        "explanation": "解析：私人教练可在合法范围内进行一般营养教育。出处概念：私人教练的营养角色。",
+        "correctOptionKey": "choice-a"
       },
       {
         "id": "nasm-question-03",
@@ -5512,7 +5694,8 @@ export const nasmChapters = [
             "label": "运动心电图"
           }
         ],
-        "explanation": "概念记忆题（1-10）    A. 饮食回忆    B. 饮食历史    C. 饮食记录    D. 运动心电图"
+        "explanation": "解析：常见饮食评估方法为饮食回忆、饮食历史和饮食记录。出处概念：饮食摄入数据收集。",
+        "correctOptionKey": "choice-d"
       },
       {
         "id": "nasm-question-04",
@@ -5535,7 +5718,8 @@ export const nasmChapters = [
             "label": "体重估算"
           }
         ],
-        "explanation": "概念记忆题（1-10）    A. 饮食回忆    B. 饮食历史    C. 三天饮食记录    D. 体重估算"
+        "explanation": "解析：三天饮食记录通常被认为最有效，但要求也最高。出处概念：饮食记录。",
+        "correctOptionKey": "choice-c"
       },
       {
         "id": "nasm-question-05",
@@ -5558,7 +5742,8 @@ export const nasmChapters = [
             "label": "酒精"
           }
         ],
-        "explanation": "概念记忆题（1-10）    A. 谷物    B. 水果    C. 蛋白质    D. 酒精"
+        "explanation": "解析：“我的餐盘”强调五类食物组，不包括酒精。出处概念：我的餐盘。",
+        "correctOptionKey": "choice-d"
       },
       {
         "id": "nasm-question-06",
@@ -5581,7 +5766,8 @@ export const nasmChapters = [
             "label": "只指补剂热量"
           }
         ],
-        "explanation": "概念记忆题（1-10）    A. 只要体重稳定就一定健康    B. 是否有足够能量同时满足运动和生理功能需求    C. 仅指静息代谢率    D. 只指补剂热量"
+        "explanation": "解析：能量可用性指能否同时满足运动和生理功能的能量需求。出处概念：能量可用性。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-07",
@@ -5604,7 +5790,8 @@ export const nasmChapters = [
             "label": "只靠补剂就能减脂"
           }
         ],
-        "explanation": "概念记忆题（1-10）    A. 只要低脂就能减脂    B. 只要低碳就能减脂    C. 负能量平衡是减少体脂的唯一方法    D. 只靠补剂就能减脂"
+        "explanation": "解析：原文明确指出达到负能量平衡是减少体脂的唯一方法。出处概念：减脂原则。",
+        "correctOptionKey": "choice-c"
       },
       {
         "id": "nasm-question-08",
@@ -5627,7 +5814,8 @@ export const nasmChapters = [
             "label": "4.0 g/kg"
           }
         ],
-        "explanation": "概念记忆题（1-10）    A. 0.5 g/kg    B. 1.0 g/kg    C. 1.6 g/kg    D. 4.0 g/kg"
+        "explanation": "解析：减脂时建议至少 1.6 g/kg 蛋白质，必要时可更高。出处概念：减脂期蛋白质。",
+        "correctOptionKey": "choice-c"
       },
       {
         "id": "nasm-question-09",
@@ -5650,7 +5838,8 @@ export const nasmChapters = [
             "label": "7-10 g/kg/天"
           }
         ],
-        "explanation": "概念记忆题（1-10）    A. 1-2 g/kg/天    B. 3-4 g/kg/天    C. 5-6 g/kg/天    D. 7-10 g/kg/天"
+        "explanation": "解析：长时间耐力训练者推荐约 7-10 g/kg/天碳水化合物。出处概念：碳水化合物建议。",
+        "correctOptionKey": "choice-d"
       },
       {
         "id": "nasm-question-10",
@@ -5673,10 +5862,11 @@ export const nasmChapters = [
             "label": "处方治疗"
           }
         ],
-        "explanation": "概念记忆题（1-10）     A. 药物     B. 食品     C. 医疗器械     D. 处方治疗"
+        "explanation": "解析：DSHFA 将膳食补充剂定义为食品而非药物。出处概念：补剂监管。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-11",
+        "id": "nasm-question-101",
         "prompt": "三天饮食记录虽有效，但其典型缺点是：",
         "options": [
           {
@@ -5696,10 +5886,11 @@ export const nasmChapters = [
             "label": "比饮食回忆更省力"
           }
         ],
-        "explanation": "机制理解题（11-20）     A. 完全无法记录饮料     B. 会抑制客户正常饮食模式，导致记录摄入低于真实摄入     C. 不能记录补剂     D. 比饮食回忆更省力"
+        "explanation": "解析：记录行为本身可能改变进食行为，使记录摄入偏低。出处概念：饮食记录缺点。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-12",
+        "id": "nasm-question-102",
         "prompt": "“我的餐盘”当前版本更强调：",
         "options": [
           {
@@ -5719,10 +5910,11 @@ export const nasmChapters = [
             "label": "完全以补剂代替食物"
           }
         ],
-        "explanation": "机制理解题（11-20）     A. 完全不管添加糖     B. 帮助限制钠、饱和脂肪和添加糖     C. 只强调总热量     D. 完全以补剂代替食物"
+        "explanation": "解析：当前版“我的餐盘”更强调限制钠、饱和脂肪和添加糖。出处概念：我的餐盘要点。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-13",
+        "id": "nasm-question-103",
         "prompt": "体重维持稳定但生殖和代谢功能下调，最符合：",
         "options": [
           {
@@ -5742,10 +5934,11 @@ export const nasmChapters = [
             "label": "单纯脱水"
           }
         ],
-        "explanation": "机制理解题（11-20）     A. 高能量可用性     B. 低能量可用性     C. 饮食记录误差     D. 单纯脱水"
+        "explanation": "解析：体重稳定但功能下调，正是低能量可用性的典型情形。出处概念：能量可用性。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-14",
+        "id": "nasm-question-104",
         "prompt": "力量、短跑冲刺及技能训练者的碳水化合物摄入量，文中认为较合理的是：",
         "options": [
           {
@@ -5765,10 +5958,11 @@ export const nasmChapters = [
             "label": "9-12 g/kg/天"
           }
         ],
-        "explanation": "机制理解题（11-20）     A. 1-2 g/kg/天     B. 3-4 g/kg/天     C. 5-6 g/kg/天     D. 9-12 g/kg/天"
+        "explanation": "解析：力量、短跑与技能训练者一般 5-6 g/kg/天较合理。出处概念：碳水化合物建议。",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-15",
+        "id": "nasm-question-105",
         "prompt": "对减脂客户增加蛋白质摄入的意义不包括：",
         "options": [
           {
@@ -5788,10 +5982,11 @@ export const nasmChapters = [
             "label": "保证不受总热量影响而无限减脂"
           }
         ],
-        "explanation": "机制理解题（11-20）     A. 提高饱腹感     B. 帮助维持肌肉量     C. 可能稍微增加能量消耗     D. 保证不受总热量影响而无限减脂"
+        "explanation": "解析：即便高蛋白，若总热量过多仍可能储脂，因此不是无限减脂工具。出处概念：蛋白质与总热量。",
+        "correctOptionKey": "choice-d"
       },
       {
-        "id": "nasm-question-16",
+        "id": "nasm-question-106",
         "prompt": "关于减重速度，下列哪项更符合原文？",
         "options": [
           {
@@ -5811,10 +6006,11 @@ export const nasmChapters = [
             "label": "速度与训练方案无关"
           }
         ],
-        "explanation": "机制理解题（11-20）     A. 越快越好     B. 每周总体重减少约 1% 是常见指导策略     C. 必须每周减 5%     D. 速度与训练方案无关"
+        "explanation": "解析：原文给出每周总体重减少约 1% 的常见策略。出处概念：减重速度。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-17",
+        "id": "nasm-question-107",
         "prompt": "低能量密度食物的价值主要在于：",
         "options": [
           {
@@ -5834,10 +6030,11 @@ export const nasmChapters = [
             "label": "适合替代所有主食"
           }
         ],
-        "explanation": "机制理解题（11-20）     A. 增加饥饿感     B. 体积较大而热量相对低，有助于控制总摄入     C. 一定提供最高蛋白质     D. 适合替代所有主食"
+        "explanation": "解析：低能量密度食物体积大、热量较低，有助于控制饥饿和总摄入。出处概念：低能量密度食物。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-18",
+        "id": "nasm-question-108",
         "prompt": "关于膳食补充剂的法规表述，最符合文本的是：",
         "options": [
           {
@@ -5857,10 +6054,11 @@ export const nasmChapters = [
             "label": "与普通食品无关"
           }
         ],
-        "explanation": "机制理解题（11-20）     A. 可在标签上宣称治疗疾病     B. 可宣称对结构或功能的影响，但不能宣称治疗疾病     C. 不受任何监管     D. 与普通食品无关"
+        "explanation": "解析：补剂可宣称结构/功能影响，但不能宣称治疗疾病。出处概念：补剂标签法规。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-19",
+        "id": "nasm-question-109",
         "prompt": "对客户补剂方案进行评估时，较合理的做法是：",
         "options": [
           {
@@ -5880,10 +6078,11 @@ export const nasmChapters = [
             "label": "所有人都推荐同一种补剂"
           }
         ],
-        "explanation": "机制理解题（11-20）     A. 不看标签，直接默认安全     B. 只听广告宣传     C. 查看成分、识别可疑成分，并结合营养需求判断     D. 所有人都推荐同一种补剂"
+        "explanation": "解析：评估补剂应查看标签、识别成分与风险，再做判断。出处概念：补剂评估。",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-20",
+        "id": "nasm-question-110",
         "prompt": "关于“没有绝对正确的饮食方式”，更准确的理解是：",
         "options": [
           {
@@ -5903,10 +6102,11 @@ export const nasmChapters = [
             "label": "永远不需要调整饮食"
           }
         ],
-        "explanation": "机制理解题（11-20）     A. 所有饮食都一样     B. 饮食应与个人喜好、生活方式、训练目标和预算匹配     C. 无需评估客户饮食     D. 永远不需要调整饮食"
+        "explanation": "解析：饮食建议应适配个人喜好、生活方式、训练目标和预算。出处概念：饮食推荐原则。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-21",
+        "id": "nasm-question-201",
         "prompt": "客户患有高胆固醇并希望你为其制定治疗性饮食方案。更合适的回应是：",
         "options": [
           {
@@ -5926,10 +6126,11 @@ export const nasmChapters = [
             "label": "只推荐维生素"
           }
         ],
-        "explanation": "情景应用题（21-30）     A. 直接开具严格治疗方案     B. 在执业范围内做一般教育，并转介营养专业人士     C. 只让其多做深蹲     D. 只推荐维生素"
+        "explanation": "解析：治疗性饮食已超出私人教练范围，应转介专业人士。出处概念：医学营养治疗。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-22",
+        "id": "nasm-question-202",
         "prompt": "一位执行力强的客户愿意详细记录近几天摄入。若要获取更完整信息，优先可考虑：",
         "options": [
           {
@@ -5949,10 +6150,11 @@ export const nasmChapters = [
             "label": "只测体重"
           }
         ],
-        "explanation": "情景应用题（21-30）     A. 三天饮食记录     B. 只口头问一句     C. 不做评估     D. 只测体重"
+        "explanation": "解析：对执行力强客户，三天饮食记录能提供更详细信息。出处概念：饮食记录应用。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-23",
+        "id": "nasm-question-203",
         "prompt": "某客户体重稳定，但长期低热量并高训练量，出现恢复差与功能低下。最应想到：",
         "options": [
           {
@@ -5972,10 +6174,11 @@ export const nasmChapters = [
             "label": "说明训练无效"
           }
         ],
-        "explanation": "情景应用题（21-30）     A. 能量可用性不足     B. 必定吃太多     C. 单纯补水过多     D. 说明训练无效"
+        "explanation": "解析：高训练量加低摄入、体重稳定但功能下调，符合能量可用性不足。出处概念：RED-S/低能量可用性。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-24",
+        "id": "nasm-question-204",
         "prompt": "耐力客户每天训练超过 90 分钟，希望恢复肌糖原。依据原文，碳水化合物建议更接近：",
         "options": [
           {
@@ -5995,10 +6198,11 @@ export const nasmChapters = [
             "label": "完全不吃碳水"
           }
         ],
-        "explanation": "情景应用题（21-30）     A. 2 g/kg/天     B. 4 g/kg/天     C. 7-10 g/kg/天     D. 完全不吃碳水"
+        "explanation": "解析：长时间耐力训练者补糖原可参考 7-10 g/kg/天。出处概念：耐力训练碳水建议。",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-25",
+        "id": "nasm-question-205",
         "prompt": "力量训练客户并非长时间耐力型，但希望维持训练表现。依据原文，碳水化合物可先考虑：",
         "options": [
           {
@@ -6018,10 +6222,11 @@ export const nasmChapters = [
             "label": "只靠补剂"
           }
         ],
-        "explanation": "情景应用题（21-30）     A. 5-6 g/kg/天     B. 0 g/kg/天     C. 10-12 g/kg/天     D. 只靠补剂"
+        "explanation": "解析：文本指出力量、短跑和技能训练者 5-6 g/kg/天较合理。出处概念：非耐力型训练碳水建议。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-26",
+        "id": "nasm-question-206",
         "prompt": "某减脂客户总想寻找“最神奇饮食法”。更符合本章的指导是：",
         "options": [
           {
@@ -6041,10 +6246,11 @@ export const nasmChapters = [
             "label": "告诉他只要买代餐粉就行"
           }
         ],
-        "explanation": "情景应用题（21-30）     A. 强调负能量平衡比流行名称更关键     B. 告诉他只要断碳就行     C. 告诉他只要不吃晚餐就行     D. 告诉他只要买代餐粉就行"
+        "explanation": "解析：流行饮食名称不是核心，关键仍是负能量平衡。出处概念：减脂本质。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-27",
+        "id": "nasm-question-207",
         "prompt": "客户减脂期饥饿明显。若在文本框架内优化饮食，可优先考虑：",
         "options": [
           {
@@ -6064,10 +6270,11 @@ export const nasmChapters = [
             "label": "只喝能量饮料"
           }
         ],
-        "explanation": "情景应用题（21-30）     A. 增加低能量密度食物     B. 完全不吃蔬菜     C. 只吃高脂零食     D. 只喝能量饮料"
+        "explanation": "解析：低能量密度食物有助于控制饥饿并降低总热量。出处概念：减脂饮食结构。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-28",
+        "id": "nasm-question-208",
         "prompt": "客户每周减重速度过快且表现下降、瘦体重减少。更合理的解释是：",
         "options": [
           {
@@ -6087,10 +6294,11 @@ export const nasmChapters = [
             "label": "说明补剂不足"
           }
         ],
-        "explanation": "情景应用题（21-30）     A. 速度越快越理想     B. 过度限制热量可能带来不利后果     C. 说明蛋白质过多     D. 说明补剂不足"
+        "explanation": "解析：过度限制热量会导致表现下降和瘦体重减少。出处概念：减重过快的风险。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-29",
+        "id": "nasm-question-209",
         "prompt": "客户带来多种补剂但自己也说不清成分。私人教练首先应：",
         "options": [
           {
@@ -6110,10 +6318,11 @@ export const nasmChapters = [
             "label": "按广告推荐继续加量"
           }
         ],
-        "explanation": "情景应用题（21-30）     A. 一律认可     B. 一律反对     C. 查看标签与成分，再评估可疑风险     D. 按广告推荐继续加量"
+        "explanation": "解析：先查看标签和成分，再做风险评估，是最稳妥的做法。出处概念：补剂评估。",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-30",
+        "id": "nasm-question-210",
         "prompt": "为普通健身客户做长期饮食辅导时，最符合本章精神的做法是：",
         "options": [
           {
@@ -6133,7 +6342,8 @@ export const nasmChapters = [
             "label": "完全脱离训练目标"
           }
         ],
-        "explanation": "情景应用题（21-30）     A. 只给极端短期方案     B. 结合评估结果，给出可执行、可长期坚持的饮食建议     C. 不考虑客户预算和喜好     D. 完全脱离训练目标"
+        "explanation": "解析：长期有效的营养辅导必须建立在评估、可执行性和个体化基础上。出处概念：个性化营养建议。",
+        "correctOptionKey": "choice-b"
       }
     ]
   },
@@ -6302,7 +6512,8 @@ export const nasmChapters = [
             "label": "完全没有生理唤醒"
           }
         ],
-        "explanation": "概念记忆题（1-10）    A. 与压力相关的长期人格倾向    B. 急性的焦虑实际体验    C. 单纯的肌肉疲劳    D. 完全没有生理唤醒"
+        "explanation": "解析：状态焦虑是与压力相关的急性焦虑体验。出处概念：状态焦虑定义。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-02",
@@ -6325,7 +6536,8 @@ export const nasmChapters = [
             "label": "只有运动员才有"
           }
         ],
-        "explanation": "概念记忆题（1-10）    A. 训练后一时兴奋    B. 将情境视为潜在威胁的长期倾向    C. 比赛中的即时心率升高    D. 只有运动员才有"
+        "explanation": "解析：特质焦虑是把情境视为潜在威胁的长期倾向。出处概念：特质焦虑定义。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-03",
@@ -6348,7 +6560,8 @@ export const nasmChapters = [
             "label": "保证永不疲劳"
           }
         ],
-        "explanation": "概念记忆题（1-10）    A. 减少焦虑    B. 减少抑郁    C. 提高认知能力    D. 保证永不疲劳"
+        "explanation": "解析：原文提到减少焦虑、抑郁、压力反应并提高认知能力，但并未说保证永不疲劳。出处概念：运动与心理健康。",
+        "correctOptionKey": "choice-d"
       },
       {
         "id": "nasm-question-04",
@@ -6371,7 +6584,8 @@ export const nasmChapters = [
             "label": "社会目标"
           }
         ],
-        "explanation": "概念记忆题（1-10）    A. 结果目标    B. 绩效目标    C. 过程目标    D. 社会目标"
+        "explanation": "解析：过程目标具有最高自我控制水平。出处概念：目标分类。",
+        "correctOptionKey": "choice-c"
       },
       {
         "id": "nasm-question-05",
@@ -6394,7 +6608,8 @@ export const nasmChapters = [
             "label": "蛋白质摄入"
           }
         ],
-        "explanation": "概念记忆题（1-10）    A. 自我努力本身    B. 社会比较或竞争结果    C. 呼吸放松    D. 蛋白质摄入"
+        "explanation": "解析：结果目标通常通过社会比较来证明。出处概念：结果目标。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-06",
@@ -6417,7 +6632,8 @@ export const nasmChapters = [
             "label": "心理目标与生理目标之间"
           }
         ],
-        "explanation": "概念记忆题（1-10）    A. 长期与短期目标之间    B. 过程目标与结果目标之间    C. 训练目标与营养目标之间    D. 心理目标与生理目标之间"
+        "explanation": "解析：绩效目标位于过程目标和结果目标之间。出处概念：目标分类。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-07",
@@ -6440,7 +6656,8 @@ export const nasmChapters = [
             "label": "取悦他人"
           }
         ],
-        "explanation": "概念记忆题（1-10）    A. 追求外部奖励    B. 享受运动过程本身    C. 害怕惩罚    D. 取悦他人"
+        "explanation": "解析：内在动机强调对运动体验和过程本身的享受。出处概念：内在动机。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-08",
@@ -6463,7 +6680,8 @@ export const nasmChapters = [
             "label": "只与焦虑有关"
           }
         ],
-        "explanation": "概念记忆题（1-10）    A. 过程体验本身    B. 对结果或外部奖励的追求    C. 完全无目标    D. 只与焦虑有关"
+        "explanation": "解析：外在动机强调对结果或外部奖励的追求。出处概念：外在动机。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-09",
@@ -6486,7 +6704,8 @@ export const nasmChapters = [
             "label": "极度愤怒"
           }
         ],
-        "explanation": "概念记忆题（1-10）    A. 极度紧张    B. 放松、不紧张    C. 完全分心    D. 极度愤怒"
+        "explanation": "解析：心理意象训练应在放松、不紧张的状态下进行。出处概念：心理意象准备。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-10",
@@ -6509,10 +6728,11 @@ export const nasmChapters = [
             "label": "只用鼻尖呼吸"
           }
         ],
-        "explanation": "概念记忆题（1-10）     A. 浅短胸式呼吸     B. 屏气越久越好     C. 横膈膜呼吸     D. 只用鼻尖呼吸"
+        "explanation": "解析：深呼吸强调横膈膜呼吸，而非浅短胸式呼吸。出处概念：深呼吸。",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-11",
+        "id": "nasm-question-101",
         "prompt": "文中将状态焦虑与特质焦虑都视为：",
         "options": [
           {
@@ -6532,10 +6752,11 @@ export const nasmChapters = [
             "label": "无法测量的现象"
           }
         ],
-        "explanation": "机制理解题（11-20）     A. 积极心理表现     B. 消极心理表现     C. 纯生理现象     D. 无法测量的现象"
+        "explanation": "解析：状态焦虑和特质焦虑都被视为消极心理表现。出处概念：焦虑分类。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-12",
+        "id": "nasm-question-102",
         "prompt": "运动减缓焦虑的一个解释是：",
         "options": [
           {
@@ -6555,10 +6776,11 @@ export const nasmChapters = [
             "label": "运动会消除全部压力源"
           }
         ],
-        "explanation": "机制理解题（11-20）     A. 节律性运动有助于放松     B. 运动一定增加负性情绪     C. 运动只对肌肉有作用     D. 运动会消除全部压力源"
+        "explanation": "解析：节律性运动被用作解释运动减缓焦虑的一种机制。出处概念：减压机制。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-13",
+        "id": "nasm-question-103",
         "prompt": "关于高强度运动后的心理反应，下列哪项更符合原文？",
         "options": [
           {
@@ -6578,10 +6800,11 @@ export const nasmChapters = [
             "label": "只有低强度训练才有生理作用"
           }
         ],
-        "explanation": "机制理解题（11-20）     A. 对所有普通人都必然立即产生积极情绪     B. 对大多数普通人并不一定产生积极反应     C. 与运动强度无关     D. 只有低强度训练才有生理作用"
+        "explanation": "解析：原文指出对大多数普通人而言，高于通气阈值的训练未必有积极性反应。出处概念：高强度运动与情绪。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-14",
+        "id": "nasm-question-104",
         "prompt": "过程目标之所以重要，主要因为：",
         "options": [
           {
@@ -6601,10 +6824,11 @@ export const nasmChapters = [
             "label": "只能用于比赛"
           }
         ],
-        "explanation": "机制理解题（11-20）     A. 一定最难实现     B. 客户可在努力过程中体验成功     C. 完全不需要付出努力     D. 只能用于比赛"
+        "explanation": "解析：过程目标的重要性在于客户可在努力过程中体验成功。出处概念：过程目标。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-15",
+        "id": "nasm-question-105",
         "prompt": "多元化目标设定的价值在于：",
         "options": [
           {
@@ -6624,10 +6848,11 @@ export const nasmChapters = [
             "label": "只追求结果目标"
           }
         ],
-        "explanation": "机制理解题（11-20）     A. 只保留一个长期目标     B. 平衡单一目标可能带来的挫败感     C. 取消短期目标     D. 只追求结果目标"
+        "explanation": "解析：多元化目标设置有助于平衡单一目标带来的失望与挫败。出处概念：多元化目标设定。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-16",
+        "id": "nasm-question-106",
         "prompt": "强化式反馈相较惩罚式反馈，更可能：",
         "options": [
           {
@@ -6647,10 +6872,11 @@ export const nasmChapters = [
             "label": "使客户停止训练"
           }
         ],
-        "explanation": "机制理解题（11-20）     A. 削弱客户动机     B. 激发客户行为动机     C. 让客户更依赖失败     D. 使客户停止训练"
+        "explanation": "解析：强化式领导风格和指导性反馈更可能激发行为动机。出处概念：强化与惩罚。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-17",
+        "id": "nasm-question-107",
         "prompt": "正面惩罚在文中的例子更接近：",
         "options": [
           {
@@ -6670,10 +6896,11 @@ export const nasmChapters = [
             "label": "提供更多选择"
           }
         ],
-        "explanation": "机制理解题（11-20）     A. 对进步给予表扬     B. 因技术较差而进行批评     C. 帮客户完成目标     D. 提供更多选择"
+        "explanation": "解析：批评动作技术较差是文中给出的正面惩罚例子。出处概念：正面惩罚。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-18",
+        "id": "nasm-question-108",
         "prompt": "自我决定理论更强调：",
         "options": [
           {
@@ -6693,10 +6920,11 @@ export const nasmChapters = [
             "label": "外在动机毫无作用"
           }
         ],
-        "explanation": "机制理解题（11-20）     A. 动机是固定不变的     B. 动机存在由低到高的连续体     C. 只有内在动机才存在     D. 外在动机毫无作用"
+        "explanation": "解析：自我决定理论强调动机连续体，而非二元对立。出处概念：自我决定理论。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-19",
+        "id": "nasm-question-109",
         "prompt": "深呼吸的生理作用包括：",
         "options": [
           {
@@ -6716,10 +6944,11 @@ export const nasmChapters = [
             "label": "加强浅短呼吸"
           }
         ],
-        "explanation": "机制理解题（11-20）     A. 提高心率和血压     B. 降低心率和血压     C. 维持颈肩胸肌紧张     D. 加强浅短呼吸"
+        "explanation": "解析：深呼吸可降低心率与血压。出处概念：深呼吸生理作用。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-20",
+        "id": "nasm-question-110",
         "prompt": "客户若处在安全、受欢迎和受尊重的环境中，更可能获得：",
         "options": [
           {
@@ -6739,10 +6968,11 @@ export const nasmChapters = [
             "label": "更强逃避倾向"
           }
         ],
-        "explanation": "机制理解题（11-20）     A. 更低坚持性     B. 更少能力感     C. 更强内在动机与积极体验     D. 更强逃避倾向"
+        "explanation": "解析：安全、欢迎和尊重的环境有助于能力感、内在动机和坚持性。出处概念：环境与动机。",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-21",
+        "id": "nasm-question-201",
         "prompt": "某客户训练前心慌、紧张、呼吸快，这更接近：",
         "options": [
           {
@@ -6762,10 +6992,11 @@ export const nasmChapters = [
             "label": "饮食记录偏差"
           }
         ],
-        "explanation": "情景应用题（21-30）     A. 状态焦虑     B. 特质焦虑     C. 结果目标     D. 饮食记录偏差"
+        "explanation": "解析：题干描述的是短期、即时的焦虑体验，属于状态焦虑。出处概念：状态焦虑。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-22",
+        "id": "nasm-question-202",
         "prompt": "一位客户总把“在比赛中赢别人”作为唯一目标，失败后就放弃。更合理的调整是：",
         "options": [
           {
@@ -6785,10 +7016,11 @@ export const nasmChapters = [
             "label": "用惩罚激励"
           }
         ],
-        "explanation": "情景应用题（21-30）     A. 继续只设结果目标     B. 加入过程目标和绩效目标     C. 取消所有目标     D. 用惩罚激励"
+        "explanation": "解析：只设结果目标可控性太低，应加入过程目标与绩效目标。出处概念：目标多元化。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-23",
+        "id": "nasm-question-203",
         "prompt": "某客户总说“我只要严格少吃就一定能减脂，不需要运动”。作为教练，更应做的是：",
         "options": [
           {
@@ -6808,10 +7040,11 @@ export const nasmChapters = [
             "label": "完全回避讨论"
           }
         ],
-        "explanation": "情景应用题（21-30）     A. 直接附和     B. 识别并调整错误信念     C. 强化其拖延     D. 完全回避讨论"
+        "explanation": "解析：错误信念会阻碍执行，需先识别并调整。出处概念：识别错误信念。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-24",
+        "id": "nasm-question-204",
         "prompt": "客户在训练关系中感到被尊重、被关心，并收到积极反馈。依据原文，更可能出现的是：",
         "options": [
           {
@@ -6831,10 +7064,11 @@ export const nasmChapters = [
             "label": "决策拖延加剧"
           }
         ],
-        "explanation": "情景应用题（21-30）     A. 内在动机与坚持性提高     B. 焦虑必然升高     C. 运动能力必然下降     D. 决策拖延加剧"
+        "explanation": "解析：积极社会环境和强化反馈有助于提高内在动机和坚持性。出处概念：积极环境与强化。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-25",
+        "id": "nasm-question-205",
         "prompt": "客户希望准备 10 km 比赛，只设“1 小时完赛”一个目标，压力很大。更好的做法是：",
         "options": [
           {
@@ -6854,10 +7088,11 @@ export const nasmChapters = [
             "label": "只靠想象成功"
           }
         ],
-        "explanation": "情景应用题（21-30）     A. 保留单一目标即可     B. 拆解为多个短期、多类型目标     C. 不再训练     D. 只靠想象成功"
+        "explanation": "解析：长期目标应拆解为短期、多类型目标，减少挫败。出处概念：多元化目标设定。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-26",
+        "id": "nasm-question-206",
         "prompt": "教练总在客户动作不佳时只用批评与取消特权来反馈。依据本章，这种做法的风险是：",
         "options": [
           {
@@ -6877,10 +7112,11 @@ export const nasmChapters = [
             "label": "会自动减少拖延"
           }
         ],
-        "explanation": "情景应用题（21-30）     A. 更容易削弱动机     B. 一定提升坚持性     C. 一定形成内在动机     D. 会自动减少拖延"
+        "explanation": "解析：惩罚式反馈通常更容易削弱客户动机。出处概念：惩罚的风险。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-27",
+        "id": "nasm-question-207",
         "prompt": "客户总在训练前犹豫不决、迟迟不开始。文中把这种现象与哪类问题联系起来？",
         "options": [
           {
@@ -6900,10 +7136,11 @@ export const nasmChapters = [
             "label": "结果目标过少"
           }
         ],
-        "explanation": "情景应用题（21-30）     A. 选择过多导致的拖延     B. 骨密度不足     C. 肌糖原超量储存     D. 结果目标过少"
+        "explanation": "解析：文中把过多选择导致的决策停滞与拖延联系起来。出处概念：减少拖延。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-28",
+        "id": "nasm-question-208",
         "prompt": "客户在重要训练前很紧张。若采用本章建议，可先引导其：",
         "options": [
           {
@@ -6923,10 +7160,11 @@ export const nasmChapters = [
             "label": "立即高强度冲刺"
           }
         ],
-        "explanation": "情景应用题（21-30）     A. 快速浅呼吸     B. 横膈膜深呼吸并放松     C. 完全屏气     D. 立即高强度冲刺"
+        "explanation": "解析：本章推荐以横膈膜深呼吸缓解紧张，降低心率和血压。出处概念：深呼吸技巧。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-29",
+        "id": "nasm-question-209",
         "prompt": "客户为长跑训练设定“今天专注积极自我暗示和跑姿”这一目标，更接近：",
         "options": [
           {
@@ -6946,10 +7184,11 @@ export const nasmChapters = [
             "label": "无动机"
           }
         ],
-        "explanation": "情景应用题（21-30）     A. 结果目标     B. 过程目标     C. 外部奖励目标     D. 无动机"
+        "explanation": "解析：专注积极自我暗示和跑姿，属于可高度自控的过程目标。出处概念：过程目标与自我暗示。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-30",
+        "id": "nasm-question-210",
         "prompt": "要提升客户长期坚持性，最符合本章精神的做法是：",
         "options": [
           {
@@ -6969,7 +7208,8 @@ export const nasmChapters = [
             "label": "完全忽略客户感受"
           }
         ],
-        "explanation": "情景应用题（21-30）     A. 只靠外部惩罚     B. 建立多元目标、强化反馈和更自主的动机     C. 不解释心理收益     D. 完全忽略客户感受"
+        "explanation": "解析：长期坚持更依赖多元目标、强化反馈与更自主的动机结构。出处概念：目标设定与自我决定理论。",
+        "correctOptionKey": "choice-b"
       }
     ]
   },
@@ -7130,7 +7370,8 @@ export const nasmChapters = [
             "label": "确立客户-私教协议"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 评估客户与私教的适合度 B. 讨论目标 C. 直接安排高强度测试 D. 确立客户-私教协议"
+        "explanation": "解析：初次访谈强调适合度、目标与协议，不是直接进入高强度测试。出处概念：初次访谈内容。",
+        "correctOptionKey": "choice-c"
       },
       {
         "id": "nasm-question-02",
@@ -7153,7 +7394,8 @@ export const nasmChapters = [
             "label": "只负责教授动作"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 直接诊断疾病 B. 个性化评估、激励与指导客户 C. 代替医生决定治疗方案 D. 只负责教授动作"
+        "explanation": "解析：文本将私人教练定义为以个性化方法对客户进行评估、激励和指导的健康/健身专业人士。出处概念：私人教练执业范围。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-03",
@@ -7176,7 +7418,8 @@ export const nasmChapters = [
             "label": "统一所有客户方案"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 提高会员续费率 B. 识别疾病与风险因素 C. 增加测试项目数量 D. 统一所有客户方案"
+        "explanation": "解析：筛查的核心是识别已知疾病、风险因素与需要转诊的人群。出处概念：运动前健康筛查目的。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-04",
@@ -7199,7 +7442,8 @@ export const nasmChapters = [
             "label": "可完全替代医疗问卷"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 直接给出冠状动脉疾病诊断 B. 成本效益高、实施方便 C. 专门用于运动员表现预测 D. 可完全替代医疗问卷"
+        "explanation": "解析：`PAR-Q+` 被描述为成本效益高、易实施，能快速识别需要进一步筛查者。出处概念：PAR-Q+优点。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-05",
@@ -7222,7 +7466,8 @@ export const nasmChapters = [
             "label": "场馆装修偏好"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 教练销售能力 B. 风险因素、药物史与症状史 C. 会员满意度 D. 场馆装修偏好"
+        "explanation": "解析：健康/医疗问卷可识别风险因素、骨科问题、症状史、药物史、补剂史等。出处概念：健康/医疗问卷功能。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-06",
@@ -7245,7 +7490,8 @@ export const nasmChapters = [
             "label": "训练日志模板"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 生活方式问卷 B. 速度测试记录 C. 最大力量换算表 D. 训练日志模板"
+        "explanation": "解析：生活方式问卷、知情同意书和风险承担协议都属于额外筛查资料。出处概念：额外筛查文件。",
+        "correctOptionKey": "choice-a"
       },
       {
         "id": "nasm-question-07",
@@ -7268,7 +7514,8 @@ export const nasmChapters = [
             "label": "只有医生转诊后"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 测试或训练之后 B. 客户受伤之后 C. 测试或训练之前 D. 只有医生转诊后"
+        "explanation": "解析：知情同意书应在测试或参与训练前，以口头和书面形式向客户说明风险与过程。出处概念：知情同意书。",
+        "correctOptionKey": "choice-c"
       },
       {
         "id": "nasm-question-08",
@@ -7291,7 +7538,8 @@ export const nasmChapters = [
             "label": "10 个"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 4 个 B. 6 个 C. 8 个 D. 10 个"
+        "explanation": "解析：文本明确列出八个可识别的 CVD 阳性风险因素。出处概念：CVD阳性风险因素。",
+        "correctOptionKey": "choice-c"
       },
       {
         "id": "nasm-question-09",
@@ -7314,7 +7562,8 @@ export const nasmChapters = [
             "label": "代替客户签署文件"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 核实文件是否完整 B. 便于进入下一步筛查 C. 保障信息机密性 D. 代替客户签署文件"
+        "explanation": "解析：记录保存用于完整、核实、保密和检索，不会替代签署行为。出处概念：记录保存。",
+        "correctOptionKey": "choice-d"
       },
       {
         "id": "nasm-question-10",
@@ -7337,10 +7586,11 @@ export const nasmChapters = [
             "label": "豁免协议一定有效"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 儿童与成人文件要求完全一致 B. 儿童无需健康回顾问卷 C. 法律与医疗文件问题更复杂 D. 豁免协议一定有效"
+        "explanation": "解析：儿童参与训练涉及更复杂的医疗与法律文件问题，不能按成人逻辑简单处理。出处概念：儿童参与运动前文件。",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-11",
+        "id": "nasm-question-101",
         "prompt": "为什么 `PAR-Q+` 往往需要与其他健康评估工具配合使用？",
         "options": [
           {
@@ -7360,10 +7610,11 @@ export const nasmChapters = [
             "label": "因为它不能识别任何症状"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 因为它填写太慢 B. 因为它主要用于运动安全，不足以完整识别冠状动脉风险因素等内容 C. 因为它只适用于儿童 D. 因为它不能识别任何症状"
+        "explanation": "解析：`PAR-Q+` 更偏向运动安全，不足以完整识别冠状动脉风险因素、药物和禁忌。出处概念：PAR-Q+局限性。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-12",
+        "id": "nasm-question-102",
         "prompt": "初次访谈中讨论边界、角色、资源和期望，主要是为了：",
         "options": [
           {
@@ -7383,10 +7634,11 @@ export const nasmChapters = [
             "label": "代替训练评估"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 延长销售流程 B. 增加合同页数 C. 提前澄清合作关系与执行条件 D. 代替训练评估"
+        "explanation": "解析：边界、角色、资源和期望的澄清，有助于确认适宜性并减少执行冲突。出处概念：适合度评估。",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-13",
+        "id": "nasm-question-103",
         "prompt": "风险分级的实际意义在于：",
         "options": [
           {
@@ -7406,10 +7658,11 @@ export const nasmChapters = [
             "label": "仅用于比赛分组"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 决定场馆收费标准 B. 帮助决定测试、运动方式及是否转诊 C. 只用于填写表格 D. 仅用于比赛分组"
+        "explanation": "解析：风险分级直接服务于测试选择、运动方式选择和是否转诊。出处概念：风险分级用途。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-14",
+        "id": "nasm-question-104",
         "prompt": "下列哪项最符合知情同意书的功能？",
         "options": [
           {
@@ -7429,10 +7682,11 @@ export const nasmChapters = [
             "label": "替代训练合同"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 说明方案内容、风险、收益和参与者责任 B. 证明客户没有任何风险 C. 替代医疗许可 D. 替代训练合同"
+        "explanation": "解析：知情同意书的核心要素包括方案描述、风险收益、保密条款和参与者责任。出处概念：知情同意书要素。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-15",
+        "id": "nasm-question-105",
         "prompt": "风险承担/豁免协议的正确理解是：",
         "options": [
           {
@@ -7452,10 +7706,11 @@ export const nasmChapters = [
             "label": "与法律解释无关"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 一经签署即可免除所有专业责任 B. 可说明客户知悉风险，但不能取代专业责任 C. 只适用于儿童 D. 与法律解释无关"
+        "explanation": "解析：风险承担协议可能有用，但不能减少或免除私人教练应有的职业责任。出处概念：风险承担/豁免协议。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-16",
+        "id": "nasm-question-106",
         "prompt": "评估 CVD 风险因素时，文本强调的总体原则是：",
         "options": [
           {
@@ -7475,10 +7730,11 @@ export const nasmChapters = [
             "label": "只看体重"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 只看年龄 B. 风险因素越多越轻松开始训练 C. 风险因素越多、程度越重，潜在风险越高 D. 只看体重"
+        "explanation": "解析：文本指出风险因素越多、程度越严重，患 CVD 的概率越大。出处概念：CVD风险评估逻辑。",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-17",
+        "id": "nasm-question-107",
         "prompt": "生活方式问卷的主要价值在于：",
         "options": [
           {
@@ -7498,10 +7754,11 @@ export const nasmChapters = [
             "label": "直接决定药物使用"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 诊断严重疾病 B. 补充饮食、压力、体力活动等行为信息 C. 替代医生意见 D. 直接决定药物使用"
+        "explanation": "解析：生活方式问卷主要补充饮食、压力、活动水平等行为信息，并辅助目标设定。出处概念：生活方式问卷。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-18",
+        "id": "nasm-question-108",
         "prompt": "医疗许可的流程意义主要在于：",
         "options": [
           {
@@ -7521,10 +7778,11 @@ export const nasmChapters = [
             "label": "只用于竞技人群"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 增加客户阻力 B. 把超出私教执业范围的问题交由医疗专业人员处理 C. 取消所有训练 D. 只用于竞技人群"
+        "explanation": "解析：医疗许可与转诊用于把医疗判断交给医疗专业人员，私教在许可范围内工作。出处概念：转诊与医疗许可。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-19",
+        "id": "nasm-question-109",
         "prompt": "记录保存与信息安全被强调，是因为：",
         "options": [
           {
@@ -7544,10 +7802,11 @@ export const nasmChapters = [
             "label": "只在受伤后才需要"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 只为市场宣传 B. 关系到资料完整、保密与责任证明 C. 只对线上客户重要 D. 只在受伤后才需要"
+        "explanation": "解析：记录保存既支持执行，也关系到资料机密性与责任证明。出处概念：记录保存与保密。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-20",
+        "id": "nasm-question-110",
         "prompt": "当儿童参与训练时，为什么要更加谨慎？",
         "options": [
           {
@@ -7567,10 +7826,11 @@ export const nasmChapters = [
             "label": "因为儿童一定要做最大强度测试"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 因为儿童不能做任何训练 B. 因为儿童的法律责任与风险管理问题更复杂 C. 因为儿童不需要监护人信息 D. 因为儿童一定要做最大强度测试"
+        "explanation": "解析：儿童的豁免、风险承担与责任认定更复杂，因此需要更谨慎。出处概念：儿童法律与风险管理。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-21",
+        "id": "nasm-question-201",
         "prompt": "一名新客户第一次见面，教练最合理的先后顺序是：",
         "options": [
           {
@@ -7590,10 +7850,11 @@ export const nasmChapters = [
             "label": "先卖课，再讨论目标"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 先做高强度测试，再补问卷 B. 先访谈与筛查，再决定是否测试 C. 先安排比赛，再看健康情况 D. 先卖课，再讨论目标"
+        "explanation": "解析：先访谈与筛查，再决定后续测试与方案，是本章示例流程。出处概念：客户咨询与健康评估步骤。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-22",
+        "id": "nasm-question-202",
         "prompt": "某客户填写 `PAR-Q+` 后出现一个或多个 “YES”，最稳妥的做法是：",
         "options": [
           {
@@ -7613,10 +7874,11 @@ export const nasmChapters = [
             "label": "只做力量训练即可"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 直接开始高强度训练 B. 忽略结果 C. 继续进一步筛查并咨询相关专业人士 D. 只做力量训练即可"
+        "explanation": "解析：`PAR-Q+` 出现一个或多个“Yes”时，应继续补充筛查并咨询相关专业人士。出处概念：PAR-Q+后续处理。",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-23",
+        "id": "nasm-question-203",
         "prompt": "某客户准备参加中高强度运动，且健康/医疗问卷提示既往有心血管症状史。教练首先应：",
         "options": [
           {
@@ -7636,10 +7898,11 @@ export const nasmChapters = [
             "label": "只做柔韧性练习"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 直接安排跑步测试 B. 先转诊并考虑医疗许可 C. 先做体脂测试即可 D. 只做柔韧性练习"
+        "explanation": "解析：存在心血管症状史时，不应直接做高强度测试，应先转诊并考虑医疗许可。出处概念：转诊基础。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-24",
+        "id": "nasm-question-204",
         "prompt": "某客户目标明确，但时间安排与教练服务时间严重冲突。按本章逻辑，教练应优先：",
         "options": [
           {
@@ -7659,10 +7922,11 @@ export const nasmChapters = [
             "label": "直接提高费用"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 隐瞒服务限制 B. 继续签约再说 C. 重新评估双方适合度 D. 直接提高费用"
+        "explanation": "解析：服务时间地点等都是影响双方适合度的重要因素。出处概念：客户-私教适合度。",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-25",
+        "id": "nasm-question-205",
         "prompt": "某客户已签署风险承担协议，训练中仍出现因教练明显疏忽导致的问题。下列判断最符合本章精神的是：",
         "options": [
           {
@@ -7682,10 +7946,11 @@ export const nasmChapters = [
             "label": "协议自动等于医疗许可"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 教练因此完全免责 B. 协议可减少专业责任要求 C. 协议不能替代专业执业责任 D. 协议自动等于医疗许可"
+        "explanation": "解析：风险承担协议并不能取代私人教练的专业责任。出处概念：风险承担/豁免协议的限制。",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-26",
+        "id": "nasm-question-206",
         "prompt": "教练接触一名儿童客户，家长希望尽快开始减重训练。最稳妥的第一步是：",
         "options": [
           {
@@ -7705,10 +7970,11 @@ export const nasmChapters = [
             "label": "先安排大重量训练"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 先做极限测试 B. 先由父母或监护人完成相关健康回顾文件 C. 只签豁免协议 D. 先安排大重量训练"
+        "explanation": "解析：儿童参与训练前应先由父母或法定监护人完成相关健康回顾文件。出处概念：儿童参与运动前文件。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-27",
+        "id": "nasm-question-207",
         "prompt": "某客户的资料散落在聊天记录、纸质问卷和手机照片中，教练下一步最需要完善的是：",
         "options": [
           {
@@ -7728,10 +7994,11 @@ export const nasmChapters = [
             "label": "训练音乐清单"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 广告文案 B. 记录保存系统 C. 心率区间公式 D. 训练音乐清单"
+        "explanation": "解析：资料分散会影响核实、保密与后续决策，优先应建立记录保存系统。出处概念：记录保存系统。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-28",
+        "id": "nasm-question-208",
         "prompt": "某客户有多项 CVD 风险因素，但无明显症状。教练在方案制定前最重要的是：",
         "options": [
           {
@@ -7751,10 +8018,11 @@ export const nasmChapters = [
             "label": "只看客户主观意愿"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 忽略风险因素，因为没有症状 B. 根据筛查结果做风险分级并判断是否需医疗许可 C. 只做低次数大重量训练 D. 只看客户主观意愿"
+        "explanation": "解析：即便无症状，多项风险因素仍需做风险分级并判断是否需要医疗许可。出处概念：风险因素评估与许可判断。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-29",
+        "id": "nasm-question-209",
         "prompt": "某客户表示自己已经 “做过体检，医生没说什么”，但健康/医疗问卷中仍显示近期手术和药物使用史。教练应：",
         "options": [
           {
@@ -7774,10 +8042,11 @@ export const nasmChapters = [
             "label": "只签合同即可"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 不再追问 B. 以问卷信息为基础继续评估并在需要时转诊 C. 默认可以做任何测试 D. 只签合同即可"
+        "explanation": "解析：既往体检不能替代当前问卷中的风险信息，教练仍应依据现有资料继续评估。出处概念：健康/医疗问卷的应用。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-30",
+        "id": "nasm-question-210",
         "prompt": "某客户完成医生转诊后回到私教处。根据本章逻辑，教练接下来应：",
         "options": [
           {
@@ -7797,7 +8066,8 @@ export const nasmChapters = [
             "label": "不再需要关注风险"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 完全照搬所有客户的统一方案 B. 在医生建议基础上监控并调整训练 C. 停止全部记录 D. 不再需要关注风险"
+        "explanation": "解析：医生转诊后，私人教练仍需结合建议持续监控和调整方案。出处概念：转诊后的训练监控与调整。",
+        "correctOptionKey": "choice-b"
       }
     ]
   },
@@ -7953,7 +8223,8 @@ export const nasmChapters = [
             "label": "替代日常训练"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 增加收费项目 B. 收集基准数据 C. 统一所有客户方案 D. 替代日常训练"
+        "explanation": "解析：评估的直接基础作用是收集基准数据，为后续训练设计和进展比较服务。出处概念：评估目的。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-02",
@@ -7976,7 +8247,8 @@ export const nasmChapters = [
             "label": "只看常模排名"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 训练周期结束后的总结 B. 训练中持续观察与调整 C. 只在比赛后实施 D. 只看常模排名"
+        "explanation": "解析：形成性评估发生在方案开始前和训练过程中，强调持续观察与调整。出处概念：形成性评估。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-03",
@@ -7999,7 +8271,8 @@ export const nasmChapters = [
             "label": "设备校准"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 每次上课时的主观观察 B. 周期结束后的阶段总结 C. 训练前问卷 D. 设备校准"
+        "explanation": "解析：总结性评估是对某一训练周期、季节或阶段的训练总结。出处概念：总结性评估。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-04",
@@ -8022,7 +8295,8 @@ export const nasmChapters = [
             "label": "测试是否有图表"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 测试是否便宜 B. 测试结果是否重复一致 C. 测试是否流行 D. 测试是否有图表"
+        "explanation": "解析：可靠性关注重复测量的一致性。出处概念：可靠性/信度。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-05",
@@ -8045,7 +8319,8 @@ export const nasmChapters = [
             "label": "测试是否有软件支持"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 测试是否测到了应该测的内容 B. 测试是否由名人推荐 C. 测试是否时间最短 D. 测试是否有软件支持"
+        "explanation": "解析：有效性指测试是否测到了它应该测量的内容。出处概念：有效性/效度。",
+        "correctOptionKey": "choice-a"
       },
       {
         "id": "nasm-question-06",
@@ -8068,7 +8343,8 @@ export const nasmChapters = [
             "label": "是否需要校准设备"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 是否达到最低健康标准 B. 与同类人群表现比较 C. 是否需要热身 D. 是否需要校准设备"
+        "explanation": "解析：常模参照用于把客户表现与其他同类人群进行比较。出处概念：常模参照。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-07",
@@ -8091,7 +8367,8 @@ export const nasmChapters = [
             "label": "比较两台设备外观"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 与别人做百分位比较 B. 判断是否达到健康相关最低标准 C. 比较两位教练技术水平 D. 比较两台设备外观"
+        "explanation": "解析：标准参照强调是否达到健康相关最低标准，而非与别人排名比较。出处概念：标准参照。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-08",
@@ -8114,7 +8391,8 @@ export const nasmChapters = [
             "label": "强制所有客户做同一测试"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 设备校准 B. 测试前指导 C. 安全与应急检查 D. 强制所有客户做同一测试"
+        "explanation": "解析：测试应个体化选择，不存在“所有客户做同一测试”的原则。出处概念：测试前准备与测试选择。",
+        "correctOptionKey": "choice-d"
       },
       {
         "id": "nasm-question-09",
@@ -8137,7 +8415,8 @@ export const nasmChapters = [
             "label": "1 年后固定一次"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 1 天后 B. 1 周后 C. 约 8 周后 D. 1 年后固定一次"
+        "explanation": "解析：文本明确提到可在约 8 周或更长时间后安排重新测试。出处概念：再评估时间框架。",
+        "correctOptionKey": "choice-c"
       },
       {
         "id": "nasm-question-10",
@@ -8160,10 +8439,11 @@ export const nasmChapters = [
             "label": "代替测试执行"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 便于结果检索 B. 支持前后比较 C. 保证保密性 D. 代替测试执行"
+        "explanation": "解析：记录系统支持收集、比较、检索与保密，但不能替代测试执行。出处概念：数据记录系统。",
+        "correctOptionKey": "choice-d"
       },
       {
-        "id": "nasm-question-11",
+        "id": "nasm-question-101",
         "prompt": "为什么测试选择必须与客户目标一致？",
         "options": [
           {
@@ -8183,10 +8463,11 @@ export const nasmChapters = [
             "label": "这样不需要解释数据"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 这样表格更长 B. 这样结果对客户更有意义，也更能支持方案设计 C. 这样设备一定更便宜 D. 这样不需要解释数据"
+        "explanation": "解析：与目标一致的测试更有解释价值，也更有利于激励客户。出处概念：目标与方案进展。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-12",
+        "id": "nasm-question-102",
         "prompt": "对于很少骑自行车的客户，功率自行车测试估值可能偏低，文本给出的原因是：",
         "options": [
           {
@@ -8206,10 +8487,11 @@ export const nasmChapters = [
             "label": "温度太高"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 场地太安静 B. 局部肌肉疲劳 C. 心率计失灵 D. 温度太高"
+        "explanation": "解析：文本指出不常骑车者的自行车测试估值偏低，可能由局部肌肉疲劳造成。出处概念：测试方式与客户特征。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-13",
+        "id": "nasm-question-103",
         "prompt": "“一项测试既可靠又有效”意味着：",
         "options": [
           {
@@ -8229,10 +8511,11 @@ export const nasmChapters = [
             "label": "只要能在实验室做即可"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 只要结果好看即可 B. 既能稳定重复，又能测到应测内容 C. 只要由专家设计即可 D. 只要能在实验室做即可"
+        "explanation": "解析：好测试应同时满足“测得准”和“测得稳”。出处概念：效度与信度结合。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-14",
+        "id": "nasm-question-104",
         "prompt": "为什么不同方法测得的身体成分结果不应随意比较？",
         "options": [
           {
@@ -8252,10 +8535,11 @@ export const nasmChapters = [
             "label": "因为所有方法都完全一样"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 因为单位一定不同 B. 因为不同方法基于不同假设与误差来源 C. 因为体脂不需要复测 D. 因为所有方法都完全一样"
+        "explanation": "解析：若测试未覆盖应有内容，即内容效度不足。出处概念：内容效度。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-15",
+        "id": "nasm-question-105",
         "prompt": "测量标准误差反映的是：",
         "options": [
           {
@@ -8275,10 +8559,11 @@ export const nasmChapters = [
             "label": "运动强度等级"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 实际测量值与理论真实值之间的差异 B. 教练收费标准 C. 客户对测试的满意度 D. 运动强度等级"
+        "explanation": "解析：标准误差就是测量结果与理论真实值之间的差异。出处概念：测量标准误差。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-16",
+        "id": "nasm-question-106",
         "prompt": "测试顺序中通常把最大或次最大有氧测试放在较后位置，是因为：",
         "options": [
           {
@@ -8298,10 +8583,11 @@ export const nasmChapters = [
             "label": "这些测试与目标无关"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 这些测试最便宜 B. 这些测试通常造成较大疲劳 C. 这些测试不需要热身 D. 这些测试与目标无关"
+        "explanation": "解析：最大或次最大有氧测试常造成较大疲劳，所以通常安排在测试后段。出处概念：测试顺序。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-17",
+        "id": "nasm-question-107",
         "prompt": "形成性评估与总结性评估最关键的区别在于：",
         "options": [
           {
@@ -8321,10 +8607,11 @@ export const nasmChapters = [
             "label": "前者无数据，后者全是数据"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 前者只看设备，后者只看客户 B. 前者看进展过程，后者看阶段结果 C. 前者一定非正式，后者一定正式 D. 前者无数据，后者全是数据"
+        "explanation": "解析：形成性评估衡量进展过程，总结性评估衡量阶段结果。出处概念：两类评估区别。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-18",
+        "id": "nasm-question-108",
         "prompt": "为什么要对客户讲清测试终止条件？",
         "options": [
           {
@@ -8344,10 +8631,11 @@ export const nasmChapters = [
             "label": "为了减少热身时间"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 为了让客户紧张 B. 为了让客户知道任何情况下都不能停 C. 为了保障安全并明确客户和教练都可终止测试 D. 为了减少热身时间"
+        "explanation": "解析：终止条件是安全管理的一部分，客户和教练都可能因为安全原因终止测试。出处概念：测试终止条件。",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-19",
+        "id": "nasm-question-109",
         "prompt": "为什么日常主观观察也属于评估的一部分？",
         "options": [
           {
@@ -8367,10 +8655,11 @@ export const nasmChapters = [
             "label": "因为客户不需要目标"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 因为正式测试不重要 B. 因为客户的姿势、步态、技术和状态会影响方案调整 C. 因为主观观察能替代所有数据 D. 因为客户不需要目标"
+        "explanation": "解析：日常观察能提供动作姿势、步态、技术和状态等重要信息。出处概念：形成性评估中的主观观察。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-20",
+        "id": "nasm-question-110",
         "prompt": "文本更推荐大多数普通客户长期把谁作为主要比较对象？",
         "options": [
           {
@@ -8390,10 +8679,11 @@ export const nasmChapters = [
             "label": "私教本人"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 同龄所有人 B. 竞技运动员 C. 过去的自己 D. 私教本人"
+        "explanation": "解析：对大多数普通客户而言，与过去的自己比较更合适。出处概念：结果解释与再评估。",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-21",
+        "id": "nasm-question-201",
         "prompt": "一位客户目标是提升跑步表现，教练优先选择与其习惯运动模式接近的有氧测试，主要依据是：",
         "options": [
           {
@@ -8413,10 +8703,11 @@ export const nasmChapters = [
             "label": "这样不必解释结果"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 测试越复杂越好 B. 贴近运动模式的测试更有针对性 C. 跑步客户不能做其他测试 D. 这样不必解释结果"
+        "explanation": "解析：测试与客户习惯运动模式越接近，越有针对性，也更利于结果转化。出处概念：目标匹配测试。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-22",
+        "id": "nasm-question-202",
         "prompt": "一位超重且下肢关节不适的客户要做有氧评估，较稳妥的选择是：",
         "options": [
           {
@@ -8436,10 +8727,11 @@ export const nasmChapters = [
             "label": "不做任何评估"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 直接做长距离跑 B. 先选负重冲刺测试 C. 先考虑非负重或负担较小的测试 D. 不做任何评估"
+        "explanation": "解析：超重或下肢关节不适客户更适合负担较小的测试方式。出处概念：客户特征与测试选择。",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-23",
+        "id": "nasm-question-203",
         "prompt": "某测试由同一教练在相同条件下重复测量结果非常接近，这首先说明它：",
         "options": [
           {
@@ -8459,10 +8751,11 @@ export const nasmChapters = [
             "label": "一定是最大强度测试"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 价格高 B. 可靠性较好 C. 一定最有效 D. 一定是最大强度测试"
+        "explanation": "解析：同条件下重复测量接近，首先体现的是可靠性。出处概念：复测法。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-24",
+        "id": "nasm-question-204",
         "prompt": "某测试看起来像是在测目标能力，但并未覆盖该能力所需全部内容，更可能缺的是：",
         "options": [
           {
@@ -8482,10 +8775,11 @@ export const nasmChapters = [
             "label": "评分表字体"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 内容效度 B. 时间长度 C. 设备颜色 D. 评分表字体"
+        "explanation": "解析：像是在测，但没有覆盖完整内容，问题出在内容效度。出处概念：内容效度。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-25",
+        "id": "nasm-question-205",
         "prompt": "某客户第一次测试后，教练立刻安排了最大有氧测试、冲刺测试、灵敏性测试连续进行，且中间休息不足。最可能的问题是：",
         "options": [
           {
@@ -8505,10 +8799,11 @@ export const nasmChapters = [
             "label": "一定更安全"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 数据可能受疲劳干扰 B. 一定更准确 C. 更能体现客户潜力 D. 一定更安全"
+        "explanation": "解析：高疲劳测试顺序不合理会污染后续测试结果。出处概念：测试顺序安排。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-26",
+        "id": "nasm-question-206",
         "prompt": "某客户前后两次评估使用了不同身体成分方法。若教练想比较变化趋势，最稳妥的说法是：",
         "options": [
           {
@@ -8528,10 +8823,11 @@ export const nasmChapters = [
             "label": "后一次一定更准确"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 两次结果可直接精确比较 B. 不同方法间比较应非常谨慎 C. 只要单位相同就完全可比 D. 后一次一定更准确"
+        "explanation": "解析：不同方法基于不同模型与误差，横向比较需谨慎。出处概念：身体成分方法比较限制。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-27",
+        "id": "nasm-question-207",
         "prompt": "某客户在测试中出现明显眩晕和面色苍白，此时教练最合理的处理是：",
         "options": [
           {
@@ -8551,10 +8847,11 @@ export const nasmChapters = [
             "label": "等客户自己决定"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 继续测试以获得完整数据 B. 立即终止测试 C. 只降低一点速度 D. 等客户自己决定"
+        "explanation": "解析：眩晕和面色苍白属于终止测试的一般症状。出处概念：终止运动测试症状。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-28",
+        "id": "nasm-question-208",
         "prompt": "某客户特别在意自己是否“比别人强”，教练在解释百分位时最恰当的是：",
         "options": [
           {
@@ -8574,10 +8871,11 @@ export const nasmChapters = [
             "label": "百分位越高就一定健康"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 百分位就是考试百分制 B. 50 百分位表示处于中间水平 C. 70 百分位等于得了 70 分 D. 百分位越高就一定健康"
+        "explanation": "解析：50 百分位表示处于群体中间水平，不等于 50 分。出处概念：百分位解释。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-29",
+        "id": "nasm-question-209",
         "prompt": "某客户以改善健康为主要目标，但所选测试没有成熟的标准参照。按文本思路，教练可：",
         "options": [
           {
@@ -8597,10 +8895,11 @@ export const nasmChapters = [
             "label": "直接按运动员标准要求"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 完全放弃评估 B. 只看主观感觉 C. 结合常模参照并鼓励达到平均或以上水平 D. 直接按运动员标准要求"
+        "explanation": "解析：缺少标准参照时，可结合常模参照鼓励客户先达到平均或以上水平。出处概念：标准参照不足时的解释。",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-30",
+        "id": "nasm-question-210",
         "prompt": "某客户完成初测后，教练打算制定方案。按本章逻辑，下一步最合适的是：",
         "options": [
           {
@@ -8620,7 +8919,8 @@ export const nasmChapters = [
             "label": "只保存数据不沟通"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 先压着结果不解释 B. 与客户一起回顾结果并据此定方案 C. 直接安排所有可用测试 D. 只保存数据不沟通"
+        "explanation": "解析：测试完成后应尽快解释结果，并据此共同制定训练方案。出处概念：结果回顾与方案制定。",
+        "correctOptionKey": "choice-b"
       }
     ]
   },
@@ -8786,7 +9086,8 @@ export const nasmChapters = [
             "label": "握力和柔韧性"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 心率和血压 B. 体脂和爆发力 C. 灵敏性和速度 D. 握力和柔韧性"
+        "explanation": "解析：本章指出最基础的生命体征测试是心率与血压。出处概念：生命体征。",
+        "correctOptionKey": "choice-a"
       },
       {
         "id": "nasm-question-02",
@@ -8809,7 +9110,8 @@ export const nasmChapters = [
             "label": "皮褶卡尺"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 触诊 B. 听诊 C. 心率监测仪 D. 皮褶卡尺"
+        "explanation": "解析：触诊、听诊和心率监测仪都是测心率的常用方法，皮褶卡尺不是。出处概念：心率测量方法。",
+        "correctOptionKey": "choice-d"
       },
       {
         "id": "nasm-question-03",
@@ -8832,7 +9134,8 @@ export const nasmChapters = [
             "label": "静态负荷"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 内部训练负荷 B. 外部训练负荷 C. 恢复负荷 D. 静态负荷"
+        "explanation": "解析：外部训练负荷描述训练量、距离、负荷等客观工作量。出处概念：外部训练负荷。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-04",
@@ -8855,7 +9158,8 @@ export const nasmChapters = [
             "label": "环境负荷"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 外部训练负荷 B. 内部训练负荷 C. 设备负荷 D. 环境负荷"
+        "explanation": "解析：`RPE` 是客户对训练过程的主观感知，属于内部训练负荷。出处概念：内部训练负荷。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-05",
@@ -8878,7 +9182,8 @@ export const nasmChapters = [
             "label": "腰围 ÷ 身高"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 体重 ÷ 身高 B. 体重 ÷ 身高平方 C. 身高 ÷ 体重平方 D. 腰围 ÷ 身高"
+        "explanation": "解析：BMI=体重（kg）÷身高平方（m²）。出处概念：BMI公式。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-06",
@@ -8901,7 +9206,8 @@ export const nasmChapters = [
             "label": "测量血压"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 直接测量骨密度 B. 间接估算皮下脂肪与体脂率 C. 判断爆发力 D. 测量血压"
+        "explanation": "解析：皮褶法是间接估算皮下脂肪与体脂率的方法。出处概念：皮褶法。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-07",
@@ -8924,7 +9230,8 @@ export const nasmChapters = [
             "label": "抓背测试"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. YMCA 功率自行车测试 B. CKCUES 测试 C. 单腿蹲测试 D. 抓背测试"
+        "explanation": "解析：YMCA 功率自行车测试属于心肺耐力评估方案。出处概念：功率自行车测试。",
+        "correctOptionKey": "choice-a"
       },
       {
         "id": "nasm-question-08",
@@ -8947,7 +9254,8 @@ export const nasmChapters = [
             "label": "台阶测试"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 坐位体前屈 B. 抓背测试 C. T 测试 D. 台阶测试"
+        "explanation": "解析：抓背测试用于上肢柔韧性和肩部 ROM 评估。出处概念：抓背测试。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-09",
@@ -8970,7 +9278,8 @@ export const nasmChapters = [
             "label": "腰臀比"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 下肢爆发力 B. 上肢闭链功能与稳定性 C. 静息代谢 D. 腰臀比"
+        "explanation": "解析：CKCUES 用于评估上肢闭链稳定性和功能。出处概念：CKCUES测试。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-10",
@@ -8993,10 +9302,11 @@ export const nasmChapters = [
             "label": "测量静息心率"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 评估下肢动作质量 B. 测量血压 C. 估算体脂率 D. 测量静息心率"
+        "explanation": "解析：单腿蹲和跳台测试用于评估下肢动作质量。出处概念：单腿蹲和跳台测试。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-11",
+        "id": "nasm-question-101",
         "prompt": "测量脉搏时不建议使用拇指，主要因为：",
         "options": [
           {
@@ -9016,10 +9326,11 @@ export const nasmChapters = [
             "label": "拇指不卫生"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 拇指太短 B. 拇指自身脉搏会干扰判断 C. 拇指力量太小 D. 拇指不卫生"
+        "explanation": "解析：拇指自身脉搏可能干扰心率判断。出处概念：触诊流程。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-12",
+        "id": "nasm-question-102",
         "prompt": "静息心率通常采用较长计时窗口，主要是为了：",
         "options": [
           {
@@ -9039,10 +9350,11 @@ export const nasmChapters = [
             "label": "增加训练量"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 增加客户紧张感 B. 减少计数误差 C. 配合更大负荷 D. 增加训练量"
+        "explanation": "解析：静息心率计时更长，有助于减少计数与测量误差。出处概念：心率计时原则。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-13",
+        "id": "nasm-question-103",
         "prompt": "血压测量中重复测量的意义主要在于：",
         "options": [
           {
@@ -9062,10 +9374,11 @@ export const nasmChapters = [
             "label": "判断柔韧性"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 让客户休息更久 B. 提高结果稳定性并减少偶然误差 C. 替代心率测量 D. 判断柔韧性"
+        "explanation": "解析：血压重复测量能提高结果稳定性，必要时取平均值。出处概念：血压测量流程。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-14",
+        "id": "nasm-question-104",
         "prompt": "外部训练负荷与内部训练负荷之间的关系，最适合用来：",
         "options": [
           {
@@ -9085,10 +9398,11 @@ export const nasmChapters = [
             "label": "取代动作观察"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 决定会员卡价格 B. 理解训练刺激与生理反应是否匹配 C. 判断场馆大小 D. 取代动作观察"
+        "explanation": "解析：外部与内部训练负荷的平衡，可帮助判断适应趋势与训练是否匹配。出处概念：训练负荷平衡模型。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-15",
+        "id": "nasm-question-105",
         "prompt": "BMI 对肌肉量较高者可能不准确，是因为：",
         "options": [
           {
@@ -9108,10 +9422,11 @@ export const nasmChapters = [
             "label": "BMI 只能在实验室测"
           }
         ],
-        "explanation": "机制理解题（11-20） A. BMI 会直接测脂肪 B. BMI 不区分脂肪量和去脂体重 C. BMI 只能用于女性 D. BMI 只能在实验室测"
+        "explanation": "解析：BMI 不区分脂肪和去脂体重，所以对某些人群会失真。出处概念：BMI局限。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-16",
+        "id": "nasm-question-106",
         "prompt": "皮褶法的准确性高度依赖：",
         "options": [
           {
@@ -9131,10 +9446,11 @@ export const nasmChapters = [
             "label": "房间是否播放音乐"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 卡尺颜色 B. 操作者技术与标准化流程 C. 客户主观感受 D. 房间是否播放音乐"
+        "explanation": "解析：皮褶法准确性依赖操作者技能、卡尺与标准化流程。出处概念：皮褶法误差来源。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-17",
+        "id": "nasm-question-107",
         "prompt": "次最大有氧测试的最大优势之一是：",
         "options": [
           {
@@ -9154,10 +9470,11 @@ export const nasmChapters = [
             "label": "一定比实验室更准确"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 可完全等同实验室直接测量 B. 场地上更易实施 C. 不受客户差异影响 D. 一定比实验室更准确"
+        "explanation": "解析：次最大测试的现实价值在于场地操作性强。出处概念：心肺耐力场地测试。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-18",
+        "id": "nasm-question-108",
         "prompt": "YMCA 坐位体前屈与坐位体前屈箱的一个关键差别在于：",
         "options": [
           {
@@ -9177,10 +9494,11 @@ export const nasmChapters = [
             "label": "是否能比较常模"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 是否需要热身 B. “0 点”设定不同 C. 是否能测柔韧性 D. 是否能比较常模"
+        "explanation": "解析：两类坐位体前屈测试的常模使用前要注意“0 点”是否一致。出处概念：坐位体前屈测试。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-19",
+        "id": "nasm-question-109",
         "prompt": "中垂线评估的主要用途是：",
         "options": [
           {
@@ -9200,10 +9518,11 @@ export const nasmChapters = [
             "label": "估算 VO2max"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 直接计算体脂率 B. 作为静态姿势排列的参考 C. 测量爆发力 D. 估算 VO2max"
+        "explanation": "解析：中垂线评估是静态姿势排列的参考方法。出处概念：中垂线评估。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-20",
+        "id": "nasm-question-110",
         "prompt": "体态与动作评估为什么通常需要结合经验判断？",
         "options": [
           {
@@ -9223,10 +9542,11 @@ export const nasmChapters = [
             "label": "因为它们不需要解剖学知识"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 因为它们完全无法观察 B. 因为它们多带有定性和主观性 C. 因为它们只适用于儿童 D. 因为它们不需要解剖学知识"
+        "explanation": "解析：体态与动作评估多为定性判断，因此要依靠知识和经验。出处概念：体态评估与动作评估。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-21",
+        "id": "nasm-question-201",
         "prompt": "一位客户刚运动完就来测静息体重和皮褶，教练最应担心的是：",
         "options": [
           {
@@ -9246,10 +9566,11 @@ export const nasmChapters = [
             "label": "不会有任何影响"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 客户会太开心 B. 水合状态与组织状态变化会影响结果 C. 体重一定更轻且最准确 D. 不会有任何影响"
+        "explanation": "解析：运动后水合状态和组织状态变化会影响体重与皮褶结果。出处概念：身体质量与皮褶测试注意事项。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-22",
+        "id": "nasm-question-202",
         "prompt": "某客户测脉搏时，教练用力压住双侧颈动脉。按本章原则，这样做的问题是：",
         "options": [
           {
@@ -9269,10 +9590,11 @@ export const nasmChapters = [
             "label": "只影响血压不影响心率"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 更快更准 B. 可能人为影响心率且有安全问题 C. 只是不舒适 D. 只影响血压不影响心率"
+        "explanation": "解析：颈动脉测量若压迫过大，可能人为降低心率且存在风险。出处概念：颈动脉触诊注意事项。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-23",
+        "id": "nasm-question-203",
         "prompt": "某客户血压测量时袖套明显过小，最可能导致：",
         "options": [
           {
@@ -9292,10 +9614,11 @@ export const nasmChapters = [
             "label": "柔韧性下降"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 结果失真 B. 心率自动下降 C. 体脂率升高 D. 柔韧性下降"
+        "explanation": "解析：袖套大小不当会使血压测量失真。出处概念：血压测量流程与常见错误。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-24",
+        "id": "nasm-question-204",
         "prompt": "客户一次 30 分钟训练课主观 `RPE=6`，则本章举例的训练课 `RPE` 为：",
         "options": [
           {
@@ -9315,10 +9638,11 @@ export const nasmChapters = [
             "label": "300"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 36 B. 60 C. 180 D. 300"
+        "explanation": "解析：训练课 `RPE=RPE × 时间`，即 6×30=180。出处概念：内部训练负荷举例。",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-25",
+        "id": "nasm-question-205",
         "prompt": "一位肌肉量很高的训练者 BMI 较高。教练最合理的解释是：",
         "options": [
           {
@@ -9338,10 +9662,11 @@ export const nasmChapters = [
             "label": "BMI 足以作为唯一判断依据"
           }
         ],
-        "explanation": "情景应用题（21-30） A. BMI 高就一定肥胖 B. BMI 可能高估了其肥胖程度 C. BMI 比皮褶更能说明体脂 D. BMI 足以作为唯一判断依据"
+        "explanation": "解析：肌肉量高者可能被 BMI 高估为超重或肥胖。出处概念：BMI局限。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-26",
+        "id": "nasm-question-206",
         "prompt": "某客户前测用皮褶法，后测改用 BIA。若比较体脂变化，最稳妥的说法是：",
         "options": [
           {
@@ -9361,10 +9686,11 @@ export const nasmChapters = [
             "label": "只看数值大小即可"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 两者可直接一一对照 B. 不同方法间比较要谨慎 C. 后测一定更准 D. 只看数值大小即可"
+        "explanation": "解析：不同体成分方法间不宜直接可靠比较。出处概念：方法比较限制。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-27",
+        "id": "nasm-question-207",
         "prompt": "教练安排一般健身客户做一整套测试时，最合理的先后顺序应先包含：",
         "options": [
           {
@@ -9384,10 +9710,11 @@ export const nasmChapters = [
             "label": "先药球传球，再测血压"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 先最大有氧，再静息血压 B. 先静息指标与非疲劳测试 C. 先冲刺，再身高体重 D. 先药球传球，再测血压"
+        "explanation": "解析：一般健身客户应先测静息指标和非疲劳项目。出处概念：测试顺序。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-28",
+        "id": "nasm-question-208",
         "prompt": "某客户主要目标是改善健康，不是竞技表现。解释测试结果时更应强调：",
         "options": [
           {
@@ -9407,10 +9734,11 @@ export const nasmChapters = [
             "label": "是否达到全国纪录"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 是否赢过运动员 B. 与自身基线相比的变化 C. 某次单项最好成绩 D. 是否达到全国纪录"
+        "explanation": "解析：对健康目标客户，更应重视与自身基线相比的变化。出处概念：结果解释。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-29",
+        "id": "nasm-question-209",
         "prompt": "某客户做抓背测试时出现明显躯干扭转与代偿。教练此时应：",
         "options": [
           {
@@ -9430,10 +9758,11 @@ export const nasmChapters = [
             "label": "改测血压"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 直接记录为最好成绩 B. 忽略代偿 C. 纠正代偿后再判断结果 D. 改测血压"
+        "explanation": "解析：抓背测试应避免躯干扭转等代偿，否则结果失真。出处概念：抓背测试流程。",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-30",
+        "id": "nasm-question-210",
         "prompt": "某客户单腿蹲无法达到要求角度且无法保持平衡。按本章建议，更适合：",
         "options": [
           {
@@ -9453,7 +9782,8 @@ export const nasmChapters = [
             "label": "放弃所有动作评估"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 继续强行完成 B. 改用跳台测试作为替代 C. 直接做最大深蹲 D. 放弃所有动作评估"
+        "explanation": "解析：无法完成单腿蹲时，可改用跳台测试作为替代。出处概念：单腿蹲和跳台测试。",
+        "correctOptionKey": "choice-b"
       }
     ]
   },
@@ -9608,7 +9938,8 @@ export const nasmChapters = [
             "label": "核心稳定能力"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 最大力量输出能力 B. 一个或多个关节的活动范围 C. 快速变向能力 D. 核心稳定能力"
+        "explanation": "解析：本章把柔韧性定义为一个或多个关节的活动范围。出处概念：柔韧性定义。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-02",
@@ -9631,7 +9962,8 @@ export const nasmChapters = [
             "label": "皮褶测试"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 弹振式拉伸 B. 肌电图测试 C. 血压测量 D. 皮褶测试"
+        "explanation": "解析：弹振式拉伸属于本章讨论的柔韧训练类型。出处概念：柔韧性训练类型。",
+        "correctOptionKey": "choice-a"
       },
       {
         "id": "nasm-question-03",
@@ -9654,7 +9986,8 @@ export const nasmChapters = [
             "label": "腰臀比计算"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 静态拉伸 B. 1RM 测试 C. 台阶测试 D. 腰臀比计算"
+        "explanation": "解析：静态拉伸是最常用的提高柔韧性方法之一。出处概念：静态拉伸。",
+        "correctOptionKey": "choice-a"
       },
       {
         "id": "nasm-question-04",
@@ -9677,7 +10010,8 @@ export const nasmChapters = [
             "label": "直接测量 ROM"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 替代正式训练 B. 提高核心温度 C. 直接增加最大力量 D. 直接测量 ROM"
+        "explanation": "解析：热身的核心是提高核心温度，并为后续活动做准备。出处概念：热身作用。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-05",
@@ -9700,7 +10034,8 @@ export const nasmChapters = [
             "label": "完全不热身"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 更激进地拉伸 B. 避免过度拉伸 C. 只做弹振式拉伸 D. 完全不热身"
+        "explanation": "解析：过度松弛者应特别谨慎，避免过度拉伸。出处概念：过度松弛。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-06",
@@ -9723,7 +10058,8 @@ export const nasmChapters = [
             "label": "心肺恢复能力"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 组织被拉伸后恢复原长的能力 B. 组织永久变长的能力 C. 动作学习能力 D. 心肺恢复能力"
+        "explanation": "解析：弹性是组织被动拉伸后恢复原长度的能力。出处概念：弹性。",
+        "correctOptionKey": "choice-a"
       },
       {
         "id": "nasm-question-07",
@@ -9746,7 +10082,8 @@ export const nasmChapters = [
             "label": "训练频率变化"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 组织对温度的适应 B. 组织在移除外力后仍维持较长长度的能力 C. 神经反应速度 D. 训练频率变化"
+        "explanation": "解析：可塑性强调移除外力后仍保持较长长度。出处概念：可塑性。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-08",
@@ -9769,7 +10106,8 @@ export const nasmChapters = [
             "label": "有氧功率表测试"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 悬吊训练 B. 血脂筛查 C. 医疗转诊 D. 有氧功率表测试"
+        "explanation": "解析：悬吊训练是本章重点介绍的训练形式之一。出处概念：训练技术分类。",
+        "correctOptionKey": "choice-a"
       },
       {
         "id": "nasm-question-09",
@@ -9792,7 +10130,8 @@ export const nasmChapters = [
             "label": "训练音乐"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 外观颜色 B. 安全性 C. 拍照效果 D. 训练音乐"
+        "explanation": "解析：由于稳定球固有不稳定性高，首要关注点是安全。出处概念：稳定球训练指南。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-10",
@@ -9815,10 +10154,11 @@ export const nasmChapters = [
             "label": "躯干必须后仰"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 膝高于胸 B. 大腿与地面大致平行或略高 C. 脚离地 D. 躯干必须后仰"
+        "explanation": "解析：球体合适时，客户坐上去大腿应与地面平行或略高。出处概念：稳定球尺寸。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-11",
+        "id": "nasm-question-101",
         "prompt": "柔韧性与热身的关系，最准确的理解是：",
         "options": [
           {
@@ -9838,10 +10178,11 @@ export const nasmChapters = [
             "label": "做了柔韧训练就不需要热身"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 二者完全相同 B. 热身可提高体温，柔韧训练是否立刻安排取决于后续活动性质 C. 做了热身就不需要柔韧训练 D. 做了柔韧训练就不需要热身"
+        "explanation": "解析：热身和柔韧训练相关但不同，柔韧训练何时安排要看后续运动性质。出处概念：热身与柔韧训练关系。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-12",
+        "id": "nasm-question-102",
         "prompt": "核心温度升高会怎样影响 ROM？",
         "options": [
           {
@@ -9861,10 +10202,11 @@ export const nasmChapters = [
             "label": "只能影响力量"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 通常有积极影响 B. 一定降低 ROM C. 没有任何关系 D. 只能影响力量"
+        "explanation": "解析：核心温度升高对 ROM 有积极影响。出处概念：温度与柔韧性。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-13",
+        "id": "nasm-question-103",
         "prompt": "弹振式拉伸不被优先推荐的重要原因之一是：",
         "options": [
           {
@@ -9884,10 +10226,11 @@ export const nasmChapters = [
             "label": "不能活动任何关节"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 太慢 B. 易激活牵张反射 C. 不需要能量 D. 不能活动任何关节"
+        "explanation": "解析：弹振式拉伸因快速拉伸容易激活牵张反射。出处概念：弹振式拉伸缺点。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-14",
+        "id": "nasm-question-104",
         "prompt": "牵张反射的直接结果通常是：",
         "options": [
           {
@@ -9907,10 +10250,11 @@ export const nasmChapters = [
             "label": "血压归零"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 肌肉进一步完全放松 B. 预先被拉伸的肌肉发生收缩 C. 心率下降 D. 血压归零"
+        "explanation": "解析：牵张反射会使预先被拉伸的肌肉发生收缩。出处概念：肌梭与牵张反射。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-15",
+        "id": "nasm-question-105",
         "prompt": "静态拉伸之所以相对更安全，是因为：",
         "options": [
           {
@@ -9930,10 +10274,11 @@ export const nasmChapters = [
             "label": "完全不需要控制技术"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 总在最大疼痛下进行 B. 速度缓慢，不易激活牵张反射 C. 不会拉伸到肌肉 D. 完全不需要控制技术"
+        "explanation": "解析：静态拉伸缓慢稳定，不易触发牵张反射，因此相对安全。出处概念：静态拉伸原理。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-16",
+        "id": "nasm-question-106",
         "prompt": "PNF 拉伸的显著特点是：",
         "options": [
           {
@@ -9953,10 +10298,11 @@ export const nasmChapters = [
             "label": "只能用于颈部"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 完全不需要主动收缩 B. 常结合被动与主动配合 C. 只适用于儿童 D. 只能用于颈部"
+        "explanation": "解析：PNF 常结合被动与主动收缩配合以增加 ROM。出处概念：PNF拉伸。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-17",
+        "id": "nasm-question-107",
         "prompt": "文本对抗阻训练与柔韧性的关系强调：",
         "options": [
           {
@@ -9976,10 +10322,11 @@ export const nasmChapters = [
             "label": "只能做局部 ROM 训练"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 抗阻训练必然降低柔韧性 B. 只练主动肌即可 C. ROM 完整且主动肌/拮抗肌均衡时可促进柔韧性 D. 只能做局部 ROM 训练"
+        "explanation": "解析：完整 ROM、主动肌与拮抗肌均衡发展的抗阻训练有助于柔韧性。出处概念：抗阻训练与柔韧性。",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-18",
+        "id": "nasm-question-108",
         "prompt": "为什么说“柔韧性越大越好”并不准确？",
         "options": [
           {
@@ -9999,10 +10346,11 @@ export const nasmChapters = [
             "label": "因为柔韧性只与年龄有关"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 因为任何柔韧训练都无用 B. 因为训练应基于个体需求，过大 ROM 也可能增加风险 C. 因为所有人 ROM 都相同 D. 因为柔韧性只与年龄有关"
+        "explanation": "解析：柔韧训练应基于个体需求，ROM 过大也可能增加受伤风险。出处概念：柔韧性并非越大越好。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-19",
+        "id": "nasm-question-109",
         "prompt": "稳定球训练中从简单到复杂逐步进阶，主要是为了：",
         "options": [
           {
@@ -10022,10 +10370,11 @@ export const nasmChapters = [
             "label": "减少热身"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 增加器械磨损 B. 保障安全并逐步适应不稳定性 C. 让动作更花哨 D. 减少热身"
+        "explanation": "解析：逐步进阶能帮助客户适应不稳定条件并降低受伤风险。出处概念：稳定球训练进阶。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-20",
+        "id": "nasm-question-110",
         "prompt": "文本建议稳定球训练前也要热身，主要原因是：",
         "options": [
           {
@@ -10045,10 +10394,11 @@ export const nasmChapters = [
             "label": "否则球会变软"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 稳定球本身很重 B. 热身可提高体温并帮助激活稳定肌群 C. 只是传统习惯 D. 否则球会变软"
+        "explanation": "解析：热身可提高体温，并帮助激活稳定肌群与运动准备。出处概念：稳定球训练前热身。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-21",
+        "id": "nasm-question-201",
         "prompt": "某客户接下来要打篮球，教练在热身后更适合安排：",
         "options": [
           {
@@ -10068,10 +10418,11 @@ export const nasmChapters = [
             "label": "只测血压"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 长时间静态拉伸为主 B. 动态柔韧训练 C. 直接不热身上场 D. 只测血压"
+        "explanation": "解析：动态剧烈活动前更适合在热身后安排动态柔韧训练。出处概念：柔韧训练与后续活动性质。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-22",
+        "id": "nasm-question-202",
         "prompt": "某客户接下来做动感单车课，按本章思路，柔韧训练更可以考虑：",
         "options": [
           {
@@ -10091,10 +10442,11 @@ export const nasmChapters = [
             "label": "先做最大力量测试"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 放在课后 B. 取消热身 C. 只做弹振式拉伸 D. 先做最大力量测试"
+        "explanation": "解析：若后续运动强度与动作模式较单一，柔韧训练可放在课后。出处概念：柔韧训练时机。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-23",
+        "id": "nasm-question-203",
         "prompt": "某初学者做静态拉伸时一开始就很难坚持太久。教练最合理的做法是：",
         "options": [
           {
@@ -10114,10 +10466,11 @@ export const nasmChapters = [
             "label": "取消所有拉伸"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 强迫其拉到疼痛 B. 从较短持续时间开始，逐步增加 C. 直接改做高强度弹振式拉伸 D. 取消所有拉伸"
+        "explanation": "解析：初学者可先缩短静态拉伸持续时间，再逐步增加。出处概念：静态拉伸执行建议。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-24",
+        "id": "nasm-question-204",
         "prompt": "某客户做拉伸时出现明显疼痛。按本章建议，教练应：",
         "options": [
           {
@@ -10137,10 +10490,11 @@ export const nasmChapters = [
             "label": "立刻改做冲刺"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 鼓励继续加大幅度 B. 认为越痛越有效 C. 减小拉伸幅度 D. 立刻改做冲刺"
+        "explanation": "解析：静态拉伸只应达到轻微不适，不应进入疼痛范围。出处概念：静态拉伸建议。",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-25",
+        "id": "nasm-question-205",
         "prompt": "某客户柔韧性不足且下背痛明显，教练在解释时最符合文本的是：",
         "options": [
           {
@@ -10160,10 +10514,11 @@ export const nasmChapters = [
             "label": "热身完全无意义"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 柔韧性与损伤无关 B. 关节正常 ROM 有助于减少损伤风险 C. 只练力量就够 D. 热身完全无意义"
+        "explanation": "解析：文本强调正常 ROM 有助于降低运动损伤风险。出处概念：柔韧性训练益处。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-26",
+        "id": "nasm-question-206",
         "prompt": "某训练者长期只做局部 ROM 的高强度抗阻训练，最可能出现：",
         "options": [
           {
@@ -10183,10 +10538,11 @@ export const nasmChapters = [
             "label": "只会提高协调"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 柔韧性下降 B. ROM 一定增大 C. 完全不受影响 D. 只会提高协调"
+        "explanation": "解析：长期只做局部 ROM 的高强度抗阻训练，可能损害柔韧性。出处概念：抗阻训练与柔韧性。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-27",
+        "id": "nasm-question-207",
         "prompt": "某客户在稳定球训练中动作变形、很快疲劳。教练最合理的调整是：",
         "options": [
           {
@@ -10206,10 +10562,11 @@ export const nasmChapters = [
             "label": "改做高强度弹振式拉伸"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 继续加难度 B. 回到更基础的练习并强调技术 C. 取消所有训练 D. 改做高强度弹振式拉伸"
+        "explanation": "解析：稳定球训练应从基础练习开始，先保证技术，再逐步提高难度。出处概念：稳定球训练指南。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-28",
+        "id": "nasm-question-208",
         "prompt": "某客户坐在稳定球上时膝明显高于髋、姿势不稳。首先应考虑：",
         "options": [
           {
@@ -10229,10 +10586,11 @@ export const nasmChapters = [
             "label": "说明客户柔韧性一定很好"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 球体大小可能不合适 B. 客户不需要热身 C. 直接增加负荷 D. 说明客户柔韧性一定很好"
+        "explanation": "解析：坐姿明显不稳且膝髋关系异常，首先应检查球体尺寸。出处概念：稳定球大小判定。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-29",
+        "id": "nasm-question-209",
         "prompt": "某客户练习悬吊训练时总用臀部带动、躯干失去中立位。教练应重点纠正的是：",
         "options": [
           {
@@ -10252,10 +10610,11 @@ export const nasmChapters = [
             "label": "腰臀比标准"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 动作对齐与中立位控制 B. 血压袖套 C. 体脂公式 D. 腰臀比标准"
+        "explanation": "解析：悬吊训练常见错误就是躯干失去中立位和借力代偿，应先纠正动作对齐。出处概念：悬吊训练技术要点。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-30",
+        "id": "nasm-question-210",
         "prompt": "某客户把几下静态拉伸当作完整热身。按本章逻辑，最恰当的纠正是：",
         "options": [
           {
@@ -10275,7 +10634,8 @@ export const nasmChapters = [
             "label": "只要出汗就一定完成热身"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 可以，二者完全等同 B. 热身与拉伸不同，热身是高效活动的基础 C. 拉伸比热身更重要，因此足够 D. 只要出汗就一定完成热身"
+        "explanation": "解析：本章明确指出不能把热身与拉伸混为一谈，热身是高效活动的基础。出处概念：热身与拉伸的区别。",
+        "correctOptionKey": "choice-b"
       }
     ]
   },
@@ -10427,7 +10787,8 @@ export const nasmChapters = [
             "label": "水中器械"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 固定器械 B. 自由重量器械 C. 备选器械 D. 水中器械"
+        "explanation": "解析：本章将器械概括为固定器械、自由重量器械和备选器械。水中器械不在本章抗阻器械分类中。（出处概念：器械三大类）",
+        "correctOptionKey": "choice-d"
       },
       {
         "id": "nasm-question-02",
@@ -10450,7 +10811,8 @@ export const nasmChapters = [
             "label": "只能用于高水平客户"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 运动路径完全不受限制 B. 通常不需要稳定控制 C. 运动路径受限且可控 D. 只能用于高水平客户"
+        "explanation": "解析：固定器械的关键特征是运动路径受限且可控，稳定性较高。（出处概念：固定器械特点）",
+        "correctOptionKey": "choice-c"
       },
       {
         "id": "nasm-question-03",
@@ -10473,7 +10835,8 @@ export const nasmChapters = [
             "label": "指尖握"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 开握 B. 假握 C. 闭合握 D. 指尖握"
+        "explanation": "解析：闭合握要求拇指环绕器械，更强调安全性；开握/假握风险更高。（出处概念：闭合握与开握）",
+        "correctOptionKey": "choice-c"
       },
       {
         "id": "nasm-question-04",
@@ -10496,7 +10859,8 @@ export const nasmChapters = [
             "label": "双肘"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 头后部 B. 上背部及后肩部 C. 下背部及臀部 D. 双肘"
+        "explanation": "解析：长凳仰卧练习的五点支撑包括头后部、上背及后肩、下背及臀部、右脚、左脚，不包括双肘。（出处概念：五点支撑）",
+        "correctOptionKey": "choice-d"
       },
       {
         "id": "nasm-question-05",
@@ -10519,7 +10883,8 @@ export const nasmChapters = [
             "label": "随机呼吸"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 屏气到底 B. 呼气 C. 吸气 D. 随机呼吸"
+        "explanation": "解析：一般建议在向心阶段越过粘滞点时呼气，离心阶段吸气。（出处概念：呼吸原则）",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-06",
@@ -10542,7 +10907,8 @@ export const nasmChapters = [
             "label": "划船机"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 等动器械 B. 哑铃 C. 楼梯机 D. 划船机"
+        "explanation": "解析：哑铃属于自由重量器械，等动器械不属于自由重量。（出处概念：自由重量器械）",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-07",
@@ -10565,7 +10931,8 @@ export const nasmChapters = [
             "label": "轮轴器械"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 战绳 B. 等重器械 C. 配重器械 D. 轮轴器械"
+        "explanation": "解析：战绳属于备选器械；等重、配重、轮轴器械属于固定器械类别中的具体形式。（出处概念：备选器械）",
+        "correctOptionKey": "choice-a"
       },
       {
         "id": "nasm-question-08",
@@ -10588,7 +10955,8 @@ export const nasmChapters = [
             "label": "替代保护者"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 增加动作速度 B. 增加腹内压 C. 取消热身需要 D. 替代保护者"
+        "explanation": "解析：举重腰带可通过增加腹内压帮助稳定躯干、减小脊柱压力。（出处概念：举重腰带作用）",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-09",
@@ -10611,7 +10979,8 @@ export const nasmChapters = [
             "label": "轻松热身"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 结构性大负荷练习 B. 低强度步行 C. 伸展放松 D. 轻松热身"
+        "explanation": "解析：瓦尔萨尔瓦呼吸主要与深蹲、硬拉、推举等结构性、大负荷训练相关。（出处概念：瓦式呼吸适用情境）",
+        "correctOptionKey": "choice-a"
       },
       {
         "id": "nasm-question-10",
@@ -10634,10 +11003,11 @@ export const nasmChapters = [
             "label": "决定客户饮食计划"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 提高客户训练趣味 B. 替客户完成动作 C. 保护客户安全并协助完成训练 D. 决定客户饮食计划"
+        "explanation": "解析：私人教练在抗阻训练中的首要职责是保护客户安全，并在需要时协助完成训练。（出处概念：保护者职责）",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-11",
+        "id": "nasm-question-101",
         "prompt": "固定器械对新手更友好的主要原因是：",
         "options": [
           {
@@ -10657,10 +11027,11 @@ export const nasmChapters = [
             "label": "一定能提高爆发力"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 必须有两名保护者 B. 运动轨迹固定，稳定性更高 C. 阻力一定更大 D. 一定能提高爆发力"
+        "explanation": "解析：固定器械路径固定、稳定性更高，因此更适合新手或控制能力不足者。（出处概念：固定器械与新手）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-12",
+        "id": "nasm-question-102",
         "prompt": "链条训练能形成可变阻力，主要因为：",
         "options": [
           {
@@ -10680,10 +11051,11 @@ export const nasmChapters = [
             "label": "链条会自动纠正动作"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 链条越粗越轻 B. 离地链条长度变化会改变外部负荷 C. 链条只在离心阶段起作用 D. 链条会自动纠正动作"
+        "explanation": "解析：链条离地越多，参与负荷的链条越多，外部阻力会增加，因此形成可变阻力。（出处概念：链条阻力）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-13",
+        "id": "nasm-question-103",
         "prompt": "阻力带在被进一步拉伸时张力增大，这意味着：",
         "options": [
           {
@@ -10703,10 +11075,11 @@ export const nasmChapters = [
             "label": "不需要稳定控制"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 整个 ROM 中阻力恒定 B. ROM 越大阻力可能越大 C. 只对上肢有效 D. 不需要稳定控制"
+        "explanation": "解析：阻力带被拉得越长，张力越大，因此 ROM 增大时阻力可能上升。（出处概念：阻力带张力变化）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-14",
+        "id": "nasm-question-104",
         "prompt": "向心越过粘滞点时呼气的主要意义是：",
         "options": [
           {
@@ -10726,10 +11099,11 @@ export const nasmChapters = [
             "label": "让离心更省力"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 让动作更慢 B. 在困难阶段更好配合发力 C. 取消腹压 D. 让离心更省力"
+        "explanation": "解析：困难阶段呼气有助于配合发力与动作控制，不是为了拖慢动作。（出处概念：粘滞点呼吸）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-15",
+        "id": "nasm-question-105",
         "prompt": "瓦尔萨尔瓦呼吸可帮助结构性练习的关键原因是：",
         "options": [
           {
@@ -10749,10 +11123,11 @@ export const nasmChapters = [
             "label": "减少肌肉募集"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 提高器械阻力 B. 增加腹内压，稳定脊柱 C. 延长 ROM D. 减少肌肉募集"
+        "explanation": "解析：瓦式呼吸通过增加腹内压、提高躯干稳定性来帮助结构性练习。（出处概念：瓦尔萨尔瓦机制）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-16",
+        "id": "nasm-question-106",
         "prompt": "不建议在所有训练中都依赖举重腰带，主要是因为：",
         "options": [
           {
@@ -10772,10 +11147,11 @@ export const nasmChapters = [
             "label": "会降低训练频率"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 会增加器械成本 B. 可能削弱躯干主动稳定能力 C. 会减少握力 D. 会降低训练频率"
+        "explanation": "解析：若长期依赖腰带，躯干主动稳定系统可能得不到充分训练。（出处概念：腰带使用警示）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-17",
+        "id": "nasm-question-107",
         "prompt": "自由重量练习相较固定器械更常需要保护，主要因为：",
         "options": [
           {
@@ -10795,10 +11171,11 @@ export const nasmChapters = [
             "label": "只能做上肢训练"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 器械外观更复杂 B. 运动轨迹不固定，失控风险更高 C. 训练时间更长 D. 只能做上肢训练"
+        "explanation": "解析：自由重量不受固定轨迹限制，失控和脱手风险相对更高，因此更常需要保护。（出处概念：自由重量保护）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-18",
+        "id": "nasm-question-108",
         "prompt": "高翻强调四个阶段连续衔接，主要是为了：",
         "options": [
           {
@@ -10818,10 +11195,11 @@ export const nasmChapters = [
             "label": "降低对协调性的要求"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 让动作更慢 B. 形成连贯发力，把杠铃从地面转移到肩前 C. 便于停顿休息 D. 降低对协调性的要求"
+        "explanation": "解析：高翻由第一次拉杠、引杠、第二次拉杠、翻杠支撑构成连贯发力链，用于把杠铃从地面转移到肩前。（出处概念：高翻阶段）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-19",
+        "id": "nasm-question-109",
         "prompt": "壶铃摆荡若被做成“蹲起”模式，最主要的问题是：",
         "options": [
           {
@@ -10841,10 +11219,11 @@ export const nasmChapters = [
             "label": "更适合爆发力训练"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 会让阻力过轻 B. 偏离髋主导动作本质 C. 一定会提高速度 D. 更适合爆发力训练"
+        "explanation": "解析：壶铃摆荡的核心是髋铰链与摆动，不应被做成以屈膝下蹲为主的深蹲动作。（出处概念：壶铃摆荡机制）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-20",
+        "id": "nasm-question-110",
         "prompt": "划船、硬拉、深蹲等动作反复强调脊柱中立位，主要是为了：",
         "options": [
           {
@@ -10864,10 +11243,11 @@ export const nasmChapters = [
             "label": "增加组数"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 增加动作花样 B. 稳定身体排列并降低受伤风险 C. 提高器械摩擦 D. 增加组数"
+        "explanation": "解析：中立位用于维持身体排列、改善力传递并降低受伤风险。（出处概念：脊柱中立位）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-21",
+        "id": "nasm-question-201",
         "prompt": "一名抗阻训练新手、动作控制较弱、希望先建立基础，最合适的起点是：",
         "options": [
           {
@@ -10887,10 +11267,11 @@ export const nasmChapters = [
             "label": "全部使用不稳定器械"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 直接做高翻 B. 先做固定器械或自重辅助练习 C. 只做最大重量测试 D. 全部使用不稳定器械"
+        "explanation": "解析：新手宜先从固定器械、自重辅助或基础核心训练建立动作基础，再逐步进阶。（出处概念：练习起点选择）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-22",
+        "id": "nasm-question-202",
         "prompt": "客户准备进行自由重量杠铃卧推，私人教练最应优先检查的是：",
         "options": [
           {
@@ -10910,10 +11291,11 @@ export const nasmChapters = [
             "label": "是否穿跑鞋"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 是否使用开握 B. 是否建立稳定支撑并安排保护 C. 是否使用音乐 D. 是否穿跑鞋"
+        "explanation": "解析：卧推是典型自由重量练习，稳定支撑与保护安排是优先事项。（出处概念：卧推保护）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-23",
+        "id": "nasm-question-203",
         "prompt": "客户要做后深蹲并使用接近最大负荷，较合理的做法是：",
         "options": [
           {
@@ -10933,10 +11315,11 @@ export const nasmChapters = [
             "label": "故意加快离心速度"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 不用任何保护或辅助 B. 视情况采用举重腰带并安排保护 C. 改成开握 D. 故意加快离心速度"
+        "explanation": "解析：后深蹲接近最大负荷时，举重腰带与保护都属于合理的安全措施。（出处概念：结构性大负荷训练）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-24",
+        "id": "nasm-question-204",
         "prompt": "客户在上斜杠铃卧推最困难阶段习惯憋气过久，私人教练首先应强调：",
         "options": [
           {
@@ -10956,10 +11339,11 @@ export const nasmChapters = [
             "label": "把脚抬离地面"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 改为开握 B. 越过粘滞点时及时呼气 C. 取消所有训练 D. 把脚抬离地面"
+        "explanation": "解析：本章给出的通用建议是“困难阶段呼气，较容易阶段吸气”。（出处概念：呼吸教学）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-25",
+        "id": "nasm-question-205",
         "prompt": "客户在壶铃摆荡中每次都明显下蹲、圆背、抬头过高，最合适的纠正重点是：",
         "options": [
           {
@@ -10979,10 +11363,11 @@ export const nasmChapters = [
             "label": "改成跑步训练"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 增加负重 B. 恢复髋铰链与脊柱中立 C. 缩短手臂长度 D. 改成跑步训练"
+        "explanation": "解析：壶铃摆荡最先要纠正的是髋铰链、背部中立和摆动路径，而不是先加重量。（出处概念：壶铃摆荡常见错误）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-26",
+        "id": "nasm-question-206",
         "prompt": "客户需要在较小空间内做多种练习，同时希望器械便携，较可行的器械选择是：",
         "options": [
           {
@@ -11002,10 +11387,11 @@ export const nasmChapters = [
             "label": "仅液压器械"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 多组大型固定器械 B. 备选器械如阻力带、壶铃、负重包 C. 仅等动器械 D. 仅液压器械"
+        "explanation": "解析：阻力带、壶铃、负重包等备选器械更适合小空间和便携需求。（出处概念：备选器械应用）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-27",
+        "id": "nasm-question-207",
         "prompt": "客户在肩部承载杠铃练习中平衡较差，此时最合理的做法是：",
         "options": [
           {
@@ -11025,10 +11411,11 @@ export const nasmChapters = [
             "label": "强行增加重量"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 取消所有保护 B. 采用合适保护方式并靠近客户身后 C. 让客户闭眼训练 D. 强行增加重量"
+        "explanation": "解析：肩部承载杠铃练习需要保护者贴近客户、随时准备协助完成动作。（出处概念：肩部承载杠铃保护）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-28",
+        "id": "nasm-question-208",
         "prompt": "若客户已知有心血管疾病风险，进行抗阻训练时应：",
         "options": [
           {
@@ -11048,10 +11435,11 @@ export const nasmChapters = [
             "label": "只做最大力量训练"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 常规使用瓦尔萨尔瓦呼吸 B. 严禁使用任何呼吸 C. 避免使用瓦尔萨尔瓦呼吸 D. 只做最大力量训练"
+        "explanation": "解析：本章明确指出，已知或怀疑存在心血管、代谢、呼吸系统疾病者不应采用瓦式呼吸。（出处概念：瓦式呼吸禁忌）",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-29",
+        "id": "nasm-question-209",
         "prompt": "客户做哑铃侧平举时总靠耸肩和踮脚完成上举，说明最可能的问题是：",
         "options": [
           {
@@ -11071,10 +11459,11 @@ export const nasmChapters = [
             "label": "需要更多闭合握训练"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 负荷或动作控制不当 B. 热身过度 C. 鞋子太软 D. 需要更多闭合握训练"
+        "explanation": "解析：耸肩、踮脚和借力通常提示负荷不合适或动作控制不足，而非训练时间不够。（出处概念：侧平举常见错误）",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-30",
+        "id": "nasm-question-210",
         "prompt": "客户准备从固定器械过渡到自由重量训练，私人教练最稳妥的推进策略是：",
         "options": [
           {
@@ -11094,7 +11483,8 @@ export const nasmChapters = [
             "label": "只增加训练时间，不调整练习方式"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 一次性全部更换为高难度自由重量 B. 在保证动作技术的前提下逐步增加自由重量练习比例 C. 直接取消基础训练 D. 只增加训练时间，不调整练习方式"
+        "explanation": "解析：从固定器械过渡到自由重量应以动作质量为前提逐步推进，不能一次性大幅升级难度。（出处概念：渐进过渡）",
+        "correctOptionKey": "choice-b"
       }
     ]
   },
@@ -11263,7 +11653,8 @@ export const nasmChapters = [
             "label": "腿举机"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 跑步机 B. 划船机 C. 固定自行车 D. 腿举机"
+        "explanation": "解析：腿举机属于抗阻训练器械，不属于本章讨论的常见心血管器械。（出处概念：常见心血管器械）",
+        "correctOptionKey": "choice-d"
       },
       {
         "id": "nasm-question-02",
@@ -11286,7 +11677,8 @@ export const nasmChapters = [
             "label": "只要鞋底没坏就不用换"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 100—200 英里 B. 300—500 英里 C. 800—1000 英里 D. 只要鞋底没坏就不用换"
+        "explanation": "解析：本章指出大多数跑鞋在使用约 300—500 英里或约 6 个月后应考虑更换。（出处概念：跑鞋更换）",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-03",
@@ -11309,7 +11701,8 @@ export const nasmChapters = [
             "label": "10%"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 0.1% B. 1% C. 5% D. 10%"
+        "explanation": "解析：为弥补跑步机与户外跑步的差异，文中建议大约提高 1% 坡度。（出处概念：跑步机与户外差异）",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-04",
@@ -11332,7 +11725,8 @@ export const nasmChapters = [
             "label": "10—15 英寸"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 1—2 英寸 B. 2—3 英寸 C. 4—8 英寸 D. 10—15 英寸"
+        "explanation": "解析：楼梯机适当的蹬踏 ROM 通常约为 4—8 英寸。（出处概念：楼梯机 ROM）",
+        "correctOptionKey": "choice-c"
       },
       {
         "id": "nasm-question-05",
@@ -11355,7 +11749,8 @@ export const nasmChapters = [
             "label": "必须超过 90°"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 完全锁死 B. 过度屈曲 C. 轻微屈曲约 25°—30° D. 必须超过 90°"
+        "explanation": "解析：固定自行车脚踏最低位时膝关节应保持轻微屈曲，约 25°—30°，避免锁膝。（出处概念：自行车座位高度）",
+        "correctOptionKey": "choice-c"
       },
       {
         "id": "nasm-question-06",
@@ -11378,7 +11773,8 @@ export const nasmChapters = [
             "label": "120—160 rpm"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 20—40 rpm B. 40—60 rpm C. 60—100 rpm D. 120—160 rpm"
+        "explanation": "解析：本章指出较经济的踏频一般为 60—100 rpm。（出处概念：固定自行车节奏）",
+        "correctOptionKey": "choice-c"
       },
       {
         "id": "nasm-question-07",
@@ -11401,7 +11797,8 @@ export const nasmChapters = [
             "label": "平衡板"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 手臂自行车 B. 深蹲机 C. 推雪橇 D. 平衡板"
+        "explanation": "解析：上肢测功计又称手臂测功计、曲柄测功计或手臂自行车。（出处概念：上肢测功计）",
+        "correctOptionKey": "choice-a"
       },
       {
         "id": "nasm-question-08",
@@ -11424,7 +11821,8 @@ export const nasmChapters = [
             "label": "小腿"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 头部 B. 腹部 C. 膝部 D. 小腿"
+        "explanation": "解析：划船机结束动作时手柄拉向腹部，随后再进行复位。（出处概念：划船机终点位置）",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-09",
@@ -11447,7 +11845,8 @@ export const nasmChapters = [
             "label": "80%"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 10% B. 30% C. 50% D. 80%"
+        "explanation": "解析：水到颈部时，身体约承受陆地自身体重的 10%。（出处概念：水中运动负重特征）",
+        "correctOptionKey": "choice-a"
       },
       {
         "id": "nasm-question-10",
@@ -11470,10 +11869,11 @@ export const nasmChapters = [
             "label": "只适合竞技运动员"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 双脚始终离地 B. 单脚可始终与地面保持接触 C. 必须高速跳跃 D. 只适合竞技运动员"
+        "explanation": "解析：低冲击有氧操的典型特点是始终有单脚与地面接触。（出处概念：低冲击团操）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-11",
+        "id": "nasm-question-101",
         "prompt": "跑步机上相同速度下常感觉比户外更容易，主要因为：",
         "options": [
           {
@@ -11493,10 +11893,11 @@ export const nasmChapters = [
             "label": "心率不会升高"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 室内空气更冷 B. 履带帮助身体前移 C. 鞋子更轻 D. 心率不会升高"
+        "explanation": "解析：跑步机的履带帮助身体前移，减少了主动推进需求，因此常感觉较容易。（出处概念：跑步机机制）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-12",
+        "id": "nasm-question-102",
         "prompt": "跑步机和楼梯机训练中不宜过度依赖扶手，主要因为：",
         "options": [
           {
@@ -11516,10 +11917,11 @@ export const nasmChapters = [
             "label": "会降低鞋底摩擦"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 会缩短器械寿命 B. 会降低负荷并破坏体态排列 C. 会让速度变快 D. 会降低鞋底摩擦"
+        "explanation": "解析：扶手依赖会支撑部分体重、降低真实负荷，并影响体态排列，增加下腰背风险。（出处概念：扶手使用）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-13",
+        "id": "nasm-question-103",
         "prompt": "楼梯机速度过快最可能带来的问题是：",
         "options": [
           {
@@ -11539,10 +11941,11 @@ export const nasmChapters = [
             "label": "心率必然过低"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 蹬踏深度过大 B. 动作更稳定 C. 蹬踏短而快，深度过浅 D. 心率必然过低"
+        "explanation": "解析：楼梯机速度过快容易造成短而快的蹬踏，导致蹬踏深度过浅，动作质量下降。（出处概念：楼梯机速度）",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-14",
+        "id": "nasm-question-104",
         "prompt": "椭圆机被认为适合骨科问题客户，主要原因之一是：",
         "options": [
           {
@@ -11562,10 +11965,11 @@ export const nasmChapters = [
             "label": "不需要姿势控制"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 负荷一定最大 B. 属于低冲击训练 C. 只能练上肢 D. 不需要姿势控制"
+        "explanation": "解析：椭圆机的主要优势之一是低冲击，对骨科问题或下腰背疼痛客户更友好。（出处概念：椭圆机适用人群）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-15",
+        "id": "nasm-question-105",
         "prompt": "固定自行车若座位过低，最可能导致：",
         "options": [
           {
@@ -11585,10 +11989,11 @@ export const nasmChapters = [
             "label": "划船效率下降"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 膝关节 ROM 不合理 B. 上肢疲劳增加 C. 扶手依赖消失 D. 划船效率下降"
+        "explanation": "解析：固定自行车座位过低或过高都会破坏合理 ROM 与关节位置。（出处概念：座位高度）",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-16",
+        "id": "nasm-question-106",
         "prompt": "半卧式自行车在同等工作负荷下心率和 RPE 往往低于直立式，主要因为：",
         "options": [
           {
@@ -11608,10 +12013,11 @@ export const nasmChapters = [
             "label": "必须慢速骑行"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 不能调阻力 B. 背部支撑减少姿势肌工作 C. 只能练上肢 D. 必须慢速骑行"
+        "explanation": "解析：半卧式自行车有背部支撑，姿势肌工作减少，因此在同等工作负荷下心率、耗氧率和 RPE 通常较低。（出处概念：半卧式自行车）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-17",
+        "id": "nasm-question-107",
         "prompt": "划船机训练中初学者常见问题是：",
         "options": [
           {
@@ -11631,10 +12037,11 @@ export const nasmChapters = [
             "label": "无法拉到腹部"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 过多依赖下肢 B. 过多依赖上肢 C. 完全不会屈膝 D. 无法拉到腹部"
+        "explanation": "解析：初学者在划船机上常过多依赖上肢，而忽视下肢与躯干协同。（出处概念：划船机常见问题）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-18",
+        "id": "nasm-question-108",
         "prompt": "跑步中步幅过大、落地点远离身体重心，会导致：",
         "options": [
           {
@@ -11654,10 +12061,11 @@ export const nasmChapters = [
             "label": "一定提高配速"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 制动效应和更大冲击 B. 心率下降 C. 手臂摆动减少 D. 一定提高配速"
+        "explanation": "解析：步幅过大会让脚落地点远离重心，增加制动效应与着地冲击。（出处概念：跑步步幅）",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-19",
+        "id": "nasm-question-109",
         "prompt": "自由泳中打腿的主要作用更偏向于：",
         "options": [
           {
@@ -11677,10 +12085,11 @@ export const nasmChapters = [
             "label": "增加肩部负荷"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 完全决定前进速度 B. 保持平衡和身体水平姿势 C. 取代手臂划水 D. 增加肩部负荷"
+        "explanation": "解析：自由泳中打腿的主要功能是平衡身体和维持水平姿势，推进作用并非对多数人都占主导。（出处概念：自由泳打腿）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-20",
+        "id": "nasm-question-110",
         "prompt": "水中训练虽然冲击较低，但仍需重视补水，主要因为：",
         "options": [
           {
@@ -11700,10 +12109,11 @@ export const nasmChapters = [
             "label": "水压会阻止饮水"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 水温一定更高 B. 呼吸仍会导致大量水分流失 C. 水中不出汗就是脱水 D. 水压会阻止饮水"
+        "explanation": "解析：水中训练后仍需补水，因为呼吸会导致明显的水分流失。（出处概念：水中训练补水）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-21",
+        "id": "nasm-question-201",
         "prompt": "一位从未使用过跑步机的老年客户第一次训练，最合适的开始方式是：",
         "options": [
           {
@@ -11723,10 +12133,11 @@ export const nasmChapters = [
             "label": "双脚同时跳上履带"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 直接高速跑步 B. 跨立履带、抓住扶手、低速启动 C. 先调到最大坡度 D. 双脚同时跳上履带"
+        "explanation": "解析：对初次使用跑步机的老年客户，应跨立履带、抓扶手、低速启动，再逐步进入正常步行。（出处概念：跑步机上机流程）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-22",
+        "id": "nasm-question-202",
         "prompt": "客户在跑步机上总是双手紧抓扶手完成全程，私人教练最应强调：",
         "options": [
           {
@@ -11746,10 +12157,11 @@ export const nasmChapters = [
             "label": "应改穿举重鞋"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 扶手抓得越紧越安全 B. 在控制平衡后应逐步减少扶手依赖 C. 必须把速度调到最高 D. 应改穿举重鞋"
+        "explanation": "解析：扶手可用于建立初始平衡，但应逐步减少依赖，以恢复真实摆臂与负荷。（出处概念：扶手渐进撤除）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-23",
+        "id": "nasm-question-203",
         "prompt": "一位膝关节不适的客户需要选择低冲击心血管方式，下列更合适的是：",
         "options": [
           {
@@ -11769,10 +12181,11 @@ export const nasmChapters = [
             "label": "快速冲刺跑"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 高冲击有氧操 B. 椭圆机或固定自行车 C. 跳箱训练 D. 快速冲刺跑"
+        "explanation": "解析：椭圆机与固定自行车属于低冲击方式，更适合膝关节不适客户。（出处概念：低冲击器械）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-24",
+        "id": "nasm-question-204",
         "prompt": "客户使用楼梯机时身体明显左右摇摆，首先应考虑调整：",
         "options": [
           {
@@ -11792,10 +12205,11 @@ export const nasmChapters = [
             "label": "改成单脚训练"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 增大步幅和速度 B. 减小步幅或速度 C. 提高扶手高度 D. 改成单脚训练"
+        "explanation": "解析：楼梯机身体左右摇摆常提示步幅或速度过大，应先减小其中之一。（出处概念：楼梯机姿势控制）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-25",
+        "id": "nasm-question-205",
         "prompt": "客户固定自行车踩踏到底时膝关节完全锁死，最可能需要调整的是：",
         "options": [
           {
@@ -11815,10 +12229,11 @@ export const nasmChapters = [
             "label": "水壶位置"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 座位高度 B. 鞋带松紧 C. 音乐节奏 D. 水壶位置"
+        "explanation": "解析：脚踏最低位膝锁死通常说明座位偏高，应重新调整座位高度。（出处概念：自行车座位调整）",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-26",
+        "id": "nasm-question-206",
         "prompt": "一位下肢受限客户又希望提高心血管能力，较好的器械选择是：",
         "options": [
           {
@@ -11838,10 +12253,11 @@ export const nasmChapters = [
             "label": "冲刺跑"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 上肢测功计 B. 负重弓步 C. 台阶跳 D. 冲刺跑"
+        "explanation": "解析：上肢测功计能为下肢受限者提供可行的有氧替代选择。（出处概念：上肢训练应用）",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-27",
+        "id": "nasm-question-207",
         "prompt": "客户在划船机训练中一开始就猛拉手柄、下肢几乎不发力，最合适的纠正是：",
         "options": [
           {
@@ -11861,10 +12277,11 @@ export const nasmChapters = [
             "label": "让客户闭眼感受"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 强调先由下肢启动，再配合躯干和上肢 B. 提高阻力掩盖错误 C. 缩短手柄行程 D. 让客户闭眼感受"
+        "explanation": "解析：划船机技术强调先由下肢发力启动，再配合躯干与上肢拉柄。（出处概念：划船机动作顺序）",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-28",
+        "id": "nasm-question-208",
         "prompt": "一位客户已能持续步行 1 小时且无明显疲劳，想开始跑步训练，较合理的过渡方式是：",
         "options": [
           {
@@ -11884,10 +12301,11 @@ export const nasmChapters = [
             "label": "只练划船机"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 直接全程高强度跑 B. 采用走跑交替方案 C. 只做高冲击操 D. 只练划船机"
+        "explanation": "解析：文中建议在具备一定步行基础后，可通过走跑交替逐步进入跑步训练。（出处概念：步行到跑步过渡）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-29",
+        "id": "nasm-question-209",
         "prompt": "初学者参加搏击操课时，私人教练更合理的建议是：",
         "options": [
           {
@@ -11907,10 +12325,11 @@ export const nasmChapters = [
             "label": "先做高踢和大幅旋转"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 一次练尽可能多的组合动作 B. 先学正确动作，不必短时间练太多 C. 每天都练，不留恢复日 D. 先做高踢和大幅旋转"
+        "explanation": "解析：搏击操初学者应先学习正确动作，不宜在短时间内堆积太多技术组合。（出处概念：搏击操初学者指导）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-30",
+        "id": "nasm-question-210",
         "prompt": "客户进行水中跳跃练习前，最应先掌握的是：",
         "options": [
           {
@@ -11930,7 +12349,8 @@ export const nasmChapters = [
             "label": "更快摆臂速度"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 屏气时间 B. 正确落地技术 C. 更高跳跃高度 D. 更快摆臂速度"
+        "explanation": "解析：水中跳跃前先学正确落地技术，有助于降低冲击与受伤风险。（出处概念：水中跳跃技术）",
+        "correctOptionKey": "choice-b"
       }
     ]
   },
@@ -12089,7 +12509,8 @@ export const nasmChapters = [
             "label": "随机性"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 特异性 B. 超负荷 C. 多样化 D. 随机性"
+        "explanation": "解析：本章明确提出的四项基本原则是特异性、超负荷、多样化、渐进性，不包括“随机性”。（出处概念：四大原则）",
+        "correctOptionKey": "choice-d"
       },
       {
         "id": "nasm-question-02",
@@ -12112,7 +12533,8 @@ export const nasmChapters = [
             "label": "以上都是"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 肌肉耐力 B. 肌肉肥大 C. 肌肉力量 D. 以上都是"
+        "explanation": "解析：本章列出的主要目标包括肌肉耐力、肌肉肥大、肌肉力量和肌肉爆发力。（出处概念：主要目标）",
+        "correctOptionKey": "choice-d"
       },
       {
         "id": "nasm-question-03",
@@ -12135,7 +12557,8 @@ export const nasmChapters = [
             "label": "只看训练时长，不看内容"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 想增强腿部力量，却只安排手臂训练 B. 按目标肌群和运动模式安排训练 C. 每次随意更换动作 D. 只看训练时长，不看内容"
+        "explanation": "解析：特异性强调训练内容要与目标肌群、运动模式和结果对应。（出处概念：特异性原则）",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-04",
@@ -12158,7 +12581,8 @@ export const nasmChapters = [
             "label": "取消间歇时间记录"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 只减少训练变量 B. 增加负荷重量或组数 C. 固定方案终身不变 D. 取消间歇时间记录"
+        "explanation": "解析：增加重量、增加重复次数或组数、缩短休息、提高频率都可构成超负荷。（出处概念：超负荷原则）",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-05",
@@ -12181,7 +12605,8 @@ export const nasmChapters = [
             "label": "只做最大重量"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 多样化的阶段性安排 B. 只做同一动作 C. 只看当天状态 D. 只做最大重量"
+        "explanation": "解析：周期性训练本质上是对训练变量进行阶段性安排，是多样化的重要实现方式。（出处概念：周期性）",
+        "correctOptionKey": "choice-a"
       },
       {
         "id": "nasm-question-06",
@@ -12204,7 +12629,8 @@ export const nasmChapters = [
             "label": "BMI 单独值"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. RM B. RIR C. RPE D. BMI 单独值"
+        "explanation": "解析：本章用于确定初始负荷的方法是 RM、RIR、RPE，BMI 不能单独用于此目的。（出处概念：负荷确定方法）",
+        "correctOptionKey": "choice-d"
       },
       {
         "id": "nasm-question-07",
@@ -12227,7 +12653,8 @@ export const nasmChapters = [
             "label": "速度与柔韧"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 热身与放松 B. 核心训练与辅助训练 C. 有氧与无氧 D. 速度与柔韧"
+        "explanation": "解析：练习方式按本章框架主要分为核心训练与辅助训练。（出处概念：抗阻训练类型）",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-08",
@@ -12250,7 +12677,8 @@ export const nasmChapters = [
             "label": "完全不需要休息"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 至少 1 天，但不超过 3 天 B. 必须连续训练 C. 至少 5 天 D. 完全不需要休息"
+        "explanation": "解析：同一肌群训练日之间至少留一天、但不超过三天，是本章给出的基本指导之一。（出处概念：恢复时间）",
+        "correctOptionKey": "choice-a"
       },
       {
         "id": "nasm-question-09",
@@ -12273,7 +12701,8 @@ export const nasmChapters = [
             "label": "每月 1 次"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 每周 1 次 B. 每周 2—3 次 C. 每周 6—7 次 D. 每月 1 次"
+        "explanation": "解析：本章指出，大多数初级和中级客户每周 2—3 次抗阻训练即可获得良好收益。（出处概念：训练频率）",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-10",
@@ -12296,10 +12725,11 @@ export const nasmChapters = [
             "label": "只做单组训练"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 超级组 B. 只做热身 C. 只做放松 D. 只做单组训练"
+        "explanation": "解析：超级组属于次级排序方法，强调两种练习连续进行。（出处概念：次级排序）",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-11",
+        "id": "nasm-question-101",
         "prompt": "抗阻训练中强调特异性，主要是因为：",
         "options": [
           {
@@ -12319,10 +12749,11 @@ export const nasmChapters = [
             "label": "动作技术不影响结果"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 训练效果与训练方式和目标直接相关 B. 所有练习效果完全相同 C. 训练频率比动作内容更重要 D. 动作技术不影响结果"
+        "explanation": "解析：特异性说明训练方案的效果与训练类型直接相关，因此目标与内容必须对齐。（出处概念：特异性机制）",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-12",
+        "id": "nasm-question-102",
         "prompt": "超负荷若不与渐进性结合，最可能的问题是：",
         "options": [
           {
@@ -12342,10 +12773,11 @@ export const nasmChapters = [
             "label": "不需要恢复"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 客户立即达到峰值适应 B. 训练刺激过跳跃，适应与安全性受影响 C. 自动提升坚持性 D. 不需要恢复"
+        "explanation": "解析：超负荷若脱离渐进性，会让客户难以适应并增加受伤或恢复问题。（出处概念：超负荷与渐进性）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-13",
+        "id": "nasm-question-103",
         "prompt": "多样化并不等于随机换动作，主要因为：",
         "options": [
           {
@@ -12365,10 +12797,11 @@ export const nasmChapters = [
             "label": "只要出汗就有效"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 多样化应围绕目标与阶段进行 B. 动作越多越好 C. 训练顺序永远不重要 D. 只要出汗就有效"
+        "explanation": "解析：多样化是有目的地改变训练变量，而不是随意改变动作。（出处概念：多样化原则）",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-14",
+        "id": "nasm-question-104",
         "prompt": "先做爆发力和核心训练、后做辅助训练的主要逻辑是：",
         "options": [
           {
@@ -12388,10 +12821,11 @@ export const nasmChapters = [
             "label": "避免多关节动作"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 让复杂动作在更疲劳时完成 B. 让复杂动作在较低疲劳下完成 C. 节省所有休息时间 D. 避免多关节动作"
+        "explanation": "解析：爆发力与核心训练更复杂、对神经肌肉质量要求更高，因此宜在较低疲劳状态下先做。（出处概念：练习顺序）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-15",
+        "id": "nasm-question-105",
         "prompt": "训练负荷越大，组间歇休息通常：",
         "options": [
           {
@@ -12411,10 +12845,11 @@ export const nasmChapters = [
             "label": "只看天气"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 越短 B. 越长 C. 完全不变 D. 只看天气"
+        "explanation": "解析：负荷越大，通常恢复需求越高，因此组间休息时间更长。（出处概念：间歇时间）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-16",
+        "id": "nasm-question-106",
         "prompt": "新手不宜只依赖 RPE 或 RIR 来确定负荷，主要因为：",
         "options": [
           {
@@ -12434,10 +12869,11 @@ export const nasmChapters = [
             "label": "RIR 只适用于女性"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 新手一定不需要负荷 B. 主观感知准确性较差 C. RPE 只能用于有氧训练 D. RIR 只适用于女性"
+        "explanation": "解析：新手的主观努力感知和储备重复判断常不稳定，不能孤立依赖。（出处概念：RPE/RIR局限）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-17",
+        "id": "nasm-question-107",
         "prompt": "训练阶段排序不当，最可能导致：",
         "options": [
           {
@@ -12457,10 +12893,11 @@ export const nasmChapters = [
             "label": "不再需要评估"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 更好的长期适应 B. 生理适应减弱、表现受限 C. 自动提高训练粘性 D. 不再需要评估"
+        "explanation": "解析：本章指出训练阶段排序不当会削弱适应、降低预期表现。（出处概念：训练阶段排序）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-18",
+        "id": "nasm-question-108",
         "prompt": "“单一方案过度训练”与下列哪一问题最相关？",
         "options": [
           {
@@ -12480,10 +12917,11 @@ export const nasmChapters = [
             "label": "休息太多"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 缺乏多样化 B. 热身太充分 C. 练习太少 D. 休息太多"
+        "explanation": "解析：缺乏多样化会使方案单调，出现“单一方案过度训练”。（出处概念：多样化缺失）",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-19",
+        "id": "nasm-question-109",
         "prompt": "复合组与超级组都强调连续完成两种练习，其共同特点是：",
         "options": [
           {
@@ -12503,10 +12941,11 @@ export const nasmChapters = [
             "label": "一定不适合节省时间"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 两个动作之间几乎无休息 B. 一定针对同一肌群 C. 一定用于力量举 D. 一定不适合节省时间"
+        "explanation": "解析：复合组和超级组都强调两种练习连续完成、几乎无间歇。（出处概念：复合组与超级组）",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-20",
+        "id": "nasm-question-110",
         "prompt": "维持型抗阻训练方案的本质更偏向于：",
         "options": [
           {
@@ -12526,10 +12965,11 @@ export const nasmChapters = [
             "label": "只做新动作"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 持续上升所有变量 B. 以较低成本维持既有适应 C. 每周都加大负荷 D. 只做新动作"
+        "explanation": "解析：维持型方案的重点是以较少的额外提升成本维持既有适应。（出处概念：维持思路）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-21",
+        "id": "nasm-question-201",
         "prompt": "一名没有抗阻训练经验的新手客户，最合理的起步策略是：",
         "options": [
           {
@@ -12549,10 +12989,11 @@ export const nasmChapters = [
             "label": "每周训练 6 天"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 直接用高难度自由重量做爆发力训练 B. 先从技术要求较低的练习建立基础 C. 只做 1RM 测试 D. 每周训练 6 天"
+        "explanation": "解析：无经验新手应先通过较基础、较稳定的训练方式建立动作基础和训练习惯。（出处概念：新手起步）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-22",
+        "id": "nasm-question-202",
         "prompt": "客户同时安排了较多跑步与灵活性训练，设计抗阻训练频率时应：",
         "options": [
           {
@@ -12572,10 +13013,11 @@ export const nasmChapters = [
             "label": "取消休息日"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 只看抗阻目标，不看其他训练 B. 综合审视整体工作负荷和恢复 C. 固定每周 5 次 D. 取消休息日"
+        "explanation": "解析：抗阻训练不是孤立存在的，必须结合有氧、灵活性等整体工作负荷来安排频率。（出处概念：整体方案）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-23",
+        "id": "nasm-question-203",
         "prompt": "一位客户想提高排球相关爆发力，较有特异性的练习方向是：",
         "options": [
           {
@@ -12595,10 +13037,11 @@ export const nasmChapters = [
             "label": "只做坐姿器械"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 选择更接近跳跃与爆发模式的动作 B. 只做卷腹 C. 只做二头弯举 D. 只做坐姿器械"
+        "explanation": "解析：若目标是排球爆发力，就应选择更接近跳跃与爆发发力模式的训练内容。（出处概念：运动模式特异性）",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-24",
+        "id": "nasm-question-204",
         "prompt": "客户当前动作技术不稳定，私人教练在分配初始负荷前应先做的是：",
         "options": [
           {
@@ -12618,10 +13061,11 @@ export const nasmChapters = [
             "label": "只看体重"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 让客户直接做到力竭 B. 先建立恰当动作技术 C. 直接根据别人计划套用 D. 只看体重"
+        "explanation": "解析：本章强调，在确定训练负荷之前，客户首先要具备正确执行该练习的能力。（出处概念：动作技术优先）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-25",
+        "id": "nasm-question-205",
         "prompt": "如果客户训练目标是肌肉耐力，较合理的方向是：",
         "options": [
           {
@@ -12641,10 +13085,11 @@ export const nasmChapters = [
             "label": "只做爆发力动作"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 较高重复、较短休息 B. 较低重复、极长休息 C. 只做单次最大努力 D. 只做爆发力动作"
+        "explanation": "解析：肌肉耐力目标通常对应较高重复和较短间歇，而不是最大力量型安排。（出处概念：肌肉耐力变量）",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-26",
+        "id": "nasm-question-206",
         "prompt": "若客户目标是力量或爆发力训练，安排练习顺序时更合理的是：",
         "options": [
           {
@@ -12664,10 +13109,11 @@ export const nasmChapters = [
             "label": "先做所有小肌群"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 先做大量辅助训练，再做核心训练 B. 先做爆发力和核心训练 C. 先做卷腹到疲劳 D. 先做所有小肌群"
+        "explanation": "解析：力量和爆发力目标下，宜先安排爆发力与核心训练，再安排辅助训练。（出处概念：排序指南）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-27",
+        "id": "nasm-question-207",
         "prompt": "客户为训练时间有限的健身人群，希望在有限时间内提高总运动量，较可考虑的方法是：",
         "options": [
           {
@@ -12687,10 +13133,11 @@ export const nasmChapters = [
             "label": "只做热身"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 超级组 B. 只做单组训练 C. 取消间歇记录 D. 只做热身"
+        "explanation": "解析：超级组具有时间效率，可在有限训练时间内提高总运动量。（出处概念：超级组用途）",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-28",
+        "id": "nasm-question-208",
         "prompt": "一位新手客户对“还剩几次储备重复”完全没有概念，此时私人教练应：",
         "options": [
           {
@@ -12710,10 +13157,11 @@ export const nasmChapters = [
             "label": "取消所有负荷分配"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 只靠 RIR 安排全部训练 B. 不把 RIR 作为唯一依据 C. 直接安排高级聚集组 D. 取消所有负荷分配"
+        "explanation": "解析：当客户对 RIR 缺乏经验时，私人教练不应把它作为唯一的负荷依据。（出处概念：RIR应用限制）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-29",
+        "id": "nasm-question-209",
         "prompt": "客户长期使用完全不变的训练方案，近来进步停滞且训练厌倦感上升，更应优先考虑：",
         "options": [
           {
@@ -12733,10 +13181,11 @@ export const nasmChapters = [
             "label": "只换训练服"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 增加多样化与周期性调整 B. 永远保持不变 C. 只减少热身 D. 只换训练服"
+        "explanation": "解析：进步停滞和厌倦上升时，应优先考虑多样化、周期性和训练阶段调整。（出处概念：多样化与周期性）",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-30",
+        "id": "nasm-question-210",
         "prompt": "一名高级客户要以最大力量为目标设计 4 周模块，下列哪项更符合本章思路？",
         "options": [
           {
@@ -12756,7 +13205,8 @@ export const nasmChapters = [
             "label": "只按心情安排训练"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 完全不安排核心训练 B. 结合训练频率、核心/辅助练习、负荷与周内变化整体设计 C. 只做单关节动作 D. 只按心情安排训练"
+        "explanation": "解析：本章的方案设计思路是整合频率、练习选择、负荷、顺序、周内变化与目标，而不是单看一个变量。（出处概念：方案整体设计）",
+        "correctOptionKey": "choice-b"
       }
     ]
   },
@@ -12919,7 +13369,8 @@ export const nasmChapters = [
             "label": "握距宽度"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 运动方式 B. 运动强度 C. 训练频率 D. 握距宽度"
+        "explanation": "解析：有氧方案的基本组成包括运动方式、强度、频率、持续时间等，不包含握距宽度。（出处概念：方案组成）",
+        "correctOptionKey": "choice-d"
       },
       {
         "id": "nasm-question-02",
@@ -12942,7 +13393,8 @@ export const nasmChapters = [
             "label": "500—600 分钟"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 30—60 分钟 B. 75—150 分钟 C. 150—300 分钟 D. 500—600 分钟"
+        "explanation": "解析：本章援引体力活动建议，指出每周中等强度活动推荐量约为 150—300 分钟。（出处概念：体力活动建议）",
+        "correctOptionKey": "choice-c"
       },
       {
         "id": "nasm-question-03",
@@ -12965,7 +13417,8 @@ export const nasmChapters = [
             "label": "400—500 分钟"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 20—40 分钟 B. 75—150 分钟 C. 200—300 分钟 D. 400—500 分钟"
+        "explanation": "解析：高强度活动每周建议量约为 75—150 分钟。（出处概念：体力活动建议）",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-04",
@@ -12988,7 +13441,8 @@ export const nasmChapters = [
             "label": "95%—100% HRR"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 10%—20% HRR B. 20%—30% HRR C. 40%—89% HRR D. 95%—100% HRR"
+        "explanation": "解析：对一般健康成年人，本章提到中等到剧烈强度常约为 40%—89% HRR。（出处概念：健康成年人强度范围）",
+        "correctOptionKey": "choice-c"
       },
       {
         "id": "nasm-question-05",
@@ -13011,7 +13465,8 @@ export const nasmChapters = [
             "label": "90%—100% HRR"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 5%—10% HRR B. 30%—39% HRR C. 60%—70% HRR D. 90%—100% HRR"
+        "explanation": "解析：较高风险客户可能需要从 30%—39% HRR 的较保守强度开始。（出处概念：高风险客户起点）",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-06",
@@ -13034,7 +13489,8 @@ export const nasmChapters = [
             "label": "BMI"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 身高 B. 静息心率 C. 柔韧性 D. BMI"
+        "explanation": "解析：Karvonen 公式把静息心率纳入考虑，因此个体化程度更高。（出处概念：Karvonen 公式）",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-07",
@@ -13057,7 +13513,8 @@ export const nasmChapters = [
             "label": "训练频率"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 最大摄氧量 B. 自我努力感知 C. 静息代谢率 D. 训练频率"
+        "explanation": "解析：RPE 是“自我努力感知”，用于主观监控运动强度。（出处概念：RPE）",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-08",
@@ -13080,7 +13537,8 @@ export const nasmChapters = [
             "label": "一周总训练量"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 最大心率 B. 静息状态下的基本耗氧量水平 C. 一次训练课 D. 一周总训练量"
+        "explanation": "解析：1 MET 代表静息状态的基本耗氧量，是活动代谢成本的参照。（出处概念：METs）",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-09",
@@ -13103,7 +13561,8 @@ export const nasmChapters = [
             "label": "只看步数"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 提高强度并缩短时间 B. 降低强度并延长持续时间 C. 只做上肢 D. 只看步数"
+        "explanation": "解析：LSD 的核心思想就是降低正常强度，以换取更长持续时间。（出处概念：LSD训练）",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-10",
@@ -13126,10 +13585,11 @@ export const nasmChapters = [
             "label": "30%"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 5% B. 10% C. 20% D. 30%"
+        "explanation": "解析：本章明确提出，一般每周增长不应超过 10%。（出处概念：训练进展）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-11",
+        "id": "nasm-question-101",
         "prompt": "有氧训练中的特异性原则强调：",
         "options": [
           {
@@ -13149,10 +13609,11 @@ export const nasmChapters = [
             "label": "只要时间够长就不需要强度"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 任意运动方式都能产生完全相同适应 B. 训练方式与训练结果直接相关 C. 抗阻训练能完全替代有氧训练 D. 只要时间够长就不需要强度"
+        "explanation": "解析：特异性意味着训练模式与训练适应直接相关，不能指望不同方式完全等效。（出处概念：特异性）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-12",
+        "id": "nasm-question-102",
         "prompt": "使用 HRR 设定强度比只看 APMHR 更个体化，主要因为：",
         "options": [
           {
@@ -13172,10 +13633,11 @@ export const nasmChapters = [
             "label": "HRR只适用于运动员"
           }
         ],
-        "explanation": "机制理解题（11-20） A. HRR纳入了静息心率差异 B. HRR不需要年龄 C. HRR不需要心率 D. HRR只适用于运动员"
+        "explanation": "解析：HRR=最大心率-静息心率，因此能体现静息心率差异对训练区间的影响。（出处概念：HRR）",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-13",
+        "id": "nasm-question-103",
         "prompt": "单独使用 RPE 的局限性之一是：",
         "options": [
           {
@@ -13195,10 +13657,11 @@ export const nasmChapters = [
             "label": "只适用于跑步机"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 无法反映主观努力 B. 不同客户和不同运动方式差异较大 C. 一定比心率准确 D. 只适用于跑步机"
+        "explanation": "解析：相同心率或相同运动下，不同客户、不同模式的主观努力感可明显不同，因此 RPE 不宜单用。（出处概念：RPE局限）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-14",
+        "id": "nasm-question-104",
         "prompt": "对未训练客户而言，本章主张“保守起步”，主要是为了：",
         "options": [
           {
@@ -13218,10 +13681,11 @@ export const nasmChapters = [
             "label": "避免任何心率变化"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 延长测试时间 B. 降低过度训练和坚持困难风险 C. 让客户永远停留低水平 D. 避免任何心率变化"
+        "explanation": "解析：保守起步可减少过度训练、受伤和难以坚持的问题。（出处概念：保守起步）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-15",
+        "id": "nasm-question-105",
         "prompt": "有氧训练持续时间与强度一般呈现：",
         "options": [
           {
@@ -13241,10 +13705,11 @@ export const nasmChapters = [
             "label": "随机关系"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 正比关系 B. 反比关系 C. 无关系 D. 随机关系"
+        "explanation": "解析：本章直接指出，运动持续时间与运动强度成反比。（出处概念：持续时间与强度）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-16",
+        "id": "nasm-question-106",
         "prompt": "维持型有氧方案与提高型方案的主要区别在于：",
         "options": [
           {
@@ -13264,10 +13729,11 @@ export const nasmChapters = [
             "label": "不需要热身"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 完全不需要强度 B. 主要目标是维持已有能力而非继续提高 C. 只能用于新手 D. 不需要热身"
+        "explanation": "解析：提高型方案强调继续进步，维持型方案强调以较少投入维持现有水平。（出处概念：提高型与维持型）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-17",
+        "id": "nasm-question-107",
         "prompt": "LSD 训练每周不宜过多，主要是因为：",
         "options": [
           {
@@ -13287,10 +13753,11 @@ export const nasmChapters = [
             "label": "不能监控心率"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 完全没有训练价值 B. 持续时间较长，容易带来过度训练问题 C. 不能提升有氧耐力 D. 不能监控心率"
+        "explanation": "解析：LSD 持续时间较长，因此每周不宜过多，以避免恢复问题和过度训练。（出处概念：LSD频率）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-18",
+        "id": "nasm-question-108",
         "prompt": "间歇训练之所以能在高强度下累计更多训练量，主要因为：",
         "options": [
           {
@@ -13310,10 +13777,11 @@ export const nasmChapters = [
             "label": "不需要设定目标"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 完全不需要恢复 B. 工作与恢复交替，延缓整体疲劳 C. 只依赖无氧系统 D. 不需要设定目标"
+        "explanation": "解析：高强度工作之间穿插恢复，可延缓整体疲劳并增加高强度总训练时间。（出处概念：间歇训练机制）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-19",
+        "id": "nasm-question-109",
         "prompt": "交叉训练能突破单一模式限制，主要原因是：",
         "options": [
           {
@@ -13333,10 +13801,11 @@ export const nasmChapters = [
             "label": "训练时间一定更长"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 每次都必须全身训练 B. 多种运动方式把刺激分配到不同肌群和模式 C. 心率一定更低 D. 训练时间一定更长"
+        "explanation": "解析：交叉训练通过多种方式分散局部负担，并增加不同模式适应，因此能突破单一模式限制。（出处概念：交叉训练）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-20",
+        "id": "nasm-question-110",
         "prompt": "有氧与抗阻训练组合时，本章指出常见结果是：",
         "options": [
           {
@@ -13356,10 +13825,11 @@ export const nasmChapters = [
             "label": "两者完全互不影响"
           }
         ],
-        "explanation": "机制理解题（11-20） A. VO2 一定下降 B. 力量增长可能弱于单独抗阻训练 C. 肌肥大一定增强 D. 两者完全互不影响"
+        "explanation": "解析：本章指出，组合训练下 VO2 的提高与单独有氧类似，但力量提高通常弱于单独抗阻训练。（出处概念：有氧+抗阻组合）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-21",
+        "id": "nasm-question-201",
         "prompt": "一位以 10km 完赛时间为目标的客户，运动方式选择上更应强调：",
         "options": [
           {
@@ -13379,10 +13849,11 @@ export const nasmChapters = [
             "label": "只做抗阻训练"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 与目标项目接近的训练方式 B. 只做上肢训练 C. 只做低强度散步 D. 只做抗阻训练"
+        "explanation": "解析：若目标是 10km，则训练方式应尽量接近跑步任务本身，体现特异性原则。（出处概念：目标导向的运动方式）",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-22",
+        "id": "nasm-question-202",
         "prompt": "客户长期久坐、体能较差，刚开始制定有氧方案时更合理的做法是：",
         "options": [
           {
@@ -13402,10 +13873,11 @@ export const nasmChapters = [
             "label": "每天最大强度训练"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 直接安排高强度间歇 B. 从可接受、较舒适的方式开始 C. 一律要求跑步 D. 每天最大强度训练"
+        "explanation": "解析：对久坐、体能较差的客户，应从舒适且能接受的方式开始，而不是强行高强度。（出处概念：起步方式选择）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-23",
+        "id": "nasm-question-203",
         "prompt": "如果客户服用了会影响心率反应的药物，私人教练在确定运动强度时应：",
         "options": [
           {
@@ -13425,10 +13897,11 @@ export const nasmChapters = [
             "label": "固定使用 95%HRR"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 继续只用 APMHR B. 采用非基于心率的替代方法 C. 完全不训练 D. 固定使用 95%HRR"
+        "explanation": "解析：影响心率反应的药物会降低基于心率处方的准确性，因此应改用其他方法。（出处概念：药物影响心率）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-24",
+        "id": "nasm-question-204",
         "prompt": "一位一般健康成年人要开始有氧训练，若按本章建议从中等到剧烈强度起步，可优先参考：",
         "options": [
           {
@@ -13448,10 +13921,11 @@ export const nasmChapters = [
             "label": "只看步数"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 40%—89% HRR B. 5%—15% HRR C. 90%—100% HRR D. 只看步数"
+        "explanation": "解析：一般健康成年人常以 40%—89% HRR 作为中等到剧烈有氧训练区间参考。（出处概念：训练强度）",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-25",
+        "id": "nasm-question-205",
         "prompt": "一个客户因为时间有限无法持续完成较长稳态有氧，较合理的替代策略是：",
         "options": [
           {
@@ -13471,10 +13945,11 @@ export const nasmChapters = [
             "label": "只做最大测试"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 取消一切训练 B. 使用较短时间的间歇训练 C. 只做拉伸 D. 只做最大测试"
+        "explanation": "解析：当客户没有时间或体能完成长时间稳态训练时，本章允许用较短时间间歇训练替代。（出处概念：间歇训练应用）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-26",
+        "id": "nasm-question-206",
         "prompt": "某客户的目标是建立有氧基础并延长持续运动能力，更适合优先加入：",
         "options": [
           {
@@ -13494,10 +13969,11 @@ export const nasmChapters = [
             "label": "只做爆发式抗阻"
           }
         ],
-        "explanation": "情景应用题（21-30） A. LSD 训练 B. 只做超级组 C. 只做 1RM 测试 D. 只做爆发式抗阻"
+        "explanation": "解析：若目标是建立基础、延长持续时间，LSD 是典型选择。（出处概念：LSD训练应用）",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-27",
+        "id": "nasm-question-207",
         "prompt": "某客户无法长时间维持乳酸阈水平训练，更适合先采用哪类节奏训练？",
         "options": [
           {
@@ -13517,10 +13993,11 @@ export const nasmChapters = [
             "label": "只做低强度散步"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 稳态配速/节奏训练 B. 间歇配速/节奏训练 C. 只做最大冲刺 D. 只做低强度散步"
+        "explanation": "解析：无法长时间维持乳酸阈强度时，更适合先做间歇配速/节奏训练，再渐进到稳态。（出处概念：配速/节奏训练）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-28",
+        "id": "nasm-question-208",
         "prompt": "一位客户希望在较短时间内累计较多高强度训练量，较合适的方法是：",
         "options": [
           {
@@ -13540,10 +14017,11 @@ export const nasmChapters = [
             "label": "只做低强度长走"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 间歇训练 B. 只做放松 C. 只做热身 D. 只做低强度长走"
+        "explanation": "解析：要在较短时间内累计较多高强度训练量，间歇训练最符合本章思路。（出处概念：间歇训练）",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-29",
+        "id": "nasm-question-209",
         "prompt": "一位铁人三项目标客户需要结合跑步、骑行和其他项目训练，更适合：",
         "options": [
           {
@@ -13563,10 +14041,11 @@ export const nasmChapters = [
             "label": "只做水中步行"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 只用单一运动模式 B. 交叉训练 C. 只做手臂训练 D. 只做水中步行"
+        "explanation": "解析：铁人三项目标天然需要多模式训练，交叉训练最契合。（出处概念：交叉训练目标）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-30",
+        "id": "nasm-question-210",
         "prompt": "如果某高水平客户同时进行大量有氧和抗阻训练，但恢复时间不足，私人教练更合理的做法是：",
         "options": [
           {
@@ -13586,7 +14065,8 @@ export const nasmChapters = [
             "label": "永远取消抗阻"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 继续同时加量 B. 采用阶段性交替安排，避免长期并行堆叠 C. 永远取消有氧 D. 永远取消抗阻"
+        "explanation": "解析：当恢复不足时，可采用阶段性交替安排，先侧重一类能力，再维持另一类，而非长期并行堆叠。（出处概念：组合训练与阶段安排）",
+        "correctOptionKey": "choice-b"
       }
     ]
   },
@@ -13765,7 +14245,8 @@ export const nasmChapters = [
             "label": "只做向心收缩"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 长时间等长收缩 B. 快速离心后紧接爆发性向心收缩 C. 缓慢离心后长时间停顿 D. 只做向心收缩"
+        "explanation": "解析：增强式运动定义即快速离心后接爆发性向心收缩。（出处概念：增强式运动定义）",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-02",
@@ -13788,7 +14269,8 @@ export const nasmChapters = [
             "label": "放松阶段"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 离心阶段 B. 缓冲阶段 C. 向心阶段 D. 放松阶段"
+        "explanation": "解析：缓冲阶段决定能量是否散失，对爆发力发展最关键。（出处概念：牵张-收缩周期）",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-03",
@@ -13811,7 +14293,8 @@ export const nasmChapters = [
             "label": "骨膜"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 并联弹性成分 B. 串联弹性成分 C. 关节囊 D. 骨膜"
+        "explanation": "解析：力学模型强调串联弹性成分是主要力量来源。（出处概念：力学模型）",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-04",
@@ -13834,7 +14317,8 @@ export const nasmChapters = [
             "label": "前庭器"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 高尔基腱器官 B. 肌梭 C. 视网膜 D. 前庭器"
+        "explanation": "解析：肌梭对牵拉速度和幅度敏感，是牵张反射核心感受器。（出处概念：神经生理学模型）",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-05",
@@ -13857,7 +14341,8 @@ export const nasmChapters = [
             "label": "只提高步频的能力"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 长时间保持动作速度的能力 B. 在高速下施加最大力量的能力 C. 低速下持续输出力量的能力 D. 只提高步频的能力"
+        "explanation": "解析：速度-力量即高速下施加最大力量的能力。（出处概念：速度-力量）",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-06",
@@ -13880,7 +14365,8 @@ export const nasmChapters = [
             "label": "柔韧性维持能力"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 长时间维持最大努力移动的能力 B. 单次最大力量输出 C. 维持静态平衡的能力 D. 柔韧性维持能力"
+        "explanation": "解析：速度-耐力强调较长时间持续快速移动。（出处概念：速度-耐力）",
+        "correctOptionKey": "choice-a"
       },
       {
         "id": "nasm-question-07",
@@ -13903,7 +14389,8 @@ export const nasmChapters = [
             "label": "等于90度"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 大于45度 B. 约30度 C. 小于5度 D. 等于90度"
+        "explanation": "解析：最大速度时身体应放松、略直立，前倾小于5度。（出处概念：冲刺跑身体姿势）",
+        "correctOptionKey": "choice-c"
       },
       {
         "id": "nasm-question-08",
@@ -13926,7 +14413,8 @@ export const nasmChapters = [
             "label": "斜面"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 水平面 B. 冠状面 C. 矢状面 D. 斜面"
+        "explanation": "解析：手臂应主要在矢状面前后摆动。（出处概念：手臂动作）",
+        "correctOptionKey": "choice-c"
       },
       {
         "id": "nasm-question-09",
@@ -13949,7 +14437,8 @@ export const nasmChapters = [
             "label": "高"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 低 B. 中低 C. 中 D. 高"
+        "explanation": "解析：跳深被列为高强度练习。（出处概念：跳深）",
+        "correctOptionKey": "choice-d"
       },
       {
         "id": "nasm-question-10",
@@ -13972,10 +14461,11 @@ export const nasmChapters = [
             "label": "降低心率反应"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 提高步幅与超常速度体验 B. 增强肩袖稳定 C. 提高静态平衡 D. 降低心率反应"
+        "explanation": "解析：下坡冲刺用于体验高于最大速度的跑步，偏向步幅/超速训练。（出处概念：下坡冲刺）",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-11",
+        "id": "nasm-question-101",
         "prompt": "若离心阶段后缓冲时间过长，最可能出现的是",
         "options": [
           {
@@ -13995,10 +14485,11 @@ export const nasmChapters = [
             "label": "动作速度自动提高"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 弹性势能利用增强 B. 牵张反射增强 C. 储存能量以热量形式散失 D. 动作速度自动提高"
+        "explanation": "解析：缓冲过长会使储能散失并削弱反射增强。（出处概念：缓冲阶段）",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-12",
+        "id": "nasm-question-102",
         "prompt": "增强式训练能够提高爆发力，主要因为",
         "options": [
           {
@@ -14018,10 +14509,11 @@ export const nasmChapters = [
             "label": "降低神经肌肉激活"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 增加动作时间 B. 利用弹性势能与牵张反射 C. 完全依赖静力收缩 D. 降低神经肌肉激活"
+        "explanation": "解析：增强式训练同时利用弹性势能和牵张反射。（出处概念：增强式训练机制）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-13",
+        "id": "nasm-question-103",
         "prompt": "增强式训练降低损伤风险的重要原因之一是",
         "options": [
           {
@@ -14041,10 +14533,11 @@ export const nasmChapters = [
             "label": "减少地面反作用力利用"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 完全避免离心负荷 B. 提高动态稳定和落地控制 C. 取消变向动作 D. 减少地面反作用力利用"
+        "explanation": "解析：文本强调其可提高动态稳定、落地控制和平衡，降低损伤率。（出处概念：损伤预防）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-14",
+        "id": "nasm-question-104",
         "prompt": "速度训练中脚触地时间应尽可能短，主要为了",
         "options": [
           {
@@ -14064,10 +14557,11 @@ export const nasmChapters = [
             "label": "延长腾空时间"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 增加制动力 B. 减少地面反作用力 C. 提高推进效率 D. 延长腾空时间"
+        "explanation": "解析：缩短触地时间可减少无效损失，提高向前推进。（出处概念：冲刺跑技术）",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-15",
+        "id": "nasm-question-105",
         "prompt": "冲刺加速阶段身体约前倾45度的主要目的之一是",
         "options": [
           {
@@ -14087,10 +14581,11 @@ export const nasmChapters = [
             "label": "延长支撑时间"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 增加垂直制动力 B. 强调前向驱动 C. 降低步频 D. 延长支撑时间"
+        "explanation": "解析：加速阶段前倾可强化驱动，强调正面跑步力学。（出处概念：加速度）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-16",
+        "id": "nasm-question-106",
         "prompt": "增强式训练中训练量与强度的关系更接近",
         "options": [
           {
@@ -14110,10 +14605,11 @@ export const nasmChapters = [
             "label": "固定不变"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 正相关 B. 无关系 C. 反比关系 D. 固定不变"
+        "explanation": "解析：增强式训练量与强度成反比。（出处概念：训练量）",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-17",
+        "id": "nasm-question-107",
         "prompt": "上坡冲刺若使速度下降超过建议范围，通常应",
         "options": [
           {
@@ -14133,10 +14629,11 @@ export const nasmChapters = [
             "label": "加大阻力带张力"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 增加坡度 B. 缩短恢复 C. 减小坡度 D. 加大阻力带张力"
+        "explanation": "解析：若上坡导致速度下降过多，应减小坡度恢复动作技术。（出处概念：上坡冲刺）",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-18",
+        "id": "nasm-question-108",
         "prompt": "抵抗同伴阻力冲刺跑中，合理阻力应使速度降低",
         "options": [
           {
@@ -14156,10 +14653,11 @@ export const nasmChapters = [
             "label": "约50%"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 约1% B. 约10% C. 约25% D. 约50%"
+        "explanation": "解析：阻力仅应让速度下降约10%，超过则不利技术保持。（出处概念：抵抗同伴阻力冲刺跑）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-19",
+        "id": "nasm-question-109",
         "prompt": "原地摆臂从坐姿逐步进展到慢跑，主要体现的是",
         "options": [
           {
@@ -14179,10 +14677,11 @@ export const nasmChapters = [
             "label": "先高强度，再低强度"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 先发展核心稳定与控制，再提高动作复杂度 B. 先练下肢，再练上肢 C. 先提高柔韧，再提高力量 D. 先高强度，再低强度"
+        "explanation": "解析：由坐姿到慢跑体现稳定与控制要求逐步增加。（出处概念：原地摆臂进展）",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-20",
+        "id": "nasm-question-110",
         "prompt": "增强式训练安排在训练课前部，主要因为此时",
         "options": [
           {
@@ -14202,10 +14701,11 @@ export const nasmChapters = [
             "label": "乳酸最多"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 血糖最低 B. 疲劳较低，神经肌肉控制更好 C. 心率最高 D. 乳酸最多"
+        "explanation": "解析：增强式训练前置是为保证低疲劳下的姿势控制和技术质量。（出处概念：练习顺序）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-21",
+        "id": "nasm-question-201",
         "prompt": "一名初学客户无抗阻训练经验，但想直接做高强度跳深，最合理的做法是",
         "options": [
           {
@@ -14225,10 +14725,11 @@ export const nasmChapters = [
             "label": "只做上肢抛球"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 直接安排高箱跳深 B. 先建立抗阻与低强度增强式基础 C. 只安排下坡冲刺 D. 只做上肢抛球"
+        "explanation": "解析：无抗阻基础者不应直接进入高强度增强式，应先建基础。（出处概念：安全注意事项/进展）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-22",
+        "id": "nasm-question-202",
         "prompt": "青少年客户进入增强式训练时，教练首先应重点教授",
         "options": [
           {
@@ -14248,10 +14749,11 @@ export const nasmChapters = [
             "label": "呼吸屏气技巧"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 最大负重 B. 比赛战术 C. 起跳与落地技术 D. 呼吸屏气技巧"
+        "explanation": "解析：对年轻客户应先教授跳跃与落地技术。（出处概念：年龄与成熟度）",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-23",
+        "id": "nasm-question-203",
         "prompt": "客户在跨越障碍物跳时总把双膝分开绕过障碍，说明",
         "options": [
           {
@@ -14271,10 +14773,11 @@ export const nasmChapters = [
             "label": "代表核心稳定极佳"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 动作难度过低 B. 属于标准技术 C. 在通过代偿降低难度 D. 代表核心稳定极佳"
+        "explanation": "解析：分膝绕障是用代偿方式降低练习难度的常见错误。（出处概念：跨越障碍物跳）",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-24",
+        "id": "nasm-question-204",
         "prompt": "客户做跳箱时箱体明显高于其能力，最可能带来的问题是",
         "options": [
           {
@@ -14294,10 +14797,11 @@ export const nasmChapters = [
             "label": "触地时间自然缩短"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 动作更稳定 B. 训练更安全 C. 受伤风险增加 D. 触地时间自然缩短"
+        "explanation": "解析：箱体相对能力过高是典型风险因素。（出处概念：跳箱常见错误）",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-25",
+        "id": "nasm-question-205",
         "prompt": "一名普通健身客户希望改善跌倒风险和制动能力，可优先考虑",
         "options": [
           {
@@ -14317,10 +14821,11 @@ export const nasmChapters = [
             "label": "完全避免任何快速动作"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 只做长距离慢跑 B. 适度增强式与离心控制训练 C. 只做静态拉伸 D. 完全避免任何快速动作"
+        "explanation": "解析：文本指出适度增强式和离心控制有助于预防损伤、降低跌倒风险。（出处概念：损伤预防/离心训练）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-26",
+        "id": "nasm-question-206",
         "prompt": "客户进行原地摆臂时手臂频繁越过身体中线，教练应提示",
         "options": [
           {
@@ -14340,10 +14845,11 @@ export const nasmChapters = [
             "label": "肘关节完全伸直"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 增大冠状面摆动 B. 保持摆臂在矢状面内 C. 手臂完全不动 D. 肘关节完全伸直"
+        "explanation": "解析：摆臂跨中线会引起躯干扭转，应限制在矢状面。（出处概念：原地摆臂常见错误）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-27",
+        "id": "nasm-question-207",
         "prompt": "一名客户上坡冲刺时动作技术明显变形，正确调整是",
         "options": [
           {
@@ -14363,10 +14869,11 @@ export const nasmChapters = [
             "label": "取消热身"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 继续提高速度 B. 减小坡度直至恢复技术 C. 改做深蹲到力竭 D. 取消热身"
+        "explanation": "解析：动作变形时应减小坡度，恢复正常技术后再进展。（出处概念：上坡冲刺常见错误）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-28",
+        "id": "nasm-question-208",
         "prompt": "客户落地制动练习时总是从箱体跳下而不是迈下，主要问题在于",
         "options": [
           {
@@ -14386,10 +14893,11 @@ export const nasmChapters = [
             "label": "改善了平衡"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 改变了起始高度控制 B. 增加了上肢参与 C. 降低了训练难度 D. 改善了平衡"
+        "explanation": "解析：落地制动应从箱体迈下，跳下会改变训练起始高度和负荷特征。（出处概念：落地制动）",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-29",
+        "id": "nasm-question-209",
         "prompt": "一名警察备考客户需要快速奔跑和跨越障碍，最符合文本建议的判断是",
         "options": [
           {
@@ -14409,10 +14917,11 @@ export const nasmChapters = [
             "label": "只应进行低强度散步"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 不适合增强式训练 B. 增强式训练可服务其职业需求 C. 只应进行柔韧训练 D. 只应进行低强度散步"
+        "explanation": "解析：文本明确将警察、消防、军事准备列为可从增强式训练获益的职业场景。（出处概念：工作表现）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-30",
+        "id": "nasm-question-210",
         "prompt": "客户在辅助牵引跑中出现后仰制动、脚跟先着地，最合适的处理是",
         "options": [
           {
@@ -14432,7 +14941,8 @@ export const nasmChapters = [
             "label": "改做颈后下拉"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 继续加速 B. 增加牵引速度 C. 降低辅助速度直到恢复正确技术 D. 改做颈后下拉"
+        "explanation": "解析：辅助速度过大导致制动和动作变形时，应先降低速度。（出处概念：同伴辅助牵引跑）",
+        "correctOptionKey": "choice-c"
       }
     ]
   },
@@ -14596,7 +15106,8 @@ export const nasmChapters = [
             "label": "60分钟"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 20分钟 B. 30分钟 C. 45分钟 D. 60分钟"
+        "explanation": "解析：文本明确建议儿童每天至少60分钟MVPA。（出处概念：儿童体力活动指南）",
+        "correctOptionKey": "choice-d"
       },
       {
         "id": "nasm-question-02",
@@ -14619,7 +15130,8 @@ export const nasmChapters = [
             "label": "16-20岁"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 3-5岁 B. 6-11岁 C. 12-16岁 D. 16-20岁"
+        "explanation": "解析：青春期前大致对应女孩6-11岁、男孩6-13岁。（出处概念：青春期前定义）",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-03",
@@ -14642,7 +15154,8 @@ export const nasmChapters = [
             "label": "完全依赖心率区间训练"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 长时间匀速持续运动 B. 间歇性、爆发性活动 C. 只适合静态练习 D. 完全依赖心率区间训练"
+        "explanation": "解析：儿童自然活动以间歇性、爆发性和强度变化大为特征。（出处概念：儿童活动方式）",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-04",
@@ -14665,7 +15178,8 @@ export const nasmChapters = [
             "label": "脂肪大量增加"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 明显肌肥大 B. 神经适应 C. 血红蛋白提高 D. 脂肪大量增加"
+        "explanation": "解析：儿童力量增长主要来自神经适应而非显著肌肥大。（出处概念：儿童抗阻训练机制）",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-05",
@@ -14688,7 +15202,8 @@ export const nasmChapters = [
             "label": "只做1组，每组30次"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 5-6组，每组1-3次 B. 1-3组，每组8-12次 C. 4-5组，每组15-20次 D. 只做1组，每组30次"
+        "explanation": "解析：推荐以1-3组、8-12次/组开启儿童抗阻训练。（出处概念：儿童抗阻训练指南）",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-06",
@@ -14711,7 +15226,8 @@ export const nasmChapters = [
             "label": "9-10"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 1-2 B. 3-4 C. 5-6 D. 9-10"
+        "explanation": "解析：0-10量表中中等强度常对应5或6。（出处概念：老年人有氧强度）",
+        "correctOptionKey": "choice-c"
       },
       {
         "id": "nasm-question-07",
@@ -14734,7 +15250,8 @@ export const nasmChapters = [
             "label": "7天"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 1天 B. 2天 C. 3天 D. 7天"
+        "explanation": "解析：高强度有氧运动建议每周至少3天。（出处概念：老年人有氧频率）",
+        "correctOptionKey": "choice-c"
       },
       {
         "id": "nasm-question-08",
@@ -14757,7 +15274,8 @@ export const nasmChapters = [
             "label": "150分钟"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 60分钟 B. 90分钟 C. 120分钟 D. 150分钟"
+        "explanation": "解析：孕妇建议每周累计至少150分钟中等强度运动。（出处概念：孕妇运动指南）",
+        "correctOptionKey": "choice-d"
       },
       {
         "id": "nasm-question-09",
@@ -14780,7 +15298,8 @@ export const nasmChapters = [
             "label": "深蹲跳"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 普拉提 B. 凯格尔运动 C. 壶铃摆动 D. 深蹲跳"
+        "explanation": "解析：盆底肌训练即凯格尔运动。（出处概念：孕妇与产后训练）",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-10",
@@ -14803,10 +15322,11 @@ export const nasmChapters = [
             "label": "恢复终期"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 第一阶段 B. 第二阶段 C. 第四期 D. 恢复终期"
+        "explanation": "解析：产后数周被称作“第四期”。（出处概念：产后护理）",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-11",
+        "id": "nasm-question-101",
         "prompt": "不应把成人训练模式直接套用于儿童，主要因为",
         "options": [
           {
@@ -14826,10 +15346,11 @@ export const nasmChapters = [
             "label": "儿童不能进行任何有氧训练"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 儿童不需要运动 B. 儿童活动方式与生理特点不同 C. 儿童无法学习动作 D. 儿童不能进行任何有氧训练"
+        "explanation": "解析：儿童活动行为和生理反应不同于成人，不能机械照搬成人模型。（出处概念：儿童训练原则）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-12",
+        "id": "nasm-question-102",
         "prompt": "儿童更适合游戏化循环训练，而非单纯30分钟慢跑，主要原因是",
         "options": [
           {
@@ -14849,10 +15370,11 @@ export const nasmChapters = [
             "label": "儿童不能提高心肺功能"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 儿童只喜欢器械 B. 儿童习惯间歇与强度变化的活动模式 C. 儿童不能出汗 D. 儿童不能提高心肺功能"
+        "explanation": "解析：儿童更适合短时、变化、间歇性的活动组织方式。（出处概念：儿童活动特点）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-13",
+        "id": "nasm-question-103",
         "prompt": "儿童抗阻训练安全性的关键条件是",
         "options": [
           {
@@ -14872,10 +15394,11 @@ export const nasmChapters = [
             "label": "避免所有外部负荷"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 禁止监督 B. 只用最大负荷 C. 密切监督与持续指导 D. 避免所有外部负荷"
+        "explanation": "解析：安全关键在于监督、器械安全和持续指导。（出处概念：儿童抗阻训练安全性）",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-14",
+        "id": "nasm-question-104",
         "prompt": "老年人训练中要求避免瓦式呼吸，主要是因为它会",
         "options": [
           {
@@ -14895,10 +15418,11 @@ export const nasmChapters = [
             "label": "提高爆发力"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 降低体温 B. 增加胸内压和血压风险 C. 增加柔韧性 D. 提高爆发力"
+        "explanation": "解析：瓦式呼吸会增加胸内压、阻碍血流并提高血压风险。（出处概念：老年人呼吸）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-15",
+        "id": "nasm-question-105",
         "prompt": "老年人肌肉爆发力训练的负荷建议更接近",
         "options": [
           {
@@ -14918,10 +15442,11 @@ export const nasmChapters = [
             "label": "只可徒手"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 10%-20% 1RM B. 40%-60% 1RM C. 90%-100% 1RM D. 只可徒手"
+        "explanation": "解析：老年人爆发力训练建议约40%-60%1RM并尽可能快地向心收缩。（出处概念：老年人运动速度）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-16",
+        "id": "nasm-question-106",
         "prompt": "老年人跌倒风险高的重要诱发因素之一是",
         "options": [
           {
@@ -14941,10 +15466,11 @@ export const nasmChapters = [
             "label": "训练频率偏高"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 肌肉无力 B. 肌肉过强 C. 体温偏低 D. 训练频率偏高"
+        "explanation": "解析：肌无力是老年人跌倒的重要诱因之一。（出处概念：预防跌倒）",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-17",
+        "id": "nasm-question-107",
         "prompt": "妊娠中后期应逐步减少仰卧位训练，主要因为",
         "options": [
           {
@@ -14964,10 +15490,11 @@ export const nasmChapters = [
             "label": "会提高爆发力"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 会降低柔韧性 B. 子宫增大会影响静脉回流 C. 会增加上肢力量 D. 会提高爆发力"
+        "explanation": "解析：妊娠中后期仰卧位可影响静脉回流和心输出量。（出处概念：孕期力学适应）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-18",
+        "id": "nasm-question-108",
         "prompt": "孕妇训练中推荐使用RPE和谈话测试，主要因为",
         "options": [
           {
@@ -14987,10 +15514,11 @@ export const nasmChapters = [
             "label": "运动时间无法记录"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 心率不会变化 B. 妊娠改变了心率与耗氧关系 C. 血压无法测量 D. 运动时间无法记录"
+        "explanation": "解析：妊娠改变心率与耗氧的相关性，因此更依赖RPE和谈话测试。（出处概念：孕期心血管反应）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-19",
+        "id": "nasm-question-109",
         "prompt": "孕期应避免过度拉伸，主要与哪项变化相关？",
         "options": [
           {
@@ -15010,10 +15538,11 @@ export const nasmChapters = [
             "label": "视觉下降"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 关节松弛 B. 肌肉完全僵硬 C. 心率过低 D. 视觉下降"
+        "explanation": "解析：妊娠期关节松弛，过度拉伸增加关节风险。（出处概念：孕期力学响应）",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-20",
+        "id": "nasm-question-110",
         "prompt": "产后中等强度活动可减缓哪一问题的症状？",
         "options": [
           {
@@ -15033,10 +15562,11 @@ export const nasmChapters = [
             "label": "视力下降"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 失眠 B. 产后抑郁 C. 低体温 D. 视力下降"
+        "explanation": "解析：文本指出中等强度活动可减缓产后抑郁症状。（出处概念：产后护理）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-21",
+        "id": "nasm-question-201",
         "prompt": "一名7岁儿童不喜欢持续慢跑，教练更适合安排",
         "options": [
           {
@@ -15056,10 +15586,11 @@ export const nasmChapters = [
             "label": "长时间静态拉伸"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 固定30分钟匀速跑 B. 8-12站循环游戏训练 C. 最大重量深蹲 D. 长时间静态拉伸"
+        "explanation": "解析：儿童更适合多站点、趣味化、变化强度的循环训练。（出处概念：儿童训练设计）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-22",
+        "id": "nasm-question-202",
         "prompt": "儿童第一次抗阻训练时很想测试自己能举多重，教练应优先把注意力转向",
         "options": [
           {
@@ -15079,10 +15610,11 @@ export const nasmChapters = [
             "label": "热量消耗"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 最大力量测试 B. 掌握动作技术与多种运动技能 C. 比赛表现 D. 热量消耗"
+        "explanation": "解析：应把注意力从举重多少转向运动技能和正确技术。（出处概念：儿童抗阻训练指导）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-23",
+        "id": "nasm-question-203",
         "prompt": "一位老年客户在训练中常屏气用力，教练最合适的纠正是",
         "options": [
           {
@@ -15102,10 +15634,11 @@ export const nasmChapters = [
             "label": "只在向心阶段屏气"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 继续保持 B. 用力和放下阶段都连续呼吸 C. 只在离心阶段屏气 D. 只在向心阶段屏气"
+        "explanation": "解析：老年人抗阻训练应避免屏气，保持连续呼吸。（出处概念：老年人运动呼吸）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-24",
+        "id": "nasm-question-204",
         "prompt": "一位老年客户平衡差、易跌倒，训练中应优先加入",
         "options": [
           {
@@ -15125,10 +15658,11 @@ export const nasmChapters = [
             "label": "只做长时间跑步"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 只做卧推 B. 平衡训练和抗阻训练 C. 只做被动按摩 D. 只做长时间跑步"
+        "explanation": "解析：平衡训练配合抗阻训练有助于降低跌倒风险。（出处概念：老年人跌倒预防）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-25",
+        "id": "nasm-question-205",
         "prompt": "老年客户服药后心率反应受影响，监控有氧强度更适合用",
         "options": [
           {
@@ -15148,10 +15682,11 @@ export const nasmChapters = [
             "label": "只看出汗量"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 只看年龄预测最大心率 B. RPE和谈话测试 C. 只看体重 D. 只看出汗量"
+        "explanation": "解析：老年人药物可能影响心率反应，故RPE和谈话测试更实用。（出处概念：老年人有氧强度监控）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-26",
+        "id": "nasm-question-206",
         "prompt": "一位久坐孕妇准备开始运动，最合适的起点是",
         "options": [
           {
@@ -15171,10 +15706,11 @@ export const nasmChapters = [
             "label": "热瑜伽"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 高强度间歇冲刺 B. 短时步行并逐步增加 C. 增强式跳跃训练 D. 热瑜伽"
+        "explanation": "解析：久坐孕妇可先把短时步行纳入生活，再逐步进展。（出处概念：孕妇起始运动）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-27",
+        "id": "nasm-question-207",
         "prompt": "孕妇在妊娠后期训练时更适合",
         "options": [
           {
@@ -15194,10 +15730,11 @@ export const nasmChapters = [
             "label": "进行骑马训练"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 增加自由重量不稳定练习 B. 采用更稳定、支撑更多的器械 C. 进行潜水 D. 进行骑马训练"
+        "explanation": "解析：后期重心变化更明显，应增加器械稳定性和支撑性。（出处概念：孕期力学响应）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-28",
+        "id": "nasm-question-208",
         "prompt": "孕妇若在运动中出现头痛、头晕和定向障碍，教练应",
         "options": [
           {
@@ -15217,10 +15754,11 @@ export const nasmChapters = [
             "label": "忽略症状继续训练"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 增加训练强度 B. 立刻安排冲刺 C. 降低强度并转诊医疗人员 D. 忽略症状继续训练"
+        "explanation": "解析：这些可能是严重症状信号，应降低强度并转诊。（出处概念：体温调节反应/安全）",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-29",
+        "id": "nasm-question-209",
         "prompt": "一名产后女性希望恢复训练，最重要的原则是",
         "options": [
           {
@@ -15240,10 +15778,11 @@ export const nasmChapters = [
             "label": "只做腹部高强度练习"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 立即恢复到孕前最高强度 B. 完全避免活动半年 C. 在许可下逐步恢复并纳入盆底肌训练 D. 只做腹部高强度练习"
+        "explanation": "解析：产后恢复应渐进，并纳入盆底肌训练。（出处概念：产后护理）",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-30",
+        "id": "nasm-question-210",
         "prompt": "对于儿童团体训练，文本更推荐教练",
         "options": [
           {
@@ -15263,7 +15802,8 @@ export const nasmChapters = [
             "label": "取消监督"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 给所有儿童统一负荷 B. 依据个体能力设置各自工作负荷 C. 让儿童自由举最大重量 D. 取消监督"
+        "explanation": "解析：文本强调应依据每个儿童能力设置各自负荷，而非统一要求。（出处概念：儿童团体训练）",
+        "correctOptionKey": "choice-b"
       }
     ]
   },
@@ -15282,7 +15822,7 @@ export const nasmChapters = [
     "outline": [],
     "quizQuestions": [
       {
-        "id": "nasm-question-41",
+        "id": "nasm-question-401",
         "prompt": "私人教练面对营养或代谢问题客户时，最合适的职责定位是",
         "options": [
           {
@@ -15302,10 +15842,11 @@ export const nasmChapters = [
             "label": "代替RD制定医学营养方案"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 负责医学诊断 B. 开具药物处方 C. 设计运动方案并支持生活方式改变 D. 代替RD制定医学营养方案"
+        "explanation": "解析：私人教练应负责运动方案与生活方式支持，不做医学诊断和治疗。（出处概念：执业实践范围）",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-42",
+        "id": "nasm-question-402",
         "prompt": "超重的BMI范围通常是",
         "options": [
           {
@@ -15325,10 +15866,11 @@ export const nasmChapters = [
             "label": "大于40"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 18.5-24.9 B. 25-29.9 C. 30-34.9 D. 大于40"
+        "explanation": "解析：超重定义为BMI 25-29.9。（出处概念：超重定义）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-43",
+        "id": "nasm-question-403",
         "prompt": "肥胖在文本中的定义是BMI",
         "options": [
           {
@@ -15348,10 +15890,11 @@ export const nasmChapters = [
             "label": "大于35"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 大于23 B. 大于25 C. 大于30 D. 大于35"
+        "explanation": "解析：肥胖定义为BMI大于30。（出处概念：肥胖定义）",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-44",
+        "id": "nasm-question-404",
         "prompt": "女性肥胖更典型的脂肪分布是",
         "options": [
           {
@@ -15371,10 +15914,11 @@ export const nasmChapters = [
             "label": "上肢远端"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 腹部和躯干 B. 臀部和大腿 C. 胸背部 D. 上肢远端"
+        "explanation": "解析：女性型肥胖以臀部和大腿脂肪堆积为特征。（出处概念：脂肪分布）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-45",
+        "id": "nasm-question-405",
         "prompt": "高血脂中常被称为“坏”胆固醇的是",
         "options": [
           {
@@ -15394,10 +15938,11 @@ export const nasmChapters = [
             "label": "胆汁酸"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. HDL B. LDL C. 甘油三酯 D. 胆汁酸"
+        "explanation": "解析：LDL常被称作“坏”胆固醇。（出处概念：高血脂）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-46",
+        "id": "nasm-question-406",
         "prompt": "为改善心血管健康与高血脂，成年人每周至少应进行多少分钟中等强度有氧活动？",
         "options": [
           {
@@ -15417,10 +15962,11 @@ export const nasmChapters = [
             "label": "150分钟"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 60分钟 B. 90分钟 C. 120分钟 D. 150分钟"
+        "explanation": "解析：建议每周至少150分钟中等强度有氧活动。（出处概念：高血脂客户运动指南）",
+        "correctOptionKey": "choice-d"
       },
       {
-        "id": "nasm-question-47",
+        "id": "nasm-question-407",
         "prompt": "含糖饮料在文本中被指出是",
         "options": [
           {
@@ -15440,10 +15986,11 @@ export const nasmChapters = [
             "label": "不影响代谢风险"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 蛋白质主要来源 B. 添加糖的重要来源 C. 不影响体重 D. 不影响代谢风险"
+        "explanation": "解析：含糖饮料是添加糖的最大来源之一。（出处概念：限制饮食中的糖）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-48",
+        "id": "nasm-question-408",
         "prompt": "神经性厌食症最常见的亚型是",
         "options": [
           {
@@ -15463,10 +16010,11 @@ export const nasmChapters = [
             "label": "混合型"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 清除型 B. 限制型 C. 夜食型 D. 混合型"
+        "explanation": "解析：限制型是最常见的神经性厌食症类型。（出处概念：AN亚型）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-49",
+        "id": "nasm-question-409",
         "prompt": "女性运动员三联症不包括",
         "options": [
           {
@@ -15486,10 +16034,11 @@ export const nasmChapters = [
             "label": "高血糖恒定升高"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 可用能量不足 B. 月经紊乱 C. 较低骨密度 D. 高血糖恒定升高"
+        "explanation": "解析：三联症包括低能量可用性、月经紊乱和低骨密度，不是高血糖恒定升高。（出处概念：女性运动员三联症）",
+        "correctOptionKey": "choice-d"
       },
       {
-        "id": "nasm-question-50",
+        "id": "nasm-question-410",
         "prompt": "RED-S的核心基础是",
         "options": [
           {
@@ -15509,10 +16058,11 @@ export const nasmChapters = [
             "label": "高脂饮食"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 高蛋白摄入 B. 低能量可用性 C. 高强度训练不足 D. 高脂饮食"
+        "explanation": "解析：RED-S以低能量可用性为基础。（出处概念：RED-S）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-51",
+        "id": "nasm-question-501",
         "prompt": "私人教练不应为代谢疾病客户进行诊断，主要因为",
         "options": [
           {
@@ -15532,10 +16082,11 @@ export const nasmChapters = [
             "label": "医生不需要参与"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 训练不会影响健康 B. 这超出其执业实践范围 C. RD不能合作 D. 医生不需要参与"
+        "explanation": "解析：越界诊断和治疗超出私人教练执业范围。（出处概念：执业范围）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-52",
+        "id": "nasm-question-502",
         "prompt": "腹部脂肪比整体肥胖更值得警惕，主要因为它",
         "options": [
           {
@@ -15555,10 +16106,11 @@ export const nasmChapters = [
             "label": "不受生活方式影响"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 与心血管和代谢风险联系更紧 B. 更容易测量 C. 只影响体型 D. 不受生活方式影响"
+        "explanation": "解析：腹部脂肪与Ⅱ型糖尿病和CVD风险联系更强。（出处概念：腹部脂肪）",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-53",
+        "id": "nasm-question-503",
         "prompt": "对许多肥胖客户而言，减重的主要来源更应依靠",
         "options": [
           {
@@ -15578,10 +16130,11 @@ export const nasmChapters = [
             "label": "只做力量训练不调饮食"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 只增加静态拉伸 B. 只增加补剂 C. 减少热量摄入并配合运动 D. 只做力量训练不调饮食"
+        "explanation": "解析：文本强调减重主要依赖热量缺口，运动为重要补充。（出处概念：体重管理）",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-54",
+        "id": "nasm-question-504",
         "prompt": "运动对减重方案的关键额外价值之一是",
         "options": [
           {
@@ -15601,10 +16154,11 @@ export const nasmChapters = [
             "label": "一定避免代谢率下降"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 必然带来快速大量减重 B. 帮助长期维持体重并降低CVD风险 C. 完全替代饮食调整 D. 一定避免代谢率下降"
+        "explanation": "解析：运动对长期维持体重和降低CVD风险尤为重要。（出处概念：运动减肥的好处）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-55",
+        "id": "nasm-question-505",
         "prompt": "高血脂管理的基础被概括为",
         "options": [
           {
@@ -15624,10 +16178,11 @@ export const nasmChapters = [
             "label": "只补充鱼油"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 单一药物治疗 B. 健康生活方式 C. 只做高强度训练 D. 只补充鱼油"
+        "explanation": "解析：ACC/AHA将健康生活方式视为风险管理基础。（出处概念：高脂血应对）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-56",
+        "id": "nasm-question-506",
         "prompt": "反式脂肪应尽量减少，主要因为",
         "options": [
           {
@@ -15647,10 +16202,11 @@ export const nasmChapters = [
             "label": "是理想能量来源"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 会提高食物含水量 B. 与心血管风险不利相关 C. 能增加HDL D. 是理想能量来源"
+        "explanation": "解析：反式脂肪应尽量避免，与心血管风险不利相关。（出处概念：膳食脂肪调节）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-57",
+        "id": "nasm-question-507",
         "prompt": "用碳水化合物直接替代饱和脂肪和反式脂肪并不是好办法，文本强调因为",
         "options": [
           {
@@ -15670,10 +16226,11 @@ export const nasmChapters = [
             "label": "会让运动失效"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 会完全阻止消化 B. 不一定降低LDL，且可能降低HDL、升高甘油三酯 C. 会增加肌肉量 D. 会让运动失效"
+        "explanation": "解析：高碳替代并不能理想改善血脂结构，还可能降低HDL并升高甘油三酯。（出处概念：膳食胆固醇与脂肪）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-58",
+        "id": "nasm-question-508",
         "prompt": "ED恢复客户的训练不应强调减重，主要因为",
         "options": [
           {
@@ -15693,10 +16250,11 @@ export const nasmChapters = [
             "label": "他们只能做拉伸"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 运动无法影响体重 B. 需要先避免把运动再次变成清除行为 C. 所有ED客户都不能运动 D. 他们只能做拉伸"
+        "explanation": "解析：ED恢复者要避免把运动重新变成清除行为。（出处概念：ED恢复客户运动方案）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-59",
+        "id": "nasm-question-509",
         "prompt": "女性运动员三联症和RED-S都提示的核心问题之一是",
         "options": [
           {
@@ -15716,10 +16274,11 @@ export const nasmChapters = [
             "label": "只进行有氧训练"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 睡眠过多 B. 能量摄入与消耗不匹配 C. 只吃脂肪 D. 只进行有氧训练"
+        "explanation": "解析：二者都围绕能量摄入与消耗不匹配展开。（出处概念：三联症/RED-S）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-60",
+        "id": "nasm-question-510",
         "prompt": "对ED恢复客户，训练前要求医生全面评估，主要是因为",
         "options": [
           {
@@ -15739,10 +16298,11 @@ export const nasmChapters = [
             "label": "只为提高肌肉围度"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 他们通常没有任何风险 B. 可能存在电解质异常、心律失常等并发问题 C. 只为获得比赛许可 D. 只为提高肌肉围度"
+        "explanation": "解析：ED可能伴电解质异常、心律失常等风险，必须先医学评估。（出处概念：ED恢复客户安全）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-61",
+        "id": "nasm-question-601",
         "prompt": "一位客户要求你根据化验单直接告诉他何时吃降脂药，最合适的回应是",
         "options": [
           {
@@ -15762,10 +16322,11 @@ export const nasmChapters = [
             "label": "让客户自己猜测"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 直接给出具体方案 B. 根据经验调整剂量 C. 转介医生并坚持自己只负责运动支持 D. 让客户自己猜测"
+        "explanation": "解析：药物和医学解读应由医生负责，教练应转介。（出处概念：执业范围）",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-62",
+        "id": "nasm-question-602",
         "prompt": "一位BMI 28的客户想评估腹部脂肪风险，文本更支持加入",
         "options": [
           {
@@ -15785,10 +16346,11 @@ export const nasmChapters = [
             "label": "只做柔韧性测试"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 只测体重 B. 腰围测量 C. 只测臂围 D. 只做柔韧性测试"
+        "explanation": "解析：腰围是评估腹部脂肪与风险的实用方法。（出处概念：腹部脂肪测量）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-63",
+        "id": "nasm-question-603",
         "prompt": "一位超重客户暂时减重不明显，但开始稳定运动、饮食变好、血压改善，最合理的判断是",
         "options": [
           {
@@ -15808,10 +16370,11 @@ export const nasmChapters = [
             "label": "必须立刻停止训练"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 方案失败 B. 只有体重下降才算成功 C. 生活方式改变本身就是重要成功指标 D. 必须立刻停止训练"
+        "explanation": "解析：成功不仅看体重，也看行为和风险指标改善。（出处概念：体重管理成功标准）",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-64",
+        "id": "nasm-question-604",
         "prompt": "一位高血脂客户想知道是否只靠运动就够了，文本更支持",
         "options": [
           {
@@ -15831,10 +16394,11 @@ export const nasmChapters = [
             "label": "只靠断糖"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 只靠运动 B. 只靠药物 C. 运动联合饮食和其他生活方式改变 D. 只靠断糖"
+        "explanation": "解析：高血脂干预以饮食、运动与生活方式联合最为核心。（出处概念：高血脂生活方式）",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-65",
+        "id": "nasm-question-605",
         "prompt": "客户日常大量喝含糖饮料，教练更合适的建议是",
         "options": [
           {
@@ -15854,10 +16418,11 @@ export const nasmChapters = [
             "label": "训练后加倍喝"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 继续作为主要补水来源 B. 以白水或非甜饮料替代 C. 只在睡前喝 D. 训练后加倍喝"
+        "explanation": "解析：应鼓励用白水或非甜饮料替代含糖饮料。（出处概念：限制饮食中的糖）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-66",
+        "id": "nasm-question-606",
         "prompt": "一位客户表现出明显体重下降、怕冷、过度运动和对体形的扭曲评价，最合适处理是",
         "options": [
           {
@@ -15877,10 +16442,11 @@ export const nasmChapters = [
             "label": "鼓励更严格节食"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 继续加大训练量 B. 建议其主动寻求医生与专业团队帮助 C. 立即安排减脂课 D. 鼓励更严格节食"
+        "explanation": "解析：这些是神经性厌食症警示信号，应及时转介专业团队。（出处概念：ED警示信号）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-67",
+        "id": "nasm-question-607",
         "prompt": "一位ED恢复客户回到训练时仍有头晕和心律不齐，教练应",
         "options": [
           {
@@ -15900,10 +16466,11 @@ export const nasmChapters = [
             "label": "忽略症状"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 继续高强度训练 B. 先暂停并要求医疗许可 C. 只改练腹肌 D. 忽略症状"
+        "explanation": "解析：存在异常症状时应暂停训练并回到医疗系统。（出处概念：ED恢复客户注意事项）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-68",
+        "id": "nasm-question-608",
         "prompt": "对于恢复期ED客户，更合适的训练方向是",
         "options": [
           {
@@ -15923,10 +16490,11 @@ export const nasmChapters = [
             "label": "每天无休息训练"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 剧烈减脂方案 B. 全面、适度、非力竭训练 C. 只做空腹有氧 D. 每天无休息训练"
+        "explanation": "解析：恢复期更适合适度、全面、非力竭训练。（出处概念：ED恢复客户运动处方）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-69",
+        "id": "nasm-question-609",
         "prompt": "一位男性运动员长期控能量、体重下降、表现下降，教练应警惕",
         "options": [
           {
@@ -15946,10 +16514,11 @@ export const nasmChapters = [
             "label": "只需增加步频"
           }
         ],
-        "explanation": "情景应用题（21-30） A. RED-S或低能量可用性问题 B. 只是训练意志太强 C. 一定没有营养风险 D. 只需增加步频"
+        "explanation": "解析：长期低能量可用性可能进入RED-S范畴。（出处概念：RED-S）",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-70",
+        "id": "nasm-question-610",
         "prompt": "对肥胖客户进行腹部脂肪测量时，更合理的做法是",
         "options": [
           {
@@ -15969,7 +16538,8 @@ export const nasmChapters = [
             "label": "强制使用皮褶卡钳"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 在公开场合快速操作 B. 不考虑客户感受 C. 提供隐私并以恰当方式测量 D. 强制使用皮褶卡钳"
+        "explanation": "解析：测量要保护隐私、避免尴尬并以恰当方式进行。（出处概念：腹部脂肪评估）",
+        "correctOptionKey": "choice-c"
       }
     ]
   },
@@ -16137,7 +16707,8 @@ export const nasmChapters = [
             "label": "老年专属病"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 沉默的杀手 B. 无害疾病 C. 运动病 D. 老年专属病"
+        "explanation": "解析：文本指出高血压是“沉默的杀手”之一。（出处概念：高血压）",
+        "correctOptionKey": "choice-a"
       },
       {
         "id": "nasm-question-02",
@@ -16160,7 +16731,8 @@ export const nasmChapters = [
             "label": "2期高血压"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 正常血压 B. 血压偏高 C. 1期高血压 D. 2期高血压"
+        "explanation": "解析：2017更新后120/80 mmHg归入血压偏高。（出处概念：血压分类）",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-03",
@@ -16183,7 +16755,8 @@ export const nasmChapters = [
             "label": "肾"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 心 B. 肺泡 C. 脑 D. 肾"
+        "explanation": "解析：靶器官损伤包括心、脑、肾、外周血管和视网膜等。（出处概念：TOD）",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-04",
@@ -16206,7 +16779,8 @@ export const nasmChapters = [
             "label": "视力增强"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 头痛 B. 跛行疼痛 C. 咽痛 D. 视力增强"
+        "explanation": "解析：PAD典型表现是活动中出现跛行疼痛或抽筋。（出处概念：PAD）",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-05",
@@ -16229,7 +16803,8 @@ export const nasmChapters = [
             "label": "第五"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 第一 B. 第二 C. 第三 D. 第五"
+        "explanation": "解析：COPD已成为美国第三大致死因。（出处概念：COPD）",
+        "correctOptionKey": "choice-c"
       },
       {
         "id": "nasm-question-06",
@@ -16252,7 +16827,8 @@ export const nasmChapters = [
             "label": "COPD"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. ACSM B. AAP C. PAD D. COPD"
+        "explanation": "解析：哮喘行动计划缩写为AAP。（出处概念：AAP）",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-07",
@@ -16275,7 +16851,8 @@ export const nasmChapters = [
             "label": "皮褶厚度"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. BMI B. 呼吸困难量表 C. 腰围 D. 皮褶厚度"
+        "explanation": "解析：推荐使用呼吸困难量表监测症状与强度。（出处概念：哮喘训练监控）",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-08",
@@ -16298,7 +16875,8 @@ export const nasmChapters = [
             "label": "仅周末"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 1-2天 B. 2-3天 C. 5-7天 D. 仅周末"
+        "explanation": "解析：高血压客户有氧训练建议每周5-7天。（出处概念：高血压运动指南）",
+        "correctOptionKey": "choice-c"
       },
       {
         "id": "nasm-question-09",
@@ -16321,7 +16899,8 @@ export const nasmChapters = [
             "label": "游泳冲刺"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 上肢功率车 B. 跑步机步行 C. 深蹲跳 D. 游泳冲刺"
+        "explanation": "解析：PAD监督性运动训练以跑步机步行为基础最常见。（出处概念：PAD训练）",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-10",
@@ -16344,10 +16923,11 @@ export const nasmChapters = [
             "label": "运动性脱水"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 运动性肌肉无力 B. 运动性支气管狭窄 C. 运动后低血糖 D. 运动性脱水"
+        "explanation": "解析：EIB即运动性支气管狭窄。（出处概念：哮喘与EIB）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-11",
+        "id": "nasm-question-101",
         "prompt": "高血压患者应避免Valsalva呼吸，主要因为它会",
         "options": [
           {
@@ -16367,10 +16947,11 @@ export const nasmChapters = [
             "label": "稳定血压"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 降低胸内压 B. 增加胸内压并影响心输出量 C. 改善静脉回流 D. 稳定血压"
+        "explanation": "解析：胸内压增高会减少回流心脏血流并影响心输出量。（出处概念：高血压禁忌）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-12",
+        "id": "nasm-question-102",
         "prompt": "高血压患者药物中，β受体阻滞剂对运动监控的主要影响是",
         "options": [
           {
@@ -16390,10 +16971,11 @@ export const nasmChapters = [
             "label": "提高爆发力"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 增加柔韧性 B. 使心率更能反映运动强度 C. 阻止心率随运动正常升高 D. 提高爆发力"
+        "explanation": "解析：β阻滞剂会减慢并限制运动性心率上升，故需借助RPE。（出处概念：高血压药物）",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-13",
+        "id": "nasm-question-103",
         "prompt": "MI、中风和PAD病理生理学本质相近，关键共同点是",
         "options": [
           {
@@ -16413,10 +16995,11 @@ export const nasmChapters = [
             "label": "都是感染病"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 都由肌肉拉伤引起 B. 都与堵塞性血管疾病有关 C. 都只影响呼吸系统 D. 都是感染病"
+        "explanation": "解析：三者本质上都与堵塞性血管病变相关。（出处概念：共同病理生理学）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-14",
+        "id": "nasm-question-104",
         "prompt": "PAD监督性步行训练之所以有效，关键之一在于",
         "options": [
           {
@@ -16436,10 +17019,11 @@ export const nasmChapters = [
             "label": "只降低体重"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 完全避免下肢负荷 B. 通过间歇步行改善行走能力和调节功能 C. 只提高上肢力量 D. 只降低体重"
+        "explanation": "解析：间歇步行训练可改善PAD患者行走能力与相关调节机制。（出处概念：PAD运动指南）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-15",
+        "id": "nasm-question-105",
         "prompt": "中风后客户运动处方通常需降低强度，主要因为",
         "options": [
           {
@@ -16459,10 +17043,11 @@ export const nasmChapters = [
             "label": "完全不能做有氧"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 峰值运动能力下降且能量消耗增加 B. 他们不会疲劳 C. 只能做柔韧训练 D. 完全不能做有氧"
+        "explanation": "解析：中风后峰值运动能力下降、活动耗能增加，因此处方需保守。（出处概念：CVA后训练）",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-16",
+        "id": "nasm-question-106",
         "prompt": "COPD患者运动不耐受并不只是肺功能问题，还与什么有关？",
         "options": [
           {
@@ -16482,10 +17067,11 @@ export const nasmChapters = [
             "label": "腹部脂肪减少"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 骨骼肌消瘦和无力 B. 过度肌肥大 C. 视力异常 D. 腹部脂肪减少"
+        "explanation": "解析：COPD常伴骨骼肌消瘦、无力和纤维改变。（出处概念：COPD）",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-17",
+        "id": "nasm-question-107",
         "prompt": "哮喘患者进行较长热身的主要目的之一是",
         "options": [
           {
@@ -16505,10 +17091,11 @@ export const nasmChapters = [
             "label": "取消放松需要"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 提高最大力量 B. 降低EIB发生风险 C. 增加胸闷 D. 取消放松需要"
+        "explanation": "解析：较充分热身可减少运动后急性支气管狭窄风险。（出处概念：哮喘训练）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-18",
+        "id": "nasm-question-108",
         "prompt": "哮喘和EIB训练中要避免极端温湿环境，主要因为",
         "options": [
           {
@@ -16528,10 +17115,11 @@ export const nasmChapters = [
             "label": "会增加食欲"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 容易触发气道反应 B. 会提高骨密度 C. 会降低协调性 D. 会增加食欲"
+        "explanation": "解析：极端温湿度可成为诱因，加重哮喘/EIB反应。（出处概念：哮喘环境控制）",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-19",
+        "id": "nasm-question-109",
         "prompt": "高血压客户收缩压达到220 mmHg或舒张压达到105 mmHg时，文本建议",
         "options": [
           {
@@ -16551,10 +17139,11 @@ export const nasmChapters = [
             "label": "改做增强式训练"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 继续训练 B. 提高强度 C. 终止运动 D. 改做增强式训练"
+        "explanation": "解析：达到该阈值被视为应终止运动。（出处概念：高血压安全注意事项）",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-20",
+        "id": "nasm-question-110",
         "prompt": "哮喘客户的AAP之所以重要，主要因为它",
         "options": [
           {
@@ -16574,10 +17163,11 @@ export const nasmChapters = [
             "label": "替代医生"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 只记录体重 B. 提供症状恶化与紧急处理框架 C. 只决定饮食 D. 替代医生"
+        "explanation": "解析：AAP提供恶化识别与紧急处理的书面框架。（出处概念：AAP）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-21",
+        "id": "nasm-question-201",
         "prompt": "一位高血压1期客户血压尚未控制，最合适的处理是",
         "options": [
           {
@@ -16597,10 +17187,11 @@ export const nasmChapters = [
             "label": "只做屏气大重量训练"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 立即安排高强度训练 B. 先停止所有活动半年 C. 先由医生介入并获得许可后再训练 D. 只做屏气大重量训练"
+        "explanation": "解析：高血压未控制且达1期及以上，应先由医生处理并许可。（出处概念：血压分类与许可）",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-22",
+        "id": "nasm-question-202",
         "prompt": "高血压客户进行抗阻训练时，教练应特别强调",
         "options": [
           {
@@ -16620,10 +17211,11 @@ export const nasmChapters = [
             "label": "只做等长极限收缩"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 每次都憋气完成 B. 采用Valsalva提高稳定 C. 避免屏气并渐进加负荷 D. 只做等长极限收缩"
+        "explanation": "解析：要避免屏气，并循序渐进增加负荷。（出处概念：高血压训练）",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-23",
+        "id": "nasm-question-203",
         "prompt": "一位MI后客户来训练，教练最应优先索取的信息是",
         "options": [
           {
@@ -16643,10 +17235,11 @@ export const nasmChapters = [
             "label": "体脂秤品牌"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 最近旅游照片 B. 压力测试结果和医生许可 C. 过去的饮食喜好 D. 体脂秤品牌"
+        "explanation": "解析：MI后训练必须依托压力测试、超声心动图和医生许可等信息。（出处概念：MI后客户）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-24",
+        "id": "nasm-question-204",
         "prompt": "一位中风后客户平衡差、易疲劳，训练起始更适合",
         "options": [
           {
@@ -16666,10 +17259,11 @@ export const nasmChapters = [
             "label": "纯冲刺训练"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 无辅助自由动作 B. 固定器械和有支撑练习 C. 大量跳跃训练 D. 纯冲刺训练"
+        "explanation": "解析：中风客户常有平衡和稳定问题，应从固定器械或支撑练习开始。（出处概念：CVA后训练方案）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-25",
+        "id": "nasm-question-205",
         "prompt": "PAD客户走5分钟后小腿疼痛明显，最佳处理更接近",
         "options": [
           {
@@ -16689,10 +17283,11 @@ export const nasmChapters = [
             "label": "只做上肢训练"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 忍痛持续走到底 B. 疼痛后短休，再继续行走 C. 永远不要再走路 D. 只做上肢训练"
+        "explanation": "解析：PAD伴跛行宜采用行走至症状出现、短休、再行走的模式。（出处概念：PAD监督训练）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-26",
+        "id": "nasm-question-206",
         "prompt": "COPD客户开始运动的最佳起点通常是",
         "options": [
           {
@@ -16712,10 +17307,11 @@ export const nasmChapters = [
             "label": "只做拉伸"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 先自行高强度训练 B. 先进入正规肺康复，再过渡长期维持 C. 先做大重量卧推 D. 只做拉伸"
+        "explanation": "解析：COPD应先在正规肺康复体系中开展训练，再向长期维持过渡。（出处概念：COPD）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-27",
+        "id": "nasm-question-207",
         "prompt": "一位哮喘客户没有AAP，教练最合理的做法是",
         "options": [
           {
@@ -16735,10 +17331,11 @@ export const nasmChapters = [
             "label": "直接安排极限运动"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 忽略即可 B. 鼓励其医疗人员制定AAP C. 自己编写药物方案 D. 直接安排极限运动"
+        "explanation": "解析：没有AAP时应鼓励其医疗人员制定，而不是由教练自行替代。（出处概念：AAP）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-28",
+        "id": "nasm-question-208",
         "prompt": "哮喘客户正式训练前仅热身2分钟就想进入高强度跑，教练应",
         "options": [
           {
@@ -16758,10 +17355,11 @@ export const nasmChapters = [
             "label": "只看心率不看症状"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 同意 B. 建议至少10-15分钟渐进热身 C. 省略放松改为更快跑 D. 只看心率不看症状"
+        "explanation": "解析：文本建议至少10-15分钟不同强度热身。（出处概念：哮喘训练指南）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-29",
+        "id": "nasm-question-209",
         "prompt": "一位哮喘客户运动时呼吸困难量表达到较高等级并伴胸闷，教练应",
         "options": [
           {
@@ -16781,10 +17379,11 @@ export const nasmChapters = [
             "label": "完全不休息"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 继续加量 B. 依据症状与AAP及时调整甚至停止 C. 让其屏气 D. 完全不休息"
+        "explanation": "解析：出现明显症状应依AAP和症状监测及时调整或停止。（出处概念：哮喘行动计划/呼吸困难量表）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-30",
+        "id": "nasm-question-210",
         "prompt": "面对心血管和呼吸系统疾病客户，私人教练最恰当的总体角色是",
         "options": [
           {
@@ -16804,7 +17403,8 @@ export const nasmChapters = [
             "label": "只负责化验解释"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 独立替代医生 B. 在医疗团队框架下实施安全训练 C. 只负责药物管理 D. 只负责化验解释"
+        "explanation": "解析：私人教练应在医疗团队框架下实施安全有效训练。（出处概念：章节总原则）",
+        "correctOptionKey": "choice-b"
       }
     ]
   },
@@ -16965,7 +17565,8 @@ export const nasmChapters = [
             "label": "只发生于肌腱"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 长期轻微累积损伤 B. 组织突然超负荷后的明显损伤 C. 只发生于骨骼 D. 只发生于肌腱"
+        "explanation": "解析：宏观创伤是组织突然遭受超负荷并产生明显损伤。（出处概念：损伤分类）",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-02",
@@ -16988,7 +17589,8 @@ export const nasmChapters = [
             "label": "直接撞击伤"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 爆发性损伤 B. 过度使用损伤 C. 急性断裂 D. 直接撞击伤"
+        "explanation": "解析：微创伤通常被称为过度使用损伤。（出处概念：微创伤）",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-03",
@@ -17011,7 +17613,8 @@ export const nasmChapters = [
             "label": "疼痛、肿胀、瘢痕"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 萎缩、增生、再伤 B. 炎症、修复、重塑 C. 牵拉、断裂、固定 D. 疼痛、肿胀、瘢痕"
+        "explanation": "解析：组织愈合依次为炎症、修复、重塑。（出处概念：组织愈合）",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-04",
@@ -17034,7 +17637,8 @@ export const nasmChapters = [
             "label": "1年"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 2-3天 B. 2-3周 C. 2-3月 D. 1年"
+        "explanation": "解析：急性损伤后炎症阶段通常约2-3天，严重时更久。（出处概念：炎症阶段）",
+        "correctOptionKey": "choice-a"
       },
       {
         "id": "nasm-question-05",
@@ -17057,7 +17661,8 @@ export const nasmChapters = [
             "label": "只做深蹲跳"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 强调腰椎屈曲 B. 强调腰椎伸展位练习 C. 只做仰卧起坐 D. 只做深蹲跳"
+        "explanation": "解析：椎间盘突出通常避免屈曲、鼓励伸展位练习。（出处概念：腰椎间盘损伤）",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-06",
@@ -17080,7 +17685,8 @@ export const nasmChapters = [
             "label": "臀中肌"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 冈上肌 B. 肱三头肌 C. 斜方肌下束 D. 臀中肌"
+        "explanation": "解析：冈上肌等肩峰下结构常见于撞击综合征。（出处概念：肩峰撞击综合征）",
+        "correctOptionKey": "choice-a"
       },
       {
         "id": "nasm-question-07",
@@ -17103,7 +17709,8 @@ export const nasmChapters = [
             "label": "颈后位最安全"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 手臂在身体后方且外展超过90度 B. 外展低于90度且位于身体前侧 C. 任何位置都安全 D. 颈后位最安全"
+        "explanation": "解析：安全区是外展低于90度且位于身体前侧。（出处概念：前肩不稳定安全区）",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-08",
@@ -17126,7 +17733,8 @@ export const nasmChapters = [
             "label": "压缩伤"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 外翻扭伤 B. 内翻扭伤 C. 过伸伤 D. 压缩伤"
+        "explanation": "解析：最常见的是足踝内翻扭伤。（出处概念：踝关节）",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-09",
@@ -17149,7 +17757,8 @@ export const nasmChapters = [
             "label": "肘关节伸展"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 肩胛骨上旋 B. 胫骨前移和旋转 C. 髋关节外展 D. 肘关节伸展"
+        "explanation": "解析：ACL主要限制胫骨前移和旋转。（出处概念：ACL）",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-10",
@@ -17172,10 +17781,11 @@ export const nasmChapters = [
             "label": "韧带完全断裂"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 系统性炎症性关节病 B. 退行性骨关节疾病 C. 急性肌肉拉伤 D. 韧带完全断裂"
+        "explanation": "解析：OA即退行性骨关节疾病。（出处概念：骨关节炎）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-11",
+        "id": "nasm-question-101",
         "prompt": "ROM在损伤后常受限，主要与哪类变化有关？",
         "options": [
           {
@@ -17195,10 +17805,11 @@ export const nasmChapters = [
             "label": "关节囊完全消失"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 胶原交联和纤维化增加 B. 肌肉立刻肥大 C. 血流永久增加 D. 关节囊完全消失"
+        "explanation": "解析：分泌物、胶原交联、纤维化等都会限制ROM。（出处概念：损伤对功能影响）",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-12",
+        "id": "nasm-question-102",
         "prompt": "修复阶段新生胶原纤维最初较弱，主要因为",
         "options": [
           {
@@ -17218,10 +17829,11 @@ export const nasmChapters = [
             "label": "不会形成瘢痕"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 完全缺乏血液 B. 排列随机，尚未沿应力线优化 C. 已经完全成熟 D. 不会形成瘢痕"
+        "explanation": "解析：修复期胶原纤维排列随机，抗拉性能不足。（出处概念：修复阶段）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-13",
+        "id": "nasm-question-103",
         "prompt": "重塑阶段训练的核心意义在于",
         "options": [
           {
@@ -17241,10 +17853,11 @@ export const nasmChapters = [
             "label": "只做被动休息"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 完全停止负荷 B. 通过渐进负荷促进新组织强化与功能恢复 C. 只处理炎症 D. 只做被动休息"
+        "explanation": "解析：重塑期需要适度渐进负荷促进组织成熟和功能恢复。（出处概念：重塑阶段）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-14",
+        "id": "nasm-question-104",
         "prompt": "腰椎间盘突出客户应避免腰椎屈曲，主要因为屈曲会",
         "options": [
           {
@@ -17264,10 +17877,11 @@ export const nasmChapters = [
             "label": "改善神经根空间"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 促进髓核前移 B. 促进髓核后移并加重后突出 C. 增加肩胛稳定 D. 改善神经根空间"
+        "explanation": "解析：腰椎屈曲会促使髓核向后移，可能加重突出。（出处概念：腰椎间盘损伤）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-15",
+        "id": "nasm-question-105",
         "prompt": "前膝疼痛训练中，强化臀中肌的重要性在于",
         "options": [
           {
@@ -17287,10 +17901,11 @@ export const nasmChapters = [
             "label": "提高握力"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 只增加上肢力量 B. 改善骨盆与下肢动态排列 C. 降低心率 D. 提高握力"
+        "explanation": "解析：臀中肌有助于改善骨盆控制和下肢排列，减轻前膝疼痛相关负荷。（出处概念：前膝疼痛）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-16",
+        "id": "nasm-question-106",
         "prompt": "ACL术后开链腿伸展最后30度需谨慎，主要因为",
         "options": [
           {
@@ -17310,10 +17925,11 @@ export const nasmChapters = [
             "label": "会减少股四头肌参与"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 对ACL移植物应力最大 B. 完全没有负荷 C. 只会刺激腘绳肌 D. 会减少股四头肌参与"
+        "explanation": "解析：开链腿伸展末段会增加胫骨前移和ACL应力。（出处概念：ACL术后训练）",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-17",
+        "id": "nasm-question-107",
         "prompt": "肩袖训练常用轻负荷高次数，主要因为肩袖肌群更偏向",
         "options": [
           {
@@ -17333,10 +17949,11 @@ export const nasmChapters = [
             "label": "完全无功能"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 纯最大力量肌 B. 稳定与耐力角色 C. 爆发性短程发力 D. 完全无功能"
+        "explanation": "解析：肩袖更承担稳定和耐力任务，故常以轻负荷高次数训练。（出处概念：肩袖训练）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-18",
+        "id": "nasm-question-108",
         "prompt": "踝关节扭伤恢复中加入平衡训练的重要原因之一是",
         "options": [
           {
@@ -17356,10 +17973,11 @@ export const nasmChapters = [
             "label": "减少ROM"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 增强本体感觉并降低再扭伤风险 B. 只为了提高臂力 C. 替代全部力量训练 D. 减少ROM"
+        "explanation": "解析：平衡训练有助恢复本体感觉并减少再损伤。（出处概念：踝关节康复）",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-19",
+        "id": "nasm-question-109",
         "prompt": "RA患者处于发作期时，更适合的抗阻形式是",
         "options": [
           {
@@ -17379,10 +17997,11 @@ export const nasmChapters = [
             "label": "颈后肩推"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 增强式 B. 等长抗阻 C. 高冲击跑跳 D. 颈后肩推"
+        "explanation": "解析：RA发作期更适合等长抗阻训练。（出处概念：RA活动与运动指南）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-20",
+        "id": "nasm-question-110",
         "prompt": "OA患者被建议优先采用低冲击训练，主要因为",
         "options": [
           {
@@ -17402,10 +18021,11 @@ export const nasmChapters = [
             "label": "必须避免所有活动"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 完全不能提高心肺功能 B. 需要尽量减少关节面负荷压力 C. 不能进行任何力量训练 D. 必须避免所有活动"
+        "explanation": "解析：OA训练强调减少关节负荷压力，故优先低冲击模式。（出处概念：OA）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-21",
+        "id": "nasm-question-201",
         "prompt": "一位康复后客户训练时局部再度肿胀、发热、ROM下降，最合理的判断是",
         "options": [
           {
@@ -17425,10 +18045,11 @@ export const nasmChapters = [
             "label": "应立即增加训练量"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 这是必然进步 B. 进展可能过快 C. 说明负荷太低 D. 应立即增加训练量"
+        "explanation": "解析：这些负性反应通常提示负荷进展过快或不当。（出处概念：训练监测）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-22",
+        "id": "nasm-question-202",
         "prompt": "一位下腰背椎间盘突出客户最不适合的练习是",
         "options": [
           {
@@ -17448,10 +18069,11 @@ export const nasmChapters = [
             "label": "温和臀肌拉伸"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 保持腰椎中立位稳定训练 B. 被动腰椎伸展 C. 仰卧起坐 D. 温和臀肌拉伸"
+        "explanation": "解析：仰卧起坐强调腰椎屈曲，不适合椎间盘突出者。（出处概念：椎间盘损伤禁忌）",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-23",
+        "id": "nasm-question-203",
         "prompt": "肩峰撞击综合征客户做高位下拉时，更安全的方式是",
         "options": [
           {
@@ -17471,10 +18093,11 @@ export const nasmChapters = [
             "label": "宽握到极限位"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 颈后下拉 B. 下拉至胸前 C. 大幅后仰借力 D. 宽握到极限位"
+        "explanation": "解析：高位下拉宜拉至胸前，颈后下拉不推荐。（出处概念：肩峰撞击综合征）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-24",
+        "id": "nasm-question-204",
         "prompt": "前肩不稳定客户最应避免的动作之一是",
         "options": [
           {
@@ -17494,10 +18117,11 @@ export const nasmChapters = [
             "label": "肩胛稳定练习"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 肩外展低于90度活动 B. 颈后肩推 C. 轻负荷肩袖训练 D. 肩胛稳定练习"
+        "explanation": "解析：颈后肩推会把肩放在危险位，加重前肩不稳风险。（出处概念：前肩不稳定）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-25",
+        "id": "nasm-question-205",
         "prompt": "ACL重建术后早期，若移植物来自半腱肌/股薄肌，则通常需避免",
         "options": [
           {
@@ -17517,10 +18141,11 @@ export const nasmChapters = [
             "label": "任何上肢训练"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 髋外展 B. 任何积极或抗阻性腘绳肌训练 C. 任何闭链训练 D. 任何上肢训练"
+        "explanation": "解析：半腱肌/股薄肌移植物术后4-6周通常禁止积极或抗阻性腘绳肌练习。（出处概念：ACL重建）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-26",
+        "id": "nasm-question-206",
         "prompt": "踝关节扭伤客户在疼痛肿胀减轻后，下一步重点更适合加入",
         "options": [
           {
@@ -17540,10 +18165,11 @@ export const nasmChapters = [
             "label": "长期完全固定"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 只做卧推 B. ROM、力量和本体感觉训练 C. 立即最大强度跳深 D. 长期完全固定"
+        "explanation": "解析：应从ROM、力量、本体感觉逐步恢复，再到更复杂活动。（出处概念：踝关节活动与运动指南）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-27",
+        "id": "nasm-question-207",
         "prompt": "TKA后客户正式康复结束，较合适的有氧活动是",
         "options": [
           {
@@ -17563,10 +18189,11 @@ export const nasmChapters = [
             "label": "全深蹲跳"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 跑步跳箱 B. 游泳和固定自行车 C. 高冲击踏板操 D. 全深蹲跳"
+        "explanation": "解析：游泳和固定自行车是TKA后较适宜的低冲击活动。（出处概念：TKA）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-28",
+        "id": "nasm-question-208",
         "prompt": "THA后客户的方案设计中，文本更支持",
         "options": [
           {
@@ -17586,10 +18213,11 @@ export const nasmChapters = [
             "label": "长期只卧床"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 常规高冲击跑跳 B. 低冲击活动并咨询外科医生确认禁忌 C. 完全不再做下肢训练 D. 长期只卧床"
+        "explanation": "解析：THA后应采用低冲击活动，并确认外科医生对持续禁忌的要求。（出处概念：THA）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-29",
+        "id": "nasm-question-209",
         "prompt": "RA客户若已出现颈部不稳定史，下列最应避免的是",
         "options": [
           {
@@ -17609,10 +18237,11 @@ export const nasmChapters = [
             "label": "轻度抗阻训练"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 固定自行车 B. 颈部强化和颈部拉伸 C. ROM训练 D. 轻度抗阻训练"
+        "explanation": "解析：RA若有颈部不稳定史，颈部拉伸和强化都属高风险。（出处概念：RA禁忌）",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-30",
+        "id": "nasm-question-210",
         "prompt": "私人教练面对骨科损伤客户时，最恰当的基本原则是",
         "options": [
           {
@@ -17632,7 +18261,8 @@ export const nasmChapters = [
             "label": "忽略愈合阶段差异"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 自行判断全部医疗禁忌 B. 与医生和康复团队沟通后制定训练 C. 只按通用健身模板训练 D. 忽略愈合阶段差异"
+        "explanation": "解析：私人教练应在医疗团队信息支持下制定方案，而非独断处理。（出处概念：章节总原则）",
+        "correctOptionKey": "choice-b"
       }
     ]
   },
@@ -17670,7 +18300,7 @@ export const nasmChapters = [
     "outline": [],
     "quizQuestions": [
       {
-        "id": "nasm-question-81",
+        "id": "nasm-question-801",
         "prompt": "本章主要讨论的特殊人群不包括哪一项？",
         "options": [
           {
@@ -17690,10 +18320,11 @@ export const nasmChapters = [
             "label": "脑瘫客户"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 脊髓损伤客户 B. 多发性硬化症客户 C. 冠心病术后客户 D. 脑瘫客户"
+        "explanation": "解析：本章明确列出 SCI、MS、癫痫、CP 四类人群，未包括冠心病术后。出处概念：章节对象范围。",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-82",
+        "id": "nasm-question-802",
         "prompt": "本章强调神经肌肉障碍客户训练的主要目标是：",
         "options": [
           {
@@ -17713,10 +18344,11 @@ export const nasmChapters = [
             "label": "尽快恢复竞赛水平"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 统一提高 1RM B. 通过提高功能能力改善生活质量 C. 只进行康复治疗 D. 尽快恢复竞赛水平"
+        "explanation": "解析：原文强调主要训练目标应是通过提高功能能力改善生活质量。出处概念：训练总目标。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-83",
+        "id": "nasm-question-803",
         "prompt": "脑瘫在原文中被界定为：",
         "options": [
           {
@@ -17736,10 +18368,11 @@ export const nasmChapters = [
             "label": "仅限儿童期发作的短暂障碍"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 进行性疾病 B. 非进行性疾病 C. 传染性疾病 D. 仅限儿童期发作的短暂障碍"
+        "explanation": "解析：原文指出 CP 是非进行性疾病。出处概念：脑瘫定义。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-84",
+        "id": "nasm-question-804",
         "prompt": "SCI 损伤位置越高，通常意味着：",
         "options": [
           {
@@ -17759,10 +18392,11 @@ export const nasmChapters = [
             "label": "只影响下肢"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 功能受限范围越小 B. 功能受限范围越大 C. 与功能受限无关 D. 只影响下肢"
+        "explanation": "解析：损伤位置越高，影响范围通常越广。出处概念：SCI 损伤平面与功能关系。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-85",
+        "id": "nasm-question-805",
         "prompt": "SCI 发生在较高节段并影响四肢时，原文称为：",
         "options": [
           {
@@ -17782,10 +18416,11 @@ export const nasmChapters = [
             "label": "偏瘫"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 截瘫 B. 四肢瘫 C. 单瘫 D. 偏瘫"
+        "explanation": "解析：高位损伤影响四肢时称四肢瘫。出处概念：SCI 分类。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-86",
+        "id": "nasm-question-806",
         "prompt": "自主神经反射异常最核心的风险表现之一是：",
         "options": [
           {
@@ -17805,10 +18440,11 @@ export const nasmChapters = [
             "label": "低血钙"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 突发性高血压 B. 低血糖 C. 低体温 D. 低血钙"
+        "explanation": "解析：AD 的关键危险信号是突发性高血压。出处概念：SCI 异常生理反应。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-87",
+        "id": "nasm-question-807",
         "prompt": "本章指出，SCI 客户在极端温度环境中的主要困难之一是：",
         "options": [
           {
@@ -17828,10 +18464,11 @@ export const nasmChapters = [
             "label": "无法测量心率"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 不能进行力量训练 B. 体温调节能力受限 C. 不能补液 D. 无法测量心率"
+        "explanation": "解析：原文强调 T6 及以上损伤者可出现体温调节紊乱。出处概念：SCI 运动注意事项。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-88",
+        "id": "nasm-question-808",
         "prompt": "对 CP 客户而言，原文反复强调应优先关注：",
         "options": [
           {
@@ -17851,10 +18488,11 @@ export const nasmChapters = [
             "label": "最大负荷测试成绩"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 高难度动作展示 B. 功能能力与活动参与 C. 竞技专项成绩 D. 最大负荷测试成绩"
+        "explanation": "解析：CP 训练重在功能能力与体力活动参与潜力。出处概念：CP 实践应用。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-89",
+        "id": "nasm-question-809",
         "prompt": "本章提到，SCI 客户常见的过度使用损伤部位不包括：",
         "options": [
           {
@@ -17874,10 +18512,11 @@ export const nasmChapters = [
             "label": "踝"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 肩 B. 腕 C. 肘 D. 踝"
+        "explanation": "解析：原文多次提到肩、腕、肘过度使用损伤。出处概念：SCI 常见损伤。",
+        "correctOptionKey": "choice-d"
       },
       {
-        "id": "nasm-question-90",
+        "id": "nasm-question-810",
         "prompt": "对特殊人群训练，最符合原文的说法是：",
         "options": [
           {
@@ -17897,10 +18536,11 @@ export const nasmChapters = [
             "label": "只需医学管理，不需要教练参与"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 一般不建议参加规律训练 B. 只适合被动活动 C. 规律训练可带来功能和健康收益 D. 只需医学管理，不需要教练参与"
+        "explanation": "解析：章节明确指出规律训练可带来功能和健康收益。出处概念：训练收益。",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-91",
+        "id": "nasm-question-901",
         "prompt": "SCI 客户出现 AD 的直接诱发机制通常与哪类因素有关？",
         "options": [
           {
@@ -17920,10 +18560,11 @@ export const nasmChapters = [
             "label": "训练频率过低"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 不良刺激引发交感神经反应 B. 碳水摄入过多 C. 血乳酸升高 D. 训练频率过低"
+        "explanation": "解析：AD 由不良刺激诱发交感反应并导致血压骤升。出处概念：AD 机制。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-92",
+        "id": "nasm-question-902",
         "prompt": "对 SCI 客户而言，训练前询问头痛、视物模糊等症状的主要目的是：",
         "options": [
           {
@@ -17943,10 +18584,11 @@ export const nasmChapters = [
             "label": "判断是否缺钙"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 判断是否存在自主神经反射异常风险 B. 判断是否脱水 C. 判断是否肌肉酸痛 D. 判断是否缺钙"
+        "explanation": "解析：这些症状正是训练前识别 AD 风险的重要线索。出处概念：SCI 训练前筛查。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-93",
+        "id": "nasm-question-903",
         "prompt": "SCI 客户在热环境中风险升高的重要原因是：",
         "options": [
           {
@@ -17966,10 +18608,11 @@ export const nasmChapters = [
             "label": "必然发生抽搐"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 肌肉量一定过大 B. 出汗或颤抖调温能力可能受限 C. 必然发生低血压 D. 必然发生抽搐"
+        "explanation": "解析：SCI 客户在极端环境中不能充分出汗或颤抖调温。出处概念：SCI 体温调节。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-94",
+        "id": "nasm-question-904",
         "prompt": "神经肌肉损伤程度会影响 SCI 客户的：",
         "options": [
           {
@@ -17989,10 +18632,11 @@ export const nasmChapters = [
             "label": "饮食偏好"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 体力活动水平和有氧适能 B. 头发颜色 C. 教育水平 D. 饮食偏好"
+        "explanation": "解析：原文将损伤程度与体力活动、有氧适能、功率输出联系起来。出处概念：SCI 功能与适能。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-95",
+        "id": "nasm-question-905",
         "prompt": "原文对 CP 的描述表明，其功能问题加重更多与什么相关？",
         "options": [
           {
@@ -18012,10 +18656,11 @@ export const nasmChapters = [
             "label": "仅与药物有关"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 脑损伤持续恶化 B. 处理不当导致继发表现恶化 C. 必然的年龄增长 D. 仅与药物有关"
+        "explanation": "解析：CP 本身非进行性，但继发表现可因处理不当加重。出处概念：CP 病程特点。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-96",
+        "id": "nasm-question-906",
         "prompt": "CP 客户肌无力为什么在训练处方中被强调？",
         "options": [
           {
@@ -18035,10 +18680,11 @@ export const nasmChapters = [
             "label": "它只影响静息代谢"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 它与功能能力受限密切相关 B. 它只影响美观 C. 它说明不能训练 D. 它只影响静息代谢"
+        "explanation": "解析：原文将肌无力视为 CP 活动受限的重要因素。出处概念：CP 机制。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-97",
+        "id": "nasm-question-907",
         "prompt": "原文指出，抗痉挛药和抗癫痫药对训练的意义在于：",
         "options": [
           {
@@ -18058,10 +18704,11 @@ export const nasmChapters = [
             "label": "一定提升平衡能力"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 可忽略不计 B. 可能改变 ROM、疲劳感和生理反应 C. 一定提升爆发力 D. 一定提升平衡能力"
+        "explanation": "解析：这些药物可能影响 ROM、疲劳、嗜睡及生理监测结果。出处概念：药物与训练反应。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-98",
+        "id": "nasm-question-908",
         "prompt": "对 CP 客户优先使用单关节或固定器械训练，主要是因为：",
         "options": [
           {
@@ -18081,10 +18728,11 @@ export const nasmChapters = [
             "label": "能完全替代功能训练"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 价格更低 B. 更便于控制动作技术和风险 C. 只适合健美训练 D. 能完全替代功能训练"
+        "explanation": "解析：早期采用更稳定方式有助于控制动作并降低风险。出处概念：CP 训练起点。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-99",
+        "id": "nasm-question-909",
         "prompt": "对 SCI 客户进行运动测试与处方时，为什么要关注损伤平面和完整性？",
         "options": [
           {
@@ -18104,10 +18752,11 @@ export const nasmChapters = [
             "label": "因为它们仅影响比赛规则"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 因为它们决定训练服装 B. 因为它们与功能能力和训练反应相关 C. 因为它们只影响心理状态 D. 因为它们仅影响比赛规则"
+        "explanation": "解析：损伤平面和完整性决定了功能能力与训练反应差异。出处概念：SCI 分层评估。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-100",
+        "id": "nasm-question-910",
         "prompt": "本章的处方逻辑最符合下列哪一项？",
         "options": [
           {
@@ -18127,10 +18776,11 @@ export const nasmChapters = [
             "label": "先做最大测试再决定安全性"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 疾病名称决定一切 B. 先识别风险与功能水平，再制定处方 C. 所有人都用统一模板 D. 先做最大测试再决定安全性"
+        "explanation": "解析：本章反复强调先筛查、再分层、再处方。出处概念：总体处方逻辑。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-101",
+        "id": "nasm-question-1001",
         "prompt": "一名 T6 及以上 SCI 客户夏季训练前主诉头痛、焦虑，你首先应：",
         "options": [
           {
@@ -18150,10 +18800,11 @@ export const nasmChapters = [
             "label": "直接安排冷水浴后训练"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 立即做高强度间歇训练 B. 先排查 AD 风险并监测血压 C. 让其自行热身 30 分钟 D. 直接安排冷水浴后训练"
+        "explanation": "解析：此情境符合 AD 风险排查优先级，不能直接训练。出处概念：SCI 训练前检查。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-102",
+        "id": "nasm-question-1002",
         "prompt": "一位 SCI 客户准备在高温潮湿环境下训练，最符合原文的处理是：",
         "options": [
           {
@@ -18173,10 +18824,11 @@ export const nasmChapters = [
             "label": "训练时间越长越好"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 只要意愿强就按常规进行 B. 关注补液、逐步适应和环境降温 C. 用厚衣服促进出汗 D. 训练时间越长越好"
+        "explanation": "解析：高温训练需环境控制、补液和逐步适应。出处概念：SCI 环境管理。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-103",
+        "id": "nasm-question-1003",
         "prompt": "轮椅使用者进入训练场地后，教练首先应关注的不是：",
         "options": [
           {
@@ -18196,10 +18848,11 @@ export const nasmChapters = [
             "label": "客户最喜欢的音乐类型"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 通道与设备可达性 B. 无障碍与人行路线 C. 训练区组织方式 D. 客户最喜欢的音乐类型"
+        "explanation": "解析：无障碍、通道和设备组织直接关系到安全与可实施性。出处概念：SCI 场地可达性。",
+        "correctOptionKey": "choice-d"
       },
       {
-        "id": "nasm-question-104",
+        "id": "nasm-question-1004",
         "prompt": "一位 CP 客户协调性较差、步行能力有限，选择有氧测试时更稳妥的做法是：",
         "options": [
           {
@@ -18219,10 +18872,11 @@ export const nasmChapters = [
             "label": "不做任何评估"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 直接跑台最大测试 B. 结合其功能能力选择更合适的测试工具 C. 只测卧推 1RM D. 不做任何评估"
+        "explanation": "解析：CP 测试工具选择应基于其实际步行与功能能力。出处概念：CP 测试选择。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-105",
+        "id": "nasm-question-1005",
         "prompt": "CP 客户训练开始阶段更适合：",
         "options": [
           {
@@ -18242,10 +18896,11 @@ export const nasmChapters = [
             "label": "只做竞技专项动作"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 复杂自由重量爆发训练 B. 单关节或固定器械、强调动作技术 C. 只做拉伸不做力量 D. 只做竞技专项动作"
+        "explanation": "解析：原文建议从单关节或固定器械入手并强调技术。出处概念：CP 抗阻训练起始阶段。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-106",
+        "id": "nasm-question-1006",
         "prompt": "某 CP 客户正在服用抗痉挛药，训练中教练应特别注意：",
         "options": [
           {
@@ -18265,10 +18920,11 @@ export const nasmChapters = [
             "label": "只做大重量深蹲"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 只记录体重 B. ROM 变化及心率、血压等反应 C. 必须完全避免训练 D. 只做大重量深蹲"
+        "explanation": "解析：药物可能改变 ROM 及心率血压等反应，需持续观察。出处概念：药物监测。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-107",
+        "id": "nasm-question-1007",
         "prompt": "某 SCI 客户想在比赛前通过诱发“增压效应”提升表现，教练应：",
         "options": [
           {
@@ -18288,10 +18944,11 @@ export const nasmChapters = [
             "label": "仅在赛季末尝试"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 鼓励尝试 B. 视作高风险行为并制止 C. 只要血压高就可以 D. 仅在赛季末尝试"
+        "explanation": "解析：通过诱发 AD 追求表现属于高风险行为，原文明确不应鼓励。出处概念：增压效应警示。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-108",
+        "id": "nasm-question-1008",
         "prompt": "一位特殊人群客户功能水平较低，最符合本章的训练目标设定是：",
         "options": [
           {
@@ -18311,10 +18968,11 @@ export const nasmChapters = [
             "label": "尽快完成全部标准化测试"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 优先追求竞技纪录 B. 先提升日常功能和活动参与能力 C. 只看体脂率 D. 尽快完成全部标准化测试"
+        "explanation": "解析：对低功能水平客户，应先追求功能与参与能力提升。出处概念：功能导向处方。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-109",
+        "id": "nasm-question-1009",
         "prompt": "对有两项以上心血管危险因素并伴症状的 CP 客户，原文建议：",
         "options": [
           {
@@ -18334,10 +18992,11 @@ export const nasmChapters = [
             "label": "只做自重训练即可"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 直接开始中高强度训练 B. 先接受临床检查和医疗许可 C. 只做柔韧训练即可 D. 只做自重训练即可"
+        "explanation": "解析：高风险或伴症状客户应先完成临床检查并获医疗许可。出处概念：CP 运动前筛查。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-110",
+        "id": "nasm-question-1010",
         "prompt": "如果教练对某类特殊疾病客户把握不足，最符合原文结论的做法是：",
         "options": [
           {
@@ -18357,7 +19016,8 @@ export const nasmChapters = [
             "label": "拒绝所有特殊人群客户"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 按经验直接训练 B. 在健康和医疗专业人员指导下提高专业知识 C. 只参考网络经验 D. 拒绝所有特殊人群客户"
+        "explanation": "解析：章节结语强调应在健康与医疗专业人员指导下提升专业知识。出处概念：教练专业边界。",
+        "correctOptionKey": "choice-b"
       }
     ]
   },
@@ -18635,7 +19295,8 @@ export const nasmChapters = [
             "label": "速度与柔韧"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 频率与恢复 B. 超负荷与特异性 C. 营养与睡眠 D. 速度与柔韧"
+        "explanation": "解析：原文明确指出两项主要原则是超负荷和特异性。出处概念：训练原则。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-02",
@@ -18658,7 +19319,8 @@ export const nasmChapters = [
             "label": "比赛人数"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 训练场地大小 B. 训练中使用的重量 C. 教练工作时长 D. 比赛人数"
+        "explanation": "解析：训练负荷即训练中使用的重量，是方案核心变量之一。出处概念：训练负荷定义。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-03",
@@ -18681,7 +19343,8 @@ export const nasmChapters = [
             "label": "只做固定器械训练"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 训练越累越好 B. 训练动作越接近专项，转移可能性越大 C. 所有项目都练相同动作 D. 只做固定器械训练"
+        "explanation": "解析：训练活动越接近专项动作，转移可能性越大。出处概念：特异性原则。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-04",
@@ -18704,7 +19367,8 @@ export const nasmChapters = [
             "label": "柔韧测试"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 12RM 测试 B. 体重百分比 C. 直接 1RM 测试 D. 柔韧测试"
+        "explanation": "解析：直接 1RM 测试被称为评估肌肉力量的黄金标准。出处概念：力量测试。",
+        "correctOptionKey": "choice-c"
       },
       {
         "id": "nasm-question-05",
@@ -18727,7 +19391,8 @@ export const nasmChapters = [
             "label": "只做拉伸"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 继续提高负荷做直接 1RM B. 改用次最大 RM 或预测方式 C. 取消所有力量训练 D. 只做拉伸"
+        "explanation": "解析：动作技术不足时更适合用次最大 RM 或预测法。出处概念：测试安全性。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-06",
@@ -18750,7 +19415,8 @@ export const nasmChapters = [
             "label": "ROM"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. %1RM B. BMI C. VO2max D. ROM"
+        "explanation": "解析：%1RM 是本章反复使用的负荷表达方式。出处概念：负荷设定。",
+        "correctOptionKey": "choice-a"
       },
       {
         "id": "nasm-question-07",
@@ -18773,7 +19439,8 @@ export const nasmChapters = [
             "label": "完全随机阶段"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 基础或肥大/耐力阶段 B. 力量阶段 C. 竞赛阶段 D. 完全随机阶段"
+        "explanation": "解析：传统周期强调阶段性推进，不是随机阶段。出处概念：传统周期结构。",
+        "correctOptionKey": "choice-d"
       },
       {
         "id": "nasm-question-08",
@@ -18796,7 +19463,8 @@ export const nasmChapters = [
             "label": "不需要恢复安排"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 一整年训练强度不变 B. 一周内安排不同负荷特征的训练日 C. 只适合新手 D. 不需要恢复安排"
+        "explanation": "解析：波动周期的特点是在一周内安排不同负荷日。出处概念：波动周期。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-09",
@@ -18819,7 +19487,8 @@ export const nasmChapters = [
             "label": "两者都不如无周期化"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 只有传统周期有效 B. 只有波动周期有效 C. 两者都可作为有效周期化方式 D. 两者都不如无周期化"
+        "explanation": "解析：原文并未绝对化二者优劣，而是都视作有效方案。出处概念：周期化比较。",
+        "correctOptionKey": "choice-c"
       },
       {
         "id": "nasm-question-10",
@@ -18842,10 +19511,11 @@ export const nasmChapters = [
             "label": "长期停训"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 4-6 周基础训练 B. 1 天冲刺训练 C. 只做专项比赛 D. 长期停训"
+        "explanation": "解析：正式周期训练前常先做 4-6 周基础训练。出处概念：准备阶段。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-11",
+        "id": "nasm-question-101",
         "prompt": "超负荷原则的本质是：",
         "options": [
           {
@@ -18865,10 +19535,11 @@ export const nasmChapters = [
             "label": "只增加训练动作数量"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 训练刺激维持不变 B. 训练压力逐步增加以持续产生适应 C. 只增加训练时间 D. 只增加训练动作数量"
+        "explanation": "解析：持续适应的前提是训练压力逐步增加。出处概念：超负荷机制。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-12",
+        "id": "nasm-question-102",
         "prompt": "最大力量提升不一定直接提升爆发性项目表现，主要因为：",
         "options": [
           {
@@ -18888,10 +19559,11 @@ export const nasmChapters = [
             "label": "爆发力只靠有氧训练"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 爆发力还依赖快速产力能力 B. 力量训练会降低速度 C. 运动员都不需要力量 D. 爆发力只靠有氧训练"
+        "explanation": "解析：专项爆发表现还要求快速产力，而不只是最大力量。出处概念：力量与爆发力关系。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-13",
+        "id": "nasm-question-103",
         "prompt": "%1RM 与重复次数关系不能机械套用，主要因为它会受到下列因素影响，除了：",
         "options": [
           {
@@ -18911,10 +19583,11 @@ export const nasmChapters = [
             "label": "教练年龄"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 动作类型 B. 器械形式 C. 训练顺序 D. 教练年龄"
+        "explanation": "解析：文中提到动作类型、器械形式、训练顺序等会影响该关系，未提教练年龄。出处概念：%1RM 关系的局限。",
+        "correctOptionKey": "choice-d"
       },
       {
-        "id": "nasm-question-14",
+        "id": "nasm-question-104",
         "prompt": "同等 %1RM 下，固定器械往往可比自由重量完成更多重复次数，这说明：",
         "options": [
           {
@@ -18934,10 +19607,11 @@ export const nasmChapters = [
             "label": "%1RM 完全无意义"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 负荷关系受练习形式影响 B. 固定器械一定更优 C. 自由重量无训练价值 D. %1RM 完全无意义"
+        "explanation": "解析：同等 %1RM 下重复次数不同，说明练习形式会影响关系。出处概念：器械差异。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-15",
+        "id": "nasm-question-105",
         "prompt": "训练后段动作可完成重复次数减少，主要反映了：",
         "options": [
           {
@@ -18957,10 +19631,11 @@ export const nasmChapters = [
             "label": "客户一定动作错误"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 器械故障 B. 训练顺序会影响表现输出 C. 动作永远不该放后面 D. 客户一定动作错误"
+        "explanation": "解析：动作安排越靠后，重复次数越可能下降。出处概念：训练顺序效应。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-16",
+        "id": "nasm-question-106",
         "prompt": "使用较低重复次数的 RM 测试去估算 1RM，主要是为了：",
         "options": [
           {
@@ -18980,10 +19655,11 @@ export const nasmChapters = [
             "label": "降低训练频率"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 提高预测精度 B. 节省器械 C. 避免热身 D. 降低训练频率"
+        "explanation": "解析：较低重复次数的 RM 测试通常有更高的估算精度。出处概念：RM 预测。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-17",
+        "id": "nasm-question-107",
         "prompt": "周期化训练的核心价值在于：",
         "options": [
           {
@@ -19003,10 +19679,11 @@ export const nasmChapters = [
             "label": "只服务健美目标"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 消除所有疲劳 B. 让训练量与强度变化更有组织 C. 保证每周都做同一计划 D. 只服务健美目标"
+        "explanation": "解析：周期化的核心就在于系统地变化训练量、强度和恢复。出处概念：周期化价值。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-18",
+        "id": "nasm-question-108",
         "prompt": "赛季较长项目更适合在赛季中持续应用波动安排，核心原因是：",
         "options": [
           {
@@ -19026,10 +19703,11 @@ export const nasmChapters = [
             "label": "不能做力量训练"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 不需要恢复 B. 便于在比赛期调节训练量与恢复 C. 只能做轻训练 D. 不能做力量训练"
+        "explanation": "解析：赛季中更需要用波动安排平衡比赛负荷与恢复。出处概念：赛季训练管理。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-19",
+        "id": "nasm-question-109",
         "prompt": "如果训练目标是提高专项爆发输出，最符合本章逻辑的是：",
         "options": [
           {
@@ -19049,10 +19727,11 @@ export const nasmChapters = [
             "label": "只做柔韧训练"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 只做大重量慢速训练 B. 选择带有爆发力特征的训练方式并匹配负荷 C. 只做肌耐力训练 D. 只做柔韧训练"
+        "explanation": "解析：若要提高专项爆发表现，需要安排更符合爆发要求的训练。出处概念：专项转移。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-20",
+        "id": "nasm-question-110",
         "prompt": "本章认为有效处方的制定应基于：",
         "options": [
           {
@@ -19072,10 +19751,11 @@ export const nasmChapters = [
             "label": "只看上周成绩"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 只参考表格 B. 负荷、动作、顺序、恢复等变量综合判断 C. 客户个人喜好即可 D. 只看上周成绩"
+        "explanation": "解析：本章始终强调综合变量，而非只看单一数值。出处概念：处方逻辑。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-21",
+        "id": "nasm-question-201",
         "prompt": "一名篮球运动员希望提高起跳爆发力，教练只安排高负重大重量慢速训练。根据本章，最需要补充的是：",
         "options": [
           {
@@ -19095,10 +19775,11 @@ export const nasmChapters = [
             "label": "更多腹肌训练"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 长时间有氧跑 B. 更具爆发性特征的训练 C. 完全停训 D. 更多腹肌训练"
+        "explanation": "解析：仅提高最大力量不足以保证爆发表现提升。出处概念：力量与爆发力区分。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-22",
+        "id": "nasm-question-202",
         "prompt": "一位技术不稳定的新运动员准备做卧推 1RM 测试，最佳做法是：",
         "options": [
           {
@@ -19118,10 +19799,11 @@ export const nasmChapters = [
             "label": "只做体重记录"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 直接测试到极限 B. 先用次最大 RM 或预测法 C. 取消所有评估 D. 只做体重记录"
+        "explanation": "解析：技术不稳定时应优先选择更安全的评估方式。出处概念：1RM 测试条件。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-23",
+        "id": "nasm-question-203",
         "prompt": "如果某运动员 1RM 为 200 磅，按原文示例其 8RM 接近：",
         "options": [
           {
@@ -19141,10 +19823,11 @@ export const nasmChapters = [
             "label": "200 磅"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 100 磅 B. 120 磅 C. 160 磅 D. 200 磅"
+        "explanation": "解析：原文示例中 200 磅的 8RM 约为 160 磅。出处概念：%1RM 与 RM 示例。",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-24",
+        "id": "nasm-question-204",
         "prompt": "某训练动作被安排在训练课最后，重复次数比前面同类动作明显减少，最合理解释是：",
         "options": [
           {
@@ -19164,10 +19847,11 @@ export const nasmChapters = [
             "label": "动作一定选错"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 运动员营养不足 B. 训练顺序影响了输出 C. 器械一定坏了 D. 动作一定选错"
+        "explanation": "解析：训练顺序会影响在既定负荷下完成的重复次数。出处概念：顺序效应。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-25",
+        "id": "nasm-question-205",
         "prompt": "一名运动员赛季很长，比赛频繁。依据本章，赛季中训练安排更应强调：",
         "options": [
           {
@@ -19187,10 +19871,11 @@ export const nasmChapters = [
             "label": "停止所有抗阻训练"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 维持高训练量不变 B. 根据比赛数调整训练量并保证恢复 C. 只做测试 D. 停止所有抗阻训练"
+        "explanation": "解析：赛季中应根据比赛与专项负荷调整训练量并重视恢复。出处概念：赛季安排。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-26",
+        "id": "nasm-question-206",
         "prompt": "某教练想通过每 2-3 周调整部分练习方式提高适应性，这一思路符合：",
         "options": [
           {
@@ -19210,10 +19895,11 @@ export const nasmChapters = [
             "label": "只练单一动作"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 多样化安排 B. 完全随机化 C. 取消周期化 D. 只练单一动作"
+        "explanation": "解析：按 2-3 周适度调整练习体现了多样化安排思想。出处概念：练习方式多样化。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-27",
+        "id": "nasm-question-207",
         "prompt": "一位运动员休赛期刚开始周期训练，最适合的起点是：",
         "options": [
           {
@@ -19233,10 +19919,11 @@ export const nasmChapters = [
             "label": "只做专项比赛模拟"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 直接进入竞赛阶段 B. 先做基础训练周期 C. 先做减量恢复 12 周 D. 只做专项比赛模拟"
+        "explanation": "解析：周期训练前的基础训练阶段用于熟悉动作和初步适应。出处概念：基础训练周期。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-28",
+        "id": "nasm-question-208",
         "prompt": "某运动员需要速度型力量输出。爆发力日使用 30%-70%1RM 的快速重复更符合哪种思路？",
         "options": [
           {
@@ -19256,10 +19943,11 @@ export const nasmChapters = [
             "label": "只做肌耐力训练"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 特异性与功率训练结合 B. 只追求最大训练量 C. 放弃力量训练 D. 只做肌耐力训练"
+        "explanation": "解析：较轻负荷快速完成符合爆发力训练思路。出处概念：爆发力日设计。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-29",
+        "id": "nasm-question-209",
         "prompt": "教练把某表格中的 %1RM 与次数关系直接视为绝对标准，不考虑动作类型和训练状态。这一做法最大问题是：",
         "options": [
           {
@@ -19279,10 +19967,11 @@ export const nasmChapters = [
             "label": "不利于记录数据"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 太节省时间 B. 忽视了该关系只是指导而非硬规则 C. 过于保守 D. 不利于记录数据"
+        "explanation": "解析：原文明确指出相关表格只作指导，不能硬套。出处概念：负荷表使用边界。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-30",
+        "id": "nasm-question-210",
         "prompt": "对不同运动员都套用同一套传统周期模板，不作个体调整。依据本章，最可能的评价是：",
         "options": [
           {
@@ -19302,7 +19991,8 @@ export const nasmChapters = [
             "label": "只要训练量大就没问题"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 正确，因为所有运动员适用同一方案 B. 不合理，因为没有一种方案能以同样方式使所有运动员获益 C. 正确，因为周期化本来就是固定模板 D. 只要训练量大就没问题"
+        "explanation": "解析：章节结语强调没有一种方案能同样适配所有运动员。出处概念：个体化原则。",
+        "correctOptionKey": "choice-b"
       }
     ]
   },
@@ -19600,7 +20290,8 @@ export const nasmChapters = [
             "label": "5 个"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 2 个 B. 3 个 C. 4 个 D. 5 个"
+        "explanation": "解析：原文明确是前期规划、设计、施工、试运行四阶段。出处概念：设施规划流程。",
+        "correctOptionKey": "choice-c"
       },
       {
         "id": "nasm-question-02",
@@ -19623,7 +20314,8 @@ export const nasmChapters = [
             "label": "并购整合"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 前期规划 B. 设计 C. 施工 D. 并购整合"
+        "explanation": "解析：并购整合不在本章四阶段中。出处概念：设施规划流程。",
+        "correctOptionKey": "choice-d"
       },
       {
         "id": "nasm-question-03",
@@ -19646,7 +20338,8 @@ export const nasmChapters = [
             "label": "会员续费"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 设备报废 B. 需求分析 C. 比赛组织 D. 会员续费"
+        "explanation": "解析：需求分析是前期规划阶段核心内容。出处概念：前期规划。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-04",
@@ -19669,7 +20362,8 @@ export const nasmChapters = [
             "label": "纯粹装修美化"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 人员配置与员工发展 B. 大规模拆除 C. 重新选址 D. 纯粹装修美化"
+        "explanation": "解析：试运行阶段重点就是人员、招聘、培训和运营准备。出处概念：试运行阶段。",
+        "correctOptionKey": "choice-a"
       },
       {
         "id": "nasm-question-05",
@@ -19692,7 +20386,8 @@ export const nasmChapters = [
             "label": "任意地方"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 仓库深处 B. 距潜在事故现场较近且可快速取到的位置 C. 经理办公室锁柜内 D. 任意地方"
+        "explanation": "解析：AED 应便于立即获取，距离潜在事故现场较近。出处概念：急救设备布局。",
+        "correctOptionKey": "choice-b"
       },
       {
         "id": "nasm-question-06",
@@ -19715,7 +20410,8 @@ export const nasmChapters = [
             "label": "不需要标准"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 与办公室一样即可 B. 越暗越好 C. 应比教室或办公室更明亮 D. 不需要标准"
+        "explanation": "解析：抗阻训练区照明应比教室或办公室更明亮。出处概念：照明要求。",
+        "correctOptionKey": "choice-c"
       },
       {
         "id": "nasm-question-07",
@@ -19738,7 +20434,8 @@ export const nasmChapters = [
             "label": "只看会员反馈"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 70 分贝以下 B. 100 分贝以下即可 C. 没有限制 D. 只看会员反馈"
+        "explanation": "解析：原文建议背景噪音低于 70 分贝。出处概念：噪音控制。",
+        "correctOptionKey": "choice-a"
       },
       {
         "id": "nasm-question-08",
@@ -19761,7 +20458,8 @@ export const nasmChapters = [
             "label": "只看最低价格"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 制定功能标准 B. 评估规格和功效 C. 评估制造商商业行为 D. 只看最低价格"
+        "explanation": "解析：设备选择需看功能、规格、功效和制造商，不是只看最低价。出处概念：器材评估流程。",
+        "correctOptionKey": "choice-d"
       },
       {
         "id": "nasm-question-09",
@@ -19784,7 +20482,8 @@ export const nasmChapters = [
             "label": "只关注外观"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 按区域系统维护 B. 随机维护 C. 只坏了再修 D. 只关注外观"
+        "explanation": "解析：这些清单说明维护要按区域系统开展。出处概念：分区维护。",
+        "correctOptionKey": "choice-a"
       },
       {
         "id": "nasm-question-10",
@@ -19807,10 +20506,11 @@ export const nasmChapters = [
             "label": "由外包公司单独负责即可"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 可有可无 B. 只针对火灾 C. 必须可实施并明确角色责任 D. 由外包公司单独负责即可"
+        "explanation": "解析：应急预案必须可执行，并明确员工角色责任。出处概念：应急预案。",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-11",
+        "id": "nasm-question-101",
         "prompt": "为什么前期规划阶段必须做需求分析？",
         "options": [
           {
@@ -19830,10 +20530,11 @@ export const nasmChapters = [
             "label": "只为购买镜子"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 为了决定颜色搭配 B. 因为后续目标、空间和预算都依赖它 C. 只是形式要求 D. 只为购买镜子"
+        "explanation": "解析：需求分析决定后续空间、目标、预算和服务方向。出处概念：前期规划机制。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-12",
+        "id": "nasm-question-102",
         "prompt": "原文将“只考虑当前需求、不规划未来需求”视为常见错误，原因是：",
         "options": [
           {
@@ -19853,10 +20554,11 @@ export const nasmChapters = [
             "label": "会减少员工数量"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 会提高噪音 B. 不利于设施长期扩展和替代使用 C. 会降低照明 D. 会减少员工数量"
+        "explanation": "解析：不考虑未来需求会削弱设施的扩展与替代使用能力。出处概念：总体规划。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-13",
+        "id": "nasm-question-103",
         "prompt": "把监督员办公室靠近抗阻训练区的主要原因是：",
         "options": [
           {
@@ -19876,10 +20578,11 @@ export const nasmChapters = [
             "label": "减少地面承重"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 方便休息 B. 便于观察整个区域并快速接近 C. 方便播放音乐 D. 减少地面承重"
+        "explanation": "解析：靠近训练区有利于观察和快速接近。出处概念：监督空间。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-14",
+        "id": "nasm-question-104",
         "prompt": "设备间距和通道设计的本质目标是：",
         "options": [
           {
@@ -19899,10 +20602,11 @@ export const nasmChapters = [
             "label": "增加设备数量"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 节省清洁用品 B. 保证安全、可达和通行效率 C. 只提升视觉饱满度 D. 增加设备数量"
+        "explanation": "解析：设备间距与通道设计的本质是安全与可达。出处概念：布局原则。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-15",
+        "id": "nasm-question-105",
         "prompt": "原文强调对接触皮肤的设备表面应进行清洁和消毒，说明维护不仅包括：",
         "options": [
           {
@@ -19922,10 +20626,11 @@ export const nasmChapters = [
             "label": "会员营销"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 外观管理 B. 卫生与感染控制 C. 成本控制 D. 会员营销"
+        "explanation": "解析：清洁与消毒体现了卫生和感染控制要求。出处概念：维护与卫生。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-16",
+        "id": "nasm-question-106",
         "prompt": "将无法使用或损坏设备移出训练区，主要是为了：",
         "options": [
           {
@@ -19945,10 +20650,11 @@ export const nasmChapters = [
             "label": "提升品牌色彩统一性"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 节省电费 B. 降低误用和受伤风险 C. 提高会员数量 D. 提升品牌色彩统一性"
+        "explanation": "解析：损坏设备若继续留在场地，会增加误用与受伤风险。出处概念：故障设备处理。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-17",
+        "id": "nasm-question-107",
         "prompt": "同时考虑 110V 和 220V 电源需求，反映的设计原则是：",
         "options": [
           {
@@ -19968,10 +20674,11 @@ export const nasmChapters = [
             "label": "所有设备电压都一样"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 先买设备再想供电 B. 设备采购与基础设施应联动考虑 C. 只看清洁便利性 D. 所有设备电压都一样"
+        "explanation": "解析：供电系统必须与拟购设备联动规划。出处概念：电路要求。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-18",
+        "id": "nasm-question-108",
         "prompt": "温湿度控制为什么需要结合建筑结构和客流量？",
         "options": [
           {
@@ -19991,10 +20698,11 @@ export const nasmChapters = [
             "label": "因为与训练无关"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 因为训练区不用空调 B. 因为室内环境会受窗户、门、绝缘和使用人数影响 C. 因为只看季节即可 D. 因为与训练无关"
+        "explanation": "解析：室内环境受建筑结构和使用强度共同影响。出处概念：温湿度控制。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-19",
+        "id": "nasm-question-109",
         "prompt": "应急预案中明确员工角色和责任的意义在于：",
         "options": [
           {
@@ -20014,10 +20722,11 @@ export const nasmChapters = [
             "label": "只是法律形式"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 方便排班 B. 发生事件时减少混乱并快速执行 C. 方便绩效考核 D. 只是法律形式"
+        "explanation": "解析：角色分工清楚可在紧急情况下减少混乱。出处概念：应急执行机制。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-20",
+        "id": "nasm-question-110",
         "prompt": "日常“清洁+检查+润滑+紧固”的高频维护模式，最能体现：",
         "options": [
           {
@@ -20037,10 +20746,11 @@ export const nasmChapters = [
             "label": "只适用于家庭健身房"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 被动维修思维 B. 预防性维护思维 C. 纯审美思维 D. 只适用于家庭健身房"
+        "explanation": "解析：这体现的是预防性维护，而非事后维修。出处概念：维护原理。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-21",
+        "id": "nasm-question-201",
         "prompt": "新建训练馆时，团队首先讨论目标客户、预计使用人数和预算，这属于：",
         "options": [
           {
@@ -20060,10 +20770,11 @@ export const nasmChapters = [
             "label": "报废更新"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 前期规划 B. 施工 C. 试运行 D. 报废更新"
+        "explanation": "解析：这些问题都属于前期规划阶段的需求分析。出处概念：前期规划。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-22",
+        "id": "nasm-question-202",
         "prompt": "某抗阻训练区镜子直接落地安装，紧邻杠铃训练位。根据原文，最大问题是：",
         "options": [
           {
@@ -20083,10 +20794,11 @@ export const nasmChapters = [
             "label": "会降低会员数量"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 成本过高 B. 可能增加被器械撞击损坏的风险 C. 不利于音乐播放 D. 会降低会员数量"
+        "explanation": "解析：镜面过低且离杠铃区过近，易被器械撞击。出处概念：镜子安装要求。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-23",
+        "id": "nasm-question-203",
         "prompt": "某设施把 AED 锁在管理层办公室，普通员工不能快速取用。依据本章，这种做法：",
         "options": [
           {
@@ -20106,10 +20818,11 @@ export const nasmChapters = [
             "label": "只在赛季不合理"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 合理 B. 不合理，因为不便于立即获取 C. 只在小场馆不合理 D. 只在赛季不合理"
+        "explanation": "解析：AED 锁起来会破坏“快速可达”原则。出处概念：急救可达性。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-24",
+        "id": "nasm-question-204",
         "prompt": "某训练馆背景音乐长期 95 分贝以上，最符合原文的评价是：",
         "options": [
           {
@@ -20129,10 +20842,11 @@ export const nasmChapters = [
             "label": "只要会员喜欢就行"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 属于推荐范围 B. 偏高，不利于噪音控制 C. 与安全无关 D. 只要会员喜欢就行"
+        "explanation": "解析：95 分贝高于建议背景噪音水平。出处概念：噪音控制。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-25",
+        "id": "nasm-question-205",
         "prompt": "一台固定器械的皮带和螺栓明显磨损但仍留在训练区，教练最应做的是：",
         "options": [
           {
@@ -20152,10 +20866,11 @@ export const nasmChapters = [
             "label": "调高音乐分散注意力"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 继续使用直到彻底损坏 B. 移除或标识停用并安排维修 C. 只口头提醒会员小心 D. 调高音乐分散注意力"
+        "explanation": "解析：损坏设备应移除或标识停用，不能继续暴露于训练区。出处概念：设备安全管理。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-26",
+        "id": "nasm-question-206",
         "prompt": "家庭健身房布局时，最不应忽视的是：",
         "options": [
           {
@@ -20175,10 +20890,11 @@ export const nasmChapters = [
             "label": "不需要考虑地面承重"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 设备周围仍需基本安全缓冲空间 B. 家庭场景可以完全取消间距 C. 不需要考虑动线 D. 不需要考虑地面承重"
+        "explanation": "解析：家庭设施虽空间较小，仍要保留安全缓冲。出处概念：家庭布局注意事项。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-27",
+        "id": "nasm-question-207",
         "prompt": "某设施只在发生事故后才检查设备，最违背本章哪一原则？",
         "options": [
           {
@@ -20198,10 +20914,11 @@ export const nasmChapters = [
             "label": "团课编排"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 预防性维护 B. 人员招聘 C. 会员销售 D. 团课编排"
+        "explanation": "解析：只在事故后检查违背预防性维护理念。出处概念：维护机制。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-28",
+        "id": "nasm-question-208",
         "prompt": "一家俱乐部制定了火灾和医疗急症流程，但多年不更新。根据本章，更合理的做法是：",
         "options": [
           {
@@ -20221,10 +20938,11 @@ export const nasmChapters = [
             "label": "只交给外部机构"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 维持不变 B. 每年复审并更新 C. 只在发生事故后更新 D. 只交给外部机构"
+        "explanation": "解析：章节要求定期审查并更新应急预案。出处概念：预案管理。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-29",
+        "id": "nasm-question-209",
         "prompt": "某设计团队只追求把更多设备塞进空间，忽略通道与监督视野。这最可能带来：",
         "options": [
           {
@@ -20244,10 +20962,11 @@ export const nasmChapters = [
             "label": "更少的维护需求"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 更好的安全性 B. 动线、监管和安全问题 C. 更低的噪音 D. 更少的维护需求"
+        "explanation": "解析：只追求密度会损害通行、监督和安全。出处概念：布局机制。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-30",
+        "id": "nasm-question-210",
         "prompt": "私人教练参与设施规划和维护的最符合原文的原因是：",
         "options": [
           {
@@ -20267,7 +20986,8 @@ export const nasmChapters = [
             "label": "与实际训练没有关系"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 只是为了增加工作量 B. 其职责与训练安全、设备使用和场地组织直接相关 C. 仅因为管理层要求 D. 与实际训练没有关系"
+        "explanation": "解析：私人教练与训练安全、设备使用、场地组织直接相关，因此应参与。出处概念：私人教练职责。",
+        "correctOptionKey": "choice-b"
       }
     ]
   },
@@ -20389,7 +21109,7 @@ export const nasmChapters = [
     "outline": [],
     "quizQuestions": [
       {
-        "id": "nasm-question-21",
+        "id": "nasm-question-201",
         "prompt": "本章最核心的法律责任主题之一是：",
         "options": [
           {
@@ -20409,10 +21129,11 @@ export const nasmChapters = [
             "label": "设备采购"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 广告投放 B. 标准照护 C. 品牌命名 D. 设备采购"
+        "explanation": "解析：标准照护是本章判断责任的核心。出处概念：标准照护。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-22",
+        "id": "nasm-question-202",
         "prompt": "风险管理在原文中的核心含义是：",
         "options": [
           {
@@ -20432,10 +21153,11 @@ export const nasmChapters = [
             "label": "出事后请律师即可"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 把所有客户都拒之门外 B. 识别并尽量减少训练相关风险 C. 购买最贵保险即可 D. 出事后请律师即可"
+        "explanation": "解析：风险管理是识别、分析并尽量避免或减少风险。出处概念：风险管理定义。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-23",
+        "id": "nasm-question-203",
         "prompt": "标准照护指的是：",
         "options": [
           {
@@ -20455,10 +21177,11 @@ export const nasmChapters = [
             "label": "俱乐部装修标准"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 教练个人习惯 B. 提供安全有效服务应达到的专业标准 C. 客户的主观满意度 D. 俱乐部装修标准"
+        "explanation": "解析：标准照护强调应达到的专业服务水平。出处概念：职业责任。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-24",
+        "id": "nasm-question-204",
         "prompt": "私人教练最常面临的法律问题主要属于：",
         "options": [
           {
@@ -20478,10 +21201,11 @@ export const nasmChapters = [
             "label": "海商法"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 民事责任领域 B. 国际贸易法 C. 专利法 D. 海商法"
+        "explanation": "解析：私人教练责任问题主要出现在民事责任框架中。出处概念：法律分类。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-25",
+        "id": "nasm-question-205",
         "prompt": "下列哪项最符合本章对过失的理解？",
         "options": [
           {
@@ -20501,10 +21225,11 @@ export const nasmChapters = [
             "label": "只与保险有关"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 任何事故都等于过失 B. 过失与是否达到应有专业标准有关 C. 只要客户受伤就必然败诉 D. 只与保险有关"
+        "explanation": "解析：过失关键在于是否未达到应有专业标准。出处概念：过失定义。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-26",
+        "id": "nasm-question-206",
         "prompt": "过失诉讼通常围绕几个关键要素展开？",
         "options": [
           {
@@ -20524,10 +21249,11 @@ export const nasmChapters = [
             "label": "5 个"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 2 个 B. 3 个 C. 4 个 D. 5 个"
+        "explanation": "解析：原文明确提到起诉过失的四个要素。出处概念：过失四要素。",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-27",
+        "id": "nasm-question-207",
         "prompt": "知情同意文件的主要作用是：",
         "options": [
           {
@@ -20547,10 +21273,11 @@ export const nasmChapters = [
             "label": "代替健康问卷"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 代替所有监督 B. 让客户理解计划内容与风险 C. 免除所有责任 D. 代替健康问卷"
+        "explanation": "解析：知情同意的目的在于让客户理解计划与风险。出处概念：知情同意。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-28",
+        "id": "nasm-question-208",
         "prompt": "本章对免责协议的态度是：",
         "options": [
           {
@@ -20570,10 +21297,11 @@ export const nasmChapters = [
             "label": "只适用于员工"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 可覆盖一切行为 B. 通常不覆盖重大过失或故意不当行为 C. 完全无效 D. 只适用于员工"
+        "explanation": "解析：原文指出免责通常不覆盖重大过失、故意不当行为或犯罪行为。出处概念：免责边界。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-29",
+        "id": "nasm-question-209",
         "prompt": "客户训练信息在本章中被视为：",
         "options": [
           {
@@ -20593,10 +21321,11 @@ export const nasmChapters = [
             "label": "只要口头同意即可公开"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 公共信息 B. 可随意分享的信息 C. 机密信息 D. 只要口头同意即可公开"
+        "explanation": "解析：客户信息被视为机密信息。出处概念：保密义务。",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-30",
+        "id": "nasm-question-210",
         "prompt": "原文对专业教育与认证的态度是：",
         "options": [
           {
@@ -20616,10 +21345,11 @@ export const nasmChapters = [
             "label": "只对学术岗位有用"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 不重要 B. 比实践更无用 C. 是达到专业标准的重要基础 D. 只对学术岗位有用"
+        "explanation": "解析：正规教育和权威认证被视为专业能力的重要基础。出处概念：教育与认证。",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-31",
+        "id": "nasm-question-301",
         "prompt": "风险管理首先保护的是：",
         "options": [
           {
@@ -20639,10 +21369,11 @@ export const nasmChapters = [
             "label": "社交媒体声量"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 教练的销售数据 B. 客户安全 C. 俱乐部装修预算 D. 社交媒体声量"
+        "explanation": "解析：风险管理的首要目标是保护客户安全。出处概念：风险管理目的。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-32",
+        "id": "nasm-question-302",
         "prompt": "为什么记录保存对法律风险控制很重要？",
         "options": [
           {
@@ -20662,10 +21393,11 @@ export const nasmChapters = [
             "label": "仅用于市场推广"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 只是行政工作 B. 它能证明筛查、告知、监督和调整是否真实发生 C. 仅用于收费 D. 仅用于市场推广"
+        "explanation": "解析：完整记录是证明履责的重要证据。出处概念：文件留存。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-33",
+        "id": "nasm-question-303",
         "prompt": "下列哪项最能构成过失分析中的“违反义务”？",
         "options": [
           {
@@ -20685,10 +21417,11 @@ export const nasmChapters = [
             "label": "更新训练计划"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 按标准流程筛查 B. 在技术明显错误时仍继续危险训练 C. 记录客户反馈 D. 更新训练计划"
+        "explanation": "解析：明知技术错误仍继续危险训练，符合违反义务的典型特征。出处概念：过失机制。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-34",
+        "id": "nasm-question-304",
         "prompt": "即使雇主要求，教练也不应做超出行业标准的事，原因是：",
         "options": [
           {
@@ -20708,10 +21441,11 @@ export const nasmChapters = [
             "label": "只是不好做杂务"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 会浪费时间 B. 职业责任不能由雇主指令替代 C. 会降低会员满意度 D. 只是不好做杂务"
+        "explanation": "解析：职业责任来自行业标准，不能因雇主要求而被抹去。出处概念：专业边界。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-35",
+        "id": "nasm-question-305",
         "prompt": "客户签署免责协议后，教练仍需认真监督训练，主要因为：",
         "options": [
           {
@@ -20731,10 +21465,11 @@ export const nasmChapters = [
             "label": "法律只看文件不看行为"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 协议无任何意义 B. 免责并不替代标准照护义务 C. 监督只为提高成绩 D. 法律只看文件不看行为"
+        "explanation": "解析：签署免责协议后，教练仍负有标准照护义务。出处概念：免责与监督关系。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-36",
+        "id": "nasm-question-306",
         "prompt": "正规教育与权威认证之所以被强调，是因为它们：",
         "options": [
           {
@@ -20754,10 +21489,11 @@ export const nasmChapters = [
             "label": "可以取消知情同意"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 直接等于零风险 B. 有助于证明具备基本专业知识与能力 C. 可以代替实践经验 D. 可以取消知情同意"
+        "explanation": "解析：教育和认证有助于证明教练具备基本专业能力。出处概念：专业资格。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-37",
+        "id": "nasm-question-307",
         "prompt": "客户若在训练中出现疲劳、气短或不适，原文最符合的处理是：",
         "options": [
           {
@@ -20777,10 +21513,11 @@ export const nasmChapters = [
             "label": "忽略不计"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 要求坚持完成训练 B. 允许减少或停止并及时告知教练 C. 只补水即可 D. 忽略不计"
+        "explanation": "解析：原文强调客户有权减少或停止运动，并应告知教练。出处概念：训练监测与调整。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-38",
+        "id": "nasm-question-308",
         "prompt": "保密义务的底层逻辑是：",
         "options": [
           {
@@ -20800,10 +21537,11 @@ export const nasmChapters = [
             "label": "避免与医生沟通"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 增加文书量 B. 保护客户权益与专业信任关系 C. 方便营销 D. 避免与医生沟通"
+        "explanation": "解析：保密本质上保护客户权益与职业信任。出处概念：保密原则。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-39",
+        "id": "nasm-question-309",
         "prompt": "免责协议通常为何不适用于重大过失？",
         "options": [
           {
@@ -20823,10 +21561,11 @@ export const nasmChapters = [
             "label": "因为只适用于团课"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 因为重大过失超出可合理豁免的范围 B. 因为签字无效 C. 因为客户不同意 D. 因为只适用于团课"
+        "explanation": "解析：重大过失通常超出可豁免的合理边界。出处概念：免责限制。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-40",
+        "id": "nasm-question-310",
         "prompt": "从本章逻辑看，法律责任与道德责任的关系更接近：",
         "options": [
           {
@@ -20846,10 +21585,11 @@ export const nasmChapters = [
             "label": "法律责任比道德责任不重要"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 完全无关 B. 都服务于安全、专业与客户权益保护 C. 只能二选一 D. 法律责任比道德责任不重要"
+        "explanation": "解析：两者都围绕安全、专业和客户权益展开。出处概念：职业法律与道德责任。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-41",
+        "id": "nasm-question-401",
         "prompt": "新客户入会后，教练直接安排高强度训练，没有健康史问卷和风险告知。最明显的问题是：",
         "options": [
           {
@@ -20869,10 +21609,11 @@ export const nasmChapters = [
             "label": "营销效率不高"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 训练量偏低 B. 风险管理和标准照护不足 C. 销售环节过多 D. 营销效率不高"
+        "explanation": "解析：缺少问卷与告知说明风险管理和标准照护都不到位。出处概念：训练前程序。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-42",
+        "id": "nasm-question-402",
         "prompt": "客户已经签了免责协议，教练因此不再示范动作也不纠正技术。依据本章，这一做法：",
         "options": [
           {
@@ -20892,10 +21633,11 @@ export const nasmChapters = [
             "label": "只对团课合理"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 合理 B. 不合理，因为免责不替代监督义务 C. 只对老客户合理 D. 只对团课合理"
+        "explanation": "解析：免责文件不能代替教练对训练过程的监督。出处概念：免责边界。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-43",
+        "id": "nasm-question-403",
         "prompt": "一名客户训练中出现明显胸闷和气短，教练仍要求其完成计划。这最可能触及：",
         "options": [
           {
@@ -20915,10 +21657,11 @@ export const nasmChapters = [
             "label": "合理加量"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 良好风险管理 B. 违反标准照护 C. 正确激励 D. 合理加量"
+        "explanation": "解析：客户明显不适仍强行推进，易构成违反标准照护。出处概念：监督责任。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-44",
+        "id": "nasm-question-404",
         "prompt": "客户开始服用新处方药却未更新记录，教练也未询问。最合理的评价是：",
         "options": [
           {
@@ -20938,10 +21681,11 @@ export const nasmChapters = [
             "label": "只影响营销"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 无关紧要 B. 不利于安全监测与责任管理 C. 只影响收费 D. 只影响营销"
+        "explanation": "解析：药物变化会影响训练安全，未更新记录增加风险。出处概念：信息更新。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-45",
+        "id": "nasm-question-405",
         "prompt": "某机构要求教练清洁窗户和卫生间，且因此无暇监督训练。根据本章，更关键的问题是：",
         "options": [
           {
@@ -20961,10 +21705,11 @@ export const nasmChapters = [
             "label": "设备一定会损坏"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 教练不够勤奋 B. 工作要求可能偏离专业标准并影响核心职责 C. 客户一定会投诉 D. 设备一定会损坏"
+        "explanation": "解析：若非专业杂务影响核心监督职责，就偏离了职业责任重点。出处概念：工作职责边界。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-46",
+        "id": "nasm-question-406",
         "prompt": "未经客户明确书面同意，教练把其健康信息发给无关第三方。这首先违反了：",
         "options": [
           {
@@ -20984,10 +21729,11 @@ export const nasmChapters = [
             "label": "设备维护制度"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 价格策略 B. 保密责任 C. 训练周期 D. 设备维护制度"
+        "explanation": "解析：擅自披露健康信息违反保密责任。出处概念：信息保密。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-47",
+        "id": "nasm-question-407",
         "prompt": "一位教练多年从业但没有接受系统教育，也不了解筛查和应急流程。按本章逻辑，这种情况说明：",
         "options": [
           {
@@ -21007,10 +21753,11 @@ export const nasmChapters = [
             "label": "与法律责任无关"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 经验已足够 B. 经验不能自动替代专业能力 C. 不影响标准照护 D. 与法律责任无关"
+        "explanation": "解析：原文强调经验并不能自动替代系统教育与专业能力。出处概念：教育、经验与能力。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-48",
+        "id": "nasm-question-408",
         "prompt": "训练后客户声称从未知道该计划存在相应风险，而档案里也没有知情同意文件。教练最不利之处在于：",
         "options": [
           {
@@ -21030,10 +21777,11 @@ export const nasmChapters = [
             "label": "没有团课安排"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 没有会员卡 B. 缺少风险告知和记录证据 C. 没有销售方案 D. 没有团课安排"
+        "explanation": "解析：没有文件就难证明已完成充分告知。出处概念：知情同意与记录。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-49",
+        "id": "nasm-question-409",
         "prompt": "一份免责协议试图让客户放弃对故意伤害和重大过失的任何主张。依据本章，应如何理解？",
         "options": [
           {
@@ -21053,10 +21801,11 @@ export const nasmChapters = [
             "label": "只要客户签字就没有问题"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 完全有效 B. 有明显法律边界问题 C. 比知情同意更重要 D. 只要客户签字就没有问题"
+        "explanation": "解析：该类条款至少存在明显边界问题，不能简单视为有效。出处概念：免责协议限制。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-50",
+        "id": "nasm-question-410",
         "prompt": "如果教练想降低纠纷风险，最符合本章总思路的做法是：",
         "options": [
           {
@@ -21076,7 +21825,8 @@ export const nasmChapters = [
             "label": "只让客户自己训练"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 少和客户沟通 B. 强化筛查、记录、监督、告知和应急准备 C. 只买保险 D. 只让客户自己训练"
+        "explanation": "解析：本章主线正是用系统化风险管理降低纠纷与伤害。出处概念：风险管理实践。",
+        "correctOptionKey": "choice-b"
       }
     ]
   },
@@ -21230,7 +21980,7 @@ export const nasmChapters = [
     "outline": [],
     "quizQuestions": [
       {
-        "id": "nasm-question-51",
+        "id": "nasm-question-501",
         "prompt": "本章开篇最核心的观点是：",
         "options": [
           {
@@ -21250,10 +22000,11 @@ export const nasmChapters = [
             "label": "价格越低越好"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 只要懂训练就一定能经营成功 B. 商业成功还需要理解行业运营 C. 私人教练不需要营销 D. 价格越低越好"
+        "explanation": "解析：原文开篇强调，掌握运动科学并不足以成就事业，还要懂商业运营。出处概念：章节主旨。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-52",
+        "id": "nasm-question-502",
         "prompt": "本章认为商业决策的起点通常是：",
         "options": [
           {
@@ -21273,10 +22024,11 @@ export const nasmChapters = [
             "label": "设备品牌"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 场地装修 B. 目标市场 C. 社交媒体粉丝数 D. 设备品牌"
+        "explanation": "解析：目标市场是后续商业决策的起点。出处概念：目标市场。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-53",
+        "id": "nasm-question-503",
         "prompt": "目标市场越具体，通常意味着：",
         "options": [
           {
@@ -21296,10 +22048,11 @@ export const nasmChapters = [
             "label": "客户一定越少"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 决策越困难 B. 决策越容易 C. 价格一定越低 D. 客户一定越少"
+        "explanation": "解析：目标客户越具体，业务决策越容易。出处概念：细分市场价值。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-54",
+        "id": "nasm-question-504",
         "prompt": "下列哪项属于本章列出的常见商业模式？",
         "options": [
           {
@@ -21319,10 +22072,11 @@ export const nasmChapters = [
             "label": "证券交易所"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 健身工作室 B. 远洋航运 C. 房地产中介 D. 证券交易所"
+        "explanation": "解析：健身工作室是原文列出的常见商业模式之一。出处概念：商业模式。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-55",
+        "id": "nasm-question-505",
         "prompt": "销售在原文中的定义更接近：",
         "options": [
           {
@@ -21342,10 +22096,11 @@ export const nasmChapters = [
             "label": "更换 logo"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 引导客户购买服务的互动过程 B. 发朋友圈 C. 印宣传单 D. 更换 logo"
+        "explanation": "解析：销售被定义为引导客户购买服务的互动过程。出处概念：销售定义。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-56",
+        "id": "nasm-question-506",
         "prompt": "USP 指的是：",
         "options": [
           {
@@ -21365,10 +22120,11 @@ export const nasmChapters = [
             "label": "单次训练价格"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 统一训练计划 B. 独特销售主张 C. 用户安全协议 D. 单次训练价格"
+        "explanation": "解析：USP 即独特销售主张。出处概念：USP。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-57",
+        "id": "nasm-question-507",
         "prompt": "对受雇于设施的教练而言，价格通常由谁设定？",
         "options": [
           {
@@ -21388,10 +22144,11 @@ export const nasmChapters = [
             "label": "同行竞争者"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 客户 B. 教练自己 C. 设施雇主或经理 D. 同行竞争者"
+        "explanation": "解析：作为员工，价格通常由设施雇主或经理设定。出处概念：受雇岗位规则。",
+        "correctOptionKey": "choice-c"
       },
       {
-        "id": "nasm-question-58",
+        "id": "nasm-question-508",
         "prompt": "对独立承包商而言，哪项通常由自己决定？",
         "options": [
           {
@@ -21411,10 +22168,11 @@ export const nasmChapters = [
             "label": "会员年龄"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 课程项目与价格结构 B. 法律制度 C. 天气 D. 会员年龄"
+        "explanation": "解析：独立承包商需要自行决定服务项目和定价。出处概念：独立承包经营。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-59",
+        "id": "nasm-question-509",
         "prompt": "本章认为最有效的营销方式之一是：",
         "options": [
           {
@@ -21434,10 +22192,11 @@ export const nasmChapters = [
             "label": "只做折扣海报"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 完全不与人接触 B. 当面交流潜在客户 C. 只发报价单 D. 只做折扣海报"
+        "explanation": "解析：原文强调当面交流是非常有效的营销方式。出处概念：营销渠道。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-60",
+        "id": "nasm-question-510",
         "prompt": "客户咨询最重要的功能之一是：",
         "options": [
           {
@@ -21457,10 +22216,11 @@ export const nasmChapters = [
             "label": "只展示证书"
           }
         ],
-        "explanation": "概念记忆题（1-10） A. 立即让客户付款，不必交流 B. 了解潜在客户需求并提出合适建议 C. 只介绍价格 D. 只展示证书"
+        "explanation": "解析：咨询是了解客户并提出建议的关键环节。出处概念：客户咨询。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-61",
+        "id": "nasm-question-601",
         "prompt": "目标市场会影响服务项目、场地和价格，说明其作用是：",
         "options": [
           {
@@ -21480,10 +22240,11 @@ export const nasmChapters = [
             "label": "与经营无关"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 只影响宣传语 B. 会牵动整体商业设计 C. 只影响招聘 D. 与经营无关"
+        "explanation": "解析：目标市场决定项目、营销、场地和价格，是整体商业设计基础。出处概念：市场定位机制。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-62",
+        "id": "nasm-question-602",
         "prompt": "受雇教练不能私自降价成交，主要因为：",
         "options": [
           {
@@ -21503,10 +22264,11 @@ export const nasmChapters = [
             "label": "只适用于团课"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 会影响训练效果 B. 价格体系通常属于设施管理权限 C. 客户不喜欢低价 D. 只适用于团课"
+        "explanation": "解析：受雇岗位的价格体系通常不由教练个人擅改。出处概念：员工职责边界。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-63",
+        "id": "nasm-question-603",
         "prompt": "本章把营销与销售区分开来，主要是因为：",
         "options": [
           {
@@ -21526,10 +22288,11 @@ export const nasmChapters = [
             "label": "营销只适用于线上"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 二者毫无关联 B. 营销解决认知与信任，销售推动成交 C. 销售比营销低级 D. 营销只适用于线上"
+        "explanation": "解析：营销先建立认知和信任，销售再推动购买。出处概念：营销与销售区别。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-64",
+        "id": "nasm-question-604",
         "prompt": "如果客户只在电话中听到报价，没有感受到服务价值，最可能出现什么结果？",
         "options": [
           {
@@ -21549,10 +22312,11 @@ export const nasmChapters = [
             "label": "一定转介绍朋友"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 更容易高价成交 B. 更倾向选最低价 C. 一定当场成交 D. 一定转介绍朋友"
+        "explanation": "解析：若客户只听到报价，就更容易按价格最低做选择。出处概念：价值感知。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-65",
+        "id": "nasm-question-605",
         "prompt": "USP 为什么重要？",
         "options": [
           {
@@ -21572,10 +22336,11 @@ export const nasmChapters = [
             "label": "因为能替代专业能力"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 因为能帮助教练与竞争者区分开 B. 因为能自动带来客户 C. 因为可以取消营销 D. 因为能替代专业能力"
+        "explanation": "解析：USP 的作用就是帮助教练在竞争中脱颖而出。出处概念：独特销售主张。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-66",
+        "id": "nasm-question-606",
         "prompt": "受雇教练在巡场时与会员互动的主要经营意义是：",
         "options": [
           {
@@ -21595,10 +22360,11 @@ export const nasmChapters = [
             "label": "只为完成步数"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 打发时间 B. 建立关系并识别潜在客户 C. 替代正式咨询 D. 只为完成步数"
+        "explanation": "解析：巡场互动有助于建立关系和发现潜在客户。出处概念：员工型获客。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-67",
+        "id": "nasm-question-607",
         "prompt": "刚入行教练先在综合设施积累经验，再逐步确定细分市场，这种思路体现的是：",
         "options": [
           {
@@ -21618,10 +22384,11 @@ export const nasmChapters = [
             "label": "只适合独立承包商"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 先扩大经验样本再聚焦定位 B. 永远不需要定位 C. 细分市场没有意义 D. 只适合独立承包商"
+        "explanation": "解析：先广泛接触人群，再收敛定位，是原文建议的新手路径。出处概念：新手定位策略。",
+        "correctOptionKey": "choice-a"
       },
       {
-        "id": "nasm-question-68",
+        "id": "nasm-question-608",
         "prompt": "本章反对价格战的深层原因是：",
         "options": [
           {
@@ -21641,10 +22408,11 @@ export const nasmChapters = [
             "label": "客户从不看价格"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 降价违法 B. 低价会削弱服务价值感知 C. 所有高价都更好 D. 客户从不看价格"
+        "explanation": "解析：价格战会影响客户对服务价值的认知。出处概念：价值感知与定价。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-69",
+        "id": "nasm-question-609",
         "prompt": "咨询中使用开放式问题的主要价值在于：",
         "options": [
           {
@@ -21664,10 +22432,11 @@ export const nasmChapters = [
             "label": "替代问卷"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 增加谈话长度 B. 帮助客户更充分表达需求与目标 C. 方便立即成交 D. 替代问卷"
+        "explanation": "解析：开放式问题有助于客户充分表达，便于教练理解真实需求。出处概念：咨询沟通技巧。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-70",
+        "id": "nasm-question-610",
         "prompt": "咨询后提出建议的正确依据应是：",
         "options": [
           {
@@ -21687,10 +22456,11 @@ export const nasmChapters = [
             "label": "竞争对手价格"
           }
         ],
-        "explanation": "机制理解题（11-20） A. 教练个人偏好 B. 前面收集到的客户信息 C. 当前最热卖套餐 D. 竞争对手价格"
+        "explanation": "解析：建议应建立在已收集的客户信息之上。出处概念：咨询后建议。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-71",
+        "id": "nasm-question-701",
         "prompt": "一位新教练说“我什么人都能带，所以不用考虑定位”。依据本章，这种说法最大问题是：",
         "options": [
           {
@@ -21710,10 +22480,11 @@ export const nasmChapters = [
             "label": "有利于建立 USP"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 太谦虚 B. 目标市场过于模糊，不利于业务决策 C. 有利于定价 D. 有利于建立 USP"
+        "explanation": "解析：不考虑定位会让后续服务、营销和定价都难落地。出处概念：目标市场。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-72",
+        "id": "nasm-question-702",
         "prompt": "某教练专做“50 岁以上女性高尔夫体能训练”，这最能体现：",
         "options": [
           {
@@ -21733,10 +22504,11 @@ export const nasmChapters = [
             "label": "纯广告行为"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 价格战 B. 目标市场细分与 USP C. 随机经营 D. 纯广告行为"
+        "explanation": "解析：这是典型的细分市场加 USP 表达。出处概念：市场细分与差异化。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-73",
+        "id": "nasm-question-703",
         "prompt": "受雇于商业健身房的教练为了抢客户，私下把价格降到低于馆内标准。根据本章，这种做法：",
         "options": [
           {
@@ -21756,10 +22528,11 @@ export const nasmChapters = [
             "label": "只影响短期收入"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 正确，因为成交最重要 B. 不符合受雇岗位的价格规则 C. 只要客户同意就行 D. 只影响短期收入"
+        "explanation": "解析：员工岗位通常不能私自低价成交。出处概念：设施定价规则。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-74",
+        "id": "nasm-question-704",
         "prompt": "一位独立承包商决定自定课程项目、价格和服务形式，这最符合哪种工作状态？",
         "options": [
           {
@@ -21779,10 +22552,11 @@ export const nasmChapters = [
             "label": "设施经理"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 受雇员工 B. 独立承包商 C. 社区志愿者 D. 设施经理"
+        "explanation": "解析：自定项目和价格是独立承包商特征。出处概念：工作状态。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-75",
+        "id": "nasm-question-705",
         "prompt": "某教练电话里只报低价，不介绍专业优势和服务差异，最可能导致：",
         "options": [
           {
@@ -21802,10 +22576,11 @@ export const nasmChapters = [
             "label": "更利于高端定位"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 客户更能理解价值 B. 价格成为唯一比较标准 C. 更容易形成长期关系 D. 更利于高端定位"
+        "explanation": "解析：缺少价值展示时，客户通常只会比价格。出处概念：价值感知机制。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-76",
+        "id": "nasm-question-706",
         "prompt": "一个新教练不确定自己适合带哪类客户，最合理的初始策略是：",
         "options": [
           {
@@ -21825,10 +22600,11 @@ export const nasmChapters = [
             "label": "拒绝所有非运动员客户"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 立即锁定极窄市场 B. 先在综合设施积累不同客户经验 C. 只做线上报价 D. 拒绝所有非运动员客户"
+        "explanation": "解析：原文建议新手先在综合设施中积累经验。出处概念：入行路径。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-77",
+        "id": "nasm-question-707",
         "prompt": "教练通过参加目标人群活动、做志愿者和开讲座来接触潜在客户，这最符合：",
         "options": [
           {
@@ -21848,10 +22624,11 @@ export const nasmChapters = [
             "label": "只做电话销售"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 被动等待成交 B. 主动建立关系的营销方式 C. 只做广告投放 D. 只做电话销售"
+        "explanation": "解析：这些方式都是主动建立关系的营销手段。出处概念：营销策略。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-78",
+        "id": "nasm-question-708",
         "prompt": "客户咨询时，教练全程只介绍自己，不询问客户健康史、习惯和目标。依据本章，这样做的问题是：",
         "options": [
           {
@@ -21871,10 +22648,11 @@ export const nasmChapters = [
             "label": "更节省时间"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 过于专业 B. 破坏了咨询应有的信息收集与倾听功能 C. 更容易成交 D. 更节省时间"
+        "explanation": "解析：咨询不是单向推销，而应重视信息收集和倾听。出处概念：客户咨询流程。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-79",
+        "id": "nasm-question-709",
         "prompt": "咨询结束后，教练基于客户问卷、目标和障碍给出完整建议，并询问“这是否是你想做的事？”这一步属于：",
         "options": [
           {
@@ -21894,10 +22672,11 @@ export const nasmChapters = [
             "label": "招聘流程"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 设备维护 B. 成交引导 C. 法律免责 D. 招聘流程"
+        "explanation": "解析：提出建议并确认意愿，属于咨询后的成交引导。出处概念：客户成交。",
+        "correctOptionKey": "choice-b"
       },
       {
-        "id": "nasm-question-80",
+        "id": "nasm-question-710",
         "prompt": "如果教练想长期提升商业运营能力，最符合本章结语的做法是：",
         "options": [
           {
@@ -21917,7 +22696,8 @@ export const nasmChapters = [
             "label": "只关注折扣活动"
           }
         ],
-        "explanation": "情景应用题（21-30） A. 只学训练，不学经营 B. 持续在训练与商业两方面学习和进步 C. 只关注证书 D. 只关注折扣活动"
+        "explanation": "解析：章节结语强调训练与商业两方面都要持续学习。出处概念：结语。",
+        "correctOptionKey": "choice-b"
       }
     ]
   }
