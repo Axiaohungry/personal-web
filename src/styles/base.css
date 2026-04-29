@@ -185,9 +185,11 @@ svg {
 .site-header__brandlock {
   display: grid;
   gap: 0.25rem;
+  min-width: 0;
 }
 
 .site-header__title {
+  min-width: 0;
   font-size: 1rem;
   font-weight: 700;
   letter-spacing: 0.14em;
@@ -250,6 +252,57 @@ svg {
   border-color: var(--line);
   background: linear-gradient(135deg, var(--teal-soft), var(--accent-soft));
   color: var(--text);
+}
+
+.mobile-route-controls {
+  display: none;
+  align-items: center;
+  gap: 0.35rem;
+  position: fixed;
+  top: max(0.75rem, env(safe-area-inset-top));
+  left: max(0.75rem, env(safe-area-inset-left));
+  z-index: 1200;
+  padding: 0.2rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  backdrop-filter: blur(18px);
+  box-shadow: var(--shadow-soft);
+}
+
+.mobile-route-controls__button {
+  display: inline-grid;
+  place-items: center;
+  width: 2.55rem;
+  height: 2.55rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--text);
+  font: inherit;
+  font-size: 1.35rem;
+  line-height: 1;
+  background: var(--panel-soft);
+  box-shadow: none;
+  cursor: pointer;
+  transition:
+    transform var(--duration-fast) var(--ease-out-quint),
+    border-color var(--duration-fast) var(--ease-out-quart),
+    background-color var(--duration-base) var(--ease-out-quart),
+    color var(--duration-base) var(--ease-out-quart),
+    opacity var(--duration-base) var(--ease-out-quart);
+}
+
+.mobile-route-controls__button:hover,
+.mobile-route-controls__button:focus-visible {
+  border-color: var(--accent-soft);
+  background: linear-gradient(135deg, var(--panel-soft), var(--teal-soft));
+  transform: translateY(-1px);
+}
+
+.mobile-route-controls__button:disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+  transform: none;
 }
 
 .site-header__mobile-actions {
@@ -337,12 +390,20 @@ svg {
 }
 
 @media (max-width: 980px) {
+  .site-page {
+    padding-top: 3.75rem;
+  }
+
   .site-header {
     padding: 0.95rem 1rem;
   }
 
   .site-header__desktop {
     display: none;
+  }
+
+  .mobile-route-controls {
+    display: inline-flex;
   }
 
   .site-header__mobile-actions {
@@ -365,6 +426,11 @@ svg {
 
   .site-header {
     align-items: flex-start;
+  }
+
+  .mobile-route-controls__button {
+    width: 2.45rem;
+    height: 2.45rem;
   }
 }
 

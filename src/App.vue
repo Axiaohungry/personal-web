@@ -2,6 +2,7 @@
 import { computed, onBeforeUnmount, onMounted, provide, ref, watch } from 'vue'
 import { theme as antTheme } from 'ant-design-vue'
 
+import MobileRouteControls from '@/components/MobileRouteControls.vue'
 import {
   THEME_KEY,
   createThemeStorageApi,
@@ -211,6 +212,7 @@ onBeforeUnmount(() => {
 <template>
   <a-config-provider :theme="themeConfig">
     <a-app>
+      <MobileRouteControls />
       <router-view />
     </a-app>
   </a-config-provider>
