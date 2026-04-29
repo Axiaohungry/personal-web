@@ -12,5 +12,9 @@ export const profile = {
     label: '打开健身工作台',
     href: '/fitness/',
   },
+  ctaTertiary: {
+    label: '今天学习了吗？',
+    href: '/study/',
+  },
   accentLine: '我更习惯处理复杂但可拆解的问题：先想明白，再讲清楚，然后把它做成一套可以运行的东西。',
 }

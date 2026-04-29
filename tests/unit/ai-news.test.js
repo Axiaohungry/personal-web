@@ -376,7 +376,217 @@ test('handleNodeAiNewsRequest includes upstream details in local debug mode', as
     error: 'Unable to refresh AI news right now.',
     upstreamStatus: 429,
     upstreamError: 'Your prepayment credits are depleted.',
+    model: 'gemini-2.5-flash',
+  })
+})
+
+test('fetchAiNewsBrief retries the default news model when the configured model returns only stale stories', async () => {
+  const { fetchAiNewsBrief } = await import('../../server/aiNewsGemini.js')
+
+  let fetchCalls = 0
+  const result = await fetchAiNewsBrief({
+    apiKey: 'test-key',
     model: 'gemma-4-31b-it',
+    nowIso: '2026-04-29T07:01:00.000Z',
+    cache: null,
+    fetchImpl: async (url) => {
+      fetchCalls += 1
+      const requestUrl = String(url)
+
+      if (requestUrl.includes('/models/gemma-4-31b-it:generateContent')) {
+        return new Response(
+          JSON.stringify({
+            candidates: [
+              {
+                content: {
+                  parts: [
+                    {
+                      text: JSON.stringify({
+                        updatedAt: '2026-04-29T07:01:00.000Z',
+                        stories: [
+                          {
+                            title: 'GPT-4o release',
+                            summary: 'An older milestone story.',
+                            whyItMatters: 'Should now be rejected as stale.',
+                            sourceLabel: 'OpenAI',
+                            sourceUrl: 'https://example.com/gpt-4o',
+                            publishedAt: '2024-05-13T08:00:00.000Z',
+                          },
+                        ],
+                      }),
+                    },
+                  ],
+                },
+              },
+            ],
+          }),
+          {
+            status: 200,
+            headers: { 'Content-Type': 'application/json' },
+          }
+        )
+      }
+
+      if (requestUrl.includes('/models/gemini-2.5-flash:generateContent')) {
+        return new Response(
+          JSON.stringify({
+            candidates: [
+              {
+                content: {
+                  parts: [
+                    {
+                      text: JSON.stringify({
+                        updatedAt: '2026-04-29T07:01:00.000Z',
+                        stories: [
+                          {
+                            title: 'Fresh story one',
+                            summary: 'Recent enough for the homepage.',
+                            whyItMatters: 'This one should stay.',
+                            sourceLabel: 'Reuters',
+                            sourceUrl: 'https://example.com/fresh-story-one',
+                            publishedAt: '2026-04-29T06:30:00.000Z',
+                          },
+                          {
+                            title: 'Fresh story two',
+                            summary: 'Also recent enough for the homepage.',
+                            whyItMatters: 'This one should stay too.',
+                            sourceLabel: 'AP News',
+                            sourceUrl: 'https://example.com/fresh-story-two',
+                            publishedAt: '2026-04-28T22:00:00.000Z',
+                          },
+                          {
+                            title: 'Fresh story three',
+                            summary: 'Third recent story.',
+                            whyItMatters: 'Rounds out the brief.',
+                            sourceLabel: 'Google AI',
+                            sourceUrl: 'https://example.com/fresh-story-three',
+                            publishedAt: '2026-04-28T10:00:00.000Z',
+                          },
+                        ],
+                      }),
+                    },
+                  ],
+                },
+              },
+            ],
+          }),
+          {
+            status: 200,
+            headers: { 'Content-Type': 'application/json' },
+          }
+        )
+      }
+
+      throw new Error(`Unexpected request URL: ${requestUrl}`)
+    },
+  })
+
+  assert.equal(fetchCalls, 2)
+  assert.deepEqual(result, {
+    updatedAt: '2026-04-29T07:01:00.000Z',
+    stories: [
+      {
+        title: 'Fresh story one',
+        summary: 'Recent enough for the homepage.',
+        whyItMatters: 'This one should stay.',
+        sourceLabel: 'Reuters',
+        sourceUrl: 'https://example.com/fresh-story-one',
+        publishedAt: '2026-04-29T06:30:00.000Z',
+      },
+      {
+        title: 'Fresh story two',
+        summary: 'Also recent enough for the homepage.',
+        whyItMatters: 'This one should stay too.',
+        sourceLabel: 'AP News',
+        sourceUrl: 'https://example.com/fresh-story-two',
+        publishedAt: '2026-04-28T22:00:00.000Z',
+      },
+      {
+        title: 'Fresh story three',
+        summary: 'Third recent story.',
+        whyItMatters: 'Rounds out the brief.',
+        sourceLabel: 'Google AI',
+        sourceUrl: 'https://example.com/fresh-story-three',
+        publishedAt: '2026-04-28T10:00:00.000Z',
+      },
+    ],
+  })
+})
+
+test('normalizeAiNewsPayload drops stale stories relative to nowIso and keeps newest stories first', async () => {
+  const { normalizeAiNewsPayload } = await import('../../server/aiNewsGemini.js')
+
+  const normalized = normalizeAiNewsPayload(
+    {
+      updatedAt: '2026-04-29T07:01:00.000Z',
+      stories: [
+        {
+          title: 'Stale 2024 story',
+          summary: 'This should be dropped as outdated.',
+          whyItMatters: 'This should not reach the homepage.',
+          sourceLabel: 'Reuters',
+          sourceUrl: 'https://example.com/stale-2024-story',
+          publishedAt: '2024-05-13T08:00:00.000Z',
+        },
+        {
+          title: 'Newest story',
+          summary: 'Published most recently.',
+          whyItMatters: 'Should render first.',
+          sourceLabel: 'AP News',
+          sourceUrl: 'https://example.com/newest-story',
+          publishedAt: '2026-04-29T06:30:00.000Z',
+        },
+        {
+          title: 'Second newest story',
+          summary: 'Also recent enough.',
+          whyItMatters: 'Should remain after sorting.',
+          sourceLabel: 'The Verge',
+          sourceUrl: 'https://example.com/second-newest-story',
+          publishedAt: '2026-04-28T20:00:00.000Z',
+        },
+        {
+          title: 'Third newest story',
+          summary: 'Still recent enough.',
+          whyItMatters: 'Should remain as the third story.',
+          sourceLabel: 'Google AI',
+          sourceUrl: 'https://example.com/third-newest-story',
+          publishedAt: '2026-04-27T10:00:00.000Z',
+        },
+      ],
+    },
+    {
+      nowIso: '2026-04-29T07:01:00.000Z',
+    }
+  )
+
+  assert.deepEqual(normalized, {
+    updatedAt: '2026-04-29T07:01:00.000Z',
+    stories: [
+      {
+        title: 'Newest story',
+        summary: 'Published most recently.',
+        whyItMatters: 'Should render first.',
+        sourceLabel: 'AP News',
+        sourceUrl: 'https://example.com/newest-story',
+        publishedAt: '2026-04-29T06:30:00.000Z',
+      },
+      {
+        title: 'Second newest story',
+        summary: 'Also recent enough.',
+        whyItMatters: 'Should remain after sorting.',
+        sourceLabel: 'The Verge',
+        sourceUrl: 'https://example.com/second-newest-story',
+        publishedAt: '2026-04-28T20:00:00.000Z',
+      },
+      {
+        title: 'Third newest story',
+        summary: 'Still recent enough.',
+        whyItMatters: 'Should remain as the third story.',
+        sourceLabel: 'Google AI',
+        sourceUrl: 'https://example.com/third-newest-story',
+        publishedAt: '2026-04-27T10:00:00.000Z',
+      },
+    ],
   })
 })
 
@@ -429,6 +639,22 @@ test('handleNodeAiNewsRequest accepts Gemma news JSON wrapped in prose and commo
                         '      "source": "Google AI",',
                         '      "url": "https://example.com/open-model-update",',
                         '      "date": "2026-04-19T12:00:00.000Z",',
+                        '    },',
+                        '    {',
+                        '      "title": "Fresh developer release",',
+                        '      "summary": "Another recent launch aimed at AI builders.",',
+                        '      "why_it_matters": "It broadens the set of deployable models this week.",',
+                        '      "source": "Reuters",',
+                        '      "url": "https://example.com/fresh-developer-release",',
+                        '      "date": "2026-04-19T09:00:00.000Z",',
+                        '    },',
+                        '    {',
+                        '      "title": "Inference platform update",',
+                        '      "summary": "A platform vendor shipped a faster inference stack.",',
+                        '      "why_it_matters": "It changes deployment economics for teams shipping AI features.",',
+                        '      "source": "The Verge",',
+                        '      "url": "https://example.com/inference-platform-update",',
+                        '      "date": "2026-04-18T22:00:00.000Z",',
                         '    }',
                         '  ],',
                         '}',
@@ -466,6 +692,22 @@ test('handleNodeAiNewsRequest accepts Gemma news JSON wrapped in prose and commo
         sourceLabel: 'Google AI',
         sourceUrl: 'https://example.com/open-model-update',
         publishedAt: '2026-04-19T12:00:00.000Z',
+      },
+      {
+        title: 'Fresh developer release',
+        summary: 'Another recent launch aimed at AI builders.',
+        whyItMatters: 'It broadens the set of deployable models this week.',
+        sourceLabel: 'Reuters',
+        sourceUrl: 'https://example.com/fresh-developer-release',
+        publishedAt: '2026-04-19T09:00:00.000Z',
+      },
+      {
+        title: 'Inference platform update',
+        summary: 'A platform vendor shipped a faster inference stack.',
+        whyItMatters: 'It changes deployment economics for teams shipping AI features.',
+        sourceLabel: 'The Verge',
+        sourceUrl: 'https://example.com/inference-platform-update',
+        publishedAt: '2026-04-18T22:00:00.000Z',
       },
     ],
   })

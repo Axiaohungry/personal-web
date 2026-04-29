@@ -43,6 +43,9 @@ defineProps({
           <a-button size="large" :href="profile.ctaSecondary.href">
             {{ profile.ctaSecondary.label }}
           </a-button>
+          <a-button size="large" :href="profile.ctaTertiary.href">
+            {{ profile.ctaTertiary.label }}
+          </a-button>
         </a-space>
       </div>
 
