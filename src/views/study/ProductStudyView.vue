@@ -2,59 +2,113 @@
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 
-import EmptyStudyPlaceholder from '@/components/study/EmptyStudyPlaceholder.vue'
+import ProjectMappingPanel from '@/components/study/ProjectMappingPanel.vue'
+import StudyArticleSection from '@/components/study/StudyArticleSection.vue'
+import StudySectionNav from '@/components/study/StudySectionNav.vue'
 import StudyWorkbenchLayout from '@/components/study/StudyWorkbenchLayout.vue'
-import { productStudyRoadmap, productStudySections } from '@/data/study/productStudy.js'
+import {
+  productInterviewQuestions,
+  productPracticeChecklist,
+  productProjectSections,
+  productStudyRoadmap,
+  productStudySections,
+  productStudyTabs,
+} from '@/data/study/productStudy.js'
 
 const route = useRoute()
 
-const isRoadmapRoute = computed(
-  () => route.name === 'study-product-roadmap' || route.path === '/study/product/roadmap'
-)
+const activeTab = computed(() => (route.name === 'study-product-roadmap' ? 'roadmap' : 'system'))
 
-const placeholderSection = computed(() => productStudySections[0] ?? null)
+const heroCopy = computed(() => {
+  if (activeTab.value === 'roadmap') {
+    return {
+      eyebrow: '产品项目管理',
+      title: '用项目推进场景训练产品判断、协同和复盘能力',
+      intro:
+        '这一页把时间压力、跨团队分歧、需求方坚持和上线不达预期这些高频场景整理成可复习的处理框架。',
+      note:
+        '学习时先看处理顺序，再拿健身工具里的小功能做练习，避免只背“多沟通”这种空话。',
+      metrics: [
+        { label: '场景', value: String(productProjectSections.length) },
+        { label: '练习', value: String(productPracticeChecklist.length) },
+      ],
+    }
+  }
+
+  return {
+    eyebrow: '产品方法论',
+    title: '把产品方法、PRD、竞品分析和优先级判断整理成一条学习链路',
+    intro:
+      '这里从岗位认知开始，逐步进入需求分析、PRD、竞品分析、优先级和伪需求识别，目标是形成能学习、能复习、能面试表达的结构。',
+    note:
+      '这部分内容来自 docs/jd-study/08-product-methodology-project-management.md 的整理，并压缩成页面可浏览的学习模块。',
+    metrics: [
+      { label: '模块', value: String(productStudySections.length) },
+      { label: '问答', value: String(productInterviewQuestions.length) },
+    ],
+  }
+})
 </script>
 
 <template>
   <main class="site-page">
     <div class="page-shell">
       <StudyWorkbenchLayout
-        eyebrow="Product Study"
-        title="先把产品方法的结构搭好，再按真实经历慢慢补齐内容。"
-        intro="这一段刻意保持轻量，只区分通用占位页和 roadmap 占位页，保证顶层路由已经稳定可用。"
-        :note="
-          isRoadmapRoute
-            ? '这里先展示接下来准备补齐的方向，避免假装内容已经成熟。'
-            : '这里先保留诚实的模块占位，等后续任务再补具体方法和案例。'
-        "
-        :metrics="[
-          { label: 'State', value: isRoadmapRoute ? 'Roadmap placeholder' : 'Module placeholder' },
-          { label: 'Sections', value: String(productStudySections.length) },
-        ]"
+        :eyebrow="heroCopy.eyebrow"
+        :title="heroCopy.title"
+        :intro="heroCopy.intro"
+        :note="heroCopy.note"
+        :metrics="heroCopy.metrics"
       >
-        <EmptyStudyPlaceholder
-          v-if="isRoadmapRoute"
-          :title="productStudyRoadmap.title"
-          summary="当前先公开 roadmap，说明接下来准备补哪些内容，而不是提前伪造完整的产品方法论页面。"
-          hint="后续会围绕问题拆解、方案判断、验证闭环和跨团队协作逐步补齐。"
-        >
-          <div class="study-topic-card study-surface">
-            <p class="study-topic-card__label">Roadmap</p>
-            <h2 class="study-topic-card__title">{{ productStudyRoadmap.title }}</h2>
-            <ul class="study-article-section__list">
-              <li v-for="item in productStudyRoadmap.items" :key="item">
-                {{ item }}
-              </li>
-            </ul>
-          </div>
-        </EmptyStudyPlaceholder>
+        <template #nav>
+          <StudySectionNav
+            title="学习分区"
+            :items="productStudyTabs"
+            :active-key="activeTab"
+          />
+        </template>
 
-        <EmptyStudyPlaceholder
-          v-else
-          :title="placeholderSection?.title ?? '内容仍在整理中'"
-          :summary="placeholderSection?.summary ?? ''"
-          hint="如果只是先看结构，可继续打开 roadmap；如果要细化内容，等后续任务补齐真实案例。"
-        />
+        <template v-if="activeTab === 'system'">
+          <StudyArticleSection
+            v-for="section in productStudySections"
+            :key="section.key"
+            :eyebrow="section.eyebrow"
+            :title="section.title"
+            :summary="section.summary"
+            :bullets="section.bullets"
+          />
+
+          <ProjectMappingPanel
+            title="面试高频问题"
+            summary="把产品方法转成面试里能稳定输出的表达骨架。"
+            :items="productInterviewQuestions"
+          />
+        </template>
+
+        <template v-else>
+          <StudyArticleSection
+            v-for="section in productProjectSections"
+            :key="section.key"
+            :eyebrow="section.eyebrow"
+            :title="section.title"
+            :summary="section.summary"
+            :bullets="section.bullets"
+          />
+
+          <StudyArticleSection
+            eyebrow="学习路线"
+            :title="productStudyRoadmap.title"
+            summary="按这条路线练习，产品方法会从概念变成可执行的项目推进能力。"
+            :bullets="productStudyRoadmap.items"
+          />
+
+          <StudyArticleSection
+            eyebrow="练习任务"
+            title="用一个健身工具小功能串完整条产品链路"
+            summary="选择一个足够小的功能练习，能更快暴露你是否真的理解需求、方案、指标和复盘。"
+            :bullets="productPracticeChecklist"
+          />
+        </template>
       </StudyWorkbenchLayout>
     </div>
   </main>

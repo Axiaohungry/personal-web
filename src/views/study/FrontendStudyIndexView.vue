@@ -10,7 +10,7 @@ const categoryCards = computed(() =>
     ...category,
     meta: [
       {
-        label: 'Order',
+        label: '顺序',
         value: `0${index + 1}`,
       },
     ],
@@ -22,13 +22,13 @@ const categoryCards = computed(() =>
   <main class="site-page">
     <div class="page-shell">
       <StudyWorkbenchLayout
-        eyebrow="Frontend Study"
-        title="先把前端学习拆成三张稳定的入口卡，再逐步补齐每一层细节。"
-        intro="当前只提供顶层分类页，让基础总览、面试表达和编码训练各自有稳定入口，方便后续继续补内容。"
-        note="这一层不直接塞进长内容，重点是让学习地图和路由结构先稳定。"
+        eyebrow="前端系统学习"
+        title="把前端知识拆成基础、表达和编码训练三条复习路径。"
+        intro="基础总览负责原理和项目映射，面试表达负责回答框架，编码训练负责把知识点转回动手能力。"
+        note="如果时间有限，先从基础总览开始；如果准备面试，就优先看面试表达和编码训练。"
         :metrics="[
-          { label: 'Categories', value: String(categoryCards.length) },
-          { label: 'Focus', value: 'Index first' },
+          { label: '分类', value: String(categoryCards.length) },
+          { label: '重点', value: '系统复习' },
         ]"
       >
         <StudyTopicCard

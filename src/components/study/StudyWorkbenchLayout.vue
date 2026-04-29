@@ -24,7 +24,7 @@ defineProps({
 </script>
 
 <template>
-  <main class="study-shell">
+  <section class="study-shell">
     <section class="study-shell__hero shell-surface">
       <div class="study-shell__copy">
         <p v-if="eyebrow" class="eyebrow study-shell__eyebrow">{{ eyebrow }}</p>
@@ -57,5 +57,5 @@ defineProps({
     <section class="study-shell__content">
       <slot />
     </section>
-  </main>
+  </section>
 </template>

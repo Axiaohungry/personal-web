@@ -22,27 +22,29 @@ function handleSelect(key) {
 </script>
 
 <template>
-  <nav class="study-section-nav" aria-label="Study section navigation">
+  <nav class="study-section-nav" aria-label="学习分区导航">
     <div class="study-section-nav__header">
       <p class="study-section-nav__title">{{ props.title }}</p>
       <slot name="actions" />
     </div>
 
-    <div class="study-section-nav__items">
+    <div class="study-section-nav__items" role="tablist">
       <template v-for="item in props.items" :key="item.key">
-        <a
+        <router-link
           v-if="item.href"
+          :to="item.href"
           class="study-section-nav__item"
           :class="{ 'is-active': item.key === props.activeKey }"
-          :href="item.href"
         >
           <span class="study-section-nav__item-label">{{ item.label || item.title }}</span>
           <span v-if="item.meta" class="study-section-nav__item-meta">{{ item.meta }}</span>
-        </a>
+        </router-link>
 
         <button
           v-else
           type="button"
+          role="tab"
+          :aria-selected="item.key === props.activeKey"
           class="study-section-nav__item"
           :class="{ 'is-active': item.key === props.activeKey }"
           @click="handleSelect(item.key)"
@@ -54,3 +56,4 @@ function handleSelect(key) {
     </div>
   </nav>
 </template>
+

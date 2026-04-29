@@ -1,19 +1,25 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
 import ProjectMappingPanel from '@/components/study/ProjectMappingPanel.vue'
 import StudyArticleSection from '@/components/study/StudyArticleSection.vue'
+import StudyCodeBlock from '@/components/study/StudyCodeBlock.vue'
+import StudyQACard from '@/components/study/StudyQACard.vue'
 import StudySectionNav from '@/components/study/StudySectionNav.vue'
 import StudyWorkbenchLayout from '@/components/study/StudyWorkbenchLayout.vue'
-import { frontendStudyCategories, frontendStudySections } from '@/data/study/frontendStudy.js'
+import {
+  frontendStudyCategories,
+  frontendStudySections,
+  loadFrontendStudyDetail,
+} from '@/data/study/frontendStudy.js'
 
 const route = useRoute()
 
 const detailRouteMap = {
   'study-frontend-fundamentals': {
     key: 'fundamentals',
-    eyebrow: 'Frontend Fundamentals',
+    eyebrow: '前端基础',
     title: '把概念、面试表达和项目映射放进同一个复习页',
     intro:
       '这一页把底层概念、常见表达方式和真实项目连接起来，方便在复习、面试和落地之间切换。',
@@ -22,16 +28,16 @@ const detailRouteMap = {
   },
   'study-frontend-interview': {
     key: 'interview',
-    eyebrow: 'Frontend Interview',
+    eyebrow: '面试表达',
     title: '把常见问法整理成可以稳定输出的答题骨架',
     intro:
-      '这一页聚焦高频问法和追问准备，让回答不只停留在“知道概念”，而是能讲清取舍、验证和业务关联。',
+      '这一页聚焦高频问法和追问准备，让回答不只停留在"知道概念"，而是能讲清取舍、验证和业务关联。',
     note:
       '回答时尽量先给结论，再补背景、权衡和项目例子，这样信息密度更高，也更稳。',
   },
   'study-frontend-coding': {
     key: 'coding',
-    eyebrow: 'Frontend Coding',
+    eyebrow: '编码训练',
     title: '把知识点重新压回手感，形成能复现的练习路径',
     intro:
       '通过组件练习、基础题感和 API 设计训练，把前端知识重新变成能写出来、能解释出来的实现能力。',
@@ -50,8 +56,27 @@ const activeCategory = computed(
     frontendStudyCategories[0]
 )
 
+// 轻量摘要数据（静态 import，用于 fallback 和非详情区域）
 const activeSections = computed(
   () => frontendStudySections[activeDetail.value.key] ?? frontendStudySections.fundamentals
+)
+
+// 完整详情数据（动态加载，含代码实例、面试 Q&A 等）
+const richSections = ref(null)
+const loadingDetail = ref(false)
+
+watch(
+  () => activeDetail.value.key,
+  async (sectionKey) => {
+    richSections.value = null
+    loadingDetail.value = true
+    try {
+      richSections.value = await loadFrontendStudyDetail(sectionKey)
+    } finally {
+      loadingDetail.value = false
+    }
+  },
+  { immediate: true }
 )
 
 const navItems = computed(() =>
@@ -60,48 +85,62 @@ const navItems = computed(() =>
     title: category.title,
     label: category.label,
     href: category.href,
-    meta: `0${index + 1}`,
+    meta: `第 ${index + 1} 组`,
   }))
 )
 
+// --- Fundamentals 数据 ---
 const conceptSections = computed(() => {
   if (activeDetail.value.key !== 'fundamentals') {
     return []
   }
-
-  return activeSections.value.flatMap((section) =>
-    section.conceptBlocks.map((block) => ({
+  // 优先使用 rich 数据（有代码实例和大白话解析），fallback 到摘要数据
+  const source = richSections.value || activeSections.value
+  return source.flatMap((section) =>
+    (section.conceptBlocks || []).map((block) => ({
       key: `${section.key}-${block.title}`,
-      eyebrow: section.title,
+      eyebrow: section.dayRange || section.title,
       title: block.title,
-      summary: '先把底层机制说清，再把它对页面、状态和交互的影响串起来。',
+      summary: block.plainExplanation || '先把底层机制说清，再把它对页面、状态和交互的影响串起来。',
       bullets: block.points,
+      codeExample: block.codeExample || null,
     }))
   )
 })
 
-const interviewTakeawaySections = computed(() => {
-  if (activeDetail.value.key === 'interview') {
+// 面试表达摘要 —— 只在 fundamentals 页显示，为概念模块补充"怎么在面试中表达"的要点。
+const fundamentalsTakeawaySections = computed(() => {
+  if (activeDetail.value.key !== 'fundamentals') {
     return []
   }
-
-  return activeSections.value.map((section) => ({
+  const source = activeSections.value
+  return source.map((section) => ({
     key: `${section.key}-takeaways`,
-    eyebrow: `${section.title} interview`,
+    eyebrow: `${section.title} 面试表达`,
     title: `${section.title}：面试表达`,
-    summary: '这些要点更偏向“怎么讲”，帮助把概念转换成稳定的表达。',
+    summary: '这些要点更偏向"怎么讲"，帮助把概念转换成稳定的表达。',
     bullets: section.interviewTakeaways ?? [],
   }))
 })
 
+// 面试 Q&A 卡片数据（从 rich 数据中提取）
+const interviewQAItems = computed(() => {
+  if (activeDetail.value.key !== 'fundamentals' || !richSections.value) {
+    return []
+  }
+  return richSections.value.flatMap((section) => section.interviewQA || [])
+})
+
+// --- Interview 数据 ---
 const interviewPromptSections = computed(() => {
   if (activeDetail.value.key !== 'interview') {
     return []
   }
-
-  return activeSections.value.map((section) => ({
+  // 优先 rich 数据
+  const source = richSections.value || activeSections.value
+  return source.map((section) => ({
     key: `${section.key}-prompts`,
-    eyebrow: 'High-frequency prompts',
+    eyebrow: '高频问法',
     title: section.title,
     summary: '先把高频问题露出来，再按模块整理表达重点和回答顺序。',
     bullets: section.prompts ?? [],
@@ -112,10 +151,10 @@ const interviewGuidanceSections = computed(() => {
   if (activeDetail.value.key !== 'interview') {
     return []
   }
-
-  return activeSections.value.map((section) => ({
+  const source = richSections.value || activeSections.value
+  return source.map((section) => ({
     key: `${section.key}-guidance`,
-    eyebrow: 'Answer framing',
+    eyebrow: '回答框架',
     title: `${section.title}：回答框架`,
     summary: '这些提示帮助把问题背景、取舍和验证方式讲得更完整。',
     bullets: section.guidance ?? [],
@@ -126,24 +165,30 @@ const projectMappingEntries = computed(() => {
   if (activeDetail.value.key !== 'fundamentals') {
     return []
   }
-
-  return activeSections.value.map((section) => ({
+  const source = richSections.value || activeSections.value
+  return source.map((section) => ({
     label: section.title,
     title: `${section.title} 的项目映射`,
-    description: section.projectExamples.join(' '),
-    tags: ['Concept', 'Interview', 'Project'],
+    description: (section.projectExamples || []).join(' '),
+    tags: ['概念', '面试', '项目'],
   }))
 })
 
-const codingPracticeSections = computed(() =>
-  activeSections.value.map((section) => ({
+// --- Coding 数据 ---
+const codingPracticeSections = computed(() => {
+  if (activeDetail.value.key !== 'coding') {
+    return []
+  }
+  const source = richSections.value || activeSections.value
+  return source.map((section) => ({
     key: `${section.key}-items`,
-    eyebrow: 'Coding drills',
+    eyebrow: '编码练习',
     title: section.title,
     summary: '每个练习块都尽量对应一种真实前端工作里的能力切片。',
     bullets: section.items ?? [],
+    codeExamples: section.codeExamples || [],
   }))
-)
+})
 </script>
 
 <template>
@@ -155,21 +200,37 @@ const codingPracticeSections = computed(() =>
         :intro="activeDetail.intro"
         :note="activeDetail.note"
         :metrics="[
-          { label: 'Track', value: activeCategory.label },
-          { label: 'Sections', value: String(activeSections.length) },
+          { label: '路径', value: activeCategory.label },
+          { label: '章节', value: String(activeSections.length) },
         ]"
       >
         <template #nav>
           <StudySectionNav
-            title="Frontend study map"
+            title="学习分区"
             :items="navItems"
             :active-key="activeCategory.key"
           />
         </template>
 
+        <!-- Fundamentals: 概念 + 代码实例 + 面试表达 + Q&A + 项目映射 -->
         <template v-if="activeDetail.key === 'fundamentals'">
+          <template v-for="section in conceptSections" :key="section.key">
+            <StudyArticleSection
+              :eyebrow="section.eyebrow"
+              :title="section.title"
+              :summary="section.summary"
+              :bullets="section.bullets"
+            />
+            <StudyCodeBlock
+              v-if="section.codeExample"
+              :language="section.codeExample.language"
+              :code="section.codeExample.code"
+              :caption="section.codeExample.caption"
+            />
+          </template>
+
           <StudyArticleSection
-            v-for="section in conceptSections"
+            v-for="section in fundamentalsTakeawaySections"
             :key="section.key"
             :eyebrow="section.eyebrow"
             :title="section.title"
@@ -177,14 +238,16 @@ const codingPracticeSections = computed(() =>
             :bullets="section.bullets"
           />
 
-          <StudyArticleSection
-            v-for="section in interviewTakeawaySections"
-            :key="section.key"
-            :eyebrow="section.eyebrow"
-            :title="section.title"
-            :summary="section.summary"
-            :bullets="section.bullets"
-          />
+          <!-- 面试 Q&A 折叠卡片 -->
+          <section v-if="interviewQAItems.length" class="study-qa-section">
+            <h3 class="study-qa-section__title">面试高频 Q&A</h3>
+            <StudyQACard
+              v-for="(item, index) in interviewQAItems"
+              :key="index"
+              :question="item.question"
+              :answer="item.answer"
+            />
+          </section>
 
           <ProjectMappingPanel
             title="项目映射"
@@ -193,6 +256,7 @@ const codingPracticeSections = computed(() =>
           />
         </template>
 
+        <!-- Interview: 提示 + 框架 -->
         <template v-else-if="activeDetail.key === 'interview'">
           <StudyArticleSection
             v-for="section in interviewPromptSections"
@@ -213,15 +277,23 @@ const codingPracticeSections = computed(() =>
           />
         </template>
 
+        <!-- Coding: 练习列表 + 手写题代码 -->
         <template v-else>
-          <StudyArticleSection
-            v-for="section in codingPracticeSections"
-            :key="section.key"
-            :eyebrow="section.eyebrow"
-            :title="section.title"
-            :summary="section.summary"
-            :bullets="section.bullets"
-          />
+          <template v-for="section in codingPracticeSections" :key="section.key">
+            <StudyArticleSection
+              :eyebrow="section.eyebrow"
+              :title="section.title"
+              :summary="section.summary"
+              :bullets="section.bullets"
+            />
+            <StudyCodeBlock
+              v-for="(example, idx) in section.codeExamples"
+              :key="`${section.key}-code-${idx}`"
+              :language="example.language"
+              :code="example.code"
+              :caption="example.caption"
+            />
+          </template>
         </template>
       </StudyWorkbenchLayout>
     </div>

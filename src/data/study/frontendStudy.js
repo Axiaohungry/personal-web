@@ -158,3 +158,13 @@ export const frontendStudySections = {
     },
   ],
 }
+
+/**
+ * 按需加载前端学习的完整详情（含代码实例、面试 Q&A、手写题）。
+ * @param {string} sectionKey — 'fundamentals' | 'interview' | 'coding'
+ * @returns {Promise<Array>} 对应 section 的完整数据
+ */
+export async function loadFrontendStudyDetail(sectionKey) {
+  const { frontendStudyDetail } = await import('./generated/frontendStudyDetail.js')
+  return frontendStudyDetail[sectionKey] ?? null
+}

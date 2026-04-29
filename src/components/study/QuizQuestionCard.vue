@@ -24,16 +24,35 @@ const optionEntries = computed(() => {
   if (Array.isArray(options)) {
     return options.map((option, index) => ({
       key: option.key ?? `option-${index + 1}`,
+      displayKey: formatOptionKey(option.key ?? `option-${index + 1}`, index),
       label: option.label ?? option.text ?? '',
     }))
   }
 
   if (options && typeof options === 'object') {
-    return Object.entries(options).map(([key, label]) => ({ key, label }))
+    return Object.entries(options).map(([key, label], index) => ({
+      key,
+      displayKey: formatOptionKey(key, index),
+      label,
+    }))
   }
 
   return []
 })
+
+function formatOptionKey(key, index) {
+  const choiceMatch = String(key).match(/^choice-([a-z])$/i)
+  if (choiceMatch) {
+    return choiceMatch[1].toUpperCase()
+  }
+
+  const optionMatch = String(key).match(/^option-(\d+)$/i)
+  if (optionMatch) {
+    return String.fromCharCode(64 + Number(optionMatch[1]))
+  }
+
+  return String.fromCharCode(65 + index)
+}
 
 function handleAnswer(optionKey) {
   emit('answer', {
@@ -72,7 +91,7 @@ function handleAnswer(optionKey) {
         :disabled="question.isLocked"
         @click="handleAnswer(option.key)"
       >
-        <span class="quiz-question-card__option-key">{{ option.key }}</span>
+        <span class="quiz-question-card__option-key">{{ option.displayKey }}</span>
         <span class="quiz-question-card__option-label">{{ option.label }}</span>
       </button>
     </div>

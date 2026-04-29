@@ -18,10 +18,10 @@ export const studyTopics = [
   {
     key: 'product',
     label: '产品方法',
-    title: '先用占位路线图保留结构，再逐步补齐真实案例',
-    href: '/study/product-method/',
+    title: '从需求判断到项目推进，建立产品方法论学习主线',
+    href: '/study/product/',
     summary:
-      '产品方法模块先保持诚实的占位状态，明确后续会补充问题拆解、方案判断、指标复盘与跨团队协作内容。',
+      '把岗位认知、需求分析、PRD、竞品分析、优先级、项目管理和上线复盘整理成可学习、可面试表达的系统内容。',
   },
   {
     key: 'nasm',

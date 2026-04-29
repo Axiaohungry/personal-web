@@ -8,10 +8,9 @@ import { studyTopics } from '@/data/study/studyTopics.js'
 const topicCards = computed(() =>
   studyTopics.map((topic) => ({
     ...topic,
-    href: topic.key === 'product' ? '/study/product/' : topic.href,
     meta: [
       {
-        label: 'Topic',
+        label: '主题',
         value: topic.key,
       },
     ],
@@ -23,13 +22,13 @@ const topicCards = computed(() =>
   <main class="site-page">
     <div class="page-shell">
       <StudyWorkbenchLayout
-        eyebrow="Study Workbench"
-        title="把学习路径、复习入口和诚实的占位结构放进同一套工作台。"
-        intro="这里先保留三条顶层主线：前端基础、产品方法和 NASM。页面尽量轻，只负责给出清晰入口和后续扩展的稳定壳层。"
-        note="当前先打通顶层结构和入口页，后续再逐步补齐前端细分内容与 NASM 章节浏览。"
+        eyebrow="今天学习了吗？"
+        title="把前端、产品方法和 NASM 复习放进同一套学习工作台。"
+        intro="这里保留三条顶层主线：前端基础、产品方法和 NASM。每条主线都可以继续进入对应模块，按章节、主题或场景推进。"
+        note="先选择一个方向，再进入对应页面学习、复习或自测。移动端和桌面端都保持同一套入口结构。"
         :metrics="[
-          { label: 'Topics', value: String(topicCards.length) },
-          { label: 'Mode', value: 'Top-level routing' },
+          { label: '主题', value: String(topicCards.length) },
+          { label: '模式', value: '分模块学习' },
         ]"
       >
         <StudyTopicCard

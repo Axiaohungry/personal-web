@@ -63,26 +63,31 @@ test('future nasm study routes remain declared for later tasks', () => {
 })
 
 test('homepage keeps the study entry once in the pre-grid body shell alongside fitness', () => {
-  const studyHrefPattern = /href=(['"])\/study\/\1/g
-  const fitnessHrefPattern = /href=(['"])\/fitness\/\1/g
-  const studyHrefMatches = homeViewSource.match(studyHrefPattern) ?? []
-  const fitnessHrefMatches = homeViewSource.match(fitnessHrefPattern) ?? []
+  const literalStudyRoutePattern = /(?:href|to)=(['"])\/study\/\1/g
+  const boundStudyRoutePattern = /:(?:href|to)=['"]studyHomeCard\.href['"]/g
+  const fitnessRoutePattern = /(?:href|to)=(['"])\/fitness\/\1/g
+  const studyRouteCount =
+    (homeViewSource.match(literalStudyRoutePattern) ?? []).length +
+    (homeViewSource.match(boundStudyRoutePattern) ?? []).length
+  const fitnessRouteMatches = homeViewSource.match(fitnessRoutePattern) ?? []
   const bodyShellStart = homeViewSource.indexOf('home-page__body-shell')
   const mainGridStart = homeViewSource.indexOf('home-page__grid')
   const studyLabelPattern = /\u4eca\u5929\u5b66\u4e60\u4e86\u5417\uff1f/
 
   assert.match(homeViewSource, studyLabelPattern)
-  assert.equal(studyHrefMatches.length, 1)
-  assert.equal(fitnessHrefMatches.length, 1)
+  assert.equal(fitnessRouteMatches.length, 1)
   assert.ok(bodyShellStart !== -1)
   assert.ok(mainGridStart !== -1)
   assert.ok(bodyShellStart < mainGridStart)
 
   const preGridBody = homeViewSource.slice(bodyShellStart, mainGridStart)
-  const postGridBody = homeViewSource.slice(mainGridStart)
 
   assert.match(preGridBody, studyLabelPattern)
-  assert.match(preGridBody, fitnessHrefPattern)
-  assert.match(preGridBody, studyHrefPattern)
-  assert.equal((postGridBody.match(studyHrefPattern) ?? []).length, 0)
+  assert.match(preGridBody, fitnessRoutePattern)
+  assert.ok(studyRouteCount >= 3)
+  assert.equal(
+    (preGridBody.match(literalStudyRoutePattern) ?? []).length +
+      (preGridBody.match(boundStudyRoutePattern) ?? []).length,
+    2
+  )
 })

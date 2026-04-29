@@ -430,6 +430,13 @@
   gap: 0.75rem;
 }
 
+.home-workbench-pair__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.45rem 0.8rem;
+}
+
 .home-workbench-pair__label {
   margin: 0;
   color: var(--muted);
@@ -737,5 +744,9 @@
   .home-workbench-pair__topline,
   .contact-card__identity {
     flex-direction: column;
+  }
+
+  .home-workbench-pair__actions {
+    justify-content: flex-start;
   }
 }

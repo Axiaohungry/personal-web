@@ -8,14 +8,14 @@ import { nasmCatalog } from '@/data/study/nasmCatalog.js'
 const chapterCards = computed(() =>
   nasmCatalog.map((chapter) => ({
     ...chapter,
-    label: `Chapter ${String(chapter.order).padStart(2, '0')}`,
+    label: `第 ${String(chapter.order).padStart(2, '0')} 章`,
     meta: [
       {
-        label: 'Knowledge',
+        label: '知识点',
         value: String(chapter.knowledgeSectionCount),
       },
       {
-        label: 'Quiz',
+        label: '测验题',
         value: String(chapter.quizQuestionCount),
       },
     ],
@@ -27,13 +27,13 @@ const chapterCards = computed(() =>
   <main class="site-page">
     <div class="page-shell">
       <StudyWorkbenchLayout
-        eyebrow="NASM Study"
-        title="NASM catalog for chapter-by-chapter review"
-        intro="Browse each chapter as a compact study module with chapter knowledge points and a focused quiz. The goal is quick review without losing the feeling of a structured workbook."
-        note="Each card opens a dedicated chapter detail view, so learners can stay inside one chapter at a time instead of bouncing across a long mixed page."
+        eyebrow="NASM 分章学习"
+        title="按章节复习 NASM-CPT 核心知识点和测验题"
+        intro="每张卡片对应一个独立章节，进入后先看核心知识点，再切换到本章随机测验。"
+        note="一个页面只展示一个章节，避免在长内容里来回跳，适合做分章节复习。"
         :metrics="[
-          { label: 'Chapters', value: String(chapterCards.length) },
-          { label: 'Mode', value: 'Knowledge + quiz' },
+          { label: '章节', value: String(chapterCards.length) },
+          { label: '模式', value: '知识点 + 测验' },
         ]"
       >
         <StudyTopicCard

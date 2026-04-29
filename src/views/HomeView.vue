@@ -110,7 +110,12 @@ const otherProjects = computed(() => projects.filter((project) => project.href !
           >
             <div class="home-workbench-pair__topline">
               <p class="home-workbench-pair__label">{{ fitnessWorkbench.status }}</p>
-              <a class="home-workbench-pair__link" href="/fitness/">打开工具</a>
+              <div class="home-workbench-pair__actions">
+                <router-link class="home-workbench-pair__link" to="/fitness/">打开工具</router-link>
+                <router-link class="home-workbench-pair__link" :to="studyHomeCard.href">
+                  今天学习了吗？
+                </router-link>
+              </div>
             </div>
             <h2 class="home-workbench-pair__title">{{ fitnessWorkbench.name }}</h2>
             <p class="home-workbench-pair__summary">{{ fitnessWorkbench.summary }}</p>
@@ -122,7 +127,7 @@ const otherProjects = computed(() => projects.filter((project) => project.href !
           <article class="home-workbench-pair__card home-workbench-pair__card--study ant-surface-card">
             <div class="home-workbench-pair__topline">
               <p class="home-workbench-pair__label">今天学习了吗？</p>
-              <a class="home-workbench-pair__link" href="/study/">进入学习台</a>
+              <router-link class="home-workbench-pair__link" to="/study/">进入学习台</router-link>
             </div>
             <h2 class="home-workbench-pair__title">{{ studyHomeCard.title }}</h2>
             <p class="home-workbench-pair__summary">{{ studyHomeCard.summary }}</p>
@@ -257,6 +262,9 @@ const otherProjects = computed(() => projects.filter((project) => project.href !
                 </a-button>
                 <a-button v-if="fitnessWorkbench" size="large" :href="fitnessWorkbench.href">
                   打开健身工作台
+                </a-button>
+                <a-button size="large" :href="studyHomeCard.href">
+                  今天学习了吗？
                 </a-button>
               </a-space>
             </a-card>

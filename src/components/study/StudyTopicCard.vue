@@ -28,9 +28,9 @@ defineProps({
 </script>
 
 <template>
-  <component
-    :is="href ? 'a' : 'article'"
-    :href="href || undefined"
+  <router-link
+    v-if="href"
+    :to="href"
     class="study-topic-card study-surface"
   >
     <p v-if="label" class="study-topic-card__label">{{ label }}</p>
@@ -47,5 +47,23 @@ defineProps({
     <div v-if="tags.length" class="study-topic-card__tags">
       <span v-for="tag in tags" :key="tag" class="study-chip">{{ tag }}</span>
     </div>
-  </component>
+  </router-link>
+
+  <article v-else class="study-topic-card study-surface">
+    <p v-if="label" class="study-topic-card__label">{{ label }}</p>
+    <h2 class="study-topic-card__title">{{ title }}</h2>
+    <p v-if="summary" class="study-topic-card__summary">{{ summary }}</p>
+
+    <dl v-if="meta.length" class="study-topic-card__meta">
+      <div v-for="item in meta" :key="item.label" class="study-topic-card__meta-item">
+        <dt>{{ item.label }}</dt>
+        <dd>{{ item.value }}</dd>
+      </div>
+    </dl>
+
+    <div v-if="tags.length" class="study-topic-card__tags">
+      <span v-for="tag in tags" :key="tag" class="study-chip">{{ tag }}</span>
+    </div>
+  </article>
 </template>
+

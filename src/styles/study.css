@@ -339,12 +339,193 @@
   align-content: center;
 }
 
+/* --- 卡片和导航里的 router-link 样式重置 --- */
+a.study-topic-card,
+a.study-section-nav__item {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* --- 可点击卡片的悬停和焦点反馈 --- */
+a.study-topic-card {
+  transition:
+    border-color var(--duration-fast) var(--ease-out-quart),
+    box-shadow var(--duration-fast) var(--ease-out-quart),
+    transform var(--duration-fast) var(--ease-out-quart);
+}
+
+a.study-topic-card:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-strong);
+  transform: translateY(-2px);
+}
+
+a.study-topic-card:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* --- 学习代码块 --- */
+.study-code-block {
+  display: grid;
+  gap: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.study-code-block__header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 1.15rem;
+  background: var(--surface-soft);
+  border-bottom: 1px solid var(--line);
+}
+
+.study-code-block__language {
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--teal);
+  letter-spacing: 0.06em;
+}
+
+.study-code-block__caption {
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.study-code-block__pre {
+  margin: 0;
+  padding: 1.15rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.study-code-block__code {
+  font-family: 'IBM Plex Mono', 'Consolas', 'Menlo', monospace;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--text);
+  white-space: pre;
+  tab-size: 2;
+}
+
+/* --- 学习问答卡片 --- */
+.study-qa-section {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.study-qa-section__title {
+  margin: 0;
+  padding: 0 0.25rem;
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  letter-spacing: -0.03em;
+}
+
+.study-qa-card {
+  display: grid;
+  gap: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.study-qa-card__question {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 1rem 1.15rem;
+  border: none;
+  background: none;
+  font: inherit;
+  text-align: left;
+  color: var(--text);
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-out-quart);
+}
+
+.study-qa-card__question:hover {
+  background: var(--surface-soft);
+}
+
+.study-qa-card__q-label,
+.study-qa-card__a-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  font-size: 0.82rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.study-qa-card__q-label {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.study-qa-card__a-label {
+  background: var(--teal-soft);
+  color: var(--teal);
+}
+
+.study-qa-card__q-text {
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.study-qa-card__toggle {
+  font-size: 1.2rem;
+  font-weight: 300;
+  color: var(--muted);
+  transition: transform var(--duration-fast) var(--ease-out-quart);
+}
+
+.study-qa-card__question.is-expanded .study-qa-card__toggle {
+  transform: rotate(180deg);
+}
+
+.study-qa-card__answer {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.75rem;
+  padding: 0.75rem 1.15rem 1.15rem;
+  border-top: 1px solid var(--line);
+  background: var(--surface-soft);
+  animation: study-qa-fade-in var(--duration-fast) var(--ease-out-quart);
+}
+
+.study-qa-card__a-text {
+  margin: 0;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+@keyframes study-qa-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- 响应式：平板 --- */
 @media (max-width: 900px) {
   .study-shell__hero {
     grid-template-columns: 1fr;
   }
 }
 
+/* --- 响应式：手机 --- */
 @media (max-width: 640px) {
   .study-shell__hero,
   .study-shell__nav,
@@ -363,5 +544,29 @@
 
   .quiz-question-card__option {
     grid-template-columns: 1fr;
+  }
+
+  /* NASM 长文本可读性优化 */
+  .study-article-section__bullet {
+    line-height: 1.7;
+  }
+
+  /* 代码块移动端 */
+  .study-code-block__pre {
+    padding: 0.85rem;
+  }
+
+  .study-code-block__code {
+    font-size: 0.8rem;
+  }
+
+  /* Q&A 卡片移动端 */
+  .study-qa-card__question {
+    padding: 0.85rem 1rem;
+    gap: 0.5rem;
+  }
+
+  .study-qa-card__answer {
+    padding: 0.65rem 1rem 1rem;
   }
 }
