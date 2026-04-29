@@ -18,6 +18,16 @@ const frontendDetailSource = readFileSync(
   'utf8'
 )
 
+const studyWorkbenchLayoutSource = readFileSync(
+  fileURLToPath(new URL('../../src/components/study/StudyWorkbenchLayout.vue', import.meta.url)),
+  'utf8'
+)
+
+const studyQACardSource = readFileSync(
+  fileURLToPath(new URL('../../src/components/study/StudyQACard.vue', import.meta.url)),
+  'utf8'
+)
+
 test('study routes are declared as lazy-loaded study entrypoints', () => {
   assert.match(
     routerSource,
@@ -49,6 +59,20 @@ test('frontend interview detail keeps both prompts and guidance visible', () => 
   assert.match(frontendDetailSource, /const interviewGuidanceSections = computed/)
   assert.match(frontendDetailSource, /v-for="section in interviewPromptSections"/)
   assert.match(frontendDetailSource, /v-for="section in interviewGuidanceSections"/)
+})
+
+test('study workbench layout mounts the shared site header', () => {
+  assert.match(studyWorkbenchLayoutSource, /import SiteHeader/)
+  assert.match(studyWorkbenchLayoutSource, /import \{ navigationItems \}/)
+  assert.match(studyWorkbenchLayoutSource, /import \{ profile \}/)
+  assert.match(studyWorkbenchLayoutSource, /<SiteHeader/)
+  assert.match(studyWorkbenchLayoutSource, /:navigation-items="navigationItems"/)
+})
+
+test('study Q&A card supports structured answer blocks', () => {
+  assert.match(studyQACardSource, /normalizedAnswerBlocks/)
+  assert.match(studyQACardSource, /v-for="block in normalizedAnswerBlocks"/)
+  assert.match(studyQACardSource, /study-qa-card__answer-block/)
 })
 
 test('future nasm study routes remain declared for later tasks', () => {

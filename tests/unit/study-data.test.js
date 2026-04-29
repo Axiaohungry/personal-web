@@ -7,6 +7,7 @@ import { studyHomeCard, studyTopics } from '../../src/data/study/studyTopics.js'
 import {
   frontendStudyCategories,
   frontendStudySections,
+  loadFrontendStudyDetail,
 } from '../../src/data/study/frontendStudy.js'
 import { nasmCatalog } from '../../src/data/study/nasmCatalog.js'
 import {
@@ -44,6 +45,28 @@ test('frontend study sections expose the planned keyed section collections', () 
   assert.ok('coding' in frontendStudySections)
   assert.ok(Array.isArray(frontendStudySections.fundamentals))
   assert.ok(frontendStudySections.fundamentals.length > 0)
+})
+
+test('frontend fundamentals Q&A exposes structured interview-ready answers', async () => {
+  const fundamentals = await loadFrontendStudyDetail('fundamentals')
+  const qaItems = fundamentals.flatMap((section) => section.interviewQA ?? [])
+
+  assert.ok(qaItems.length >= 9)
+
+  for (const item of qaItems) {
+    assert.equal(typeof item.question, 'string')
+    assert.ok(Array.isArray(item.answer))
+    assert.ok(item.answer.length >= 3)
+
+    const labels = item.answer.map((block) => block.label)
+    assert.ok(labels.includes('结论'))
+    assert.ok(labels.includes('项目例子'))
+
+    for (const block of item.answer) {
+      assert.equal(typeof block.label, 'string')
+      assert.ok(block.text || block.bullets?.length)
+    }
+  }
 })
 
 test('study home card points to the study route', () => {

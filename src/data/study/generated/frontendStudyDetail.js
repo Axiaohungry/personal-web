@@ -115,15 +115,75 @@ export const frontendStudyDetail = {
       interviewQA: [
         {
           question: '什么是闭包？在你的项目中哪里用到了？',
-          answer: '闭包是函数记住了其声明时的词法作用域。在我的项目中，我通过工厂函数 createStorageApi(storage) 来封装本地存储逻辑。返回的对象内的方法形成闭包，持续引用传入的 storage 参数。这实现了数据的私有化封装。',
+          answer: [
+            {
+              label: '结论',
+              text: '闭包是函数在创建时记住外层词法作用域，并且在外层函数执行结束后仍然能访问这些变量的机制。',
+            },
+            {
+              label: '机制',
+              text: 'JavaScript 按词法作用域查找变量，内部函数会保留对外层环境的引用。它常用于封装私有状态、做工厂函数、保存异步回调里的上下文。',
+            },
+            {
+              label: '项目例子',
+              text: '在 createStorageApi(storage) 中，loadLatest 和 saveLatest 都不是直接操作全局 localStorage，而是通过闭包持续引用外层传入的 storage。这样测试时可以注入假的 storage，页面运行时再使用真实存储。',
+            },
+            {
+              label: '追问准备',
+              bullets: [
+                '闭包不是“函数嵌套”本身，而是内部函数能访问外层作用域。',
+                '风险是长期引用大对象可能造成内存不能及时释放，所以要避免无意义地持有 DOM 或大型数据。',
+              ],
+            },
+          ],
         },
         {
           question: 'Event Loop 的运行机制是什么？',
-          answer: 'Event Loop 控制 JS 单线程的执行顺序。先执行调用栈里的同步代码，清空微任务队列（如 Promise），然后再从宏任务队列（如 setTimeout）取出一个任务执行，循环往复。',
+          answer: [
+            {
+              label: '结论',
+              text: 'Event Loop 是浏览器协调同步代码、微任务、宏任务和渲染更新的调度机制，用来让单线程 JavaScript 处理异步任务。',
+            },
+            {
+              label: '机制',
+              text: '一轮执行通常是先清空调用栈里的同步代码，再清空微任务队列，例如 Promise.then；随后取一个宏任务，例如 setTimeout 或网络回调，再进入下一轮。',
+            },
+            {
+              label: '项目例子',
+              text: 'AiNewsBrief.vue 的 loadBrief 使用 await 等待 fetch。await 后面的代码会在异步结果回来后继续执行，期间页面不会被阻塞，loading、error 和 stories 都能按状态变化重新渲染。',
+            },
+            {
+              label: '追问准备',
+              bullets: [
+                'Promise.then 属于微任务，setTimeout 属于宏任务。',
+                'async/await 是 Promise 的语法糖，不能把异步代码变成真正的同步阻塞。',
+              ],
+            },
+          ],
         },
         {
           question: '如何解决前端竞态问题？',
-          answer: '在新闻简报组件中，我通过维护一个局部闭包变量 requestSequence 来解决。每次发请求前序号 +1，在 await 返回后检查序号是否一致。不一致则丢弃过期结果。',
+          answer: [
+            {
+              label: '结论',
+              text: '竞态问题的核心是“后发起的操作应该覆盖先发起的操作”，所以要给异步结果加身份校验，避免旧结果晚到后覆盖新状态。',
+            },
+            {
+              label: '机制',
+              text: '常见做法有请求序号、AbortController、时间戳或状态机。轻量页面可以用递增 requestId，复杂请求链路更适合取消旧请求或集中管理状态。',
+            },
+            {
+              label: '项目例子',
+              text: '新闻简报组件里每次 loadBrief 都会让 requestSequence 加一。await 返回后先判断 requestId 是否仍然等于当前序号，不一致就直接 return，避免过期新闻覆盖最新新闻。',
+            },
+            {
+              label: '追问准备',
+              bullets: [
+                '如果请求本身很重，可以用 AbortController 主动取消旧请求。',
+                '即使请求不能取消，也要在写入页面状态前做最新性判断。',
+              ],
+            },
+          ],
         },
       ],
       projectExamples: [
@@ -200,15 +260,78 @@ box.style.transform = 'translateX(100px)';`,
       interviewQA: [
         {
           question: '浏览器从输入 URL 到页面展示发生了什么？',
-          answer: '1.DNS 解析得到 IP；2.建立 TCP 连接；3.发起 HTTP 请求；4.服务器返回 HTML；5.解析 HTML 构建 DOM，解析 CSS 构建 CSSOM，合并成渲染树；6.布局计算；7.绘制像素；8.合成显示。',
+          answer: [
+            {
+              label: '结论',
+              text: '这道题可以按“网络请求链路”和“浏览器渲染链路”两段回答，先拿到资源，再把资源解析成用户看到的页面。',
+            },
+            {
+              label: '机制',
+              bullets: [
+                '网络侧：URL 解析、DNS 查询、建立连接、发送 HTTP 请求、服务器返回 HTML 和静态资源。',
+                '渲染侧：解析 HTML 生成 DOM，解析 CSS 生成 CSSOM，合成渲染树，执行布局、绘制和合成。',
+              ],
+            },
+            {
+              label: '项目例子',
+              text: '个人站通过路由懒加载减少首页初始 JS 体积，学习页、项目页和健身模块在访问对应路由时才下载，能缩短首屏进入成本。',
+            },
+            {
+              label: '追问准备',
+              bullets: [
+                '遇到性能追问时，从资源体积、阻塞资源、缓存策略和运行时渲染成本展开。',
+                '不要只背流程，要补一句“用户感知到的是白屏、卡顿或交互延迟”。',
+              ],
+            },
+          ],
         },
         {
           question: '强缓存和协商缓存有什么区别？',
-          answer: '强缓存完全不经过服务器，受 Cache-Control: max-age 控制。协商缓存在强缓存失效后带 ETag 或 Last-Modified 向服务器确认，未变返回 304，节省下行传输。',
+          answer: [
+            {
+              label: '结论',
+              text: '强缓存是不请求服务器，协商缓存是向服务器确认资源有没有变化；两者目标都是减少重复下载，但命中路径不同。',
+            },
+            {
+              label: '机制',
+              text: '强缓存主要看 Cache-Control 的 max-age、immutable 等字段。协商缓存通常通过 ETag / If-None-Match 或 Last-Modified / If-Modified-Since 判断，资源未变时返回 304。',
+            },
+            {
+              label: '项目例子',
+              text: '个人站的页面代码适合通过构建产物 hash 做长期缓存，HTML 则应该保持较短缓存或走协商缓存，避免用户拿到旧入口却加载不到新资源。',
+            },
+            {
+              label: '追问准备',
+              bullets: [
+                '带 hash 的静态资源可以缓存更久，因为文件名变化代表内容变化。',
+                '接口数据不应盲目强缓存，要结合实时性、用户身份和业务容错来定。',
+              ],
+            },
+          ],
         },
         {
           question: '开发环境下你们怎么解决跨域问题？',
-          answer: '在 Vite 中配置 proxy 中间件拦截 /api/* 请求，开发服务器在 Node 层代理转发，前端向同源服务器发请求，自然规避浏览器的跨域拦截。',
+          answer: [
+            {
+              label: '结论',
+              text: '开发环境通常用 Vite proxy 把前端的 /api 请求转发到后端，让浏览器看到的是同源请求，从而绕开浏览器的 CORS 限制。',
+            },
+            {
+              label: '机制',
+              text: 'CORS 是浏览器安全策略，不是服务器之间不能通信。代理发生在开发服务器的 Node 层，浏览器请求本地同源地址，开发服务器再去请求真实后端。',
+            },
+            {
+              label: '项目例子',
+              text: '个人站的本地开发可以把 /api/ai/news-brief、/api/fitness/* 这类接口交给 Vite 或本地 Node 服务转发，页面代码仍然保持相对路径请求。',
+            },
+            {
+              label: '追问准备',
+              bullets: [
+                '生产环境不应该依赖开发代理，而要由同域部署、网关或服务端 CORS 配置解决。',
+                '如果涉及 Cookie，还要同时处理 credentials 和 SameSite 等配置。',
+              ],
+            },
+          ],
         },
       ],
       projectExamples: [
@@ -277,15 +400,79 @@ watch(
       interviewQA: [
         {
           question: 'Vue 3 为什么要用 Proxy 替换 Object.defineProperty？',
-          answer: 'Object.defineProperty 只能劫持现有属性，新增/删除属性无能为力。Proxy 是引擎层面代理整个对象，天生支持数组和新增属性的拦截，性能更好代码更简洁。',
+          answer: [
+            {
+              label: '结论',
+              text: 'Vue 3 使用 Proxy 是为了更完整地代理对象操作，减少 Vue 2 中新增属性、删除属性和数组变更需要特殊处理的问题。',
+            },
+            {
+              label: '机制',
+              text: 'Object.defineProperty 是给已有属性加 getter/setter，初始化时需要递归劫持。Proxy 代理的是整个对象，可以拦截 get、set、deleteProperty、has 等操作。',
+            },
+            {
+              label: '项目例子',
+              text: 'FitnessView.vue 用 reactive 保存表单输入，用 computed 派生 TDEE 计算结果。表单字段变化后，Vue 能自动追踪依赖并只更新相关展示，不需要手动同步 DOM。',
+            },
+            {
+              label: '追问准备',
+              bullets: [
+                'Proxy 也不是“性能永远更快”，优势更多在能力完整和实现简化。',
+                '响应式写法仍要注意状态边界，避免把所有东西都塞进一个巨大 reactive 对象。',
+              ],
+            },
+          ],
         },
         {
           question: '你在项目中做了哪些前端性能优化？',
-          answer: '加载层面：路由懒加载 + manualChunks 拆分 vendor。运行时：重计算逻辑放 Web Worker，局部组件抽离确保表单更新只重渲染局部。',
+          answer: [
+            {
+              label: '结论',
+              text: '我会把性能优化分成加载阶段、运行阶段和体验兜底三类讲，避免只堆技术名词。',
+            },
+            {
+              label: '机制',
+              bullets: [
+                '加载阶段：路由懒加载、合理拆包、静态资源缓存，减少首次进入成本。',
+                '运行阶段：把衍生计算放进 computed 或纯函数，必要时把重计算放到 worker，减少主线程压力。',
+                '体验兜底：为接口加载、失败和空数据提供明确状态，降低用户对等待的焦虑。',
+              ],
+            },
+            {
+              label: '项目例子',
+              text: '个人站路由用动态 import 拆分页面；健身工作台把 TDEE、宏量营养和场景方案拆成纯计算函数；新闻简报用 loading/error 状态保证网络波动时页面仍然可理解。',
+            },
+            {
+              label: '追问准备',
+              bullets: [
+                '如果被问结果，要说指标：首屏时间、交互延迟、请求数、包体积或用户路径完成率。',
+                '如果没有线上监控，也要诚实说明用构建体积、手动性能面板和用户操作路径验证。',
+              ],
+            },
+          ],
         },
         {
           question: 'Vite 为什么那么快？',
-          answer: 'Vite 开发模式不做整体打包。依赖用 esbuild 预构建，源码通过浏览器原生 ESM 按需编译返回。',
+          answer: [
+            {
+              label: '结论',
+              text: 'Vite 快主要因为开发阶段不先整体打包，而是利用浏览器原生 ESM 按需加载源码，同时用 esbuild 预构建依赖。',
+            },
+            {
+              label: '机制',
+              text: '传统 Bundler 启动前要把项目依赖图处理成 bundle。Vite 启动时只启动开发服务器，浏览器请求哪个模块，Vite 再按需转换哪个模块；第三方依赖则提前用 esbuild 快速预构建。',
+            },
+            {
+              label: '项目例子',
+              text: '这个站点有首页、健身工作台、学习工作台和多个项目案例页。使用 Vite 后，开发时改某个 Vue 文件只触发对应模块的 HMR，不需要等待整站重新打包。',
+            },
+            {
+              label: '追问准备',
+              bullets: [
+                '开发快不等于生产不打包，生产构建仍然会用 Rollup 做优化产物。',
+                'Vite 的优势在中大型前端项目里更明显，尤其是页面和组件数量增长后。',
+              ],
+            },
+          ],
         },
       ],
       projectExamples: [

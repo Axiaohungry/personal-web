@@ -1,18 +1,35 @@
 <script setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 
-defineProps({
+const props = defineProps({
   question: {
     type: String,
     required: true,
   },
   answer: {
-    type: String,
+    type: [String, Array],
     required: true,
   },
 })
 
 const expanded = ref(false)
+const normalizedAnswerBlocks = computed(() => {
+  if (Array.isArray(props.answer)) {
+    return props.answer.map((block, index) => ({
+      label: block.label || `要点 ${index + 1}`,
+      text: block.text || '',
+      bullets: Array.isArray(block.bullets) ? block.bullets : [],
+    }))
+  }
+
+  return [
+    {
+      label: '回答',
+      text: props.answer,
+      bullets: [],
+    },
+  ]
+})
 
 function toggle() {
   expanded.value = !expanded.value
@@ -35,7 +52,19 @@ function toggle() {
 
     <div v-if="expanded" class="study-qa-card__answer">
       <span class="study-qa-card__a-label">答</span>
-      <p class="study-qa-card__a-text">{{ answer }}</p>
+      <div class="study-qa-card__answer-body">
+        <section
+          v-for="block in normalizedAnswerBlocks"
+          :key="block.label"
+          class="study-qa-card__answer-block"
+        >
+          <h4 class="study-qa-card__answer-label">{{ block.label }}</h4>
+          <p v-if="block.text" class="study-qa-card__a-text">{{ block.text }}</p>
+          <ul v-if="block.bullets.length" class="study-qa-card__answer-list">
+            <li v-for="bullet in block.bullets" :key="bullet">{{ bullet }}</li>
+          </ul>
+        </section>
+      </div>
     </div>
   </article>
 </template>

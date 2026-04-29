@@ -14,7 +14,7 @@ const baseCssSource = readFileSync(resolve(repoRoot, 'src/styles/base.css'), 'ut
 test('shared navigation exposes the required href contract', () => {
   assert.deepEqual(
     navigationItems.map((item) => item.href),
-    ['/', '/#experience', '/#projects', '/#skills', '/fitness/', '/#contact']
+    ['/', '/#experience', '/#projects', '/#skills', '/fitness/', '/study/', '/#contact']
   )
 })
 

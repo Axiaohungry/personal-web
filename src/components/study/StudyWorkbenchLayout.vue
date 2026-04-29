@@ -1,4 +1,8 @@
 <script setup>
+import SiteHeader from '@/components/SiteHeader.vue'
+import { navigationItems } from '@/data/navigation.js'
+import { profile } from '@/data/profile.js'
+
 defineProps({
   eyebrow: {
     type: String,
@@ -25,6 +29,12 @@ defineProps({
 
 <template>
   <section class="study-shell">
+    <SiteHeader
+      :site-name="profile.name"
+      :location="profile.location"
+      :navigation-items="navigationItems"
+    />
+
     <section class="study-shell__hero shell-surface">
       <div class="study-shell__copy">
         <p v-if="eyebrow" class="eyebrow study-shell__eyebrow">{{ eyebrow }}</p>
