@@ -23,9 +23,9 @@ const topicCards = computed(() =>
     <div class="page-shell">
       <StudyWorkbenchLayout
         eyebrow="今天学习了吗？"
-        title="把前端、产品方法和 NASM 复习放进同一套学习工作台。"
-        intro="这里保留三条顶层主线：前端基础、产品方法和 NASM。每条主线都可以继续进入对应模块，按章节、主题或场景推进。"
-        note="先选择一个方向，再进入对应页面学习、复习或自测。移动端和桌面端都保持同一套入口结构。"
+        title="前端、产品方法和 NASM 复习，都在这里。"
+        intro="三个方向：前端基础、产品方法和 NASM。每个方向都可以按章节或主题继续往下看。"
+        note="选一个方向进去就行。手机和电脑上看到的入口一样。"
         :metrics="[
           { label: '主题', value: String(topicCards.length) },
           { label: '模式', value: '分模块学习' },

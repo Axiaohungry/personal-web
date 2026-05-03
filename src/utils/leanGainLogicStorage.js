@@ -1,14 +1,7 @@
+import { parseJson } from './storage.js'
+
 const PREFS_KEY = 'leanGainLogicPrefs'
 const HISTORY_KEY = 'leanGainLogicHistory'
-
-function parseJson(value, fallback) {
-  if (!value) return fallback
-  try {
-    return JSON.parse(value)
-  } catch {
-    return fallback
-  }
-}
 
 export function createLeanGainLogicStorageApi(storage = globalThis.localStorage) {
   const loadHistory = () => parseJson(storage.getItem(HISTORY_KEY), [])

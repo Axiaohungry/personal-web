@@ -23,8 +23,8 @@ const categoryCards = computed(() =>
     <div class="page-shell">
       <StudyWorkbenchLayout
         eyebrow="前端系统学习"
-        title="把前端知识拆成基础、表达和编码训练三条复习路径。"
-        intro="基础总览负责原理和项目映射，面试表达负责回答框架，编码训练负责把知识点转回动手能力。"
+        title="基础、表达、编码训练，三条复习路线。"
+        intro="基础总览看原理和项目，面试表达练回答，编码训练写代码。"
         note="如果时间有限，先从基础总览开始；如果准备面试，就优先看面试表达和编码训练。"
         :metrics="[
           { label: '分类', value: String(categoryCards.length) },

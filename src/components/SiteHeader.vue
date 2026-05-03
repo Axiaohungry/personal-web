@@ -28,6 +28,7 @@ const themeMode = inject('theme-mode', {
 const mobileOpen = ref(false)
 const primaryLinks = computed(() => props.navigationItems.slice(0, 4))
 const utilityLinks = computed(() => props.navigationItems.slice(4))
+const isAnchorLink = (href) => href.includes('#')
 const isDark = computed(() => themeMode.appearance.value === 'dark')
 const themeLabel = computed(() => (isDark.value ? '深色' : '浅色'))
 
@@ -40,21 +41,36 @@ function handleThemeToggle() {
 <template>
   <header class="site-header shell-surface motion-rise">
     <div class="site-header__brandlock">
-      <a class="site-header__title" href="/">{{ siteName }}</a>
+      <router-link class="site-header__title" to="/">{{ siteName }}</router-link>
       <p v-if="location" class="site-header__meta">{{ location }}</p>
     </div>
 
     <div class="site-header__desktop">
       <nav class="site-header__nav" aria-label="Primary navigation">
-        <a-button
-          v-for="item in primaryLinks"
+        <router-link
+          v-for="item in primaryLinks.filter((i) => !isAnchorLink(i.href))"
           :key="item.href"
-          type="text"
-          class="site-header__nav-button"
+          :to="item.href"
+        >
+          <a-button
+            type="text"
+            class="site-header__nav-button"
+          >
+            {{ item.label }}
+          </a-button>
+        </router-link>
+        <a
+          v-for="item in primaryLinks.filter((i) => isAnchorLink(i.href))"
+          :key="item.href"
           :href="item.href"
         >
-          {{ item.label }}
-        </a-button>
+          <a-button
+            type="text"
+            class="site-header__nav-button"
+          >
+            {{ item.label }}
+          </a-button>
+        </a>
       </nav>
 
       <div class="site-header__controls">
@@ -69,14 +85,24 @@ function handleThemeToggle() {
         </div>
 
         <div class="site-header__utilities">
-          <a-button
-            v-for="item in utilityLinks"
+          <router-link
+            v-for="item in utilityLinks.filter((i) => !isAnchorLink(i.href))"
             :key="item.href"
-            class="site-header__utility"
+            :to="item.href"
+          >
+            <a-button class="site-header__utility">
+              {{ item.label }}
+            </a-button>
+          </router-link>
+          <a
+            v-for="item in utilityLinks.filter((i) => isAnchorLink(i.href))"
+            :key="item.href"
             :href="item.href"
           >
-            {{ item.label }}
-          </a-button>
+            <a-button class="site-header__utility">
+              {{ item.label }}
+            </a-button>
+          </a>
         </div>
       </div>
     </div>
@@ -118,16 +144,26 @@ function handleThemeToggle() {
       </div>
 
       <nav class="site-header__drawer-nav" aria-label="Mobile navigation">
-        <a-button
-          v-for="item in navigationItems"
+        <router-link
+          v-for="item in navigationItems.filter((i) => !isAnchorLink(i.href))"
           :key="item.href"
-          block
-          class="site-header__drawer-link"
+          :to="item.href"
+          @click="mobileOpen = false"
+        >
+          <a-button block class="site-header__drawer-link">
+            {{ item.label }}
+          </a-button>
+        </router-link>
+        <a
+          v-for="item in navigationItems.filter((i) => isAnchorLink(i.href))"
+          :key="item.href"
           :href="item.href"
           @click="mobileOpen = false"
         >
-          {{ item.label }}
-        </a-button>
+          <a-button block class="site-header__drawer-link">
+            {{ item.label }}
+          </a-button>
+        </a>
       </nav>
     </a-drawer>
   </header>

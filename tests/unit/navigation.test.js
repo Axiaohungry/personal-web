@@ -23,7 +23,7 @@ test('mobile route history controls are mounted globally for every route', () =>
 
   assert.ok(existsSync(controlsPath))
   assert.match(appSource, /import MobileRouteControls/)
-  assert.match(appSource, /<MobileRouteControls \/>/)
+  assert.match(appSource, /<MobileRouteControls v-if="!isEmbedded" \/>/)
   assert.doesNotMatch(siteHeaderSource, /site-header__mobile-route/)
   assert.doesNotMatch(siteHeaderSource, /useRouter/)
   assert.doesNotMatch(baseCssSource, /\.site-header__mobile-route/)

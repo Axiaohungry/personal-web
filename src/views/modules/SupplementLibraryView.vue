@@ -3,7 +3,7 @@ import ModuleWorkbenchLayout from '@/components/modules/ModuleWorkbenchLayout.vu
 import { moduleSources } from '@/data/moduleSources.js'
 import { aisGroupA, aisGroupB, supplementCatalog } from '@/data/supplementCatalog.js'
 import { useEmbeddedModuleState } from '@/hooks/useEmbeddedModuleState.js'
-import { useRemoteLookup } from '@/hooks/useRemoteLookup.js'
+import { createRemoteLookup } from '@/hooks/useRemoteLookup.js'
 
 // 补剂库和食物库一样采用“静态资料 + 远程查询”的双层结构。
 // 区别在于这里先给 AIS 分组和核心补剂说明，再允许用户补查具体补剂。
@@ -15,7 +15,7 @@ const {
   remoteRows,
   remoteError,
   handleSearch,
-} = useRemoteLookup({
+} = createRemoteLookup({
   endpoint: '/api/fitness/supplement-search',
   keyPrefix: 'supplement-result',
 })

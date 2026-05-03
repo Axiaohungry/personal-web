@@ -1,5 +1,6 @@
 <script setup>
 import { computed, onBeforeUnmount, onMounted, provide, ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
 import { theme as antTheme } from 'ant-design-vue'
 
 import MobileRouteControls from '@/components/MobileRouteControls.vue'
@@ -11,6 +12,10 @@ import {
 } from '@/utils/storage.js'
 
 const themeStorage = createThemeStorageApi()
+
+const route = useRoute()
+const isEmbedded = computed(() => route.query.embed === '1')
+
 const preferredMode = ref(themeStorage.loadMode())
 const systemPrefersDark = ref(false)
 let detachMediaQuery = null
@@ -19,6 +24,8 @@ let detachThemeMessage = null
 
 // 明暗主题共用一套语义色板。
 // 组件层不直接写死颜色，而是通过这里切换当前 palette，再由 CSS 变量和 Ant Design token 接管渲染。
+// ⚠️ 这里的颜色值必须与 src/styles/tokens.css 中的 CSS 变量保持一致。
+// 如果修改任何颜色，两个文件都需要同步更新。
 const palettes = {
   light: {
     bg: '#f7f5f0',
@@ -212,7 +219,7 @@ onBeforeUnmount(() => {
 <template>
   <a-config-provider :theme="themeConfig">
     <a-app>
-      <MobileRouteControls />
+      <MobileRouteControls v-if="!isEmbedded" />
       <router-view />
     </a-app>
   </a-config-provider>

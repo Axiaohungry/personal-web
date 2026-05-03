@@ -3,7 +3,7 @@ import ModuleWorkbenchLayout from '@/components/modules/ModuleWorkbenchLayout.vu
 import { foodLibraryGroups } from '@/data/foodLibraryCatalog.js'
 import { moduleSources } from '@/data/moduleSources.js'
 import { useEmbeddedModuleState } from '@/hooks/useEmbeddedModuleState.js'
-import { useRemoteLookup } from '@/hooks/useRemoteLookup.js'
+import { createRemoteLookup } from '@/hooks/useRemoteLookup.js'
 
 // 食物库由两部分组成：
 // 1. 本地静态高频食物表；
@@ -17,7 +17,7 @@ const {
   remoteRows,
   remoteError,
   handleSearch,
-} = useRemoteLookup({
+} = createRemoteLookup({
   endpoint: '/api/fitness/food-search',
   keyPrefix: 'food-result',
 })

@@ -25,7 +25,6 @@ import {
   Switch,
   Table,
   Tag,
-  Timeline,
   Typography,
 } from 'ant-design-vue'
 
@@ -62,7 +61,6 @@ const app = createApp(App)
   Switch,
   Table,
   Tag,
-  Timeline,
   Typography,
 ].forEach((component) => {
   // 这里使用按需注册，避免在模板里出现组件名时还需要每个页面手动 import。

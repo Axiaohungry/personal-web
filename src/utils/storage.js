@@ -3,7 +3,7 @@ const HISTORY_KEY = 'fitness.history'
 export const THEME_KEY = 'site.theme'
 const THEME_MODES = new Set(['light', 'dark', 'system'])
 
-function parseJson(value, fallback) {
+export function parseJson(value, fallback) {
   // localStorage 里保存的是字符串。
   // 这里统一兜底 JSON 解析失败的情况，避免单个坏数据让整页崩掉。
   if (!value) return fallback

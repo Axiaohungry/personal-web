@@ -377,6 +377,10 @@ svg {
   animation-delay: 180ms;
 }
 
+.motion-rise--4 {
+  animation-delay: 270ms;
+}
+
 @keyframes rise-in {
   from {
     opacity: 0;

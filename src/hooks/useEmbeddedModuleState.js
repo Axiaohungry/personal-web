@@ -1,14 +1,6 @@
 import { computed, onBeforeUnmount, onMounted, reactive, watch } from 'vue'
 import { useRoute } from 'vue-router'
-
-function normalizeGoal(value) {
-  return value === 'gain' ? 'gain' : 'cut'
-}
-
-function normalizeWeeks(value) {
-  const parsed = Number(value)
-  return Number.isFinite(parsed) && parsed >= 4 ? parsed : 8
-}
+import { normalizeGoal, normalizeWeeks } from '../utils/caloriePlanning.js'
 
 function normalizeNumber(value, fallback) {
   const parsed = Number(value)
@@ -16,7 +8,7 @@ function normalizeNumber(value, fallback) {
 }
 
 export function createEmbeddedModuleInitialState() {
-  // 这里定义的是“模块页单独打开时”的兜底值。
+  // 这里定义的是"模块页单独打开时"的兜底值。
   // 如果没有来自主工作台的 query 或 postMessage，上述默认值可以保证页面仍然可读，而不是直接报错。
   return {
     age: 24,
